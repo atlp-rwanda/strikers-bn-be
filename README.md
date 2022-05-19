@@ -1,3 +1,4 @@
+[![codecov](https://codecov.io/gh/atlp-rwanda/strikers-bn-be/branch/master/graph/badge.svg?token=WNXM9XUUG6)](https://codecov.io/gh/atlp-rwanda/strikers-bn-be)
 ### Welcome to Barefoot Nomad!
 
 <p>
