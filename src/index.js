@@ -1,12 +1,12 @@
 // @ts-nocheck
-const express = require("express"),
+const express = require('express'),
   app = express(),
-  dotenv = require("dotenv"),
-  cors = require("cors"),
-  http = require("http"),
-  { corsFunction } = require("./utils/cors");
+  dotenv = require('dotenv'),
+  cors = require('cors'),
+  http = require('http'),
+  { corsFunction } = require('./utils/cors');
 
-dotenv.config({ path: "../.env" });
+dotenv.config({ path: '../.env' });
 
 app.use(cors());
 app.use(corsFunction);
