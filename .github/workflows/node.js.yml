@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ ch#182215531-integrate-coveralls-code-coverage-service ]
+    branches: [ ch182215531integratecoverallscodecoverageservice ]
   pull_request:
-    branches: [ ch#182215531-integrate-coveralls-code-coverage-service ]
+    branches: [ ch182215531integratecoverallscodecoverageservice ]
 
 jobs:
   build:
