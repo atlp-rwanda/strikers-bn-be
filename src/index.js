@@ -1,11 +1,12 @@
 // @ts-nocheck
-const express = require('express'),
+const express = require("express"),
   app = express(),
-  cors = require('cors'),
-  { corsFunction } = require('./utils/cors'),
-  dotenv = require('dotenv');
+  dotenv = require("dotenv"),
+  cors = require("cors"),
+  http = require("http"),
+  { corsFunction } = require("./utils/cors");
 
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: "../.env" });
 
 app.use(cors());
 app.use(corsFunction);
@@ -14,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 8000,
-  server = require('http')
+  server = http
     .createServer(app)
     .listen(port, () => console.log(`Server started at port ${port}!`));
 
