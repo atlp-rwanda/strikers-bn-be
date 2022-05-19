@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ chore/#182215531-integrate-coveralls-code-coverage-service ]
+    branches: [ ch#182215531-integrate-coveralls-code-coverage-service ]
   pull_request:
-    branches: [ chore/#182215531-integrate-coveralls-code-coverage-service ]
+    branches: [ ch#182215531-integrate-coveralls-code-coverage-service ]
 
 jobs:
   build:
@@ -36,4 +36,4 @@ jobs:
       run: |
        ci_env=`curl -s https://codecov.io/env`
        npm install codecov -g
-       codecov -t 72eb69aa-44cb-4cd3-b619-6a6a0934d6a5
+       codecov -t 22a7c864-7bfc-4231-8af4-da32963eb6c1
