@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test mocha \"test/**/*.test.js\" --timeout 10000 --exit",
+    "coverage": "c8 --reporter=lcov --reporter=text npm run test"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/atlp-rwanda/strikers-bn-be#readme",
   "dependencies": {
+    "c8": "^7.11.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -27,5 +29,9 @@
     "sequelize": "^6.19.1",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.4.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "mocha": "^10.0.0"
   }
 }
