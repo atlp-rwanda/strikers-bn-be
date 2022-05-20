@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node ./src/index",
+    "babel-version": "babel --version",
     "test": "cross-env NODE_ENV=test mocha \"test/**/*.test.js\" --timeout 10000 --exit",
     "coverage": "c8 --reporter=lcov --reporter=text npm run test",
     "lint": "eslint ./src",
@@ -22,6 +24,11 @@
   },
   "homepage": "https://github.com/atlp-rwanda/strikers-bn-be#readme",
   "dependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/register": "^7.17.7",
     "c8": "^7.11.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
