@@ -1,0 +1,36 @@
+version: '3.7'
+services: 
+
+  app:
+    image: strikers-bn-be
+    environment:
+      - NODE_ENV=docker
+      - DB_HOST=${DB_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    build:
+      context: .
+      args:
+        - PORT:${PORT}
+    volumes:
+      - ./:/src/app
+    container_name: strikers-backend
+    
+    depends_on:
+      - db
+
+    ports: 
+      - "8000:8000"
+    
+    restart: always
+    
+  db:
+
+    image: postgres:14.1-alpine
+    restart: always
+    environment: 
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    container_name: strikers_db
