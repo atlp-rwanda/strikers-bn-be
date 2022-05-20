@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node ./src/index",
     "babel-version": "babel --version",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test mocha \"test/**/*.test.js\" --timeout 10000 --exit",
+    "coverage": "c8 --reporter=lcov --reporter=text npm run test",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src"
   },
@@ -28,6 +29,7 @@
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
     "@babel/register": "^7.17.7",
+    "c8": "^7.11.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -39,6 +41,8 @@
     "swagger-ui-express": "^4.4.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
+    "mocha": "^10.0.0",
     "eslint": "^8.15.0"
   }
 }
