@@ -1,22 +1,22 @@
 // @ts-nocheck
-const express = require('express'),
-  app = express(),
-  dotenv = require('dotenv'),
-  cors = require('cors'),
-  http = require('http'),
-  { corsFunction } = require('./utils/cors');
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import http from "http";
+import corsFunction from "./utils/cors";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "../public/api-docs.json";
 
-dotenv.config({ path: '../.env' });
+const app = express();
 
-const swaggerUi= require('swagger-ui-express')
-const swaggerDocument=require('../public/api-docs.json')
+dotenv.config({ path: "../.env" });
 
 app.use(cors());
 app.use(corsFunction);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const port = process.env.PORT || 8000,
   server = http
