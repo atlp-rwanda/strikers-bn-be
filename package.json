@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node ./src/index",
+    "babel-version": "babel --version",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src"
@@ -21,6 +23,11 @@
   },
   "homepage": "https://github.com/atlp-rwanda/strikers-bn-be#readme",
   "dependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/register": "^7.17.7",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "eslint-config-airbnb-base": "^15.0.0",
