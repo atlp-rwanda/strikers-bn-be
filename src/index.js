@@ -3,8 +3,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import http from "http";
-import corsFunction from "./utils/cors";
 import swaggerUi from "swagger-ui-express";
+import corsFunction from "./utils/cors";
 import swaggerDocument from "../public/api-docs.json";
 
 const app = express();
@@ -23,4 +23,4 @@ const port = process.env.PORT || 8000,
     .createServer(app)
     .listen(port, () => console.log(`Server started at port ${port}!`));
 
-module.exports = server;
+export default server;
