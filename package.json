@@ -9,7 +9,10 @@
     "test": "cross-env NODE_ENV=test mocha \"test/**/*.test.js\" --timeout 10000 --exit",
     "coverage": "c8 --reporter=lcov --reporter=text npm run test",
     "lint": "eslint ./src",
-    "lint:fix": "eslint --fix ./src"
+    "lint:fix": "eslint --fix ./src",
+    "migrate": "npx sequelize-cli db:migrate",
+    "undo-migration": "npx sequelize-cli db:migrate:undo",
+    "run-seed": "npx sequelize-cli db:seed:all"
   },
   "repository": {
     "type": "git",
@@ -36,7 +39,7 @@
     "nodemon": "^2.0.16",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.19.1",
+    "sequelize": "^6.20.0",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.4.0"
   },
