@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/index",
+    "test": "mocha --require @babel/register ./src/test/simple.test.js --exit ",
+    "coverage": "nyc --reporter=lcov --reporter=text npm test",
+    "dev": "nodemon --exec babel-node src/index.js",
     "babel-version": "babel --version",
-    "test": "cross-env NODE_ENV=test mocha \"test/**/*.test.js\" --timeout 10000 --exit",
-    "coverage": "c8 --reporter=lcov --reporter=text npm run test",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
     "migrate": "npx sequelize-cli db:migrate",
@@ -31,12 +32,16 @@
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
     "@babel/register": "^7.17.7",
+    "babel-preset-env": "^1.7.0",
     "c8": "^7.11.3",
+    "chai": "^4.3.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "express": "^4.18.1",
+    "mocha": "^10.0.0",
     "nodemon": "^2.0.16",
+    "nyc": "^15.1.0",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.20.0",
@@ -45,8 +50,6 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "eslint": "^8.15.0",
-    "mocha": "^10.0.0",
-    "sequelize-cli": "^6.4.1"
+    "eslint": "^8.15.0"
   }
 }
