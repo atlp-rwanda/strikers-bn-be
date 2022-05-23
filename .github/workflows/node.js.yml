@@ -2,14 +2,14 @@ name: CI
 
 on:
   push:
-    branches: [ ft-chore/#182215531-integrate-coveralls-code-coverage-servicea ]
+    branches: [ ft-chore/#182215531-integrate-coveralls-code-coverage-service ]
   pull_request:
     branches: [ ft-chore/#182215531-integrate-coveralls-code-coverage-service ]
 
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
