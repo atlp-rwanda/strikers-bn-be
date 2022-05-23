@@ -7,7 +7,8 @@
     "start": "node ./src/index",
     "test": "mocha -- ./src/test/simple.test.js --exit ",
     "coverage": "nyc --reporter=lcov --reporter=text npm test",
-    "lint": "eslint ./src",
+    "babel-version": "babel --version",
+   "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src"
   },
   "repository": {
@@ -22,8 +23,12 @@
   },
   "homepage": "https://github.com/atlp-rwanda/strikers-bn-be#readme",
   "dependencies": {
-
     "chai": "^4.3.6",
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/register": "^7.17.7",
     "c8": "^7.11.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
@@ -31,6 +36,7 @@
     "express": "^4.18.1",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0",
+    "nodemon": "^2.0.16",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.19.1",

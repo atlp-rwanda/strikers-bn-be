@@ -1,6 +1,7 @@
-const chai=require('chai');
+import chai from 'chai';
 const expect=chai.expect;
-const calculator=require('../utils/calculator');
+// const calculator=require('../utils/calculator');
+import {add,substract,multiply,divide} from '../utils/calculator.js'
 describe('Calculator',()=>{
     describe('Addition',()=>{
         it('shoult sum numbers',()=>{
@@ -20,8 +21,7 @@ describe('Calculator',()=>{
             expect(calculator.multiply(-31, 32)).to.equal(-992)
             expect(calculator.multiply(-5, -2)).to.equal(10)
            })
-      })
-   
+      })   
    describe('Division', () => {
       it('should divide two numbers', () => {
           expect(calculator.divide(4, 2)).to.equal(2)
