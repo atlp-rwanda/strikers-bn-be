@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/atlp-rwanda/strikers-bn-be/branch/ch182215531integratecoverallscodecoverageservice/graph/badge.svg?token=WNXM9XUUG6)](https://codecov.io/gh/atlp-rwanda/strikers-bn-bea)
+[![codecov](https://codecov.io/gh/atlp-rwandaa/strikers-bn-be/branch/ch182215531integratecoverallscodecoverageservice/graph/badge.svg?token=WNXM9XUUG6)](https://codecov.io/gh/atlp-rwanda/strikers-bn-be)
 
 ### Welcome to Barefoot Nomad!
 <p>
