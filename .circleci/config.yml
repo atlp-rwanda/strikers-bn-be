@@ -40,6 +40,6 @@ workflows:
           filters:
             branches:
               only:
-                - '#182215532-integrate-circle-with-readme-badge'
+                - master
     jobs:
       - build_and_test
