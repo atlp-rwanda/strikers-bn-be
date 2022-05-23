@@ -1,5 +1,5 @@
-exports.corsFunction = (req, res, next) => {
-  const allowedOrigins = ['https://isiteyves.github.io'];
+function corsFunction(req, res, next) {
+  const allowedOrigins = ['*'];
   const { origin } = req.headers;
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
@@ -9,4 +9,6 @@ exports.corsFunction = (req, res, next) => {
     'GET, POST, OPTIONS, PUT, PATCH, DELETE'
   );
   next();
-};
+}
+
+export default corsFunction;
