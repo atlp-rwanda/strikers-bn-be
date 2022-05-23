@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+export default function defineUser (sequelize, DataTypes) {
   class User extends Model {
     /**
      * Helper method for defining associations.
