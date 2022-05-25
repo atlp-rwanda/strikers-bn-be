@@ -11,9 +11,11 @@
     "babel-version": "babel --version",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
+    "model:generate": "npx sequelize-cli model:generate --name Manager --attributes firstName:string,lastName:string,email:string,address:string",
+    "gen-seed": "npx sequelize-cli seed:generate --name demo-manager",
     "migrate": "npx sequelize-cli db:migrate",
     "undo-migration": "npx sequelize-cli db:migrate:undo",
-    "run-seed": "npx sequelize-cli db:seed:all"
+    "seed": "npx sequelize-cli db:seed:all"
   },
   "repository": {
     "type": "git",
@@ -50,6 +52,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "eslint": "^8.15.0"
+    "eslint": "^8.15.0",
+    "sequelize-cli": "^6.4.1"
   }
 }
