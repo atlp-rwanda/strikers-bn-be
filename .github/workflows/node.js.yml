@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ ft-chore/#182215531-integrate-coveralls-code-coverage-service ]
+    branches: [ develop ]
   pull_request:
-    branches: [ ft-chore/#182215531-integrate-coveralls-code-coverage-service ]
+    branches: [ develop ]
 
 jobs:
   build:
