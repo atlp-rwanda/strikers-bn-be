@@ -40,6 +40,6 @@ workflows:
           filters:
             branches:
               only:
-                - 'ft-chore/#182215531-integrate-coveralls-code-coverage-service'
+                - master
     jobs:
       - build_and_test
