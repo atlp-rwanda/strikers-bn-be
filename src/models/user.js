@@ -1,9 +1,5 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable import/newline-after-import */
-/* eslint-disable no-unused-vars */
-/* eslint-disable linebreak-style */
-/* eslint-disable valid-jsdoc */
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -20,76 +16,17 @@ module.exports = (sequelize, DataTypes) => {
       return { ...this.get(), id: undefined, password: undefined };
     }
   }
-  User.init({
-    uuid: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false
+  User.init(
+    {
+      firstName: DataTypes.STRING,
+      lastName: DataTypes.STRING,
+      email: DataTypes.STRING,
+      password: DataTypes.STRING,
     },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    roleId: {
-      type: DataTypes.UUID,
-      defaultValue: 'c1f1d2bf-33bd-4e11-9d7a-0331db465f95',
-      allowNull: false
-    },
-    phoneNumber: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    passwordResetToken: {
-      type: DataTypes.STRING(2500),
-      allowNull: true
-    },
-    birthdate: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    location: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    preferredLanguage: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    preferredCurrency: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    department: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    lineManager: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    verified: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
-    },
-    verificationToken: {
-      type: DataTypes.STRING,
-      allowNull: true
+    {
+      sequelize,
+      modelName: "User",
     }
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
+  );
   return User;
 };
