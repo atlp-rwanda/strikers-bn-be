@@ -19,6 +19,9 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/roles", roleRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Welcome to strikers-bn-be APIs");
+});
 const port = process.env.PORT || 8000,
   server = http
     .createServer(app)
