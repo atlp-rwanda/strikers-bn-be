@@ -25,7 +25,7 @@ app.get("/",(req,res)=>{
   res.send("Welcome to strikers-bn-be APIs");
 })
 
-const port = process.env.PORT || process.env.APP_PORT,
+const port = process.env.PORT || 8000,
   server = http
     .createServer(app)
     .listen(port, async () => {
