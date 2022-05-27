@@ -5,7 +5,7 @@ const { addUser } =  require('../controllers/user.controller');
 
 /**
  * @description To create a new user
- * @api v1/api/user/
+ * @api /api/v1/user/
  * @access Public
  * @type POST
  */
