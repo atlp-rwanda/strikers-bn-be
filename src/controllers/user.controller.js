@@ -44,7 +44,6 @@ exports.addUser = async (req, res) => {
         })
 
     } catch(err) {
-        console.log(err.message)
         res.status(400).json({
             success: false,
             status: 400,

@@ -1,12 +1,11 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import dotenv from 'dotenv';
+import server from '../src/index';
 
 dotenv.config();
 chai.should();
 chai.use(chaiHttp);
-
-const server = process.env.APP_BACKEND_DOMAIN;
 
 describe('POST /v1/api/user', () => {
     /**
