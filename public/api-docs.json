@@ -1,0 +1,22 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
+        "version": "1.0.0",
+        "title": " Barefoot Nomad",
+        "contact": {
+            "email": "Andela@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": ["http"],
+    "host": "localhost:8000",
+    "basePath": "/api",
+    "paths" : {
+        
+    }
+    
+}
