@@ -14,9 +14,6 @@ app.use(corsFunction);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.get("/",(req,res)=>{
-  res.send("Welcome to strikers-bn-be APIs");
-})
 const port = process.env.PORT || 8000,
   server = http
     .createServer(app)
