@@ -16,7 +16,7 @@
     "host": "localhost:8000",
     "basePath": "/api",
     "paths" : {
-       
+
     }
     
 }
