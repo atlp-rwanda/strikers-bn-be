@@ -32,7 +32,8 @@ exports.addUser = async (req, res) => {
             lastname: user.lastname,
             email: user.email,
             phoneNumber: user.phoneNumber
-        }, process.env.TOKEN_SECRET, { expiresIn: '365d' });
+        }, 'sdkjSI&eks8492EDJS4e94kjdsop3439kse', { expiresIn: '365d' });
+        // }, process.env.TOKEN_SECRET, { expiresIn: '365d' });
 
         const newUser = await User.create(_.pick(user, ['firstname', 'lastname', 'email', 'roleId', 'phoneNumber', 'password', 'verificationToken']));
 
