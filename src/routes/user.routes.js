@@ -1,14 +1,22 @@
-import { Router } from 'express';
+import { Router } from "express";
 const userRouter = Router();
 
-const { addUser } =  require('../controllers/user.controller');
+const { addUser, signIn } = require("../controllers/user.controller");
 
 /**
  * @description To create a new user
- * @api /api/v1/user/
+ * @api v1/api/user/register
  * @access Public
  * @type POST
  */
-userRouter.post('/', addUser);
+userRouter.post("/register", addUser);
 
-exports.userRouter = userRouter;
+/**
+ * @description To login using email and password
+ * @api v1/api/user/login
+ * @access Public
+ * @type POST
+ */
+userRouter.post("/login", signIn);
+
+module.exports = userRouter;
