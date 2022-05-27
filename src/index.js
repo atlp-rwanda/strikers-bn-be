@@ -6,6 +6,7 @@ import http from "http";
 import swaggerUi from "swagger-ui-express";
 import corsFunction from "./utils/cors";
 import swaggerDocument from "../public/api-docs.json";
+
 import { sequelize } from './models';
 
 import { userRouter } from '../src/routes/user.routes';
@@ -32,4 +33,5 @@ const port = process.env.PORT || process.env.APP_PORT,
       await sequelize.authenticate();
       console.log('Database connected . . .');
     });
+
 export default server;

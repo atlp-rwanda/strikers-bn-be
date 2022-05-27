@@ -42,7 +42,6 @@
     "c8": "^7.11.3",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
-    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "esm": "^3.2.25",
