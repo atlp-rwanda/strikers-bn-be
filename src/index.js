@@ -7,10 +7,9 @@ import swaggerUi from "swagger-ui-express";
 import corsFunction from "./utils/cors";
 import swaggerDocument from "../public/api-docs.json";
 
-import roleRoutes from "./routes/role.routes";
 import { sequelize } from "./models";
 
-import { userRouter } from "../src/routes/user.routes";
+import userRouter from "../src/routes/user.routes";
 
 const app = express();
 dotenv.config({ path: "../.env" });
@@ -22,7 +21,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1/user/", userRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use("/api/roles", roleRoutes);
+app.get("/", (req, res) => {
+  res.send("Welcome to strikers-bn-be APIs");
+});
 
 app.get("/", (req, res) => {
   res.send("Welcome to strikers-bn-be APIs");
@@ -34,4 +35,4 @@ const port = process.env.PORT || 8001,
     console.log("Database connected . . .");
   });
 
-export default server;
+module.exports = server;
