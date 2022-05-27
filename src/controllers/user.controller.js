@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { User } from "../models";
 import { validateUserRegisteration } from "../validators/user.validator";
+import { TOKEN_SECRET } from "../config/key";
 
 dotenv.config();
 
@@ -34,9 +35,10 @@ exports.addUser = async (req, res) => {
         email: user.email,
         phoneNumber: user.phoneNumber,
       },
-      process.env.TOKEN_SECRET,
+      TOKEN_SECRET,
       { expiresIn: "365d" }
     );
+    // }, process.env.TOKEN_SECRET, { expiresIn: '365d' });
 
     const newUser = await User.create(
       _.pick(user, [
@@ -57,7 +59,6 @@ exports.addUser = async (req, res) => {
       data: newUser,
     });
   } catch (err) {
-    console.log(err.message);
     res.status(400).json({
       success: false,
       status: 400,
@@ -82,7 +83,7 @@ exports.signIn = async (req, res) => {
         uuid: user.uuid,
         email: user.email,
       },
-      process.env.TOKEN_SECRET,
+      TOKEN_SECRET,
       {
         expiresIn: 86400, // 24 hours
       }

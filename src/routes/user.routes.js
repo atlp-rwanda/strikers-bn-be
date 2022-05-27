@@ -1,5 +1,5 @@
 import { Router } from "express";
-const router = Router();
+const userRouter = Router();
 
 const { addUser, signIn } = require("../controllers/user.controller");
 
@@ -9,7 +9,7 @@ const { addUser, signIn } = require("../controllers/user.controller");
  * @access Public
  * @type POST
  */
-router.post("/register", addUser);
+userRouter.post("/register", addUser);
 
 /**
  * @description To login using email and password
@@ -17,6 +17,6 @@ router.post("/register", addUser);
  * @access Public
  * @type POST
  */
-router.post("/login", signIn);
+userRouter.post("/login", signIn);
 
-module.exports = router;
+module.exports = userRouter;
