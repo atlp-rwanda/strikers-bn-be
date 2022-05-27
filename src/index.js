@@ -25,11 +25,12 @@ app.get("/", (req, res) => {
   res.send("Welcome to strikers-bn-be APIs");
 });
 
-const port = process.env.PORT || 8000,
-  server = http.createServer(app).listen(port, async () => {
-    console.log(`Server started on port ${port}!`);
-    await sequelize.authenticate();
-    console.log("Database connected . . .");
-  });
+const port = process.env.PORT || 8000;
 
-export default server;
+const server = http.createServer(app).listen(port, async () => {
+  console.log(`Server started on port ${port}!`);
+  await sequelize.authenticate();
+  console.log("Database connected . . .");
+});
+
+module.exports = server;
