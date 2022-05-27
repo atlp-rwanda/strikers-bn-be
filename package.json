@@ -15,6 +15,7 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
     "model:generate": "npx sequelize-cli model:generate --name Manager --attributes firstName:string,lastName:string,email:string,address:string",
+    "generate-role-model": "npx sequelize-cli model:generate --name Role --attributes roleId:bigint,role:string",
     "gen-seed": "npx sequelize-cli seed:generate --name demo-manager",
     "migrate": "npx sequelize-cli db:migrate",
     "undo-migration": "npx sequelize-cli db:migrate:undo",

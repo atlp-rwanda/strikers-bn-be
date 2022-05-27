@@ -20,7 +20,7 @@ export async function Role(sequelize, DataTypes) {
   }
   Role.init(
     {
-      role_id: Sequelize.BIGINT,
+      roleId: Sequelize.BIGINT,
       role: Sequelize.STRING,
     },
     {

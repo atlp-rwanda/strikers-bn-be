@@ -12,7 +12,7 @@ export async function getAllRoles(req, res) {
 export async function getSpecificRole(req, res) {
   try {
     await (await Role())
-      .findOne({ where: { role_id: req.params.id } })
+      .findOne({ where: { roleId: req.params.id } })
       .then((role) => {
         if (role) res.status(200).json(role);
         else
