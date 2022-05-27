@@ -74,7 +74,7 @@ describe("POST /api/v1/user", () => {
       .request(server)
       .post("/api/v1/user/login")
       .send({
-        email: `abi${userId}@gmail.com`,
+        email: `abi_seth@gmail.com`,
         password: "pass12345",
       })
       .end((err, res) => {
