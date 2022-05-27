@@ -7,11 +7,11 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "uyxluedkijh6wcox05sx",
+    "password": "t8wWAcpUAENrA2M4A5B1",
+    "database": "bobl8pcapq1din7r380h",
+    "host": "bobl8pcapq1din7r380h-postgresql.services.clever-cloud.com",
+    "dialect": "postgres"
   },
   "production": {
     "username": "root",
