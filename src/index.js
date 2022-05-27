@@ -7,15 +7,29 @@ import swaggerUi from "swagger-ui-express";
 import corsFunction from "./utils/cors";
 import swaggerDocument from "../public/api-docs.json";
 
+import { sequelize } from "./models";
+
+import userRouter from "../src/routes/user.routes";
+
 const app = express();
 dotenv.config({ path: "../.env" });
 app.use(cors());
 app.use(corsFunction);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/v1/user/", userRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-const port = process.env.PORT || 8000,
-  server = http
-    .createServer(app)
-    .listen(port, () => console.log(`Server started at port ${port}!`));
-export default server;
+
+app.get("/", (req, res) => {
+  res.send("Welcome to strikers-bn-be APIs");
+});
+
+const port = process.env.PORT || 8001,
+  server = http.createServer(app).listen(port, async () => {
+    console.log(`Server started on port ${port}!`);
+    await sequelize.authenticate();
+    console.log("Database connected . . .");
+  });
+
+module.exports = server;
