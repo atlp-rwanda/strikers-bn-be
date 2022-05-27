@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node -r esm src/index.js",
-    "test": "cross-env NODE_ENV=test mocha --require @babel/register \"src/test/**/*.test.js\" --timeout 10000 --exit",
+    "test": "cross-env NODE_ENV=test mocha --require @babel/register \"test/**/*.test.js\" --timeout 10000 --exit",
     "coverage": "c8 --reporter=lcov --reporter=text npm test",
     "dev": "nodemon --exec babel-node src/index.js",
     "babel-version": "babel --version",
@@ -39,6 +39,7 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/register": "^7.17.7",
     "babel-preset-env": "^1.7.0",
+    "bcryptjs": "^2.4.3",
     "c8": "^7.11.3",
     "chai": "^4.3.6",
     "cors": "^2.8.5",
