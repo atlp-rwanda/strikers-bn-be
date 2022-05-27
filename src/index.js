@@ -28,7 +28,8 @@ const port = process.env.PORT || process.env.APP_PORT,
   server = http
     .createServer(app)
     .listen(port, async () => {
-      await sequelize.authenticate();
       console.log(`Server started on port ${port}!`)
+      await sequelize.authenticate();
+      console.log('Database connected . . .');
     });
 export default server;

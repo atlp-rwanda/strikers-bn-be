@@ -9,7 +9,6 @@ const { addUser } =  require('../controllers/user.controller');
  * @access Public
  * @type POST
  */
-
 userRouter.post('/', addUser);
 
 exports.userRouter = userRouter;
