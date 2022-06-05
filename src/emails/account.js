@@ -1,24 +1,18 @@
-const nodemailer = require('nodemailer');
+"use strict";
+const nodemailer = require("nodemailer");
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'manzimike378@gmail.com',
-    pass: 'bajtkfsqzhnbgtbv' 
-  }
-});
+exports.sendEmail = async (firstName, lastName, email) => {
 
-const mailOptions = {
-  from: 'manzimike378@gmail.com',
-  to: 'mikemanzi37@gmail.com',
-  subject: 'Invoices due',
-  text: 'Dudes, we really need your money.'
-};
-
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-	console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'manzimike378@gmail.com',
+            pass: 'bajtkfsqzhnbgtbv'
+        }
+    });
+    await transporter.sendMail({
+        to: email,
+        subject: "Verify your account",
+        text: `Hello ${firstName} ${lastName},\n\nThanks for signing up on Barefoot Nomad.\n\nPlease click on the link below to verify your email address.\n\n http://localhost:8001/verify/${email}`,
+    });
+}

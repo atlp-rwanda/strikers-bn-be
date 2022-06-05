@@ -53,7 +53,7 @@ exports.addUser = async (req, res) => {
       ])
     );
 
-    sendEmail()
+    sendEmail(newUser.firstname, newUser.lastname, newUser.email)
 
     return res.status(201).json({
       success: true,
