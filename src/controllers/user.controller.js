@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import { User } from "../models";
 import { validateUserRegisteration } from "../validators/user.validator";
 import { TOKEN_SECRET } from "../config/key";
+import { sendEmail } from "../emails/account"
 
 dotenv.config();
 
@@ -51,6 +52,8 @@ exports.addUser = async (req, res) => {
         "verificationToken",
       ])
     );
+
+    sendEmail()
 
     return res.status(201).json({
       success: true,
