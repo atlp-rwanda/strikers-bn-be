@@ -7,7 +7,7 @@ exports.sendEmail = async (firstName, lastName, email) => {
         service: 'gmail',
         auth: {
             user: 'manzimike378@gmail.com',
-            pass: 'bajtkfsqzhnbgtbv'
+            pass: process.env.EMAIL_PASS
         }
     });
     await transporter.sendMail({
