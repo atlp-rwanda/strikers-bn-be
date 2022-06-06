@@ -3,8 +3,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Users", {
       uuid: {
-        type: Sequelize.STRING,
-        defaultValue: Sequelize.uuid,
+        type: Sequelize.UUID,
       },
       id: {
         allowNull: false,
@@ -22,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       roleId: {
-        type: Sequelize.uuid,
+        type: Sequelize.UUID,
         allowNull: false,
       },
       phoneNumber: {
@@ -52,7 +51,7 @@ module.exports = {
     });
     await queryInterface.createTable("Roles", {
       roleId: {
-        type: Sequelize.uuid,
+        type: Sequelize.UUID,
         primaryKey: true,
       },
       role: {

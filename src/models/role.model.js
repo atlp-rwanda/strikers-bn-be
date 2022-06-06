@@ -7,8 +7,7 @@ import { Model } from "sequelize";
 
 export async function Role(sequelize, DataTypes) {
   class Role extends Model {
-    static associate(models) {
-    }
+    static associate(models) {}
     toJSON() {
       return { ...this.get(), roleId: undefined, role: undefined };
     }
@@ -16,12 +15,12 @@ export async function Role(sequelize, DataTypes) {
   Role.init(
     {
       roleId: {
-        type: DataTypes.UUIDV4,
-        allowNull: false
+        type: DataTypes.UUID,
+        allowNull: false,
       },
       role: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
     },
     {
