@@ -1,27 +1,28 @@
 // @ts-nocheck
 "use strict";
-import Sequelize, { Model } from "sequelize";
-import Joi from "joi";
-import jwt from "jsonwebtoken";
-import JoiObjectId from "joi-objectid";
 
-Joi.objectId = JoiObjectId(Joi);
+import { Model } from "sequelize";
+
+// Joi.objectId = JoiObjectId(Joi);
 
 export async function Role(sequelize, DataTypes) {
   class Role extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+    }
+    toJSON() {
+      return { ...this.get(), roleId: undefined, role: undefined };
     }
   }
   Role.init(
     {
-      roleId: Sequelize.BIGINT,
-      role: Sequelize.STRING,
+      roleId: {
+        type: DataTypes.UUIDV4,
+        allowNull: false
+      },
+      role: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
     },
     {
       sequelize,
