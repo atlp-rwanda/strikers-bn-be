@@ -1,11 +1,7 @@
-// @ts-nocheck
 "use strict";
+const { Model } = require("sequelize");
 
-import { Model } from "sequelize";
-
-// Joi.objectId = JoiObjectId(Joi);
-
-export async function Role(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
     static associate(models) {}
     toJSON() {
@@ -29,4 +25,4 @@ export async function Role(sequelize, DataTypes) {
     }
   );
   return Role;
-}
+};

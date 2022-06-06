@@ -10,6 +10,7 @@ import swaggerDocument from "../public/api-docs.json";
 import { sequelize } from "./models";
 
 import userRouter from "../src/routes/user.routes";
+import rolesRouter from "../src/routes/role.routes";
 
 const app = express();
 dotenv.config({ path: "../.env" });
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/user/", userRouter);
+app.use("/api/roles/", rolesRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/", (req, res) => {

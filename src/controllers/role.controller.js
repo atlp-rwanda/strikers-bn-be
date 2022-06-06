@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Role } from "../models/role.model";
+import Role from "../models/role.model";
 
 export async function getAllRoles(req, res) {
   try {
