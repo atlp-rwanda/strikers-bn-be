@@ -8,7 +8,7 @@ import corsFunction from "./utils/cors";
 import swaggerDocument from "../public/api-docs.json";
 
 import { sequelize } from "./models";
-
+import tripRouter from "../src/routes/trip.routes";
 import userRouter from "../src/routes/user.routes";
 
 const app = express();
@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/user/", userRouter);
+app.use("/api/v1/trip/", tripRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/", (req, res) => {

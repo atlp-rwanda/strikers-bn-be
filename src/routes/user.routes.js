@@ -1,7 +1,8 @@
-import { Router } from "express";
+import { Router } from 'express';
+
 const userRouter = Router();
 
-const { addUser, signIn } = require("../controllers/user.controller");
+const { addUser, signIn } = require('../controllers/user.controller');
 
 /**
  * @description To create a new user
@@ -9,7 +10,7 @@ const { addUser, signIn } = require("../controllers/user.controller");
  * @access Public
  * @type POST
  */
-userRouter.post("/register", addUser);
+userRouter.post('/register', addUser);
 
 /**
  * @description To login using email and password
@@ -17,6 +18,6 @@ userRouter.post("/register", addUser);
  * @access Public
  * @type POST
  */
-userRouter.post("/login", signIn);
+userRouter.post('/login', signIn);
 
 module.exports = userRouter;
