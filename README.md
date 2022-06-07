@@ -10,3 +10,6 @@
 ### Running server
 - Run `npm run dev` to run server locally
 - Run `docker-compose up` to run the app using docker
+
+### Heroku 
+[Strikers-bn-be](https://strikers-bn-be.herokuapp.com/)
