@@ -12,11 +12,11 @@ dotenv.config();
 exports.addUser = async (req, res) => {
   try {
     const user = req.body;
-    // const validateUserInput = validateUserRegisteration(user);
+    const validateUserInput = validateUserRegisteration(user);
 
-    // if (validateUserInput.error) {
-    //   return res.status(400).json(validateUserInput.error.details[0].message);
-    // }
+    if (validateUserInput.error) {
+      return res.status(400).json(validateUserInput.error.details[0].message);
+    }
 
     const duplicateEmail = await User.findOne({ where: { email: user.email } });
     if (duplicateEmail) {
