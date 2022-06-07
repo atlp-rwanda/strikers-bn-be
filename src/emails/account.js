@@ -13,6 +13,9 @@ exports.sendEmail = async (firstName, lastName, email) => {
     await transporter.sendMail({
         to: email,
         subject: "Verify your account",
-        text: `Hello ${firstName} ${lastName},\n\nThanks for signing up on Barefoot Nomad.\n\nPlease click on the link below to verify your email address.\n\n http://localhost:8001/verify/${email}`,
+        text: `Hello ${firstName} ${lastName},\n\n
+        Thanks for signing up on Barefoot Nomad.\n\n
+        Please click on the link below to verify your email address.\n\n
+        http://localhost:8001/v1/api/user/verify/${email}`,
     });
 }

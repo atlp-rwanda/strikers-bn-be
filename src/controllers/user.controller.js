@@ -12,11 +12,11 @@ dotenv.config();
 exports.addUser = async (req, res) => {
   try {
     const user = req.body;
-    const validateUserInput = validateUserRegisteration(user);
+    // const validateUserInput = validateUserRegisteration(user);
 
-    if (validateUserInput.error) {
-      return res.status(400).json(validateUserInput.error.details[0].message);
-    }
+    // if (validateUserInput.error) {
+    //   return res.status(400).json(validateUserInput.error.details[0].message);
+    // }
 
     const duplicateEmail = await User.findOne({ where: { email: user.email } });
     if (duplicateEmail) {
@@ -69,6 +69,43 @@ exports.addUser = async (req, res) => {
     });
   }
 };
+
+exports.verifyUser = async (req, res) => {
+  try {
+    const userEmail = req.params.email
+    const user = await User.findOne({ where: { email: userEmail } });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        status: 404,
+        message: "User not found!",
+      });
+    }
+    if (user.verified) {
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        message: "User already verified!",
+      });
+    }
+    user.verified = true;
+    await user.save();
+    return res.status(200).json({
+      success: true,
+      status: 200,
+      message: "User verified successfully!",
+      data: user
+    });
+  }
+  catch (err) {
+    res.status(400).json({
+      success: false,
+      status: 400,
+      message: err.message,
+    });
+  }
+}
+
 
 exports.signIn = async (req, res) => {
   try {
