@@ -1,6 +1,4 @@
-import {
-  Model
-} from 'sequelize';
+import { Model } from "sequelize";
 
 module.exports = (sequelize, DataTypes) => {
   class Trip extends Model {
@@ -13,15 +11,18 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Trip.init({
-    user: DataTypes.STRING,
-    source: DataTypes.STRING,
-    destination: DataTypes.STRING,
-    DateOfTravel: DataTypes.DATE,
-    DateOfDestination: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Trip',
-  });
+  Trip.init(
+    {
+      user: DataTypes.STRING,
+      source: DataTypes.STRING,
+      destination: DataTypes.STRING,
+      DateOfTravel: DataTypes.DATE,
+      DateOfDestination: DataTypes.DATE,
+    },
+    {
+      sequelize,
+      modelName: "Trip",
+    }
+  );
   return Trip;
 };
