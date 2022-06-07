@@ -31,8 +31,8 @@ exports.addUser = async (req, res) => {
     user.password = await bcrypt.hash(user.password, salt);
     user.verificationToken = jwt.sign(
       {
-        firstname: user.firstname,
-        lastname: user.lastname,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         phoneNumber: user.phoneNumber,
       },
@@ -43,8 +43,8 @@ exports.addUser = async (req, res) => {
 
     const newUser = await User.create(
       _.pick(user, [
-        "firstname",
-        "lastname",
+        "firstName",
+        "lastName",
         "email",
         "roleId",
         "phoneNumber",
@@ -70,19 +70,63 @@ exports.addUser = async (req, res) => {
   }
 };
 
+exports.verifyUser = async (req, res) => {
+  try {
+    const userEmail = req.params.email
+    const user = await User.findOne({ where: { email: userEmail } });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        status: 404,
+        message: "User not found!",
+      });
+    }
+    if (user.verified) {
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        message: "User already verified!",
+      });
+    }
+    user.verified = true;
+    await user.save();
+    return res.status(200).json({
+      success: true,
+      status: 200,
+      message: "User verified successfully!",
+      data: user
+    });
+  }
+  catch (err) {
+    res.status(400).json({
+      success: false,
+      status: 400,
+      message: err.message,
+    });
+  }
+}
+
+
 exports.signIn = async (req, res) => {
   try {
     let user = await User.findOne({ where: { email: req.body.email } });
 
+    if (!user) {
+      return res.status(404).send({ message: "Invalid Email or Password!" });
+    }
+
     let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 
     if (!passwordIsValid) {
-      return res.status(401).send({ message: "Invalid Password!" });
+      return res.status(401).send({ message: "Invalid Email or Password!" });
+    }
+
+    if (!user.verified) {
+      return res.status(400).send({ message: "Please verify your account!" });
     }
 
     let token = jwt.sign(
       {
-        id: user.id,
         uuid: user.uuid,
         email: user.email,
       },
