@@ -87,7 +87,6 @@ exports.signIn = async (req, res) => {
 
     let token = jwt.sign(
       {
-        id: user.id,
         uuid: user.uuid,
         email: user.email,
       },
