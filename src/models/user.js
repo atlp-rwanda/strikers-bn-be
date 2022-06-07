@@ -1,5 +1,5 @@
 "use strict";
-import { Model } from "sequelize";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     toJSON() {
-      return { ...this.get(), id: undefined, password: undefined };
+      return { ...this.get(), id: undefined, password: undefined }
     }
   }
   User.init({
@@ -34,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     roleId: {
       type: DataTypes.STRING,
+      defaultValue: '96c97445-d152-4a4e-9868-bee9d5a18ce2',
       allowNull: false
     },
     phoneNumber: {

@@ -20,7 +20,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
       },
-      roleId: {
+      roleid: {
         type: Sequelize.UUID,
         allowNull: false,
       },
@@ -40,7 +40,7 @@ module.exports = {
         type: Sequelize.STRING(2500),
         allowNull: true,
       },
-      createdAt: {
+      createdat: {
         allowNull: false,
         type: Sequelize.DATE,
       },
@@ -49,21 +49,21 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.createTable("Roles", {
-      roleId: {
-        type: Sequelize.UUID,
-        primaryKey: true,
-      },
-      role: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-    });
+    // await queryInterface.createTable("roles", {
+    //   roleid: {
+    //     type: Sequelize.UUID,
+    //     primaryKey: true,
+    //   },
+    //   roletitle: {
+    //     type: Sequelize.STRING,
+    //     allowNull: false,
+    //   },
+    // });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("Users");
   },
   async downRoles(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Roles");
+    await queryInterface.dropTable("roles");
   },
 };
