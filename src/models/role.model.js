@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
     static associate(models) {}
     toJSON() {
-      return { ...this.get(), roleid: undefined, roletitle: undefined };
+      return { ...this.get(), id: undefined };
     }
   }
   Role.init(
