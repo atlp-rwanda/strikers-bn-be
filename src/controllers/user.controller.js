@@ -31,8 +31,8 @@ exports.addUser = async (req, res) => {
     user.password = await bcrypt.hash(user.password, salt);
     user.verificationToken = jwt.sign(
       {
-        firstname: user.firstname,
-        lastname: user.lastname,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         phoneNumber: user.phoneNumber,
       },
@@ -43,8 +43,8 @@ exports.addUser = async (req, res) => {
 
     const newUser = await User.create(
       _.pick(user, [
-        "firstname",
-        "lastname",
+        "firstName",
+        "lastName",
         "email",
         "roleId",
         "phoneNumber",
@@ -111,15 +111,22 @@ exports.signIn = async (req, res) => {
   try {
     let user = await User.findOne({ where: { email: req.body.email } });
 
+    if (!user) {
+      return res.status(404).send({ message: "Invalid Email or Password!" });
+    }
+
     let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 
     if (!passwordIsValid) {
-      return res.status(401).send({ message: "Invalid Password!" });
+      return res.status(401).send({ message: "Invalid Email or Password!" });
+    }
+
+    if (!user.verified) {
+      return res.status(400).send({ message: "Please verify your account!" });
     }
 
     let token = jwt.sign(
       {
-        id: user.id,
         uuid: user.uuid,
         email: user.email,
       },
