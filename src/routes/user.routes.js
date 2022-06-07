@@ -2,7 +2,7 @@ import { Router } from "express";
 import { verifyToken } from "../middlewares/auth";
 const userRouter = Router();
 
-const { addUser, signIn,editUser,getUsers,getUser } = require("../controllers/user.controller");
+const { addUser, signIn, verifyUser, editUser, getUsers, getUser } = require("../controllers/user.controller");
 
 /**
  * @description To create a new user
@@ -28,5 +28,13 @@ userRouter.post("/register", addUser);
  * @type POST
  */
 userRouter.post("/login", signIn);
+
+/**
+ * @description To verify user account
+ * @api v1/api/user/verify/{email}
+ * @access Public
+ * @type GET
+ */
+userRouter.get("/verify/:email", verifyUser);
 
 module.exports = userRouter;
