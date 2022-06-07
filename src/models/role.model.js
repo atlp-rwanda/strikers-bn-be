@@ -1,27 +1,35 @@
 "use strict";
-const { Model } = require("sequelize");
+import { Sequelize, Model } from 'sequelize';
 
 module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
     static associate(models) {}
     toJSON() {
-      return { ...this.get(), roleId: undefined, role: undefined };
+      return { ...this.get(), roleid: undefined, roletitle: undefined };
     }
   }
   Role.init(
     {
-      roleId: {
-        type: DataTypes.UUID,
+      roleid: {
+        type: Sequelize.UUID,
         allowNull: false,
       },
-      role: {
-        type: DataTypes.STRING,
+      roletitle: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
+      createdat: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updatedat: {
+        type: Sequelize.DATE,
+        allowNull: false
+      }
     },
     {
       sequelize,
-      modelName: "Role",
+      modelName: "roles",
     }
   );
   return Role;

@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       roleId: {
         type: DataTypes.UUID,
+        defaultValue: "96c97445-d152-4a4e-9868-bee9d5a18ce2",
         allowNull: false,
       },
       phoneNumber: {
