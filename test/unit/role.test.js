@@ -24,7 +24,7 @@ describe("Role API", () => {
         it("It should NOT GET a list of all roles", async () => {
             const res = await chai
                 .request(server)
-                .get("/api/roles/all");
+                .get("/api/role/all");
             expect(res).to.have.status(404);
         });
     });
@@ -41,11 +41,18 @@ describe("Role API", () => {
             expect(res.body).to.be.a("object");
         });
 
-        it("It should NOT GET a specific role by its specific id", async () => {
-            const id="4883",res = await chai
+        it("It should NOT GET a specific role by its specific id (Non-existing role)", async () => {
+            const id="96c97445-d152-4a4e-9868-bee9d5a18ca2",res = await chai
                 .request(server)
                 .get("/api/roles/"+id);
             expect(res).to.have.status(404);
+        });
+
+        it("It should NOT GET a specific role by its specific id (Invalid UUID)", async () => {
+            const id="96c97445",res = await chai
+                .request(server)
+                .get("/api/roles/"+id);
+            expect(res).to.have.status(500);
         });
     });
 });
