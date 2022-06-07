@@ -3,9 +3,22 @@
   "version": "1.0.0",
   "description": "<p>\r   <strong>Barefoot nomad</strong> is an application that will enable its “Company Nomads” book their international travel and accommodation globally; easily and conveniently across all the locations/centers where the Company has its operations.\r </p>",
   "main": "index.js",
+  "engines": {
+    "node": "^16.13.0"
+  },
   "scripts": {
-    "start": "node ./src/index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cross-env NODE_ENV=production node -r esm src/index.js",
+    "test": "cross-env NODE_ENV=test mocha --require @babel/register \"test/**/*.test.js\" --timeout 10000 --exit",
+    "coverage": "c8 --reporter=lcov --reporter=text npm test",
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
+    "babel-version": "babel --version",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src",
+    "model:generate": "npx sequelize-cli model:generate --name Manager --attributes firstName:string,lastName:string,email:string,address:string",
+    "gen-seed": "npx sequelize-cli seed:generate --name demo-manager",
+    "migrate": "npx sequelize-cli db:migrate",
+    "undo-migration": "npx sequelize-cli db:migrate:undo",
+    "seed": "npx sequelize-cli db:seed:all"
   },
   "repository": {
     "type": "git",
@@ -19,16 +32,40 @@
   },
   "homepage": "https://github.com/atlp-rwanda/strikers-bn-be#readme",
   "dependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/register": "^7.17.7",
+    "babel-preset-env": "^1.7.0",
+    "bcryptjs": "^2.4.3",
+    "c8": "^7.11.3",
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "esm": "^3.2.25",
     "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mocha": "^10.0.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.16",
+    "nyc": "^15.1.0",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.19.1",
+    "sequelize": "^6.20.0",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.4.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
+=======
+    "cross-env": "^7.0.3",
+    "eslint": "^8.15.0",
+>>>>>>> 5910e159d76aa007706b9a01a386b5d74b8c4ab3
     "sequelize-cli": "^6.4.1"
   }
 }
