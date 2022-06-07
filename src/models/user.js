@@ -15,49 +15,46 @@ module.exports = (sequelize, DataTypes) => {
       return { ...this.get(), id: undefined, password: undefined };
     }
   }
-  User.init(
-    {
-      uuid: {
-        type: DataTypes.UUID,
-        // defaultValue: DataTypes.UUIDV4,
-      },
-      firstname: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      lastname: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      roleId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-      },
-      phoneNumber: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      verified: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
-      verificationToken: {
-        type: DataTypes.STRING(2500),
-        allowNull: true,
-      },
+  User.init({
+    uuid: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
     },
-    {
-      sequelize,
-      modelName: "User",
-    }
-  );
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    roleId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    phoneNumber: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    verified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    verificationToken: {
+      type: DataTypes.STRING(2500),
+      allowNull: true
+    } 
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
   return User;
 };
