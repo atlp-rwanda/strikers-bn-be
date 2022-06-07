@@ -27,6 +27,6 @@ router.get("/:id", getSpecificRole)
  * @access Public
  * @type PATCH
  */
-router.patch("/:email/:roleid", [verifyToken], assignRole);
+router.patch("/:email/:roleid", [verifyToken, adminCheck], assignRole);
 
 module.exports = router;
