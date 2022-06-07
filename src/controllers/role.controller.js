@@ -27,7 +27,7 @@ export async function getSpecificRole(req, res) {
 
 export async function assignRole(req, res) {
   try {
-    await User.find({ where: { uuid: req.params.userid } })
+    await User.find({ where: { email: req.params.email } })
   .on('success', function (project) {
     if (user) {
       user.update({
