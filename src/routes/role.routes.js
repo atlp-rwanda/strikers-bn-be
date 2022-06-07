@@ -1,7 +1,7 @@
 import express from "express";
 import { getAllRoles, getSpecificRole, assignRole } from "../controllers/role.controller";
-import authenticate from '../middlewares/auth';
-import adminCheck from '../middlewares/super-admin';
+import { verifyToken } from '../middlewares/auth';
+import { adminCheck } from '../middlewares/super-admin';
 
 const router = express.Router();
 
@@ -27,6 +27,6 @@ router.get("/:id", getSpecificRole)
  * @access Public
  * @type PATCH
  */
-router.patch("/:email/:roleid", [auth, adminCheck], assignRole);
+router.patch("/:email/:roleid", [verifyToken], assignRole);
 
 module.exports = router;
