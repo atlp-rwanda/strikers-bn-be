@@ -19,7 +19,7 @@ describe("Role API", () => {
       expect(res.body).to.be.a("array");
     });
 
-    it("It should NOT GET a list of all registered roles", async () => {
+    it("It should NOT GET a list of all roles", async () => {
       const res = await chai.request(server).get("/api/role/all");
       expect(res).to.have.status(404);
     });
