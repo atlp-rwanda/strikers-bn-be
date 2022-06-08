@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 const server = require("../../src/index");
 
-describe("POST /api/v1/user", () => {
+describe("POST /api/v1/users", () => {
   /**
    * Should POST a new user
    */
@@ -27,7 +27,7 @@ describe("POST /api/v1/user", () => {
 
     chai
       .request(server)
-      .post("/api/v1/user/register")
+      .post("/api/v1/users/register")
       .send(newUser)
       .end((err, response) => {
         response.should.have.status(201);
@@ -57,7 +57,7 @@ describe("POST /api/v1/user", () => {
 
     chai
       .request(server)
-      .post("/api/v1/user/register")
+      .post("/api/v1/users/register")
       .send(newUser)
       .end((err, response) => {
         response.should.have.status(403);
@@ -72,7 +72,7 @@ describe("POST /api/v1/user", () => {
   it("Should sign in user", (done) => {
     chai
       .request(server)
-      .post("/api/v1/user/login")
+      .post("/api/v1/users/login")
       .send({
         email: `abiheloaf@gmail.com`,
         password: "pass12345",
@@ -89,15 +89,15 @@ describe("GET /api/v1/users",()=>{
   /**
    * Test GET route
    */
-   describe("GET /api/v1/user/users", () => {
+   describe("GET /api/v1/users/getusers", () => {
     it("It should GET a list of all users", async () => {
-      const res = await chai.request(server).get("/api/v1/user/users");
+      const res = await chai.request(server).get("/api/v1/users/getusers");
       expect(res).to.have.status(200);
       expect(res.body).to.be.a("array");
     });
 
     it("It should NOT GET a list of all users", async () => {
-      const res = await chai.request(server).get("/api/user/all");
+      const res = await chai.request(server).get("/api/users/all");
       expect(res).to.have.status(404);
     });
   });
@@ -108,7 +108,7 @@ describe("GET /api/v1/users",()=>{
   describe("GET /api/v1/user/users/:uuid", () => {
     it("It should GET a specific user by its specific uuid", async () => {
       const uuid = "72117a46-7ba2-495d-8846-221313470ad4",
-        res = await chai.request(server).get("/api/v1/user/users/" + uuid);
+        res = await chai.request(server).get("/api/v1/users/" + uuid);
       expect(res).to.have.status(200);
       expect(res.body).to.be.a("object");
     });
