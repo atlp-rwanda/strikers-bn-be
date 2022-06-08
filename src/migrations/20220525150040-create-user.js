@@ -4,25 +4,29 @@ module.exports = {
     await queryInterface.createTable("Users", {
       uuid: {
         type: Sequelize.UUID,
+        allowNull: false
       },
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       firstName: {
         type: Sequelize.STRING,
+        allowNull: false
       },
       lastName: {
         type: Sequelize.STRING,
+        allowNull: false
       },
       email: {
         type: Sequelize.STRING,
+        allowNull: false
       },
-      roleid: {
+      roleId: {
         type: Sequelize.UUID,
-        allowNull: false,
+        allowNull: false
       },
       phoneNumber: {
         type: Sequelize.STRING,
@@ -32,6 +36,34 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      passwordResetToken: {
+        type: Sequelize.STRING(2500),
+        allowNull: true
+      },
+      birthdate: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      location: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      preferredLanguage: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      preferredCurrency: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      department: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      lineManager: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       verified: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
@@ -40,7 +72,7 @@ module.exports = {
         type: Sequelize.STRING(2500),
         allowNull: true,
       },
-      createdat: {
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },
@@ -49,21 +81,8 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    // await queryInterface.createTable("roles", {
-    //   roleid: {
-    //     type: Sequelize.UUID,
-    //     primaryKey: true,
-    //   },
-    //   roletitle: {
-    //     type: Sequelize.STRING,
-    //     allowNull: false,
-    //   },
-    // });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("Users");
-  },
-  async downRoles(queryInterface, Sequelize) {
-    await queryInterface.dropTable("roles");
-  },
+  }
 };
