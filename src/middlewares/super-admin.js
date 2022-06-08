@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { TOKEN_SECRET } from "../config/key";
-import { Roles, User } from '../models';
+import { Roles } from '../models';
 
 export async function adminCheck(req, res, next) {
   try {
@@ -9,10 +9,7 @@ export async function adminCheck(req, res, next) {
       if (err) {
         return res.status(401).send({ message: err.message });
       }
-      const user = await User.findOne({ where: { uuid: decoded.uuid } });
-      if (!user)
-        return res.status(404).send({ message: 'Invalid token owner' });
-      const role = await Roles.findOne({ where: { roleId: user.roleId } });
+      const role = await Roles.findOne({ where: { roleId: decoded.roleId } });
       if (!role)
         return res.status(404).send({ message: 'Invalid role' });
       if (role.roleTitle != 'ADMIN')
