@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 const server = require("../../src/index");
 
-describe("POST /api/v1/user", () => {
+describe("POST /api/v1/users", () => {
   /**
    * Should POST a new user
    */
@@ -27,7 +27,7 @@ describe("POST /api/v1/user", () => {
 
     chai
       .request(server)
-      .post("/api/v1/user/register")
+      .post("/api/v1/users/register")
       .send(newUser)
       .end((err, response) => {
         response.should.have.status(201);
@@ -57,7 +57,7 @@ describe("POST /api/v1/user", () => {
 
     chai
       .request(server)
-      .post("/api/v1/user/register")
+      .post("/api/v1/users/register")
       .send(newUser)
       .end((err, response) => {
         response.should.have.status(403);
@@ -72,7 +72,7 @@ describe("POST /api/v1/user", () => {
   it("Should sign in user", (done) => {
     chai
       .request(server)
-      .post("/api/v1/user/login")
+      .post("/api/v1/users/login")
       .send({
         email: `abiheloaf@gmail.com`,
         password: "pass12345",

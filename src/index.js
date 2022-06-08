@@ -20,6 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/user/", userRouter);
+
+
 app.use("/api/v1/roles", rolesRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -27,9 +29,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to strikers-bn-be APIs");
 });
 
-app.get("/", (req, res) => {
-  res.send("Welcome to strikers-bn-be APIs");
-});
 const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
     console.log(`Server started on port ${port}!`);
