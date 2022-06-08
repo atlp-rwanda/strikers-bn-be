@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import { Roles, User } from '../models';
-import { validateRoleRegistration } from '../validators/role.validator';
+import _ from "lodash";
+import { Roles, User } from "../models";
+import { validateRoleRegistration } from "../validators/role.validator";
 
 export async function addRole(req, res) {
   try {
@@ -21,16 +21,16 @@ export async function addRole(req, res) {
       return res.status(403).json({
         success: false,
         status: 403,
-        message: 'Role already exists!',
+        message: "Role already exists!",
       });
     }
 
-    const newRole = await Roles.create(_.pick(role, ['roleTitle']));
+    const newRole = await Roles.create(_.pick(role, ["roleTitle"]));
 
     return res.status(201).json({
       success: true,
       status: 201,
-      message: 'Role created successfully',
+      message: "Role created successfully",
       data: newRole,
     });
   } catch (e) {
@@ -61,12 +61,10 @@ export async function assignRole(req, res) {
   try {
     const user = await User.find({ where: { email: req.params.email } });
     if (!user) {
-      return res
-        .status(404)
-        .send({
-          success: false,
-          message: "User with that email doesn't exist",
-        });
+      return res.status(404).send({
+        success: false,
+        message: "User with that email doesn't exist",
+      });
     }
     await User.update({
       roleId: req.params.roleId,
@@ -121,7 +119,7 @@ export async function updateRole(req, res) {
     return res.status(200).json({
       success: true,
       status: 200,
-      message: 'Role title updated successfully',
+      message: "Role title updated successfully",
       data: existing,
     });
   } catch (e) {
