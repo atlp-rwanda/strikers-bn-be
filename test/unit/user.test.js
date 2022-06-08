@@ -1,4 +1,4 @@
-import chai from "chai";
+import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 import dotenv from "dotenv";
 
@@ -84,3 +84,34 @@ describe("POST /api/v1/users", () => {
       });
   });
 });
+
+describe("GET /api/v1/users",()=>{
+  /**
+   * Test GET route
+   */
+   describe("GET /api/v1/users/getusers", () => {
+    it("It should GET a list of all users", async () => {
+      const res = await chai.request(server).get("/api/v1/users/getusers");
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.a("array");
+    });
+
+    it("It should NOT GET a list of all users", async () => {
+      const res = await chai.request(server).get("/api/users/all");
+      expect(res).to.have.status(404);
+    });
+  });
+
+  /**
+   * Test GET route for specific role
+   */
+  describe("GET /api/v1/user/users/:uuid", () => {
+    it("It should GET a specific user by its specific uuid", async () => {
+      const uuid = "72117a46-7ba2-495d-8846-221313470ad4",
+        res = await chai.request(server).get("/api/v1/users/" + uuid);
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.a("object");
+    });
+  });
+});
+
