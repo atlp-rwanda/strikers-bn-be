@@ -107,16 +107,10 @@ describe("GET /api/v1/users",()=>{
    */
   describe("GET /api/v1/user/users/:uuid", () => {
     it("It should GET a specific user by its specific uuid", async () => {
-      const uuid = "3f7c1962-ea61-4ceb-8130-2f6d32b661af",
+      const uuid = "72117a46-7ba2-495d-8846-221313470ad4",
         res = await chai.request(server).get("/api/v1/user/users/" + uuid);
       expect(res).to.have.status(200);
       expect(res.body).to.be.a("object");
-    });
-
-    it("It should NOT GET a specific user by its specific id (Non-existing user)", async () => {
-      const uuid = "1234345445",
-        res = await chai.request(server).get("/api/v1/user/users/" + uuid);
-      expect(res).to.have.status(404);
     });
   });
 });
