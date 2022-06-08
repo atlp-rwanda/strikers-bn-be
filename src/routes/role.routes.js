@@ -66,6 +66,14 @@ router.delete("/:roleId", [verifyToken, adminCheck], deleteRole);
  * @access Public
  * @type PATCH
  */
-router.patch("/:existingTitle", [verifyToken, adminCheck], updateRole);
+router.patch("/:roleId", [verifyToken, adminCheck], updateRole);
+
+/**
+ * @description To update the title/name of an existing role
+ * @api api/roles/:roleId
+ * @access Public
+ * @type DELETE
+ */
+router.delete("/:roleId", [verifyToken, adminCheck], deleteRole);
 
 module.exports = router;
