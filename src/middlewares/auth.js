@@ -1,13 +1,9 @@
 import jwt from "jsonwebtoken";
+import { TOKEN_SECRET } from "../config/key";
 
-const { TOKEN_SECRET } = require("../config/key");
-
-export async function verifyToken(req, res, next) {
+export const verifyToken = async (req, res, next) => {
   try {
-    if (process.env.NODE_ENV != "test" && !req.session.email) {
-      return;
-    }
-    const token = req.headers.authorization.split(" ")[1];
+    let token = req.headers.authorization.split(" ")[1];
     jwt.verify(token, TOKEN_SECRET, (err, decoded) => {
       if (err) {
         return res.status(401).send({ message: err.message });
@@ -19,9 +15,9 @@ export async function verifyToken(req, res, next) {
   } catch (error) {
     return res.status(403).send({ message: "No token provided!" });
   }
-}
+};
 
-exports.verifyManager = (req, res, next) => {
+export const verifyManager = async (req, res, next) => {
   if (req.roleId !== process.env.MANAGER_ID) {
     return res.status(403).send({ message: "Not authorized." });
   }
