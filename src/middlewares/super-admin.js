@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config/key";
-import { Roles } from '../models';
+import { Roles } from "../models";
 
 export async function adminCheck(req, res, next) {
   try {
@@ -13,13 +13,17 @@ export async function adminCheck(req, res, next) {
         return res.status(401).send({ message: err.message });
       }
       if (!decoded.roleId)
-        return res.status(404).send({ message: 'Invalid token provided' });
+        return res.status(404).send({ message: "Invalid token provided" });
       const role = await Roles.findOne({ where: { roleId: decoded.roleId } });
-      console.log("decoded.roleId "+decoded.roleId);
-      if (!role)
-        return res.status(404).send({ message: 'Invalid role' });
-      if (role.roleTitle != 'SUPER ADMINISTRATOR')
-        return res.status(401).send({ message: 'This route can be accessed by a super administrator only!' });
+      console.log("decoded.roleId " + decoded.roleId);
+      if (!role) return res.status(404).send({ message: "Invalid role" });
+      if (role.roleTitle != "SUPER ADMINISTRATOR")
+        return res
+          .status(401)
+          .send({
+            message:
+              "This route can be accessed by a super administrator only!",
+          });
       next();
     });
   } catch {
