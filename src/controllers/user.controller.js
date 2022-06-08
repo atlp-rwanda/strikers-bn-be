@@ -73,6 +73,45 @@ exports.addUser = async (req, res) => {
   }
 };
 
+exports.editUser=async(req,res)=>{
+  try{
+    console.log(req.body)
+    const { firstName, lastName, roleId,phoneNumber,password } = req.body;
+      const id=req.params.uuid;
+      await User.findOne({ where: { uuid:  id} }).then(async (user) => {
+         if (user) {
+            await user.update(
+               { firstName, lastName, roleId,phoneNumber,password },
+               { where: { uuid: req.params.uuid } }
+            ).then(() =>
+               res.status(200).json({status:"success",message:"User with id: "+ id+" " +"UPDATED"})
+            );
+         } else
+            res.status(404).send({ message: "User with that id doesn't exist" });
+      });
+
+  }catch(err){
+    res.status(500).send({message:`Error: ${err}`})
+  }
+  
+}
+
+exports.getUsers=async(req,res)=>{
+  console.log(req.body)
+  try {
+    await User.findAll().then((users) => res.status(200).json(users));
+ } catch (err) {
+    return res.status(500).json({ error: "Something went wrong" });
+ }
+}
+exports.getUser = async (req, res) => {
+  const uuid = req.params.uuid;
+  try {
+     const user = await User.findOne({ where: { uuid } }).then((user) => { res.status(200).json(user) })
+  } catch (err) {
+     return res.status(500).json({ error: "Something went wrong" });
+  }
+}
 exports.verifyUser = async (req, res) => {
   try {
     const userEmail = req.params.email;
