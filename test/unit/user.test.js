@@ -17,10 +17,10 @@ describe("POST /api/v1/user", () => {
 
   it("It should POST a new user", (done) => {
     const newUser = {
-      firstname: `Abi${userId}`,
-      lastname: `Seth${userId}`,
+      firstName: `Abi${userId}`,
+      lastName: `Seth${userId}`,
       email: `abi${userId}@gmail.com`,
-      roleId: "9340272366132983293",
+      roleId: "e2a8b398-b658-4606-9b17-b9152792e875",
       phoneNumber: "0781294147",
       password: "pass12345",
     };
@@ -47,10 +47,10 @@ describe("POST /api/v1/user", () => {
 
   it("It should NOT POST a duplicate user email", (done) => {
     const newUser = {
-      firstname: "Abi",
-      lastname: "Seth",
-      email: "abi_seth@gmail.com",
-      roleId: "9340272366132983293",
+      firstName: "Abi",
+      lastName: "Seth",
+      email: "abiseth@gmail.com",
+      roleId: "e2a8b398-b658-4606-9b17-b9152792e875",
       phoneNumber: "0781294147",
       password: "pass12345",
     };
@@ -74,7 +74,7 @@ describe("POST /api/v1/user", () => {
       .request(server)
       .post("/api/v1/user/login")
       .send({
-        email: `abi_seth@gmail.com`,
+        email: `abiheloaf@gmail.com`,
         password: "pass12345",
       })
       .end((err, res) => {
