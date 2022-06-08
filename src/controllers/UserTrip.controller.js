@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { Trip } from "../models";
 const express=require("express");
+import { validateTripsNotifications } from '../validators/trip.validator';
 const app = express()
 app.use(express.json())
 
@@ -8,7 +9,11 @@ app.use(express.json())
     exports.addTrip = async (req, res) => {
       const user=1;
   const { source,destination,DateOfTravel,DateOfDestination,status} = req.body
-console.log(user);
+  const validateUserInput = validateTripsNotifications({ source,destination,DateOfTravel,DateOfDestination,status});
+
+  if (validateUserInput.error) {
+    return res.status(400).json(validateUserInput.error.details[0].message);
+  }
   try {
     const trip = await Trip.create({  user,source,destination, DateOfTravel,DateOfDestination,status })
 

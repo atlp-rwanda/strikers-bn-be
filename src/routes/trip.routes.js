@@ -1,7 +1,8 @@
 import { Router } from 'express';
 
 const tripRouter = Router();
-// const requireLogin=require("../middlewares/auth")
+import { verifyToken } from '../middlewares/auth';
+import { adminCheck } from '../middlewares/super-admin';
 const { addTrip,getAllTrips,getOneTrip,deleteOneTrip,updateTrip } = require('../controllers/UserTrip.controller');
 
 /**
@@ -10,7 +11,7 @@ const { addTrip,getAllTrips,getOneTrip,deleteOneTrip,updateTrip } = require('../
  * @access Public
  * @type POST
  */
-tripRouter.post('/CreateTrip', addTrip);
+tripRouter.post('/CreateTrip',verifyToken, addTrip);
 
 /**
  * @description To login using email and password
@@ -26,7 +27,7 @@ tripRouter.get('/getAllTrips', getAllTrips);
  * @access Public
  * @type GET
  */
-tripRouter.get('/trips/:id', getOneTrip);
+tripRouter.get('/trips/:id',[verifyToken, adminCheck], getOneTrip);
 
 /**
  * @description To create a new user
@@ -34,7 +35,7 @@ tripRouter.get('/trips/:id', getOneTrip);
  * @access Public
  * @type DELETE
  */
-tripRouter.delete('/trips/:id', deleteOneTrip);
+tripRouter.delete('/trips/:id',verifyToken, deleteOneTrip);
 
 /**
  * @description To create a new user
@@ -42,6 +43,6 @@ tripRouter.delete('/trips/:id', deleteOneTrip);
  * @access Public
  * @type PUT
  */
-tripRouter.put('/trips/:id', updateTrip);
+tripRouter.put('/trips/:id',verifyToken, updateTrip);
 
 module.exports = tripRouter;
