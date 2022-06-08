@@ -48,4 +48,214 @@ describe("Role API", () => {
       expect(res).to.have.status(500);
     });
   });
+
+  /**
+   * Test POST route
+   */
+  describe("POST /api/v1/roles", () => {
+    it("It should POST (create) a new role", async () => {
+      const newRole = {
+          roleTitle: "System Tester",
+        },
+        { body } = await chai
+          .request(server)
+          .post("/api/v1/users/login")
+          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+        res2 = await chai
+          .request(server)
+          .post("/api/v1/roles")
+          .send(newRole)
+          .set({ authorization: "Bearer " + body.token });
+      expect(res2).to.have.status(201);
+      await chai
+        .request(server)
+        .delete("/api/v1/roles/" + res2.body.data.roleId)
+        .set({ authorization: "Bearer " + body.token });
+    });
+
+    it("It should NOT POST (create) a new role (Role already exists)", async () => {
+      const newRole = {
+          roleTitle: "System Tester",
+        },
+        { body } = await chai
+          .request(server)
+          .post("/api/v1/users/login")
+          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+        res2 = await chai
+          .request(server)
+          .post("/api/v1/roles")
+          .send(newRole)
+          .set({ authorization: "Bearer " + body.token }),
+        res3 = await chai
+          .request(server)
+          .post("/api/v1/roles")
+          .send(newRole)
+          .set({ authorization: "Bearer " + body.token });
+      expect(res3).to.have.status(403);
+      await chai
+        .request(server)
+        .delete("/api/v1/roles/" + res2.body.data.roleId)
+        .set({ authorization: "Bearer " + body.token });
+    });
+
+    it("It should NOT POST (create) a new role (Not authenticated as Super Administrator)", async () => {
+      const newRole = {
+          roleTitle: "System Tester",
+        },
+        { body } = await chai
+          .request(server)
+          .post("/api/v1/users/login")
+          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+        res2 = await chai.request(server).post("/api/v1/roles").send(newRole);
+      expect(res2).to.have.status(403);
+    });
+
+    it("It should NOT POST (create) a new role (Invalid Title/name)", async () => {
+      const newRole = {
+          roleTitle: "S",
+        },
+        { body } = await chai
+          .request(server)
+          .post("/api/v1/users/login")
+          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+        res2 = await chai
+          .request(server)
+          .post("/api/v1/roles")
+          .send(newRole)
+          .set({ authorization: "Bearer " + body.token });
+      expect(res2).to.have.status(400);
+    });
+  });
+
+  /**
+   * Test the PATCH route
+   */
+  describe("PATCH /api/v1/roles/:roleId", () => {
+    it("It should PATCH (update) an existing role", async () => {
+      const newRole = {
+          roleTitle: "System Tester",
+        },
+        updatedRole = {
+          roleTitle: "System Maintainer",
+        },
+        { body } = await chai
+          .request(server)
+          .post("/api/v1/users/login")
+          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+        res2 = await chai
+          .request(server)
+          .post("/api/v1/roles")
+          .send(newRole)
+          .set({ authorization: "Bearer " + body.token }),
+        { roleId } = res2.body.data,
+        res3 = await chai
+          .request(server)
+          .patch("/api/v1/roles/" + roleId)
+          .send(updatedRole)
+          .set({ authorization: "Bearer " + body.token });
+      expect(res3).to.have.status(200);
+      await chai
+        .request(server)
+        .delete("/api/v1/roles/" + roleId)
+        .set({ authorization: "Bearer " + body.token });
+    });
+
+    it("It should NOT PATCH (update) an existing role (Another role with the new name already exists)", async () => {
+      const newRole = {
+          roleTitle: "System Tester",
+        },
+        newRole2 = {
+          roleTitle: "System Maintainer",
+        },
+        updatedRole = {
+          roleTitle: "System Maintainer",
+        },
+        { body } = await chai
+          .request(server)
+          .post("/api/v1/users/login")
+          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+        res2 = await chai
+          .request(server)
+          .post("/api/v1/roles")
+          .send(newRole)
+          .set({ authorization: "Bearer " + body.token }),
+        { roleId } = res2.body.data,
+        res3 = await chai
+          .request(server)
+          .post("/api/v1/roles")
+          .send(newRole2)
+          .set({ authorization: "Bearer " + body.token }),
+        res4 = await chai
+          .request(server)
+          .patch("/api/v1/roles/" + roleId)
+          .send(updatedRole)
+          .set({ authorization: "Bearer " + body.token });
+      expect(res4).to.have.status(400);
+      await chai
+        .request(server)
+        .delete("/api/v1/roles/" + roleId)
+        .set({ authorization: "Bearer " + body.token });
+      await chai
+        .request(server)
+        .delete("/api/v1/roles/" + res3.body.data.roleId)
+        .set({ authorization: "Bearer " + body.token });
+    });
+
+    it("It should NOT PATCH (update) an existing role (Not authenticated as Super Administrator)", async () => {
+      const newRole = {
+          roleTitle: "System Tester",
+        },
+        updatedRole = {
+          roleTitle: "System Maintainer",
+        },
+        { body } = await chai
+          .request(server)
+          .post("/api/v1/users/login")
+          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+        res2 = await chai
+          .request(server)
+          .post("/api/v1/roles")
+          .send(newRole)
+          .set({ authorization: "Bearer " + body.token }),
+        { roleId } = res2.body.data,
+        res3 = await chai
+          .request(server)
+          .patch("/api/v1/roles/" + roleId)
+          .send(updatedRole);
+      expect(res3).to.have.status(403);
+      await chai
+        .request(server)
+        .delete("/api/v1/roles/" + roleId)
+        .set({ authorization: "Bearer " + body.token });
+    });
+
+    it("It should NOT POST (create) a new role (Invalid Title/name)", async () => {
+      const newRole = {
+          roleTitle: "System Tester",
+        },
+        updatedRole = {
+          roleTitle: "S",
+        },
+        { body } = await chai
+          .request(server)
+          .post("/api/v1/users/login")
+          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+        res2 = await chai
+          .request(server)
+          .post("/api/v1/roles")
+          .send(newRole)
+          .set({ authorization: "Bearer " + body.token }),
+        { roleId } = res2.body.data,
+        res3 = await chai
+          .request(server)
+          .patch("/api/v1/roles/" + roleId)
+          .send(updatedRole)
+          .set({ authorization: "Bearer " + body.token });
+      expect(res3).to.have.status(400);
+      await chai
+        .request(server)
+        .delete("/api/v1/roles/" + roleId)
+        .set({ authorization: "Bearer " + body.token });
+    });
+  });
 });
