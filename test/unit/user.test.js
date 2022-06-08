@@ -1,4 +1,4 @@
-import chai from "chai";
+import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 import dotenv from "dotenv";
 
@@ -84,3 +84,40 @@ describe("POST /api/v1/user", () => {
       });
   });
 });
+
+describe("GET /api/v1/users",()=>{
+  /**
+   * Test GET route
+   */
+   describe("GET /api/v1/user/users", () => {
+    it("It should GET a list of all users", async () => {
+      const res = await chai.request(server).get("/api/v1/user/users");
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.a("array");
+    });
+
+    it("It should NOT GET a list of all users", async () => {
+      const res = await chai.request(server).get("/api/user/all");
+      expect(res).to.have.status(404);
+    });
+  });
+
+  /**
+   * Test GET route for specific role
+   */
+  describe("GET /api/v1/user/users/:uuid", () => {
+    it("It should GET a specific user by its specific uuid", async () => {
+      const uuid = "3f7c1962-ea61-4ceb-8130-2f6d32b661af",
+        res = await chai.request(server).get("/api/v1/user/users/" + uuid);
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.a("object");
+    });
+
+    it("It should NOT GET a specific user by its specific id (Non-existing user)", async () => {
+      const uuid = "1234345445",
+        res = await chai.request(server).get("/api/v1/user/users/" + uuid);
+      expect(res).to.have.status(404);
+    });
+  });
+});
+
