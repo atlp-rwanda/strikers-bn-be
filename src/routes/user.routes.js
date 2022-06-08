@@ -9,7 +9,7 @@ const {
 
 /**
  * @description To create a new user
- * @api v1/api/user/register
+ * @api v1/api/users/register
  * @access Public
  * @type POST
  */
@@ -17,7 +17,7 @@ userRouter.post("/register", addUser);
 
 /**
  * @description To login using email and password
- * @api v1/api/user/login
+ * @api v1/api/users/login
  * @access Public
  * @type POST
  */
@@ -25,7 +25,7 @@ userRouter.post("/login", signIn);
 
 /**
  * @description To verify user account
- * @api v1/api/user/verify/{email}
+ * @api v1/api/users/verify/{email}
  * @access Public
  * @type GET
  */
