@@ -94,12 +94,10 @@ exports.editUser = async (req, res) => {
             { where: { uuid: req.params.uuid } }
           )
           .then(() =>
-            res
-              .status(200)
-              .json({
-                status: "success",
-                message: `User with id: ${id} UPDATED`,
-              })
+            res.status(200).json({
+              status: "success",
+              message: `User with id: ${id} UPDATED`,
+            })
           );
       } else {
         res.status(404).send({ message: "User with that id doesn't exist" });
@@ -246,12 +244,10 @@ exports.resetPassword = async (req, res) => {
         { where: { id: user.id } }
       );
 
-      return res
-        .status(200)
-        .send({
-          messageSuccess:
-            "Email was sent successfully, it will expires in 30 minutes",
-        });
+      return res.status(200).send({
+        messageSuccess:
+          "Email was sent successfully, it will expires in 30 minutes",
+      });
     }
   } catch (error) {
     console.log(error);
