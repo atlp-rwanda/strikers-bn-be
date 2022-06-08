@@ -29,7 +29,7 @@ tripRouter.post("/create", verifyToken, addTrip);
 
 /**
  * @description To login using email and password
- * @api v1/api/trip/all
+ * @api v1/api/trips/all
  * @access Public
  * @type GET
  */
@@ -38,7 +38,7 @@ tripRouter.get("/all", getAllTrips);
 
 /**
  * @description To create a new user
- * @api v1/api/trip/:id
+ * @api v1/api/trips/:id
  * @access Public
  * @type GET
  */
@@ -46,7 +46,7 @@ tripRouter.get("/:id", [verifyToken, adminCheck], getOneTrip);
 
 /**
  * @description To create a new user
- * @api v1/api/trip/:id
+ * @api v1/api/trips/:id
  * @access Public
  * @type DELETE
  */
@@ -54,7 +54,7 @@ tripRouter.delete("/:id", verifyToken, deleteOneTrip);
 
 /**
  * @description To create a new user
- * @api v1/api/trip/:id
+ * @api v1/api/trips/:id
  * @access Public
  * @type PUT
  */
