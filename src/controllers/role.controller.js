@@ -105,9 +105,9 @@ export async function updateRole(req, res) {
       where: { roleId },
     });
     if (!existing) {
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
-        status: 400,
+        status: 404,
         message: "That role doesn't exist!",
       });
     }
@@ -135,7 +135,7 @@ export async function deleteRole(req, res) {
     const { roleId } = req.params;
     const roleToDelete = await Roles.findOne({ where: { roleId } });
     if (!roleToDelete)
-      return res.status(400).send({
+      return res.status(404).send({
         message: "The specified roleId doesn't exist in the database",
       });
     await Roles.destroy({ where: { roleId } });
