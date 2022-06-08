@@ -3,9 +3,12 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { User } from "../models";
-import { validateUserRegisteration, validateUserAuthenatication } from "../validators/user.validator";
+import {
+  validateUserRegisteration,
+  validateUserAuthenatication,
+} from "../validators/user.validator";
 import { TOKEN_SECRET } from "../config/key";
-import { sendEmail } from "../emails/account"
+import { sendEmail } from "../emails/account";
 
 dotenv.config();
 
@@ -53,7 +56,7 @@ exports.addUser = async (req, res) => {
       ])
     );
 
-    sendEmail(newUser.firstname, newUser.lastname, newUser.email)
+    sendEmail(newUser.firstname, newUser.lastname, newUser.email);
 
     return res.status(201).json({
       success: true,
@@ -72,7 +75,7 @@ exports.addUser = async (req, res) => {
 
 exports.verifyUser = async (req, res) => {
   try {
-    const userEmail = req.params.email
+    const userEmail = req.params.email;
     const user = await User.findOne({ where: { email: userEmail } });
     if (!user) {
       return res.status(404).json({
@@ -94,17 +97,16 @@ exports.verifyUser = async (req, res) => {
       success: true,
       status: 200,
       message: "User verified successfully!",
-      data: user
+      data: user,
     });
-  }
-  catch (err) {
+  } catch (err) {
     res.status(400).json({
       success: false,
       status: 400,
       message: err.message,
     });
   }
-}
+};
 
 exports.signIn = async (req, res) => {
   try {
@@ -127,7 +129,9 @@ exports.signIn = async (req, res) => {
     }
 
     if (!user.verified) {
-      return res.status(400).send({ message: "Please first verify your account!" });
+      return res
+        .status(400)
+        .send({ message: "Please first verify your account!" });
     }
 
     let token = jwt.sign(

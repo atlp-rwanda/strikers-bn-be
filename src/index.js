@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/user/", userRouter);
-app.use("/api/v1/trip/", tripRouter);
+app.use("/api/v1/trips/", tripRouter);
 app.use("/api/v1/roles", rolesRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
