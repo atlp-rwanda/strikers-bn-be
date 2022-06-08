@@ -11,7 +11,7 @@ const { addTrip,getAllTrips,getOneTrip,deleteOneTrip,updateTrip } = require('../
  * @access Public
  * @type POST
  */
-tripRouter.post('/create', addTrip);
+tripRouter.post('/create',verifyToken, addTrip);
 
 /**
  * @description To login using email and password
@@ -19,7 +19,7 @@ tripRouter.post('/create', addTrip);
  * @access Public
  * @type GET
  */
-tripRouter.get('/all', getAllTrips);
+tripRouter.get('/all',[verifyToken, adminCheck],getAllTrips);
 
 /**
  * @description To create a new user
