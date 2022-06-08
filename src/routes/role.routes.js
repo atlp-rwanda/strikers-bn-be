@@ -1,7 +1,13 @@
 import express from "express";
-import { addRole, getAllRoles, getSpecificRole, assignRole } from "../controllers/role.controller";
-import { verifyToken } from '../middlewares/auth';
-import { adminCheck } from '../middlewares/super-admin';
+import {
+  addRole,
+  getAllRoles,
+  getSpecificRole,
+  assignRole,
+  updateRole,
+} from "../controllers/role.controller";
+import { verifyToken } from "../middlewares/auth";
+import { adminCheck } from "../middlewares/super-admin";
 
 const router = express.Router();
 
@@ -27,7 +33,7 @@ router.get("/", getAllRoles);
  * @access Public
  * @type GET
  */
-router.get("/:id", getSpecificRole)
+router.get("/:id", getSpecificRole);
 
 /**
  * @description To assign a role to a certain user by his/her email
@@ -36,5 +42,13 @@ router.get("/:id", getSpecificRole)
  * @type PATCH
  */
 router.patch("/:email/:roleId", [verifyToken, adminCheck], assignRole);
+
+/**
+ * @description To update the title/name of an existing role
+ * @api api/roles/:existingTitle
+ * @access Public
+ * @type PATCH
+ */
+router.patch("/:existingTitle", [verifyToken, adminCheck], updateRole);
 
 module.exports = router;

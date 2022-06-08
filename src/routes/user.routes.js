@@ -1,7 +1,11 @@
 import { Router } from "express";
 const userRouter = Router();
 
-const { addUser, signIn, verifyUser } = require("../controllers/user.controller");
+const {
+  addUser,
+  signIn,
+  verifyUser,
+} = require("../controllers/user.controller");
 
 /**
  * @description To create a new user
