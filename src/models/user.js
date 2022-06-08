@@ -1,5 +1,6 @@
-"use strict";
-const { Model } = require("sequelize");
+/* eslint-disable valid-jsdoc */
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -8,11 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // define association here. this is to satisfy all models are on required elements.
+      // define associtaion there or here.
     }
 
     toJSON() {
-      return { ...this.get(), id: undefined, password: undefined }
+      return { ...this.get(), id: undefined, password: undefined };
     }
   }
   User.init({
@@ -51,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
     verificationToken: {
       type: DataTypes.STRING(2500),
       allowNull: true
-    } 
+    }
   }, {
     sequelize,
     modelName: 'User',
