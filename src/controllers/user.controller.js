@@ -106,7 +106,6 @@ exports.verifyUser = async (req, res) => {
   }
 }
 
-
 exports.signIn = async (req, res) => {
   try {
     const validateUserInput = validateUserAuthenatication(req.body);
