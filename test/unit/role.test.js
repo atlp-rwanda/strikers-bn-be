@@ -30,7 +30,7 @@ describe("Role API", () => {
    */
   describe("GET /api/v1/roles/:id", () => {
     it("It should GET a specific role by its specific id", async () => {
-      const id = "e2a8b398-b658-4606-9b17-b9152792e875",
+      const id = "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
         res = await chai.request(server).get("/api/v1/roles/" + id);
       expect(res).to.have.status(200);
       expect(res.body).to.be.a("object");
