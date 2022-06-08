@@ -5,6 +5,7 @@ import {
   getSpecificRole,
   assignRole,
   updateRole,
+  deleteRole,
 } from "../controllers/role.controller";
 import { verifyToken } from "../middlewares/auth";
 import { adminCheck } from "../middlewares/super-admin";
@@ -45,10 +46,18 @@ router.patch("/:email/:roleId", [verifyToken, adminCheck], assignRole);
 
 /**
  * @description To update the title/name of an existing role
- * @api api/roles/:existingTitle
+ * @api api/roles/:roleId
  * @access Public
  * @type PATCH
  */
-router.patch("/:existingTitle", [verifyToken, adminCheck], updateRole);
+router.patch("/:roleId", [verifyToken, adminCheck], updateRole);
+
+/**
+ * @description To update the title/name of an existing role
+ * @api api/roles/:roleId
+ * @access Public
+ * @type DELETE
+ */
+router.delete("/:roleId", [verifyToken, adminCheck], deleteRole);
 
 module.exports = router;

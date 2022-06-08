@@ -79,10 +79,10 @@ export async function assignRole(req, res) {
 
 export async function updateRole(req, res) {
   try {
-    const { roleTitle } = req.body,
-      { existingTitle } = req.params;
+    let { roleTitle } = req.body,
+      { roleId } = req.params;
 
-    const validateRoleInput = validateRoleRegistration(role);
+    const validateRoleInput = validateRoleRegistration(req.body);
 
     if (validateRoleInput.error) {
       return res.status(400).json(validateRoleInput.error.details[0].message);
@@ -90,8 +90,19 @@ export async function updateRole(req, res) {
 
     roleTitle = roleTitle.toUpperCase();
 
-    const existing = await Roles.findOne({
+    const otherExistsAlready = await Roles.findOne({
       where: { roleTitle },
+    });
+    if (otherExistsAlready) {
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        message: "There's already another role with the same title!",
+      });
+    }
+
+    let existing = await Roles.findOne({
+      where: { roleId },
     });
     if (!existing) {
       return res.status(400).json({
@@ -103,14 +114,34 @@ export async function updateRole(req, res) {
 
     const updatedRole = await Roles.update(
       { roleTitle },
-      { where: { roleTitle: existingTitle } }
+      { where: { roleId } }
     );
+
+    existing.roleTitle = roleTitle;
 
     return res.status(200).json({
       success: true,
       status: 200,
       message: "Role title updated successfully",
-      data: updatedRole,
+      data: existing,
+    });
+  } catch (e) {
+    res.status(500).send(`Error: ${e}`);
+  }
+}
+
+export async function deleteRole(req, res) {
+  try {
+    const { roleId } = req.params;
+    const roleToDelete = await Roles.findOne({ where: { roleId } });
+    if (!roleToDelete)
+      return res.status(400).send({
+        message: "The specified roleId doesn't exist in the database",
+      });
+    await Roles.destroy({ where: { roleId } });
+    res.status(200).send({
+      message: `Successfully deleted the ${roleToDelete.roleTitle} role.`,
+      deleteRole,
     });
   } catch (e) {
     res.status(500).send(`Error: ${e}`);
