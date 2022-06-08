@@ -14,7 +14,7 @@ export async function adminCheck(req, res, next) {
       const role = await Roles.findOne({ where: { roleId: decoded.roleId } });
       if (!role)
         return res.status(404).send({ message: 'Invalid role' });
-      if (role.roleTitle != 'ADMIN')
+      if (role.roleTitle != 'SUPER ADMINISTRATOR')
         return res.status(401).send({ message: 'This route can be accessed by a super administrator only!' });
       next();
     });
