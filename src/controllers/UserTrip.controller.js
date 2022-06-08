@@ -1,84 +1,97 @@
 import _ from "lodash";
 import { Trip } from "../models";
-const express=require("express");
-const app = express()
-app.use(express.json())
+const express = require("express");
+import { validateTripsNotifications } from "../validators/trip.validator";
+const app = express();
+app.use(express.json());
 
+exports.addTrip = async (req, res) => {
+  const user = 1;
+  const { source, destination, DateOfTravel, DateOfDestination, status } =
+    req.body;
+  const validateUserInput = validateTripsNotifications({
+    source,
+    destination,
+    DateOfTravel,
+    DateOfDestination,
+    status,
+  });
 
-    exports.addTrip = async (req, res) => {
-      const user=req.userId;
-  const { source, Destination, DateOfTravel,DateOfDestination } = req.body
-console.log(user);
-  try {
-    const trip = await Trip.create({  user,source, Destination, DateOfTravel,DateOfDestination })
-
-    return res.json(trip)
-  } catch (err) {
-    console.log(err)
-    return res.status(500).json(err)
+  if (validateUserInput.error) {
+    return res.status(400).json(validateUserInput.error.details[0].message);
   }
-}
-
-
-    exports.getAllTrips = async (req, res) => {
   try {
-    const trips = await Trip.findAll()
+    const trip = await Trip.create({
+      user,
+      source,
+      Destination,
+      DateOfTravel,
+      DateOfDestination,
+    });
 
-    return res.json(trips)
+    return res.json(trip);
   } catch (err) {
-    console.log(err)
-    return res.status(500).json({ error: 'Something went wrong' })
+    console.log(err);
+    return res.status(500).json(err);
   }
-}
+};
+
+exports.getAllTrips = async (req, res) => {
+  try {
+    const trips = await Trip.findAll();
+
+    return res.json(trips);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "Something went wrong" });
+  }
+};
 
 exports.getOneTrip = async (req, res) => {
-  const uuid = req.params.uuid
+  const uuid = req.params.uuid;
   try {
     const trip = await Trip.findOne({
       where: { uuid },
-      include: 'trip',
-    })
+      include: "trip",
+    });
 
-    return res.json(trip)
+    return res.json(trip);
   } catch (err) {
-    console.log(err)
-    return res.status(500).json({ error: 'Something went wrong' })
+    console.log(err);
+    return res.status(500).json({ error: "Something went wrong" });
   }
-}
+};
 
-
-    exports.deleteOneTrip = async (req, res) => {
-  const uuid = req.params.uuid
+exports.deleteOneTrip = async (req, res) => {
+  const uuid = req.params.uuid;
   try {
-    const trip = await Trip.findOne({ where: { uuid } })
+    const trip = await Trip.findOne({ where: { uuid } });
 
-    await trip.destroy()
+    await trip.destroy();
 
-    return res.json({ message: 'User deleted!' })
+    return res.json({ message: "User deleted!" });
   } catch (err) {
-    console.log(err)
-    return res.status(500).json({ error: 'Something went wrong' })
+    console.log(err);
+    return res.status(500).json({ error: "Something went wrong" });
   }
-}
+};
 
-
-    exports.updateTrip = async (req, res) => {
-  const uuid = req.params.uuid
-  const { name, email, role } = req.body
+exports.updateTrip = async (req, res) => {
+  const uuid = req.params.uuid;
+  const { name, email, role } = req.body;
   try {
-    const trip = await User.findOne({ where: { uuid } })
+    const trip = await User.findOne({ where: { uuid } });
 
-    trip.name = source
-    trip.name = destination
-    trip.email = DateOfTravel
-    trip.role = DateOfDestination
+    trip.name = source;
+    trip.name = destination;
+    trip.email = DateOfTravel;
+    trip.role = DateOfDestination;
 
-    await trip.save()
+    await trip.save();
 
-    return res.json(trip)
+    return res.json(trip);
   } catch (err) {
-    console.log(err)
-    return res.status(500).json({ error: 'Something went wrong' })
+    console.log(err);
+    return res.status(500).json({ error: "Something went wrong" });
   }
-}
-
+};

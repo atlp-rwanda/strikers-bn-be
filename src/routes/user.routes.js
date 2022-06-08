@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* eslint-disable import/no-import-module-exports */
 import { Router } from "express";
 import { verifyToken } from "../middlewares/auth";
@@ -16,13 +15,6 @@ const {
   resetPassword,
   newPassword,
 } = require("../controllers/user.controller");
-=======
-import { Router } from 'express';
-
-const userRouter = Router();
-
-const { addUser, signIn } = require('../controllers/user.controller');
->>>>>>> f13811c (original commit)
 
 /**
  * @description To create a new user
@@ -30,7 +22,7 @@ const { addUser, signIn } = require('../controllers/user.controller');
  * @access Public
  * @type POST
  */
-userRouter.post('/register', addUser);
+userRouter.post("/register", addUser);
 
 /**
  * @description To update a user
@@ -47,7 +39,7 @@ userRouter.get("/:uuid", getUser);
  * @access Public
  * @type POST
  */
-userRouter.post('/login', signIn);
+userRouter.post("/login", signIn);
 
 userRouter.post("/resetpassword", resetPassword);
 userRouter.patch("/resetpassword", newPassword);
