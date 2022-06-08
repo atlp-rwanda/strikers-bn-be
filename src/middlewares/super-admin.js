@@ -9,6 +9,8 @@ export async function adminCheck(req, res, next) {
       if (err) {
         return res.status(401).send({ message: err.message });
       }
+      if (!decoded.roleId)
+        return res.status(404).send({ message: 'Invalid token provided' });
       const role = await Roles.findOne({ where: { roleId: decoded.roleId } });
       if (!role)
         return res.status(404).send({ message: 'Invalid role' });
