@@ -30,8 +30,13 @@ describe("Role API", () => {
    */
   describe("GET /api/roles/:id", () => {
     it("It should GET a specific role by its specific id", async () => {
+<<<<<<< HEAD
       const id = "96c97445-d152-4a4e-9868-bee9d5a18ce2",
         res = await chai.request(server).get("/api/roles/" + id);
+=======
+      const id = "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
+        res = await chai.request(server).get("/api/v1/roles/" + id);
+>>>>>>> 155d009 ([fix]: fixed auth middlewares)
       expect(res).to.have.status(200);
       expect(res.body).to.be.a("object");
     });
