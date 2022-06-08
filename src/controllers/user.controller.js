@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import { User } from "../models";
 import { validateUserRegisteration, validateUserAuthenatication } from "../validators/user.validator";
 import { TOKEN_SECRET } from "../config/key";
+import { sendEmail } from "../emails/account"
 
 dotenv.config();
 
@@ -52,6 +53,8 @@ exports.addUser = async (req, res) => {
       ])
     );
 
+    sendEmail(newUser.firstname, newUser.lastname, newUser.email)
+
     return res.status(201).json({
       success: true,
       status: 201,
@@ -66,6 +69,43 @@ exports.addUser = async (req, res) => {
     });
   }
 };
+
+exports.verifyUser = async (req, res) => {
+  try {
+    const userEmail = req.params.email
+    const user = await User.findOne({ where: { email: userEmail } });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        status: 404,
+        message: "User not found!",
+      });
+    }
+    if (user.verified) {
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        message: "User already verified!",
+      });
+    }
+    user.verified = true;
+    await user.save();
+    return res.status(200).json({
+      success: true,
+      status: 200,
+      message: "User verified successfully!",
+      data: user
+    });
+  }
+  catch (err) {
+    res.status(400).json({
+      success: false,
+      status: 400,
+      message: err.message,
+    });
+  }
+}
+
 
 exports.signIn = async (req, res) => {
   try {
