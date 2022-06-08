@@ -49,9 +49,13 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     },
     verificationToken: {
-      type: DataTypes.STRING(2500),
+      type: DataTypes.STRING,
       allowNull: true
-    } 
+    },
+    passwordResetToken: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
   }, {
     sequelize,
     modelName: 'User',
