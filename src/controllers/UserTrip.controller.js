@@ -6,16 +6,24 @@ app.use(express.json())
 
 
     exports.addTrip = async (req, res) => {
-      const user=req.userId;
-  const { source, Destination, DateOfTravel,DateOfDestination } = req.body
+      const user=1;
+  const { source,destination,DateOfTravel,DateOfDestination,status} = req.body
 console.log(user);
   try {
-    const trip = await Trip.create({  user,source, Destination, DateOfTravel,DateOfDestination })
+    const trip = await Trip.create({  user,source,destination, DateOfTravel,DateOfDestination,status })
 
-    return res.json(trip)
+    return res.status(201).json({
+      success: true,
+      status: 201,
+      message: "Trip request created successvely",
+      data: trip,
+    })
   } catch (err) {
-    console.log(err)
-    return res.status(500).json(err)
+    res.status(400).json({
+      success: false,
+      status: 400,
+      message: err.message,
+    });
   }
 }
 
@@ -24,7 +32,11 @@ console.log(user);
   try {
     const trips = await Trip.findAll()
 
-    return res.json(trips)
+    return res.status(201).json({
+      success: true,
+      status: 200,
+      data: trips,
+    })
   } catch (err) {
     console.log(err)
     return res.status(500).json({ error: 'Something went wrong' })
@@ -32,14 +44,18 @@ console.log(user);
 }
 
 exports.getOneTrip = async (req, res) => {
-  const uuid = req.params.uuid
+  const id = req.params.id
   try {
     const trip = await Trip.findOne({
-      where: { uuid },
-      include: 'trip',
+      where: { id },
+      // include: 'id',
     })
 
-    return res.json(trip)
+    return res.status(201).json({
+      success: true,
+      status: 200,
+      data: trip,
+    })
   } catch (err) {
     console.log(err)
     return res.status(500).json({ error: 'Something went wrong' })
@@ -48,13 +64,13 @@ exports.getOneTrip = async (req, res) => {
 
 
     exports.deleteOneTrip = async (req, res) => {
-  const uuid = req.params.uuid
+  const id = req.params.id
   try {
-    const trip = await Trip.findOne({ where: { uuid } })
+    const trip = await Trip.findOne({ where: { id } })
 
     await trip.destroy()
 
-    return res.json({ message: 'User deleted!' })
+    return res.json({ message: 'Trip request deleted!' })
   } catch (err) {
     console.log(err)
     return res.status(500).json({ error: 'Something went wrong' })
@@ -63,19 +79,23 @@ exports.getOneTrip = async (req, res) => {
 
 
     exports.updateTrip = async (req, res) => {
-  const uuid = req.params.uuid
-  const { name, email, role } = req.body
+  const id = req.params.id
+  const { source,destination,DateOfTravel,DateOfDestination } = req.body
   try {
-    const trip = await User.findOne({ where: { uuid } })
+    const trip = await Trip.findOne({ where: { id } })
 
-    trip.name = source
-    trip.name = destination
-    trip.email = DateOfTravel
-    trip.role = DateOfDestination
+    trip.source = source
+    trip.destination = destination
+    trip.DateOfTravel = DateOfTravel
+    trip.DateOfDestination = DateOfDestination
 
     await trip.save()
 
-    return res.json(trip)
+    return res.status(201).json({
+      success: true,
+      status: 200,
+      data: trip,
+    })
   } catch (err) {
     console.log(err)
     return res.status(500).json({ error: 'Something went wrong' })

@@ -10,6 +10,7 @@ import swaggerDocument from "../public/api-docs.json";
 import { sequelize } from "./models";
 import tripRouter from "../src/routes/trip.routes";
 import userRouter from "../src/routes/user.routes";
+import rolesRouter from "../src/routes/role.routes";
 
 const app = express();
 dotenv.config({ path: "../.env" });
@@ -20,12 +21,16 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/user/", userRouter);
 app.use("/api/v1/trip/", tripRouter);
+app.use("/api/v1/roles", rolesRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/", (req, res) => {
   res.send("Welcome to strikers-bn-be APIs");
 });
 
+app.get("/", (req, res) => {
+  res.send("Welcome to strikers-bn-be APIs");
+});
 const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
     console.log(`Server started on port ${port}!`);

@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 const userRouter = Router();
 
-const { addUser, signIn } = require('../controllers/user.controller');
+const { addUser, signIn, verifyUser } = require("../controllers/user.controller");
 
 /**
  * @description To create a new user
@@ -19,5 +19,13 @@ userRouter.post('/register', addUser);
  * @type POST
  */
 userRouter.post('/login', signIn);
+
+/**
+ * @description To verify user account
+ * @api v1/api/user/verify/{email}
+ * @access Public
+ * @type GET
+ */
+userRouter.get("/verify/:email", verifyUser);
 
 module.exports = userRouter;

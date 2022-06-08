@@ -22,26 +22,26 @@ tripRouter.get('/getAllTrips', getAllTrips);
 
 /**
  * @description To create a new user
- * @api v1/api/trips/trips/:uuid
+ * @api v1/api/trips/trips/:id
  * @access Public
  * @type GET
  */
-tripRouter.get('/trips/:uuid', getOneTrip);
+tripRouter.get('/trips/:id', getOneTrip);
 
 /**
  * @description To create a new user
- * @api v1/api/trips/trips/:uuid
+ * @api v1/api/trips/trips/:id
  * @access Public
  * @type DELETE
  */
-tripRouter.delete('/trips/:uuid', deleteOneTrip);
+tripRouter.delete('/trips/:id', deleteOneTrip);
 
 /**
  * @description To create a new user
- * @api v1/api/trips/trips/:uuid
+ * @api v1/api/trips/trips/:id
  * @access Public
  * @type PUT
  */
-tripRouter.put('/trips/:uuid', updateTrip);
+tripRouter.put('/trips/:id', updateTrip);
 
 module.exports = tripRouter;
