@@ -11,3 +11,11 @@ exports.validateUserRegisteration = (body) => {
     })
     return validUserRegisterSchema.validate(body);
 }
+
+exports.validateUserAuthenatication = (body) => {
+    const validUserLoginSchema = Joi.object({
+        email: Joi.string().email().min(5).required(),
+        password: Joi.string().min(8).required()
+    })
+    return validUserLoginSchema.validate(body);
+}
