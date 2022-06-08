@@ -7,7 +7,7 @@ const { addTrip,getAllTrips,getOneTrip,deleteOneTrip,updateTrip } = require('../
 
 /**
  * @description To create a new user
- * @api v1/api/trips/CreateTrip
+ * @api v1/api/trips/create
  * @access Public
  * @type POST
  */
@@ -15,7 +15,7 @@ tripRouter.post('/create',verifyToken, addTrip);
 
 /**
  * @description To login using email and password
- * @api v1/api/trips/getAllTrips
+ * @api v1/api/trips/all
  * @access Public
  * @type GET
  */
@@ -23,7 +23,7 @@ tripRouter.get('/all',[verifyToken, adminCheck],getAllTrips);
 
 /**
  * @description To create a new user
- * @api v1/api/trips/trips/:id
+ * @api v1/api/trips/:id
  * @access Public
  * @type GET
  */
@@ -31,7 +31,7 @@ tripRouter.get('/:id',[verifyToken, adminCheck], getOneTrip);
 
 /**
  * @description To create a new user
- * @api v1/api/trips/trips/:id
+ * @api v1/api/trips/:id
  * @access Public
  * @type DELETE
  */
@@ -39,7 +39,7 @@ tripRouter.delete('/:id',verifyToken, deleteOneTrip);
 
 /**
  * @description To create a new user
- * @api v1/api/trips/trips/:id
+ * @api v1/api/trips/:id
  * @access Public
  * @type PUT
  */
