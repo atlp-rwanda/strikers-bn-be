@@ -7,7 +7,7 @@ app.use(express.json())
 
 
     exports.addTrip = async (req, res) => {
-      const user=1;
+      const user=   req.userId;
   const { source,destination,DateOfTravel,DateOfDestination,status} = req.body
   const validateUserInput = validateTripsNotifications({ source,destination,DateOfTravel,DateOfDestination,status});
 
