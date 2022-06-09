@@ -1,24 +1,21 @@
 import _ from "lodash";
-<<<<<<< HEAD
 import express from "express";
-import { Trip } from "../models";
+import { Trip, Notifications, User } from "../models";
 import { validateTripsNotifications } from "../validators/trip.validator";
+import { sendEmail } from "../utils/emailConfig";
+import { Server } from "socket.io";
+const io = new Server(4400, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
 
 const app = express();
 app.use(express.json());
 
 export async function addTrip(req, res) {
   const user = req.userId;
-=======
-import { Trip } from "../models";
-const express = require("express");
-import { validateTripsNotifications } from "../validators/trip.validator";
-const app = express();
-app.use(express.json());
-
-exports.addTrip = async (req, res) => {
-  const user = 1;
->>>>>>> b5bb8a8 (smoe changes)
   const { source, destination, DateOfTravel, DateOfDestination, status } =
     req.body;
   const validateUserInput = validateTripsNotifications({
@@ -28,10 +25,7 @@ exports.addTrip = async (req, res) => {
     DateOfDestination,
     status,
   });
-<<<<<<< HEAD
-=======
 
->>>>>>> b5bb8a8 (smoe changes)
   if (validateUserInput.error) {
     return res.status(400).json(validateUserInput.error.details[0].message);
   }
@@ -39,12 +33,36 @@ exports.addTrip = async (req, res) => {
     const trip = await Trip.create({
       user,
       source,
-<<<<<<< HEAD
       destination,
       DateOfTravel,
       DateOfDestination,
       status,
     });
+
+    let requester = await User.findOne({ where: { uuid: user } });
+    let lineManager = requester.lineManager;
+    //send notification via email
+    const emailTitle = `${requester.firstName} requested a trip to ${destination}`;
+    const emailDescription = `${requester.firstName} requested a trip to ${destination} from ${source} the date of travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}`;
+
+    let manager = await User.findOne({ where: { uuid: lineManager } });
+    let emailTo = manager.email;
+
+    let checkSendEmail = await sendEmail(emailTo, emailTitle, emailDescription);
+
+    console.log(checkSendEmail);
+
+    //send notification to line manager
+
+    //  let notification= await new Notifications({
+    //     title: `${requester.firstName} requested a trip to ${destination}`,
+    //     description: `${requester.firstName} requested a trip to ${destination} from ${source} the date pf travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}`,
+    //     to:lineManager
+    //   })
+
+    //   socket.on('sendNotification',notification=>{
+    //     io.emit('getNotification',notification)
+    //   })
 
     return res.status(201).json({
       success: true,
@@ -53,161 +71,114 @@ exports.addTrip = async (req, res) => {
       data: trip,
     });
   } catch (err) {
-    res.status(400).json({
+    res.status(500).json({
       success: false,
-      status: 400,
+      status: 500,
       message: err.message,
     });
   }
 }
-=======
-      Destination,
-      DateOfTravel,
-      DateOfDestination,
-    });
 
-    return res.json(trip);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
-  }
-};
->>>>>>> b5bb8a8 (smoe changes)
-
-exports.getAllTrips = async (req, res) => {
+export async function getAllTrips(req, res) {
   try {
     const trips = await Trip.findAll();
 
-<<<<<<< HEAD
-    return res.status(201).json({
+    return res.status(200).json({
       success: true,
       status: 200,
       data: trips,
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).send({ error: err.toString() });
-=======
-    return res.json(trips);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ error: "Something went wrong" });
->>>>>>> b5bb8a8 (smoe changes)
+    return res.status(400).json({ error: "Something went wrong" });
   }
-};
+}
 
-exports.getOneTrip = async (req, res) => {
-<<<<<<< HEAD
-  const id = req.params.id;
+export async function getOneTrip(req, res) {
+  const { id } = req.params;
   try {
     const trip = await Trip.findOne({
       where: { id },
       // include: 'id',
     });
 
-    return res.status(201).json({
+    return res.status(200).json({
       success: true,
       status: 200,
       data: trip,
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ error: error.toString() });
-=======
-  const uuid = req.params.uuid;
-  try {
-    const trip = await Trip.findOne({
-      where: { uuid },
-      include: "trip",
-    });
-
-    return res.json(trip);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ error: "Something went wrong" });
->>>>>>> b5bb8a8 (smoe changes)
+    return res.status(400).json({ error: "Something went wrong" });
   }
-};
+}
 
-exports.deleteOneTrip = async (req, res) => {
-<<<<<<< HEAD
-  const id = req.params.id;
+export async function deleteOneTrip(req, res) {
+  const { id } = req.params;
   try {
     const trip = await Trip.findOne({ where: { id } });
 
     await trip.destroy();
 
-    return res.json({ message: "Trip request deleted!" });
-=======
-  const uuid = req.params.uuid;
-  try {
-    const trip = await Trip.findOne({ where: { uuid } });
-
-    await trip.destroy();
-
-    return res.json({ message: "User deleted!" });
->>>>>>> b5bb8a8 (smoe changes)
+    return res.status(200).json({ message: "Trip request deleted!" });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Something went wrong" });
   }
-};
+}
 
-exports.updateTrip = async (req, res) => {
-<<<<<<< HEAD
-  const id = req.params.id;
+export async function updateTrip(req, res) {
+  const { id } = req.params;
   const { source, destination, DateOfTravel, DateOfDestination } = req.body;
   try {
     const trip = await Trip.findOne({ where: { id } });
 
-    if (source) trip.source = source;
-    if (destination) trip.destination = destination;
-    if (DateOfTravel) trip.DateOfTravel = DateOfTravel;
-    if (DateOfDestination) trip.DateOfDestination = DateOfDestination;
+    trip.source = source;
+    trip.destination = destination;
+    trip.DateOfTravel = DateOfTravel;
+    trip.DateOfDestination = DateOfDestination;
 
     await trip.save();
 
-    return res.status(201).json({
+    const userId = req.userId;
+
+    let requester = await User.findOne({ where: { uuid: userId } });
+    const lineManager = requester.lineManager;
+
+    const emailTitle = `${requester.firstName} edited the request for a travel to ${trip.destination}`;
+    const emailDescription = `${requester.firstName} edited the request for a travel to ${trip.destination} from ${source} the date of travel is ${trip.DateOfTravel} and date of destination is ${trip.DateOfDestination}`;
+
+    let manager = await User.findOne({ where: { uuid: lineManager } });
+    let emailTo = manager.email;
+
+    let checkSendEmail = await sendEmail(emailTo, emailTitle, emailDescription);
+
+    return res.status(200).json({
       success: true,
       status: 200,
       data: trip,
     });
-=======
-  const uuid = req.params.uuid;
-  const { name, email, role } = req.body;
-  try {
-    const trip = await User.findOne({ where: { uuid } });
-
-    trip.name = source;
-    trip.name = destination;
-    trip.email = DateOfTravel;
-    trip.role = DateOfDestination;
-
-    await trip.save();
-
-    return res.json(trip);
->>>>>>> b5bb8a8 (smoe changes)
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Something went wrong" });
   }
-};
-<<<<<<< HEAD
+}
 
 exports.changeStatus = async (req, res) => {
   try {
-    const trip = await Trip.findOne({ where: { id: req.params.id } });
+    if (!validateStatus(req.body.status))
+      return res.status(400).send({ message: "Invalid status" });
+
+    const trip = await TripRequest.findOne({ where: { id: req.params.id } });
     trip.status = req.body.status;
     await trip.save();
-    return res.status(201).json({
-      success: true,
-      status: 200,
+    return res.status(200).send({
       data: trip,
-      message: "Status Updated",
+      message: `Trip request ${
+        trip.status === "approved" ? "approved" : "rejected"
+      }`,
     });
   } catch (err) {
     return res.status(404).send({ error: err.toString() });
   }
 };
-=======
->>>>>>> b5bb8a8 (smoe changes)
