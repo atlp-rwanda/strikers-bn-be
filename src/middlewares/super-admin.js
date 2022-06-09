@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config/key";
 import { Roles } from '../models';
 
