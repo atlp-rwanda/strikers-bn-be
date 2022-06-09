@@ -21,4 +21,4 @@ export async function adminCheck(req, res, next) {
   } catch {
     return res.status(403).send({ message: "No token provided!" });
   }
-};
+}
