@@ -60,7 +60,9 @@ describe("Role API", () => {
         { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+          .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+          console.log("token here...",body.token);
+          const
         res2 = await chai
           .request(server)
           .post("/api/v1/roles")
