@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import jwt from "jsonwebtoken";
+=======
+import jwt from 'jsonwebtoken';
+>>>>>>> 530fe25 ([feat] Added trip crud API)
 import { TOKEN_SECRET } from "../config/key";
 
 export const verifyToken = async (req, res, next) => {
@@ -15,6 +19,7 @@ export const verifyToken = async (req, res, next) => {
   } catch (error) {
     return res.status(403).send({ message: "No token provided!" });
   }
+<<<<<<< HEAD
 };
 
 export const verifyManager = async (req, res, next) => {
@@ -23,3 +28,6 @@ export const verifyManager = async (req, res, next) => {
   }
   next();
 };
+=======
+};
+>>>>>>> 530fe25 ([feat] Added trip crud API)
