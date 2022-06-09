@@ -61,11 +61,8 @@
     "swagger-ui-express": "^4.4.0"
   },
   "devDependencies": {
-<<<<<<< HEAD
-=======
     "cross-env": "^7.0.3",
     "eslint": "^8.15.0",
->>>>>>> 5910e159d76aa007706b9a01a386b5d74b8c4ab3
     "sequelize-cli": "^6.4.1"
   }
 }

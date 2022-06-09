@@ -28,10 +28,10 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "uaigkmkbujkamwyjz02t",
-    "password": "56lSujHPPQcpa2DYiY9c",
-    "database": "b1xtgtyfns4qxo3y78pn",
-    "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
+    "username": "uyxluedkijh6wcox05sx",
+    "password": "t8wWAcpUAENrA2M4A5B1",
+    "database": "bobl8pcapq1din7r380h",
+    "host": "bobl8pcapq1din7r380h-postgresql.services.clever-cloud.com",
     "dialect": "postgres"
   },
   "production": {
