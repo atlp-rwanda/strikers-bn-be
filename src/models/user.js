@@ -18,13 +18,14 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     uuid: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false
     },
-    firstname: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    lastname: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -33,7 +34,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     roleId: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
+      defaultValue: 'c1f1d2bf-33bd-4e11-9d7a-0331db465f95',
       allowNull: false
     },
     phoneNumber: {
@@ -44,6 +46,34 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    passwordResetToken: {
+      type: DataTypes.STRING(2500),
+      allowNull: true
+    },
+    birthdate: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    preferredLanguage: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    preferredCurrency: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    department: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    lineManager: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     verified: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
@@ -51,7 +81,7 @@ module.exports = (sequelize, DataTypes) => {
     verificationToken: {
       type: DataTypes.STRING(2500),
       allowNull: true
-    } 
+    }
   }, {
     sequelize,
     modelName: 'User',

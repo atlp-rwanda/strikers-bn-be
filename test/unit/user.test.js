@@ -1,4 +1,4 @@
-import chai from "chai";
+import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 import dotenv from "dotenv";
 
@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 
 const server = require("../../src/index");
 
-describe("POST /api/v1/user", () => {
+describe("POST /api/v1/users", () => {
   /**
    * Should POST a new user
    */
@@ -17,17 +17,17 @@ describe("POST /api/v1/user", () => {
 
   it("It should POST a new user", (done) => {
     const newUser = {
-      firstname: `Abi${userId}`,
-      lastname: `Seth${userId}`,
+      firstName: `Abi${userId}`,
+      lastName: `Seth${userId}`,
       email: `abi${userId}@gmail.com`,
-      roleId: "9340272366132983293",
+      roleId: "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
       phoneNumber: "0781294147",
       password: "pass12345",
     };
 
     chai
       .request(server)
-      .post("/api/v1/user/register")
+      .post("/api/v1/users/register")
       .send(newUser)
       .end((err, response) => {
         response.should.have.status(201);
@@ -47,17 +47,17 @@ describe("POST /api/v1/user", () => {
 
   it("It should NOT POST a duplicate user email", (done) => {
     const newUser = {
-      firstname: "Abi",
-      lastname: "Seth",
-      email: "abi_seth@gmail.com",
-      roleId: "9340272366132983293",
+      firstName: "Abi",
+      lastName: "Seth",
+      email: "abiseth@gmail.com",
+      roleId: "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
       phoneNumber: "0781294147",
       password: "pass12345",
     };
 
     chai
       .request(server)
-      .post("/api/v1/user/register")
+      .post("/api/v1/users/register")
       .send(newUser)
       .end((err, response) => {
         response.should.have.status(403);
@@ -72,9 +72,9 @@ describe("POST /api/v1/user", () => {
   it("Should sign in user", (done) => {
     chai
       .request(server)
-      .post("/api/v1/user/login")
+      .post("/api/v1/users/login")
       .send({
-        email: `abi_seth@gmail.com`,
+        email: `abiheloaf@gmail.com`,
         password: "pass12345",
       })
       .end((err, res) => {
@@ -84,3 +84,34 @@ describe("POST /api/v1/user", () => {
       });
   });
 });
+
+describe("GET /api/v1/users",()=>{
+  /**
+   * Test GET route
+   */
+   describe("GET /api/v1/users/getusers", () => {
+    it("It should GET a list of all users", async () => {
+      const res = await chai.request(server).get("/api/v1/users/getusers");
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.a("array");
+    });
+
+    it("It should NOT GET a list of all users", async () => {
+      const res = await chai.request(server).get("/api/users/all");
+      expect(res).to.have.status(404);
+    });
+  });
+
+  /**
+   * Test GET route for specific role
+   */
+  describe("GET /api/v1/user/users/:uuid", () => {
+    it("It should GET a specific user by its specific uuid", async () => {
+      const uuid = "72117a46-7ba2-495d-8846-221313470ad4",
+        res = await chai.request(server).get("/api/v1/users/" + uuid);
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.a("object");
+    });
+  });
+});
+
