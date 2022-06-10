@@ -24,8 +24,4 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Roles',
   });
   return Roles;
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
