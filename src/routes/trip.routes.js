@@ -42,7 +42,7 @@ tripRouter.get("/all", getAllTrips);
  * @access Public
  * @type GET
  */
-tripRouter.get("/:id", [verifyToken, adminCheck], getOneTrip);
+tripRouter.get("/:id", verifyToken, getOneTrip);
 
 /**
  * @description To create a new user

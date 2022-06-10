@@ -1,41 +1,41 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('TripRequests', {
+    await queryInterface.createTable("TripRequests", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       user: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       source: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       destination: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       DateOfTravel: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       DateOfDestination: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('TripRequests');
-  }
+    await queryInterface.dropTable("TripRequests");
+  },
 };
