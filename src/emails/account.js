@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 /* eslint-disable quotes */
-"use strict";
+
 const nodemailer = require("nodemailer");
 
 exports.sendEmail = async (firstName, lastName, email) => {
