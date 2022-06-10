@@ -1,11 +1,10 @@
+'use strict';
 const {
   Model
 } = require('sequelize');
-
 module.exports = (sequelize, DataTypes) => {
   class Roles extends Model {
     static associate(models) {}
-
     toJSON() {
       return { ...this.get(), id: undefined };
     }
@@ -25,4 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Roles',
   });
   return Roles;
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a

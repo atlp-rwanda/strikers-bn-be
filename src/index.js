@@ -9,12 +9,10 @@ import swaggerUi from 'swagger-ui-express';
 import corsFunction from './utils/cors';
 import swaggerDocument from '../public/api-docs.json';
 
-import { sequelize } from './models';
+import { sequelize } from "./models";
 
-import userRouter from './routes/user.routes';
-import rolesRouter from './routes/role.routes';
-
-const session = require('express-session');
+import userRouter from "../src/routes/user.routes";
+import rolesRouter from "../src/routes/role.routes";
 
 const app = express();
 dotenv.config({ path: '../.env' });
@@ -26,10 +24,13 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/v1/users/', userRouter);
+app.use("/api/v1/users/", userRouter);
+app.use("/api/v1/roles", rolesRouter);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use('/api/v1/roles', rolesRouter);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.get("/", (req, res) => {
+  res.send("Welcome to strikers-bn-be APIs");
+});
 
 app.get('/', (req, res) => {
   res.send('Welcome to strikers-bn-be APIs');
@@ -38,7 +39,7 @@ const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
     console.log(`Server started on port ${port}!`);
     await sequelize.authenticate();
-    console.log('Database connected . . .');
+    console.log("Database connected . . .");
   });
-console.log(port);
+
 module.exports = server;

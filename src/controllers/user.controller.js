@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable import/no-import-module-exports */
 import _ from 'lodash';
 import bcrypt from 'bcryptjs';
@@ -7,8 +8,6 @@ import { User } from '../models';
 import { validateUserRegisteration, validateUserAuthenatication } from '../validators/user.validator';
 import { TOKEN_SECRET } from '../config/key';
 import { sendEmail } from '../emails/account';
-
-const session = require('express-session');
 
 dotenv.config();
 
