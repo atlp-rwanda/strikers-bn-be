@@ -54,7 +54,7 @@
                 }
             }
         },
-        "v1/api/user/updateuser/{uuid}": {
+        "v1/api/user/updateuser/{uuid}":{
             "put": {
                 "summary": "Update User",
                 "description": "Update User",
