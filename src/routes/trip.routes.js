@@ -13,8 +13,8 @@ const {
 } = require("../controllers/trip.controller");
 
 /**
- * @description To create a new trip
- * @api api/v1/trips/create
+ * @description To create a new user
+ * @api v1/api/trip/create
  * @access Public
  * @type POST
  */
@@ -22,35 +22,35 @@ tripRouter.post("/create", verifyToken, addTrip);
 
 /**
  * @description To login using email and password
- * @api api/v1/trips/all
+ * @api v1/api/trip/all
  * @access Public
  * @type GET
  */
-tripRouter.get("/all", getAllTrips);
+tripRouter.get("/all", verifyToken, getAllTrips);
 
 /**
- * @description To get all trips
- * @api api/v1/trips/trips/:id
+ * @description To create a new user
+ * @api v1/api/trip/:id
  * @access Public
  * @type GET
  */
-tripRouter.get("/trip/:id", [verifyToken, adminCheck], getOneTrip);
+tripRouter.get("/:id", verifyToken, getOneTrip);
 
 /**
- * @description To remove trip
- * @api api/v1/trips/:id
+ * @description To create a new user
+ * @api v1/api/trip/:id
  * @access Public
  * @type DELETE
  */
 tripRouter.delete("/:id", verifyToken, deleteOneTrip);
 
 /**
- * @description To update trip
- * @api api/v1/trips/update/:id
+ * @description To create a new user
+ * @api v1/api/trip/:id
  * @access Public
  * @type PUT
  */
-tripRouter.put("/update/:id", verifyToken, updateTrip);
+tripRouter.put("/:id", verifyToken, updateTrip);
 
 /**
  * @description To reject or approve trip status

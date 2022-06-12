@@ -9,7 +9,7 @@ export const verifyToken = async (req, res, next) => {
         return res.status(401).send({ message: err.message });
       }
       req.userId = decoded.uuid;
-      req.role = decoded.roleId;
+      req.roleId = decoded.roleId;
       next();
     });
   } catch {

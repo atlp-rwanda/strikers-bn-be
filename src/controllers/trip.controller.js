@@ -1,12 +1,15 @@
 import _ from "lodash";
-import { Trip } from "../models";
+import { TripRequest } from "../models";
 const express = require("express");
-import { validateTripsNotifications } from "../validators/trip.validator";
+import {
+  validateStatus,
+  validateTripsNotifications,
+} from "../validators/trip.validator";
 const app = express();
 app.use(express.json());
 
 exports.addTrip = async (req, res) => {
-  const user = 1;
+  const user = req.userId;
   const { source, destination, DateOfTravel, DateOfDestination, status } =
     req.body;
   const validateUserInput = validateTripsNotifications({
@@ -16,12 +19,12 @@ exports.addTrip = async (req, res) => {
     DateOfDestination,
     status,
   });
-
+  console.log(user);
   if (validateUserInput.error) {
     return res.status(400).json(validateUserInput.error.details[0].message);
   }
   try {
-    const trip = await Trip.create({
+    const trip = await TripRequest.create({
       user,
       source,
       destination,
@@ -119,14 +122,17 @@ exports.updateTrip = async (req, res) => {
 
 exports.changeStatus = async (req, res) => {
   try {
-    const trip = await Trip.findOne({ where: { id: req.params.id } });
+    if (!validateStatus(req.body.status))
+      return res.status(400).send({ message: "Invalid status" });
+
+    const trip = await TripRequest.findOne({ where: { id: req.params.id } });
     trip.status = req.body.status;
     await trip.save();
-    return res.status(201).json({
-      success: true,
-      status: 200,
+    return res.status(200).send({
       data: trip,
-      message: "Status Updated",
+      message: `Trip request ${
+        trip.status === "approved" ? "approved" : "rejected"
+      }`,
     });
   } catch (err) {
     return res.status(404).send({ error: err.toString() });
