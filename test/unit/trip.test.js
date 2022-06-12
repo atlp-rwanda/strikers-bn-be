@@ -12,6 +12,21 @@ describe("GET /api/v1/trips", () => {
    * Test GET route
    */
   describe("GET /api/v1/trips/all", () => {
+    let token = "";
+    before((done) => {
+      chai
+        .request(server)
+        .post("/api/v1/users/login")
+        .send({
+          email: "testerjhj@gmail.com",
+          password: "12345678",
+        })
+        .end((err, res) => {
+          token = res.body.token;
+          done();
+        });
+    });
+
     it("It should GET a list of all trips", async () => {
       const { body } = await chai
         .request(server)
@@ -35,6 +50,20 @@ describe("GET /api/v1/trips", () => {
    * Test GET route for specific role
    */
   describe("GET /api/v1/trips/:id", () => {
+    let token = "";
+    before((done) => {
+      chai
+        .request(server)
+        .post("/api/v1/users/login")
+        .send({
+          email: "testerjhj@gmail.com",
+          password: "12345678",
+        })
+        .end((err, res) => {
+          token = res.body.token;
+          done();
+        });
+    });
     it("It should GET a specific trip by its specific uuid", async () => {
       const { body } = await chai
         .request(server)
@@ -70,7 +99,7 @@ describe("POST /api/v1/trips/create", () => {
       .set({ authorization: "Bearer " + body.token })
       .send(newUser)
       .end((err, response) => {
-        response.should.have.status(500);
+        response.should.have.status(201);
         response.should.be.a("object");
       });
   });
@@ -89,7 +118,7 @@ describe("POST /api/v1/trips/create", () => {
       .request(server)
       .post("/api/v1/trip/create")
       .set({ Authorization: `Bearer ${token}` })
-      .send(newUser)
+      .send(newTrip)
       .end((err, response) => {
         response.should.have.status(404);
         response.should.be.a("object");

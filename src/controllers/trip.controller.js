@@ -25,7 +25,6 @@ export async function addTrip(req, res) {
     DateOfDestination,
     status,
   });
-
   if (validateUserInput.error) {
     return res.status(400).json(validateUserInput.error.details[0].message);
   }
@@ -65,8 +64,6 @@ export async function addTrip(req, res) {
     //   })
 
     return res.status(201).json({
-      success: true,
-      status: 201,
       message: "Trip request created successvely",
       data: trip,
     });
@@ -81,7 +78,7 @@ export async function addTrip(req, res) {
 
 export async function getAllTrips(req, res) {
   try {
-    const trips = await Trip.findAll();
+    const trips = await TripRequest.findAll();
 
     return res.status(200).json({
       success: true,
@@ -97,7 +94,7 @@ export async function getAllTrips(req, res) {
 export async function getOneTrip(req, res) {
   const { id } = req.params;
   try {
-    const trip = await Trip.findOne({
+    const trip = await TripRequest.findOne({
       where: { id },
       // include: 'id',
     });
@@ -116,7 +113,7 @@ export async function getOneTrip(req, res) {
 export async function deleteOneTrip(req, res) {
   const { id } = req.params;
   try {
-    const trip = await Trip.findOne({ where: { id } });
+    const trip = await TripRequest.findOne({ where: { id } });
 
     await trip.destroy();
 
@@ -131,7 +128,7 @@ export async function updateTrip(req, res) {
   const { id } = req.params;
   const { source, destination, DateOfTravel, DateOfDestination } = req.body;
   try {
-    const trip = await Trip.findOne({ where: { id } });
+    const trip = await TripRequest.findOne({ where: { id } });
 
     trip.source = source;
     trip.destination = destination;
