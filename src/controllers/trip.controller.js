@@ -19,7 +19,6 @@ exports.addTrip = async (req, res) => {
     DateOfDestination,
     status,
   });
-  console.log(user);
   if (validateUserInput.error) {
     return res.status(400).json(validateUserInput.error.details[0].message);
   }
@@ -34,8 +33,6 @@ exports.addTrip = async (req, res) => {
     });
 
     return res.status(201).json({
-      success: true,
-      status: 201,
       message: "Trip request created successvely",
       data: trip,
     });
@@ -50,11 +47,9 @@ exports.addTrip = async (req, res) => {
 
 exports.getAllTrips = async (req, res) => {
   try {
-    const trips = await Trip.findAll();
+    const trips = await TripRequest.findAll();
 
-    return res.status(201).json({
-      success: true,
-      status: 200,
+    return res.status(200).json({
       data: trips,
     });
   } catch (err) {
@@ -66,12 +61,12 @@ exports.getAllTrips = async (req, res) => {
 exports.getOneTrip = async (req, res) => {
   const id = req.params.id;
   try {
-    const trip = await Trip.findOne({
+    const trip = await TripRequest.findOne({
       where: { id },
       // include: 'id',
     });
 
-    return res.status(201).json({
+    return res.status(200).json({
       success: true,
       status: 200,
       data: trip,
@@ -85,7 +80,7 @@ exports.getOneTrip = async (req, res) => {
 exports.deleteOneTrip = async (req, res) => {
   const id = req.params.id;
   try {
-    const trip = await Trip.findOne({ where: { id } });
+    const trip = await TripRequest.findOne({ where: { id } });
 
     await trip.destroy();
 
@@ -100,7 +95,7 @@ exports.updateTrip = async (req, res) => {
   const id = req.params.id;
   const { source, destination, DateOfTravel, DateOfDestination } = req.body;
   try {
-    const trip = await Trip.findOne({ where: { id } });
+    const trip = await TripRequest.findOne({ where: { id } });
 
     if (source) trip.source = source;
     if (destination) trip.destination = destination;

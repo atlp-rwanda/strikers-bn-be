@@ -12,9 +12,22 @@ describe("GET /api/v1/trips", () => {
    * Test GET route
    */
   describe("GET /api/v1/trips/all", () => {
+    let token = "";
+    before((done) => {
+      chai
+        .request(server)
+        .post("/api/v1/users/login")
+        .send({
+          email: "testerjhj@gmail.com",
+          password: "12345678",
+        })
+        .end((err, res) => {
+          token = res.body.token;
+          done();
+        });
+    });
+
     it("It should GET a list of all trips", async () => {
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTQ4NzAxNzAsImV4cCI6MTY1NDk1NjU3MH0.jl0nf0e6RO3GxUGvSttEbU1IkAH64SdzPqdyW5KSB8U";
       const res = await chai
         .request(server)
         .get("/api/v1/trips/all")
@@ -32,9 +45,21 @@ describe("GET /api/v1/trips", () => {
    * Test GET route for specific role
    */
   describe("GET /api/v1/trips/:id", () => {
+    let token = "";
+    before((done) => {
+      chai
+        .request(server)
+        .post("/api/v1/users/login")
+        .send({
+          email: "testerjhj@gmail.com",
+          password: "12345678",
+        })
+        .end((err, res) => {
+          token = res.body.token;
+          done();
+        });
+    });
     it("It should GET a specific trip by its specific uuid", async () => {
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTQ4NzAxNzAsImV4cCI6MTY1NDk1NjU3MH0.jl0nf0e6RO3GxUGvSttEbU1IkAH64SdzPqdyW5KSB8U";
       const uuid = 1,
         res = await chai
           .request(server)
@@ -46,10 +71,22 @@ describe("GET /api/v1/trips", () => {
   });
 });
 describe("POST /api/v1/trips/create", () => {
+  let token = "";
+  before((done) => {
+    chai
+      .request(server)
+      .post("/api/v1/users/login")
+      .send({
+        email: "testerjhj@gmail.com",
+        password: "12345678",
+      })
+      .end((err, res) => {
+        token = res.body.token;
+        done();
+      });
+  });
   it("It should POST a new trip", (done) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTQ4NzAxNzAsImV4cCI6MTY1NDk1NjU3MH0.jl0nf0e6RO3GxUGvSttEbU1IkAH64SdzPqdyW5KSB8U";
-    const newUser = {
+    const newTrip = {
       source: "Muhanga",
       destination: "Kigali",
       DateOfTravel: "2022-06-08 07:22:08.305 +00:00",
@@ -61,18 +98,16 @@ describe("POST /api/v1/trips/create", () => {
       .request(server)
       .post("/api/v1/trips/create")
       .set({ Authorization: `Bearer ${token}` })
-      .send(newUser)
+      .send(newTrip)
       .end((err, response) => {
-        response.should.have.status(500);
+        response.should.have.status(201);
         response.should.be.a("object");
         done();
       });
   });
   it("It should not create a trip request", (done) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTQ4NzAxNzAsImV4cCI6MTY1NDk1NjU3MH0.jl0nf0e6RO3GxUGvSttEbU1IkAH64SdzPqdyW5KSB8U";
-    const newUser = {
-      source: "Muhanga",
+    const newTrip = {
+      source: 1,
       destination: "Kigali",
       DateOfTravel: "2022-06-08 07:22:08.305 +00:00",
       DateOfDestination: "2022-06-19 07:22:08.305 +00:00",
@@ -83,7 +118,7 @@ describe("POST /api/v1/trips/create", () => {
       .request(server)
       .post("/api/v1/trip/create")
       .set({ Authorization: `Bearer ${token}` })
-      .send(newUser)
+      .send(newTrip)
       .end((err, response) => {
         response.should.have.status(404);
         response.should.be.a("object");
@@ -93,9 +128,21 @@ describe("POST /api/v1/trips/create", () => {
   });
 });
 describe("PUT /api/v1/trips/:id - Update status", () => {
+  let token = "";
+  before((done) => {
+    chai
+      .request(server)
+      .post("/api/v1/users/login")
+      .send({
+        email: "testerjhj@gmail.com",
+        password: "12345678",
+      })
+      .end((err, res) => {
+        token = res.body.token;
+        done();
+      });
+  });
   it("It should update a trip", (done) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTQ4NzAxNzAsImV4cCI6MTY1NDk1NjU3MH0.jl0nf0e6RO3GxUGvSttEbU1IkAH64SdzPqdyW5KSB8U";
     const tripId = 1;
     const updatedtrip = {
       source: "Muhanga",
@@ -119,7 +166,7 @@ describe("PUT /api/v1/trips/:id - Update status", () => {
 
 describe("PUT /api/v1/trips/status/:id", () => {
   let t_token = "";
-  let t_tripId = 2;
+  let t_tripId = 4;
   before((done) => {
     chai
       .request(server)
@@ -179,22 +226,44 @@ describe("PUT /api/v1/trips/status/:id", () => {
   it("Should forbid request - not manager", (done) => {
     chai
       .request(server)
-      .put(`/api/v1/trips/status/${t_tripId}`)
-      .set({ Authorization: `Bearer ${process.env.NTMT_TOKEN}` })
-      .set("Accept", "application/json")
-      .send({ status: "approve" })
-      .end((err, res) => {
-        expect(res.status).to.equal(403);
-        res.body.should.have.property("message").eq("Not authorized.");
-        done();
+      .post("/api/v1/users/login")
+      .send({
+        email: "testerjhj@gmail.com",
+        password: "12345678",
+      })
+      .end((err, response) => {
+        let d_token = response.body.token;
+        chai
+          .request(server)
+          .put(`/api/v1/trips/status/${t_tripId}`)
+          .set({ Authorization: `Bearer ${d_token}` })
+          .set("Accept", "application/json")
+          .send({ status: "approve" })
+          .end((err, res) => {
+            expect(res.status).to.equal(403);
+            res.body.should.have.property("message").eq("Not authorized.");
+            done();
+          });
       });
   });
 });
 
 describe("DELETE /api/v1/trips/:id", () => {
+  let token = "";
+  before((done) => {
+    chai
+      .request(server)
+      .post("/api/v1/users/login")
+      .send({
+        email: "testerjhj@gmail.com",
+        password: "12345678",
+      })
+      .end((err, res) => {
+        token = res.body.token;
+        done();
+      });
+  });
   it("It should delete a trip", (done) => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTQ4NzAxNzAsImV4cCI6MTY1NDk1NjU3MH0.jl0nf0e6RO3GxUGvSttEbU1IkAH64SdzPqdyW5KSB8U";
     const tripId = 1;
     chai
       .request(server)
