@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-          pkg-manager: npm@5
+          pkg-manager: npm
       - run:
           command: npm run test
           name: Run tests
@@ -30,16 +30,5 @@ deploy:
 
 workflows:
   on_commit:
-    jobs:
-      - build_and_test
-
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"       
-          filters:
-            branches:
-              only:
-                - 'develop'
     jobs:
       - build_and_test
