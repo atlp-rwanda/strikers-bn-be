@@ -40,6 +40,6 @@ workflows:
           filters:
             branches:
               only:
-                - 'master'
+                - 'develop'
     jobs:
       - build_and_test
