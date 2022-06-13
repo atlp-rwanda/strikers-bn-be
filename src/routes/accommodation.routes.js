@@ -1,7 +1,7 @@
-import express from 'express';
-import { createAccommodation, getAccommodation } from '../controllers/accommodation.controller';
-import upload from '../utils/multer';
-import { travelAdmin } from '../middlewares/travel-admin';
+const express = require('express');
+const { createAccommodation, getAccommodation } = require('../controllers/accommodation.controller');
+const upload = require('../utils/multer');
+const { travelAdmin } = require('../middlewares/travel-admin');
 
 const router = express.Router();
 
