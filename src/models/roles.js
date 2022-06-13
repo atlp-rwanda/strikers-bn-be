@@ -1,4 +1,8 @@
-'use strict';
+/* eslint-disable linebreak-style */
+/* eslint-disable import/newline-after-import */
+/* eslint-disable no-unused-vars */
+/* eslint-disable lines-between-class-members */
+/* eslint-disable linebreak-style */
 const {
   Model
 } = require('sequelize');

@@ -6,12 +6,16 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import http from 'http';
 import swaggerUi from 'swagger-ui-express';
+import session from 'express-session';
+// const session = require('express-session');
 import corsFunction from './utils/cors';
 import swaggerDocument from '../public/api-docs.json';
 
 import { sequelize } from './models';
 
+
 import userRouter from './routes/user.routes';
+
 import rolesRouter from './routes/role.routes';
 
 const app = express();
@@ -27,11 +31,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/v1/users/', userRouter);
 app.use('/api/v1/roles', rolesRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 app.get('/', (req, res) => {
+  console.log("This is email "+req.session.email);
   res.send('Welcome to strikers-bn-be APIs');
 });
-
 app.get('/', (req, res) => {
   res.send('Welcome to strikers-bn-be APIs');
 });

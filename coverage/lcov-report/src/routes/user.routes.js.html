@@ -23,13 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">94.54% </span>
                 <span class="quiet">Statements</span>
-<<<<<<< HEAD
-                <span class='fraction'>30/30</span>
-=======
-                <span class='fraction'>40/40</span>
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
+                <span class='fraction'>52/55</span>
             </div>
         
             
@@ -48,13 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">94.54% </span>
                 <span class="quiet">Lines</span>
-<<<<<<< HEAD
-                <span class='fraction'>30/30</span>
-=======
-                <span class='fraction'>40/40</span>
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
+                <span class='fraction'>52/55</span>
             </div>
         
             
@@ -101,9 +93,6 @@
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
-<<<<<<< HEAD
-<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-=======
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
@@ -114,8 +103,22 @@
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
 <a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -145,76 +148,86 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<<<<<<< HEAD
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Router } from "express";
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable import/no-import-module-exports */
+import { Router } from 'express';
+import { verifyToken } from '../middlewares/auth';
+&nbsp;
 const userRouter = Router();
 &nbsp;
-const { addUser, signIn, verifyUser } = require("../controllers/user.controller");
-&nbsp;
-/**
- * @description To create a new user
- * @api v1/api/user/register
-=======
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Router } from "express";
-import { verifyToken } from "../middlewares/auth";
-const userRouter = Router();
-&nbsp;
-const { addUser, signIn,editUser,getUsers,getUser,verifyUser } = require("../controllers/user.controller");
+const {
+  addUser, signIn, editUser, getUsers, getUser, verifyUser, logout
+} = require('../controllers/user.controller');
 &nbsp;
 /**
  * @description To create a new user
  * @api v1/api/users/register
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
  * @access Public
  * @type POST
  */
-userRouter.post("/register", addUser);
+userRouter.post('/register', addUser);
 &nbsp;
 /**
-<<<<<<< HEAD
- * @description To login using email and password
- * @api v1/api/user/login
-=======
  * @description To update a user
  * @api v1/api/user/uuid
  * @access Public
  * @type PUT
  */
- userRouter.put("/updateuser/:uuid",verifyToken, editUser);
- userRouter.get("/getusers",getUsers);
- userRouter.get("/:uuid",getUser);
+userRouter.put('/updateuser/:uuid', verifyToken, editUser);
+userRouter.get('/getusers', getUsers);
+userRouter.get('/:uuid', getUser);
 /**
  * @description To login using email and password
  * @api v1/api/users/login
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
  * @access Public
  * @type POST
  */
-userRouter.post("/login", signIn);
+userRouter.post('/login', signIn);
 &nbsp;
 /**
  * @description To verify user account
-<<<<<<< HEAD
- * @api v1/api/user/verify/{email}
-=======
  * @api v1/api/users/verify/{email}
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
  * @access Public
  * @type GET
  */
-userRouter.get("/verify/:email", verifyUser);
+userRouter.get('/verify/:email', verifyUser);
+/**
+ * @description User Logout
+ * @api v1/api/users/:uuid/logout
+ * @access Public
+ * @type GET
+ */
+userRouter.get('/:uuid/logout', logout);
 &nbsp;
-module.exports = userRouter;
+userRouter.get('/:uuid/welcome',verifyToken,(req,res)=&gt;{
+<span class="cstat-no" title="statement not covered" >  console.log(req.params.uuid);</span>
+<span class="cstat-no" title="statement not covered" >  res.send(req.params.uuid+'walkverese');</span>
+<span class="cstat-no" title="statement not covered" >})</span>
+export default userRouter;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -222,15 +235,7 @@ module.exports = userRouter;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                at Tue Jun 07 2022 19:15:53 GMT+0200 (South Africa Standard Time)
-=======
-                at Wed Jun 08 2022 20:45:53 GMT+0200 (South Africa Standard Time)
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
-=======
-                at Thu Jun 09 2022 08:49:25 GMT+0200 (Central Africa Time)
->>>>>>> 849c4e65258cce698be9b7b01ab71640bcc039d4
+                at Mon Jun 13 2022 19:10:44 GMT+0200 (Central Africa Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

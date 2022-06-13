@@ -23,38 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.72% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-<<<<<<< HEAD
-                <span class='fraction'>59/61</span>
-=======
-                <span class='fraction'>90/90</span>
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
+                <span class='fraction'>95/95</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.72% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-<<<<<<< HEAD
-                <span class='fraction'>59/61</span>
-=======
-                <span class='fraction'>90/90</span>
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
+                <span class='fraction'>95/95</span>
             </div>
         
             
@@ -160,7 +152,13 @@
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -174,13 +172,13 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">111x</span>
-<span class="cline-any cline-yes">111x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">199x</span>
+<span class="cline-any cline-yes">199x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -189,8 +187,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -235,8 +231,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<<<<<<< HEAD
-=======
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -253,9 +247,18 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
-const { Model } = require("sequelize");
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable linebreak-style */
+/* eslint-disable import/newline-after-import */
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
+/* eslint-disable valid-jsdoc */
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) =&gt; {
   class User extends Model {
     /**
@@ -264,12 +267,13 @@ module.exports = (sequelize, DataTypes) =&gt; {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // define association here. this is to satisfy all models are on required elements.
+      // define associtaion there or here.
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    toJSON() {</span>
-<span class="cstat-no" title="statement not covered" >      return { ...this.get(), id: undefined, password: undefined }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    toJSON() {
+      return { ...this.get(), id: undefined, password: undefined };
+    }
   }
   User.init({
     uuid: {
@@ -290,13 +294,8 @@ module.exports = (sequelize, DataTypes) =&gt; {
       allowNull: false
     },
     roleId: {
-<<<<<<< HEAD
-      type: DataTypes.STRING,
-      defaultValue: '96c97445-d152-4a4e-9868-bee9d5a18ce2',
-=======
       type: DataTypes.UUID,
       defaultValue: 'c1f1d2bf-33bd-4e11-9d7a-0331db465f95',
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
       allowNull: false
     },
     phoneNumber: {
@@ -348,22 +347,15 @@ module.exports = (sequelize, DataTypes) =&gt; {
     modelName: 'User',
   });
   return User;
-};</pre></td></tr></table></pre>
+};
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                at Tue Jun 07 2022 19:15:53 GMT+0200 (South Africa Standard Time)
-=======
-                at Wed Jun 08 2022 20:45:53 GMT+0200 (South Africa Standard Time)
->>>>>>> 7dfaed695c40d67e3a94c95117877cbd4f5ee65a
-=======
-                at Thu Jun 09 2022 08:49:25 GMT+0200 (Central Africa Time)
->>>>>>> 849c4e65258cce698be9b7b01ab71640bcc039d4
+                at Mon Jun 13 2022 19:10:44 GMT+0200 (Central Africa Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

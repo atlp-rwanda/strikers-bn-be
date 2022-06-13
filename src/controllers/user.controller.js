@@ -173,15 +173,19 @@ exports.signIn = async (req, res) => {
       {
         uuid: user.uuid,
         email: user.email,
+        roleId:user.roleId
       },
-      TOKEN_SECRET,
-      {
-        expiresIn: 86400, // 24 hours
-      }
+      TOKEN_SECRET
+      // ,
+      // {
+      //   expiresIn: 86400, // 24 hours
+      // }
     );
     req.session.email = user.email;
     req.session.uuid = user.uuid;
+    req.session.roleId = user.roleId;
     req.session.pass = req.body.password;
+    console.log("password "+req.session.email);
     res.status(200).send({ token, user });
   } catch (error) {
     res.status(404);

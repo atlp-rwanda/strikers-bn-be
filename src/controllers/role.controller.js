@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable quotes */
-// @ts-nocheck
 import _ from "lodash";
 import { Roles, User } from "../models";
 import { validateRoleRegistration } from "../validators/role.validator";
@@ -33,8 +30,8 @@ export async function addRole(req, res) {
     return res.status(201).json({
       success: true,
       status: 201,
-      message: 'Role created successfully',
-      data: newRole
+      message: "Role created successfully",
+      data: newRole,
     });
   } catch (e) {
     res.status(500).send(`Error: ${e}`);
@@ -51,12 +48,10 @@ export async function getAllRoles(req, res) {
 
 export async function getSpecificRole(req, res) {
   try {
-    await Roles
-      .findOne({ where: { roleId: req.params.id } })
-      .then((role) => {
-        if (role) res.status(200).json(role);
-        else { res.status(404).send({ message: "Role with that id doesn't exist" }); }
-      });
+    await Roles.findOne({ where: { roleId: req.params.id } }).then((role) => {
+      if (role) res.status(200).json(role);
+      else res.status(404).send({ message: "Role with that id doesn't exist" });
+    });
   } catch (err) {
     res.status(500).send({ message: `Error: ${err}` });
   }
@@ -64,15 +59,18 @@ export async function getSpecificRole(req, res) {
 
 export async function assignRole(req, res) {
   try {
-    await User.find({ where: { email: req.params.email } })
-      .on('success', (user) => {
+    await User.find({ where: { email: req.params.email } }).on(
+      "success",
+      function (project) {
         if (user) {
-          user.update({
-            roleId: req.params.roleId
-          })
-            .success(() => {});
+          user
+            .update({
+              roleId: req.params.roleId,
+            })
+            .success(function () {});
         }
-      });
+      }
+    );
   } catch (err) {
     res.status(500).send({ message: `Error: ${err}` });
   }
@@ -102,7 +100,7 @@ export async function updateRole(req, res) {
       });
     }
 
-    const existing = await Roles.findOne({
+    let existing = await Roles.findOne({
       where: { roleId },
     });
     if (!existing) {
@@ -135,11 +133,10 @@ export async function deleteRole(req, res) {
   try {
     const { roleId } = req.params;
     const roleToDelete = await Roles.findOne({ where: { roleId } });
-    if (!roleToDelete) {
+    if (!roleToDelete)
       return res.status(404).send({
         message: "The specified roleId doesn't exist in the database",
       });
-    }
     await Roles.destroy({ where: { roleId } });
     res.status(200).send({
       message: `Successfully deleted the ${roleToDelete.roleTitle} role.`,
