@@ -6,8 +6,7 @@
   "engines": {
     "node": "^16.13.0"
   },
-  "type": "module",
-  "scripts": {
+    "scripts": {
     "start": "cross-env NODE_ENV=production node -r esm src/index.js",
     "test": "cross-env NODE_ENV=test mocha --require @babel/register \"test/**/*.test.js\" --timeout 20000 --exit",
     "coverage": "c8 --reporter=lcov --reporter=text npm test",
