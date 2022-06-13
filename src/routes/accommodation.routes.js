@@ -1,5 +1,6 @@
 import express from 'express';
 import { createAccommodation, getAccommodation } from '../controllers/accommodation.controller';
+import upload from '../utils/multer'
 
 const router = express.Router();
 
@@ -17,6 +18,6 @@ router.get('/', getAccommodation);
  * @access Private
  * @type POST
  */
-router.post('/', createAccommodation);
+router.post('/', upload.single('picture'), createAccommodation);
 
 module.exports = router;

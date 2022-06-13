@@ -1,5 +1,5 @@
-import { Accommodation } from '../models';
-import { Roles } from '../models/roles';
+import { Accommodation } from "../models";
+import { cloudinary } from '../utils/cloudinary'
 
 export async function getAccommodation(req, res) {
   try {
@@ -16,12 +16,28 @@ export async function getAccommodation(req, res) {
 
 export async function createAccommodation(req, res) {
   const {
-    name, description, location, highlights, ammenities
+    name,
+    description,
+    location,
+    roomNumber,
+    latitude,
+    longitude,
+    highlights,
+    ammenities,
   } = req.body;
   try {
-    console.log('hereee');
+    const result = await cloudinary.uploader.upload(req.file.path);
+    const picture = result.secure_url;
     const newAccommodation = await Accommodation.create({
-      name, description, location, highlights, ammenities
+      name,
+      description,
+      location,
+      roomNumber,
+      picture,
+      latitude,
+      longitude,
+      highlights,
+      ammenities,
     });
 
     // const geolocation = { latitude, longitude };

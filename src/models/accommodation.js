@@ -33,25 +33,16 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      rooms: [
-        {
-          id: { type: DataTypes.INTEGER, autoIncrement: true },
-          bedType: { type: DataTypes.STRING, allowNull: false },
-          cost: { type: DataTypes.STRING, allowNull: false },
-        },
-      ],
-      Pictures: [
-        {
-          picture: { type: DataTypes.STRING, allowNull: false },
-          CloudinaryId: { type: DataTypes.STRING, allowNull: false },
-        },
-      ],
-      geoLocation: [
-        {
-          latitude: { type: DataTypes.STRING, allowNull: false },
-          longitude: { type: DataTypes.STRING, allowNull: false }
-        }
-      ],
+      roomNumber: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      picture: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      latitude: { type: DataTypes.STRING, allowNull: false },
+      longitude: { type: DataTypes.STRING, allowNull: false },
       highlights: {
         type: DataTypes.STRING,
         allowNull: false,

@@ -30,6 +30,8 @@ app.get('/', (req, res) => {
   res.send('Welcome to strikers-bn-be APIs');
 });
 
+console.log(process.env.APP_PORT);
+
 const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
     console.log(`Server started on port ${port}!`);

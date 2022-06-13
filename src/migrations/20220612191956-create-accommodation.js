@@ -1,70 +1,65 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Accommodation', {
+    await queryInterface.createTable("Accommodation", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       uuid: {
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        defaultValue: Sequelize.UUIDV4,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       description: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       location: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
-      rooms: [
-        {
-          id: { type: Sequelize.INTEGER, autoIncrement: true },
-          bedType: { type: Sequelize.STRING, allowNull: false },
-          cost: { type: Sequelize.STRING, allowNull: false },
-        },
-      ],
-      pictures: [
-        {
-          picture: { type: Sequelize.STRING, allowNull: false },
-          CloudinaryId: { type: Sequelize.STRING, allowNull: false },
-        }
-      ],
-
-      geoLocation: [
-        {
-          latitude: { type: Sequelize.STRING, allowNull: false },
-          longitude: { type: Sequelize.STRING, allowNull: false }
-        }
-      ],
-
+      roomNumber: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      picture: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      latitude: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      longitude: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       highlights: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       ammenities: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now')
+        defaultValue: Sequelize.fn("now"),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now')
-      }
+        defaultValue: Sequelize.fn("now"),
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Accommodation');
-  }
+    await queryInterface.dropTable("Accommodation");
+  },
 };
