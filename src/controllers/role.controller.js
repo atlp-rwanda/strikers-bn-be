@@ -20,20 +20,20 @@ export async function addRole(req, res) {
       return res.status(403).json({
         success: false,
         status: 403,
-        message: "Role already exists!",
+        message: 'Role already exists!',
       });
     }
 
     const newRole = await Roles.create(
       _.pick(role, [
-        "roleTitle"
+        'roleTitle'
       ])
     );
 
     return res.status(201).json({
       success: true,
       status: 201,
-      message: "Role created successfully",
+      message: 'Role created successfully',
       data: newRole
     });
   } catch (e) {
@@ -55,8 +55,7 @@ export async function getSpecificRole(req, res) {
       .findOne({ where: { roleId: req.params.id } })
       .then((role) => {
         if (role) res.status(200).json(role);
-        else
-          res.status(404).send({ message: "Role with that id doesn't exist" });
+        else { res.status(404).send({ message: "Role with that id doesn't exist" }); }
       });
   } catch (err) {
     res.status(500).send({ message: `Error: ${err}` });
@@ -66,15 +65,15 @@ export async function getSpecificRole(req, res) {
 export async function assignRole(req, res) {
   try {
     await User.find({ where: { email: req.params.email } })
-  .on('success', function (project) {
-    if (user) {
-      user.update({
-        roleId: req.params.roleId
-      })
-      .success(function () {})
-    }
-  }) 
-  }catch (err) {
+      .on('success', (project) => {
+        if (user) {
+          user.update({
+            roleId: req.params.roleId
+          })
+            .success(() => {});
+        }
+      });
+  } catch (err) {
     res.status(500).send({ message: `Error: ${err}` });
   }
 }

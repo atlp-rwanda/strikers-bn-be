@@ -1,5 +1,7 @@
-import express from "express";
-import { addRole, getAllRoles, getSpecificRole, assignRole } from "../controllers/role.controller";
+import express from 'express';
+import {
+  addRole, getAllRoles, getSpecificRole, assignRole
+} from '../controllers/role.controller';
 import { verifyToken } from '../middlewares/auth';
 import { adminCheck } from '../middlewares/super-admin';
 
@@ -11,7 +13,7 @@ const router = express.Router();
  * @access Private
  * @type POST
  */
-router.post("/", [verifyToken, adminCheck], addRole);
+router.post('/', [verifyToken, adminCheck], addRole);
 
 /**
  * @description To get a list of all roles
@@ -19,7 +21,7 @@ router.post("/", [verifyToken, adminCheck], addRole);
  * @access Public
  * @type GET
  */
-router.get("/", getAllRoles);
+router.get('/', getAllRoles);
 
 /**
  * @description To get a specific role
@@ -27,7 +29,7 @@ router.get("/", getAllRoles);
  * @access Public
  * @type GET
  */
-router.get("/:id", getSpecificRole)
+router.get('/:id', getSpecificRole);
 
 /**
  * @description To assign a role to a certain user by his/her email
@@ -35,6 +37,6 @@ router.get("/:id", getSpecificRole)
  * @access Public
  * @type PATCH
  */
-router.patch("/:email/:roleId", [verifyToken, adminCheck], assignRole);
+router.patch('/:email/:roleId', [verifyToken, adminCheck], assignRole);
 
 module.exports = router;

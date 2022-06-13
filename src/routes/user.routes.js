@@ -1,8 +1,11 @@
-import { Router } from "express";
-import { verifyToken } from "../middlewares/auth";
+import { Router } from 'express';
+import { verifyToken } from '../middlewares/auth';
+
 const userRouter = Router();
 
-const { addUser, signIn,editUser,getUsers,getUser,verifyUser } = require("../controllers/user.controller");
+const {
+  addUser, signIn, editUser, getUsers, getUser, verifyUser
+} = require('../controllers/user.controller');
 
 /**
  * @description To create a new user
@@ -10,7 +13,7 @@ const { addUser, signIn,editUser,getUsers,getUser,verifyUser } = require("../con
  * @access Public
  * @type POST
  */
-userRouter.post("/register", addUser);
+userRouter.post('/register', addUser);
 
 /**
  * @description To update a user
@@ -18,16 +21,16 @@ userRouter.post("/register", addUser);
  * @access Public
  * @type PUT
  */
- userRouter.put("/updateuser/:uuid",verifyToken, editUser);
- userRouter.get("/getusers",getUsers);
- userRouter.get("/:uuid",getUser);
+userRouter.put('/updateuser/:uuid', verifyToken, editUser);
+userRouter.get('/getusers', getUsers);
+userRouter.get('/:uuid', getUser);
 /**
  * @description To login using email and password
  * @api v1/api/users/login
  * @access Public
  * @type POST
  */
-userRouter.post("/login", signIn);
+userRouter.post('/login', signIn);
 
 /**
  * @description To verify user account
@@ -35,6 +38,6 @@ userRouter.post("/login", signIn);
  * @access Public
  * @type GET
  */
-userRouter.get("/verify/:email", verifyUser);
+userRouter.get('/verify/:email', verifyUser);
 
 module.exports = userRouter;
