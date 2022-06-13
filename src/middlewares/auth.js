@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { TOKEN_SECRET } from "../config/key";
+import { MANAGER_ID, TOKEN_SECRET } from "../config/key";
 
 export const verifyToken = async (req, res, next) => {
   try {
@@ -18,7 +18,7 @@ export const verifyToken = async (req, res, next) => {
 };
 
 export const verifyManager = async (req, res, next) => {
-  if (req.roleId !== process.env.MANAGER_ID) {
+  if (req.roleId !== MANAGER_ID) {
     return res.status(403).send({ message: "Not authorized." });
   }
   next();
