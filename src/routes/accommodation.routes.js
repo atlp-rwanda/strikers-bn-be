@@ -1,6 +1,7 @@
 import express from 'express';
 import { createAccommodation, getAccommodation } from '../controllers/accommodation.controller';
-import upload from '../utils/multer'
+import upload from '../utils/multer';
+import { travelAdmin } from '../middlewares/travel-admin';
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ const router = express.Router();
  * @access Private
  * @type GET
  */
-router.get('/', getAccommodation);
+router.get('/', travelAdmin, getAccommodation);
 
 /**
  * @description To Create Accommodation
@@ -18,6 +19,6 @@ router.get('/', getAccommodation);
  * @access Private
  * @type POST
  */
-router.post('/', upload.single('picture'), createAccommodation);
+router.post('/', travelAdmin, upload.single('picture'), createAccommodation);
 
 module.exports = router;

@@ -1,11 +1,11 @@
-import { Accommodation } from "../models";
-import { cloudinary } from '../utils/cloudinary'
+import { Accommodation } from '../models';
+import { cloudinary } from '../utils/cloudinary';
 
 export async function getAccommodation(req, res) {
   try {
     const accommodations = await Accommodation.findAll();
     if (accommodations.length == 0) {
-      return res.status(200).send('No accommodation found!');
+      return res.status(200).send({ message: 'No accommodation found!' });
     }
     return res.status(200).send(accommodations);
   } catch (err) {
@@ -39,13 +39,7 @@ export async function createAccommodation(req, res) {
       highlights,
       ammenities,
     });
-
-    // const geolocation = { latitude, longitude };
-    // const room = {
-    //   bedType: req.body.bedType,
-    //   cost: req.body.cost
-    // };
-    res.status(201).json(newAccommodation);
+    res.status(201).send(newAccommodation);
   } catch (err) {
     console.log(err);
     res.status(400).send(err);
