@@ -24,7 +24,7 @@ tripRouter.post('/create',verifyToken, addTrip);
  * @access Public
  * @type GET
  */
-tripRouter.get('/all',verifyToken,getAllTrips);
+tripRouter.get('/all',[verifyToken, adminCheck],getAllTrips);
 
 /**
  * @description To create a new user
@@ -32,7 +32,7 @@ tripRouter.get('/all',verifyToken,getAllTrips);
  * @access Public
  * @type GET
  */
-tripRouter.get('/:id',verifyToken, getOneTrip);
+tripRouter.get('/:id',[verifyToken, adminCheck], getOneTrip);
 
 /**
  * @description To create a new user
@@ -48,6 +48,6 @@ tripRouter.delete('/:id',verifyToken, deleteOneTrip);
  * @access Public
  * @type PUT
  */
-tripRouter.put('/:id', verifyToken,updateTrip);
+tripRouter.put('/:id',verifyToken,updateTrip);
 
 module.exports = tripRouter;

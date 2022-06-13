@@ -7,7 +7,7 @@ import swaggerUi from "swagger-ui-express";
 import corsFunction from "./utils/cors";
 import swaggerDocument from "../public/api-docs.json";
 
-import { sequelize } from "./models";
+import { sequelize } from "./models/index";
 import tripRouter from "../src/routes/trip.routes";
 import userRouter from "../src/routes/user.routes";
 import rolesRouter from "../src/routes/role.routes";
