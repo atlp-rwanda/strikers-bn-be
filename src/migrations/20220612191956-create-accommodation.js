@@ -23,6 +23,27 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      rooms: [
+        {
+          id: { type: Sequelize.INTEGER, autoIncrement: true },
+          bedType: { type: Sequelize.STRING, allowNull: false },
+          cost: { type: Sequelize.STRING, allowNull: false },
+        },
+      ],
+      pictures: [
+        {
+          picture: { type: Sequelize.STRING, allowNull: false },
+          CloudinaryId: { type: Sequelize.STRING, allowNull: false },
+        }
+      ],
+
+      geoLocation: [
+        {
+          latitude: { type: Sequelize.STRING, allowNull: false },
+          longitude: { type: Sequelize.STRING, allowNull: false }
+        }
+      ],
+
       highlights: {
         type: Sequelize.STRING,
         allowNull: false
