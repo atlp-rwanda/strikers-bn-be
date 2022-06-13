@@ -13,12 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-    toJSON(){
-      return {...this.get(), id:undefined}
+    toJSON() {
+      return { ...this.get(), id: undefined };
     }
   }
   Accommodation.init({
-    uuid:{
+    uuid: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },

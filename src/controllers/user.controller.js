@@ -171,6 +171,7 @@ exports.signIn = async (req, res) => {
       {
         uuid: user.uuid,
         email: user.email,
+        roleId: user.roleId
       },
       TOKEN_SECRET,
       {
