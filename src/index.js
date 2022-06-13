@@ -21,7 +21,6 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use("/api/v1/users/", userRouter);
-
 app.use("/api/v1/roles", rolesRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
