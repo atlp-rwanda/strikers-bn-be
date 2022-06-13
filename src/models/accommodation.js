@@ -12,8 +12,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+
+    toJSON(){
+      return {...this.get(), id:undefined}
+    }
   }
   Accommodation.init({
+    uuid:{
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false

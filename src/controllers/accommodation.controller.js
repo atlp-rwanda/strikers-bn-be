@@ -5,7 +5,10 @@ export async function getAccommodation(req, res) {
   try {
     
     const accommodations = await Accommodation.findAll()
-    res.status(200).send(accommodations);
+    if(accommodations.length == 0){
+        return res.status(200).send("No accommodation found!")
+    }
+    return res.status(200).send(accommodations);
   } catch (err) {
     console.log("errrr " + err)
     return res.status(400).send(err);
