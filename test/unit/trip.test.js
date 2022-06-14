@@ -13,7 +13,7 @@ describe("GET /api/v1/trips",()=>{
    */
    describe("GET /api/v1/trips/all", () => {
     it("It should GET a list of all trips", async () => {
-      const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUwOTkxNDUsImV4cCI6MTY1NTE4NTU0NX0.56Y0VlH8jK7Cp0u67-YbIfNdx85iOze4BDJUdupVMx4"
+      const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUyMTAxMzYsImV4cCI6MTY1NTI5NjUzNn0.QXB5Aq2H6ZJd8UtDVCicyCwTvumyJjz4h3HJhsRC9r4"
       const res = await chai.request(server).get("/api/v1/trips/all")
       .set({ Authorization: `Bearer ${token}` });
       expect(res).to.have.status(200);
@@ -31,7 +31,7 @@ describe("GET /api/v1/trips",()=>{
    */
   describe("GET /api/v1/trips/:id", () => {
     it("It should GET a specific trip by its specific uuid", async () => {
-      const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUwOTkxNDUsImV4cCI6MTY1NTE4NTU0NX0.56Y0VlH8jK7Cp0u67-YbIfNdx85iOze4BDJUdupVMx4"
+      const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUyMTAxMzYsImV4cCI6MTY1NTI5NjUzNn0.QXB5Aq2H6ZJd8UtDVCicyCwTvumyJjz4h3HJhsRC9r4"
       const uuid = 21,
         res = await chai.request(server).get("/api/v1/trips/" + uuid)
         .set({ Authorization: `Bearer ${token}` });
@@ -43,7 +43,7 @@ describe("GET /api/v1/trips",()=>{
 describe("POST /api/v1/trips/create", () => {
 
     it("It should POST a new trip", (done) => {
-      const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUwOTkxNDUsImV4cCI6MTY1NTE4NTU0NX0.56Y0VlH8jK7Cp0u67-YbIfNdx85iOze4BDJUdupVMx4"
+      const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUyMTAxMzYsImV4cCI6MTY1NTI5NjUzNn0.QXB5Aq2H6ZJd8UtDVCicyCwTvumyJjz4h3HJhsRC9r4"
       const newUser = {
         source: "Muhanga",
         destination: "Kigali",
@@ -64,7 +64,7 @@ describe("POST /api/v1/trips/create", () => {
         });
     });
     it("It should not create a trip request", (done) => {
-      const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUwOTkxNDUsImV4cCI6MTY1NTE4NTU0NX0.56Y0VlH8jK7Cp0u67-YbIfNdx85iOze4BDJUdupVMx4"
+      const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUyMTAxMzYsImV4cCI6MTY1NTI5NjUzNn0.QXB5Aq2H6ZJd8UtDVCicyCwTvumyJjz4h3HJhsRC9r4"
       const newUser = {
         source: "Muhanga",
         destination: "Kigali",
@@ -89,7 +89,7 @@ describe("POST /api/v1/trips/create", () => {
     describe('PUT /api/v1/trips/:id', () => {
     
       it('It should update a trip', (done) => {
-        const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUwOTkxNDUsImV4cCI6MTY1NTE4NTU0NX0.56Y0VlH8jK7Cp0u67-YbIfNdx85iOze4BDJUdupVMx4"
+        const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUyMTAxMzYsImV4cCI6MTY1NTI5NjUzNn0.QXB5Aq2H6ZJd8UtDVCicyCwTvumyJjz4h3HJhsRC9r4"
         const tripId = 21;
         const updatedtrip = {
           source: "Muhanga",
@@ -112,7 +112,7 @@ describe("POST /api/v1/trips/create", () => {
  
   describe("DELETE /api/v1/trips/:id",()=>{
     it('It should delete a trip', (done) => {
-      const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUwOTkxNDUsImV4cCI6MTY1NTE4NTU0NX0.56Y0VlH8jK7Cp0u67-YbIfNdx85iOze4BDJUdupVMx4"
+      const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUyMTAxMzYsImV4cCI6MTY1NTI5NjUzNn0.QXB5Aq2H6ZJd8UtDVCicyCwTvumyJjz4h3HJhsRC9r4"
       const tripId = 21;
       chai.request(server)
         .delete("/api/v1/trips/" + tripId)
