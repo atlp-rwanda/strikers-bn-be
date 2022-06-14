@@ -19,17 +19,17 @@ jobs:
           paths:
             - .
 
-  deploy: # this can be any name you choose
+deploy:
     docker:
       - image: cimg/node:17.2.0
     steps:
       - attach_workspace:
           at: ~/project
-      - heroku/deploy-via-git:
-          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
+      - heroku/deploy-via-git: 
+          force: true
 
 workflows:
-  test_my_app:
+  on_commit:
     jobs:
       - build_and_test
 
