@@ -6,8 +6,8 @@
     "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
     "dialect": "postgres",
     "define": {
-      "createdAt": "createdAt",
-      "updatedAt": "updatedAt"
+      "createdAt": "createdat",
+      "updatedAt": "updatedat"
     }
   },
   "test": {
@@ -17,8 +17,8 @@
     "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
     "dialect": "postgres",
     "define": {
-      "createdAt": "createdAt",
-      "updatedAt": "updatedAt"
+      "createdAt": "createdat",
+      "updatedAt": "updatedat"
     }
   },
   "production": {
@@ -28,8 +28,8 @@
     "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
     "dialect": "postgres",
     "define": {
-      "createdAt": "createdAt",
-      "updatedAt": "updatedAt"
+      "createdAt": "createdat",
+      "updatedAt": "updatedat"
     }
   }
 }
