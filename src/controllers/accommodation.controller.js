@@ -77,7 +77,7 @@ export async function updateAccommodation(req, res) {
 export async function deleteAccommodation(req, res) {
   try {
     const id = req.params.uuid;
-    await Accommodation.destroy({ where: { id } });
+    await Accommodation.destroy({ where: { uuid: id } });
 
     return res.status(200).send({ message: `Accommodation with id ${id} deleted!!` });
   } catch (err) {
