@@ -1,7 +1,7 @@
-const express = require('express');
-const { createAccommodation, getAccommodation } = require('../controllers/accommodation.controller');
-const upload = require('../utils/multer');
-const { travelAdmin } = require('../middlewares/travel-admin');
+import express from 'express';
+import { createAccommodation, getAccommodation,updateAccommodation } from '../controllers/accommodation.controller';
+import upload from '../utils/multer';
+import { travelAdmin } from '../middlewares/travel-admin';
 
 const router = express.Router();
 
@@ -20,5 +20,13 @@ router.get('/', travelAdmin, getAccommodation);
  * @type POST
  */
 router.post('/', travelAdmin, upload.single('picture'), createAccommodation);
+
+/**
+ * @description To Create Accommodation
+ * @api api/accommodation
+ * @access Private
+ * @type PUT
+ */
+router.put('/', updateAccommodation);
 
 module.exports = router;

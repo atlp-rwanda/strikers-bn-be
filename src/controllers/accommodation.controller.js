@@ -10,7 +10,7 @@ export async function getAccommodation(req, res) {
     return res.status(200).send(accommodations);
   } catch (err) {
     console.log(`errrr ${err}`);
-    return res.status(400).send(err);
+    return res.status(404).send(err);
   }
 }
 
@@ -43,5 +43,33 @@ export async function createAccommodation(req, res) {
   } catch (err) {
     console.log(err);
     res.status(400).send(err);
+  }
+}
+
+export async function updateAccommodation(req, res) {
+  const {
+    name,
+    description,
+    location,
+    roomNumber,
+    latitude,
+    longitude,
+    highlights,
+    ammenities,
+  } = req.body;
+  const id = req.params.uuid;
+  try {
+    const accommodation = await Accommodation.findOne({ where: { uuid: id } });
+    if (!accommodation) {
+      return res.status(404).send({ message: 'Accommodation not found!' });
+    }
+    await accommodation.update({
+      name, description, location, roomNumber, latitude, longitude, highlights, ammenities
+    }, { where: { uuid: req.params.uuid } });
+
+    return res.status(200).send({ message: `Accommodation with uuid ${id} updated` });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err);
   }
 }
