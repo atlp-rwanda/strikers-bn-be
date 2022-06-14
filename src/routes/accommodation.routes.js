@@ -13,7 +13,7 @@ const router = express.Router();
  * @access Private
  * @type GET
  */
-router.get('/',travelAdmin,getAccommodation);
+router.get('/', travelAdmin, getAccommodation);
 
 /**
  * @description To Create Accommodation
@@ -29,7 +29,7 @@ router.post('/', travelAdmin, upload.single('picture'), createAccommodation);
  * @access Private
  * @type PUT
  */
-router.put('/:uuid', travelAdmin,updateAccommodation);
+router.put('/:uuid', travelAdmin, updateAccommodation);
 
 /**
  * @description To Create Accommodation
@@ -37,6 +37,6 @@ router.put('/:uuid', travelAdmin,updateAccommodation);
  * @access Private
  * @type DELETE
  */
-router.delete('/:uuid',travelAdmin, deleteAccommodation);
+router.delete('/:uuid', travelAdmin, deleteAccommodation);
 
 module.exports = router;
