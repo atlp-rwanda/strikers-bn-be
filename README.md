@@ -1,9 +1,5 @@
 [![codecov](https://codecov.io/gh/atlp-rwanda/strikers-bn-be/branch/develop/graph/badge.svg?token=WNXM9XUUG6)](https://codecov.io/gh/atlp-rwanda/strikers-bn-be)
-<<<<<<< HEAD
-[![CircleCI](https://circleci.com/gh/atlp-rwanda/strikers-bn-be.svg?style=shield)](https://app.circleci.com/pipelines/github/atlp-rwanda)
-=======
 [![CircleCI](https://circleci.com/gh/atlp-rwanda/strikers-bn-be.svg?style=shield)](https://circleci.com/gh/circleci/circleci-docs)
->>>>>>> 2c3db4717593bef260b900f3f98b65f79c8a55a8
 [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 ### Welcome to Barefoot Nomad!
 
