@@ -3,9 +3,10 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { User } from "../models";
-import { validateUserRegisteration } from "../validators/user.validator";
-import { TOKEN_SECRET,email,base_url } from "../config/key";
-import transporter from '../middlewares/mail';
+import { validateUserRegisteration, validateUserAuthenatication } from "../validators/user.validator";
+import { TOKEN_SECRET } from "../config/key";
+import { sendEmail } from "../emails/account"
+import resetPassword from '../emails/resetPassword';
 
 dotenv.config();
 
@@ -31,8 +32,8 @@ exports.addUser = async (req, res) => {
     user.password = await bcrypt.hash(user.password, salt);
     user.verificationToken = jwt.sign(
       {
-        firstname: user.firstname,
-        lastname: user.lastname,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         phoneNumber: user.phoneNumber,
       },
@@ -43,8 +44,8 @@ exports.addUser = async (req, res) => {
 
     const newUser = await User.create(
       _.pick(user, [
-        "firstname",
-        "lastname",
+        "firstName",
+        "lastName",
         "email",
         "roleId",
         "phoneNumber",
@@ -52,6 +53,8 @@ exports.addUser = async (req, res) => {
         "verificationToken",
       ])
     );
+
+    sendEmail(newUser.firstname, newUser.lastname, newUser.email)
 
     return res.status(201).json({
       success: true,
@@ -68,19 +71,107 @@ exports.addUser = async (req, res) => {
   }
 };
 
+exports.editUser=async(req,res)=>{
+  try{
+    console.log(req.body)
+    const { firstName, lastName, roleId,phoneNumber,password } = req.body;
+      const id=req.params.uuid;
+      await User.findOne({ where: { uuid:  id} }).then(async (user) => {
+         if (user) {
+            await user.update(
+               { firstName, lastName, roleId,phoneNumber,password },
+               { where: { uuid: req.params.uuid } }
+            ).then(() =>
+               res.status(200).json({status:"success",message:"User with id: "+ id+" " +"UPDATED"})
+            );
+         } else
+            res.status(404).send({ message: "User with that id doesn't exist" });
+      });
+
+  }catch(err){
+    res.status(500).send({message:`Error: ${err}`})
+  }
+  
+}
+
+exports.getUsers=async(req,res)=>{
+  console.log(req.body)
+  try {
+    await User.findAll().then((users) => res.status(200).json(users));
+ } catch (err) {
+    return res.status(500).json({ error: "Something went wrong" });
+ }
+}
+exports.getUser = async (req, res) => {
+  const uuid = req.params.uuid;
+  try {
+     const user = await User.findOne({ where: { uuid } }).then((user) => { res.status(200).json(user) })
+  } catch (err) {
+     return res.status(500).json({ error: "Something went wrong" });
+  }
+}
+exports.verifyUser = async (req, res) => {
+  try {
+    const userEmail = req.params.email
+    const user = await User.findOne({ where: { email: userEmail } });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        status: 404,
+        message: "User not found!",
+      });
+    }
+    if (user.verified) {
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        message: "User already verified!",
+      });
+    }
+    user.verified = true;
+    await user.save();
+    return res.status(200).json({
+      success: true,
+      status: 200,
+      message: "User verified successfully!",
+      data: user
+    });
+  }
+  catch (err) {
+    res.status(400).json({
+      success: false,
+      status: 400,
+      message: err.message,
+    });
+  }
+}
+
 exports.signIn = async (req, res) => {
   try {
+    const validateUserInput = validateUserAuthenatication(req.body);
+
+    if (validateUserInput.error) {
+      return res.status(400).json(validateUserInput.error.details[0].message);
+    }
+
     let user = await User.findOne({ where: { email: req.body.email } });
+
+    if (!user) {
+      return res.status(404).send({ message: "Invalid Email or Password!" });
+    }
 
     let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
 
     if (!passwordIsValid) {
-      return res.status(401).send({ message: "Invalid Password!" });
+      return res.status(401).send({ message: "Invalid Email or Password!" });
+    }
+
+    if (!user.verified) {
+      return res.status(400).send({ message: "Please first verify your account!" });
     }
 
     let token = jwt.sign(
       {
-        id: user.id,
         uuid: user.uuid,
         email: user.email,
       },
@@ -97,54 +188,38 @@ exports.signIn = async (req, res) => {
   }
 };
 
-exports.resetPasswordLink = async(req,res)=>{
+exports.resetPassword = async(req,res)=>{
   try{
     let all = await User.findAll({where: {}})
     console.log(all)
-    // let user = await User.findOne({ where: { email: req.body.email } });
-return res.send(all)
+    let user = await User.findOne({ where: { email: req.body.email } });
 
-    // if(!user)
-    //   return res.status(401).send({message: "User with such email does not exists"});
+    if(!user)
+      return res.status(401).send({message: "User with such email does not exists"});
 
-    //   let token = jwt.sign(
-    //     {
-    //       id: user.id,
-    //       email: user.email,
-    //     },
-    //     TOKEN_SECRET,
-    //     {
-    //       expiresIn: 1800, // 30 minutes
-    //     }
-    //   );
+      let token = jwt.sign(
+        {
+          id: user.id,
+          email: user.dataValues.email,
+        },
+        TOKEN_SECRET,
+        {
+          expiresIn: 1800, // 30 minutes
+        }
+      );
 
-    //   var mailOptions = {
-    //     from: email,
-    //     to: user.email,
-    //     subject: 'Strikers-BN-BE Password Reset Link',
-    //     html: `<h1>Strikers-BN-BE Password Reset Link</h1><p>Hi ${user.firstname + " "+ user.lastname} click the link bellow to reset your password</p>
-    //     <p><a href='${base_url+"/"+token}'>${base_url+"/"+token}</a></p>
-    //     <p>It will expires in 30 minutes</p>
-    //     `
-    //   };
-      
-    //   transporter.sendMail(mailOptions, async function(error, info){
-    //     if (error) {
-    //       console.log(error);
-    //       return res.status(400).send(error);
-    //     } else {
-    //       console.log('Email sent: ' + info.response);
+      let emailSent = await resetPassword(user, token);
+      if(emailSent){
+          await User.update({
+            passwordResetToken: token
+          }, {where: {id: user.id}});
 
-    //       await User.update({
-    //         passwordResetToken: token
-    //       }, {where: {id: user.id}});
-  
-    //       return res.status(200).send({messageSuccess: "Email was sent successfully, it will expires in 30 minutes"})
-    //     }
-    //   });
+          return res.status(200).send({messageSuccess: "Email was sent successfully, it will expires in 30 minutes"})
+      }
     
   }
   catch (error) {
+    console.log(error)
     res.status(404);
     res.send(error.toString());
   }
@@ -158,6 +233,9 @@ exports.newPassword = async(req,res)=>{
       jwt.verify(token,TOKEN_SECRET, async(err, decoded) => {
         if (err) 
         return res.status(401).send({ message: "Invalid Token"});
+console.log(decoded)
+        const salt = await bcrypt.genSalt(10);
+        newPassword = await bcrypt.hash(newPassword, salt);
 
         let reset = await User.update({
         password: newPassword

@@ -1,13 +1,13 @@
-const jwt = require("jsonwebtoken");
+import jwt from 'jsonwebtoken';
 
-exports.verifyToken = verifyToken = (req, res, next) => {
+export async function verifyToken (req, res, next) {
   try {
     let token = req.headers.authorization.split(" ")[1];
     jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
       if (err) {
         return res.status(401).send({ message: err.message });
       }
-      req.userId = decoded.id;
+      req.userId = decoded.uuid;
       next();
     });
   } catch {
