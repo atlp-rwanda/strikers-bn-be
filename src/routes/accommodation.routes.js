@@ -1,5 +1,7 @@
 import express from 'express';
-import { createAccommodation, getAccommodation,updateAccommodation } from '../controllers/accommodation.controller';
+import {
+  createAccommodation, getAccommodation, updateAccommodation, deleteAccommodation
+} from '../controllers/accommodation.controller';
 import upload from '../utils/multer';
 import { travelAdmin } from '../middlewares/travel-admin';
 
@@ -11,7 +13,7 @@ const router = express.Router();
  * @access Private
  * @type GET
  */
-router.get('/', travelAdmin, getAccommodation);
+router.get('/', getAccommodation);
 
 /**
  * @description To Create Accommodation
@@ -27,6 +29,14 @@ router.post('/', travelAdmin, upload.single('picture'), createAccommodation);
  * @access Private
  * @type PUT
  */
-router.put('/', updateAccommodation);
+router.put('/:uuid', updateAccommodation);
+
+/**
+ * @description To Create Accommodation
+ * @api api/accommodation
+ * @access Private
+ * @type DELETE
+ */
+router.delete('/:uuid', deleteAccommodation);
 
 module.exports = router;

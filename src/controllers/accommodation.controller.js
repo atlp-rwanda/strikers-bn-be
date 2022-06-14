@@ -73,3 +73,15 @@ export async function updateAccommodation(req, res) {
     return res.status(400).send(err);
   }
 }
+
+export async function deleteAccommodation(req, res) {
+  try {
+    const id = req.params.uuid;
+    await Accommodation.destroy({ where: { id } });
+
+    return res.status(200).send({ message: `Accommodation with id ${id} deleted!!` });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err);
+  }
+}
