@@ -1,41 +1,42 @@
 // @ts-nocheck
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import http from 'http';
-import swaggerUi from 'swagger-ui-express';
-import corsFunction from './utils/cors';
-import swaggerDocument from '../public/api-docs.json';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import http from "http";
+import swaggerUi from "swagger-ui-express";
+import corsFunction from "./utils/cors";
+import swaggerDocument from "../public/api-docs.json";
 
-import { sequelize } from './models';
+import { sequelize } from "./models";
 
-import userRouter from './routes/user.routes';
-import rolesRouter from './routes/role.routes';
-import accommodationRoutes from './routes/accommodation.routes';
+import userRouter from "./routes/user.routes";
+import rolesRouter from "./routes/role.routes";
+import bookingsRouter from "./routes/booking.routes";
+import accommodationRoutes from "./routes/accommodation.routes";
 
 const app = express();
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: "../.env" });
 app.use(cors());
 app.use(corsFunction);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/v1/users/', userRouter);
+app.use("/api/v1/users/", userRouter);
 
-app.use('/api/v1/roles', rolesRouter);
-app.use('/api/v1/accommodation', accommodationRoutes);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api/v1/roles", rolesRouter);
+app.use("/api/v1/bookings", bookingsRouter);
+app.use("/api/v1/accommodation", accommodationRoutes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.get('/', (req, res) => {
-  res.send('Welcome to strikers-bn-be APIs');
+app.get("/", (req, res) => {
+  res.send("Welcome to strikers-bn-be APIs");
 });
-
 
 const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
     console.log(`Server started on port ${port}!`);
     await sequelize.authenticate();
-    console.log('Database connected . . .');
+    console.log("Database connected . . .");
   });
 
 module.exports = server;
