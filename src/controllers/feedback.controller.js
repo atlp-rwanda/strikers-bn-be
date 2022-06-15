@@ -101,7 +101,6 @@ exports.updateFeedback = async (req, res) => {
     }
 }
 
-//check if the user is the owner of the feedback before deleting it
 exports.deleteFeedback = async (req, res) => {
     const uuid = req.params.uuid;
     try {
