@@ -1,5 +1,5 @@
 "use strict";
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
 exports.sendEmail = async (firstName, lastName, email) => {
   let transporter = nodemailer.createTransport({
