@@ -1,7 +1,5 @@
-/* eslint-disable prefer-const */
-/* eslint-disable quotes */
-
-const nodemailer = require("nodemailer");
+"use strict";
+import nodemailer from "nodemailer";
 
 exports.sendEmail = async (firstName, lastName, email) => {
   const transporter = nodemailer.createTransport({
