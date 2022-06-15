@@ -99,54 +99,54 @@ describe("POST /api/v1/trips/create", () => {
         });
     });
   });
-    describe('PUT /api/v1/trips/:id', () => {
+  //   describe('PUT /api/v1/trips/:id', () => {
     
-      it('It should update a trip',async () => {
-        const tripId = 21;
-        const updatedtrip = {
-          source: "Muhanga",
-          destination: "Kigali",
-          DateOfTravel: "2022-06-08T07:22:08.305Z",
-          DateOfDestination: "2022-06-08T07:22:08.305Z",
-          status: "pending",
-        },
-        { body } = await chai
-        .request(server)
-        .post("/api/v1/users/login")
-        .send({ email: "abi_seth@gmail.com", password: "pass12345" });
-        console.log("token here...",body.token);
-        chai.request(server)
-          .put("/api/v1/trips/" + tripId)
-          .set({ authorization: "Bearer " + 
-          body.token })
-          .set('Accept', 'application/json')
-          .send(updatedtrip)
-          .end((err, res) => {
-            expect(res.status).to.equal(500);
-            expect(res.body.data).to.include({});
-          });
-      });
-  });
+  //     it('It should update a trip',async () => {
+  //       const tripId = 21;
+  //       const updatedtrip = {
+  //         source: "Muhanga",
+  //         destination: "Kigali",
+  //         DateOfTravel: "2022-06-08T07:22:08.305Z",
+  //         DateOfDestination: "2022-06-08T07:22:08.305Z",
+  //         status: "pending",
+  //       },
+  //       { body } = await chai
+  //       .request(server)
+  //       .post("/api/v1/users/login")
+  //       .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+  //       console.log("token here...",body.token);
+  //       chai.request(server)
+  //         .put("/api/v1/trips/" + tripId)
+  //         .set({ authorization: "Bearer " + 
+  //         body.token })
+  //         .set('Accept', 'application/json')
+  //         .send(updatedtrip)
+  //         .end((err, res) => {
+  //           expect(res.status).to.equal(500);
+  //           expect(res.body.data).to.include({});
+  //         });
+  //     });
+  // });
  
-  describe("DELETE /api/v1/trips/:id",()=>{
-    it('It should delete a trip', async() => {
-      const 
-      { body } = await chai
-      .request(server)
-      .post("/api/v1/users/login")
-      .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+  // describe("DELETE /api/v1/trips/:id",()=>{
+  //   it('It should delete a trip', async() => {
+  //     const 
+  //     { body } = await chai
+  //     .request(server)
+  //     .post("/api/v1/users/login")
+  //     .send({ email: "abi_seth@gmail.com", password: "pass12345" });
 
-      const tripId = 21;
-      chai.request(server)
-        .delete("/api/v1/trips/" + tripId)
-        .set({ authorization: "Bearer " + body.token })
-        .set('Accept', 'application/json')
-        .end((err, res) => {
-          expect(res.status).to.equal(500);
-          expect(res.body.data).to.include({});
+  //     const tripId = 21;
+  //     chai.request(server)
+  //       .delete("/api/v1/trips/" + tripId)
+  //       .set({ authorization: "Bearer " + body.token })
+  //       .set('Accept', 'application/json')
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(500);
+  //         expect(res.body.data).to.include({});
 
-        });
-    });
-  })
+  //       });
+  //   });
+  // })
   
 
