@@ -20,7 +20,7 @@ describe("POST /api/v1/users", () => {
       firstName: `Abi${userId}`,
       lastName: `Seth${userId}`,
       email: `abi${userId}@gmail.com`,
-      roleId: "e2a8b398-b658-4606-9b17-b9152792e875",
+      roleId: "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
       phoneNumber: "0781294147",
       password: "pass12345",
     };
@@ -50,7 +50,7 @@ describe("POST /api/v1/users", () => {
       firstName: "Abi",
       lastName: "Seth",
       email: "abiseth@gmail.com",
-      roleId: "e2a8b398-b658-4606-9b17-b9152792e875",
+      roleId: "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
       phoneNumber: "0781294147",
       password: "pass12345",
     };
