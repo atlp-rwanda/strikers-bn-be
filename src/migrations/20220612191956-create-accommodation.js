@@ -23,7 +23,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      roomNumber: {
+      roomNumbers: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
