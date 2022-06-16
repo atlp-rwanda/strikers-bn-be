@@ -8,25 +8,21 @@ chai.use(chaiHttp);
 
 const server = require("../../src/index");
 describe("GET /api/v1/trips", () => {
-  /**
-   * Test GET route
-   */
+  let token = "";
+  before((done) => {
+    chai
+      .request(server)
+      .post("/api/v1/users/login")
+      .send({
+        email: "testerjhj@gmail.com",
+        password: "12345678",
+      })
+      .end((err, res) => {
+        token = res.body.token;
+        done();
+      });
+  });
   describe("GET /api/v1/trips/all", () => {
-    let token = "";
-    before((done) => {
-      chai
-        .request(server)
-        .post("/api/v1/users/login")
-        .send({
-          email: "testerjhj@gmail.com",
-          password: "12345678",
-        })
-        .end((err, res) => {
-          token = res.body.token;
-          done();
-        });
-    });
-
     it("It should GET a list of all trips", async () => {
       const { body } = await chai
         .request(server)
@@ -46,24 +42,7 @@ describe("GET /api/v1/trips", () => {
     });
   });
 
-  /**
-   * Test GET route for specific role
-   */
   describe("GET /api/v1/trips/:id", () => {
-    let token = "";
-    before((done) => {
-      chai
-        .request(server)
-        .post("/api/v1/users/login")
-        .send({
-          email: "testerjhj@gmail.com",
-          password: "12345678",
-        })
-        .end((err, res) => {
-          token = res.body.token;
-          done();
-        });
-    });
     it("It should GET a specific trip by its specific uuid", async () => {
       const { body } = await chai
         .request(server)
