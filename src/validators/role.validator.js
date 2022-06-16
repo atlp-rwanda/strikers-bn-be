@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 exports.validateRoleRegistration = (body) => {
   const validRoleSchema = Joi.object({

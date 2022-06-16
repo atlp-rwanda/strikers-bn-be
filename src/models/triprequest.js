@@ -1,7 +1,7 @@
 'use strict';
-import {
+const {
   Model
-} from 'sequelize';
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class TripRequest extends Model {
     /**
