@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.38% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/21</span>
+                <span class='fraction'>21/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.38% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/21</span>
+                <span class='fraction'>21/21</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -87,37 +87,37 @@
 <a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Joi = require('joi');
 &nbsp;
-exports.validateUserRegisteration = (<span class="fstat-no" title="function not covered" >body) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const validUserRegisterSchema = Joi.object({</span>
-<span class="cstat-no" title="statement not covered" >        firstName: Joi.string().max(100).min(2).required(),</span>
-<span class="cstat-no" title="statement not covered" >        lastName: Joi.string().max(100).min(2).required(),</span>
-<span class="cstat-no" title="statement not covered" >        email: Joi.string().email().min(5).required(),</span>
-<span class="cstat-no" title="statement not covered" >        roleId: Joi.string().required(),</span>
-<span class="cstat-no" title="statement not covered" >        phoneNumber: Joi.string().length(10).pattern(/^[0-9]+$/).required(),</span>
-<span class="cstat-no" title="statement not covered" >        password: Joi.string().min(8).required()</span>
-<span class="cstat-no" title="statement not covered" >    })</span>
-<span class="cstat-no" title="statement not covered" >    return validUserRegisterSchema.validate(body);</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+exports.validateUserRegisteration = (body) =&gt; {
+    const validUserRegisterSchema = Joi.object({
+        firstName: Joi.string().max(100).min(2).required(),
+        lastName: Joi.string().max(100).min(2).required(),
+        email: Joi.string().email().min(5).required(),
+        roleId: Joi.string().required(),
+        phoneNumber: Joi.string().length(10).pattern(/^[0-9]+$/).required(),
+        password: Joi.string().min(8).required()
+    })
+    return validUserRegisterSchema.validate(body);
+}
 &nbsp;
 exports.validateUserAuthenatication = (body) =&gt; {
     const validUserLoginSchema = Joi.object({
@@ -133,7 +133,7 @@ exports.validateUserAuthenatication = (body) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Jun 13 2022 21:38:03 GMT+0200 (South Africa Standard Time)
+                at Thu Jun 16 2022 13:35:10 GMT+0200 (South Africa Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
