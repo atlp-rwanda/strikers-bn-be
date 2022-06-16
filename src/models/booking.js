@@ -35,14 +35,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      createdat: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      updatedat: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
     },
     {
       sequelize,
