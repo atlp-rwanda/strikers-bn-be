@@ -34,23 +34,15 @@ router.get("/", [verifyToken, adminCheck], getAllBookings);
  * @access Public
  * @type GET
  */
-router.get("/:id", getSpecificBooking);
+router.get("/:id", verifyToken, getSpecificBooking);
 
 /**
- * @description To assign a role to a certain user by his/her email
+ * @description To assign a confirm a specific accomodation booking
  * @api api/v1/bookings/confirm/:bookingId
  * @access Public
  * @type PATCH
  */
 router.patch("/confirm/:id", [verifyToken, adminCheck], confirmBooking);
-
-/**
- * @description To update an existing booking
- * @api api/v1/bookings/:id
- * @access Public
- * @type PATCH
- */
-router.patch("/:id", verifyToken, updateBooking);
 
 /**
  * @description To delete a specific booking

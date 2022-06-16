@@ -142,7 +142,7 @@ export async function deleteRole(req, res) {
     await Roles.destroy({ where: { roleId } });
     res.status(200).send({
       message: `Successfully deleted the ${roleToDelete.roleTitle} role.`,
-      deleteRole,
+      deletedRole: roleToDelete,
     });
   } catch (e) {
     res.status(500).send(`Error: ${e}`);

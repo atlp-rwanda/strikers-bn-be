@@ -53,6 +53,7 @@ export async function getSpecificBooking(req, res) {
           res
             .status(404)
             .send({ message: "Booking with that id doesn't exist" });
+        0;
       }
     );
   } catch (err) {
@@ -60,8 +61,48 @@ export async function getSpecificBooking(req, res) {
   }
 }
 
-export async function confirmBooking(req, res) {}
+export async function confirmBooking(req, res) {
+  try {
+    const bookingId = req.params.id;
+    let checkBooking = await Booking.findOne({
+      where: { bookingId },
+    });
+    if (!checkBooking) {
+      return res.status(404).send({
+        success: false,
+        message: "Booking with that id doesn't exist",
+      });
+    }
+    const updatedBooking = await Booking.update(
+      { status: "confirmed" },
+      { where: { bookingId } }
+    );
+    checkBooking.status = "confirmed";
+    return res.status(200).json({
+      success: true,
+      message: "This accomodation booking was successfully confirmed!",
+      data: checkBooking,
+    });
+  } catch (e) {
+    res.status(500).send(`Error: ${e}`);
+  }
+}
 
-export async function updateBooking(req, res) {}
-
-export async function deleteBooking(req, res) {}
+export async function deleteBooking(req, res) {
+  try {
+    const { id } = req.params;
+    const bookingToDelete = await Booking.findOne({ where: { bookingId: id } });
+    if (!bookingToDelete) {
+      return res.status(404).send({
+        message: "The specified booking doesn't exist in the database",
+      });
+    }
+    await Booking.destroy({ where: { bookingId: id } });
+    res.status(200).send({
+      message: `Successfully deleted that booking.`,
+      deletedBooking: bookingToDelete,
+    });
+  } catch (e) {
+    res.status(500).send(`Error: ${e}`);
+  }
+}

@@ -19,11 +19,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       supplierId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
       },
       requesterId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
       },
       status: {
