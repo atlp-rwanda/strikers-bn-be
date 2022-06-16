@@ -1,12 +1,9 @@
 import _ from "lodash";
 import { TripRequest } from "../models";
-const express = require("express");
 import {
   validateStatus,
   validateTripsNotifications,
 } from "../validators/trip.validator";
-const app = express();
-app.use(express.json());
 
 exports.addTrip = async (req, res) => {
   const user = req.userId;
