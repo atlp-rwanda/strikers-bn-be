@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 exports.validateTripsNotifications = (body) => {
     const validUserRegisterSchema = Joi.object({

@@ -3,12 +3,12 @@ import { Router } from 'express';
 const tripRouter = Router();
 import { verifyToken } from '../middlewares/auth';
 import { adminCheck } from '../middlewares/super-admin';
-const { 
+import { 
     addTrip,
     getAllTrips,
     getOneTrip,
     deleteOneTrip,
-    updateTrip } = require('../controllers/trip.controller'); 
+    updateTrip }from '../controllers/trip.controller'; 
 
 /**
  * @description To create a new user

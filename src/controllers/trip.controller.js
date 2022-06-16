@@ -1,41 +1,56 @@
-import _ from "lodash";
-import { TripRequest } from "../models";
-const express=require("express");
-import { validateTripsNotifications } from '../validators/trip.validator';
+import _ from 'lodash'
+import { TripRequest } from '../models'
+import express from 'express'
+import { validateTripsNotifications } from '../validators/trip.validator'
 const app = express()
 app.use(express.json())
 
-
-    exports.addTrip = async (req, res) => {
-      const user=req.userId;
-  const { source,destination,DateOfTravel,DateOfDestination,status} = req.body
-  const validateUserInput = validateTripsNotifications({ source,destination,DateOfTravel,DateOfDestination,status});
-console.log(user);
+export async function addTrip(req, res) {
+  const user = req.userId
+  const {
+    source,
+    destination,
+    DateOfTravel,
+    DateOfDestination,
+    status,
+  } = req.body
+  const validateUserInput = validateTripsNotifications({
+    source,
+    destination,
+    DateOfTravel,
+    DateOfDestination,
+    status,
+  })
+  console.log(user)
   if (validateUserInput.error) {
-    return res.status(400).json(validateUserInput.error.details[0].message);
+    return res.status(400).json(validateUserInput.error.details[0].message)
   }
   try {
-    const trip = await TripRequest.create({user,source,destination, DateOfTravel,DateOfDestination,status })
+    const trip = await TripRequest.create({
+      user,
+      source,
+      destination,
+      DateOfTravel,
+      DateOfDestination,
+      status,
+    })
 
     return res.status(201).json({
       success: true,
       status: 201,
-      message: "Trip request created successvely",
+      message: 'Trip request created successvely',
       data: trip,
     })
-
   } catch (err) {
     res.status(500).json({
       success: false,
       status: 500,
       message: err.message,
-    });
-   
+    })
   }
 }
 
-
-    exports.getAllTrips = async (req, res) => {
+export async function getAllTrips(req, res){
   try {
     const trips = await TripRequest.findAll()
 
@@ -50,7 +65,7 @@ console.log(user);
   }
 }
 
-exports.getOneTrip = async (req, res) => {
+export async function getOneTrip(req, res) {
   const id = req.params.id
   try {
     const trip = await TripRequest.findOne({
@@ -69,8 +84,7 @@ exports.getOneTrip = async (req, res) => {
   }
 }
 
-
-    exports.deleteOneTrip = async (req, res) => {
+export async function deleteOneTrip(req, res) {
   const id = req.params.id
   try {
     const trip = await TripRequest.findOne({ where: { id } })
@@ -84,10 +98,9 @@ exports.getOneTrip = async (req, res) => {
   }
 }
 
-
-    exports.updateTrip = async (req, res) => {
+export async function updateTrip (req, res) {
   const id = req.params.id
-  const { source,destination,DateOfTravel,DateOfDestination } = req.body
+  const { source, destination, DateOfTravel, DateOfDestination } = req.body
   try {
     const trip = await TripRequest.findOne({ where: { id } })
 
@@ -108,4 +121,3 @@ exports.getOneTrip = async (req, res) => {
     return res.status(500).json({ error: 'Something went wrong' })
   }
 }
-
