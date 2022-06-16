@@ -18,7 +18,7 @@ userRouter.post("/register", addUser);
  * @access Public
  * @type PUT
  */
- userRouter.put("/updateuser/:uuid",verifyToken, editUser);
+ userRouter.put("/updateuser/:uuid", editUser);
  userRouter.get("/getusers",getUsers);
  userRouter.get("/:uuid",getUser);
 /**
