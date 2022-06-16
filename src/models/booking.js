@@ -22,6 +22,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         allowNull: false,
       },
+      accomodationId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
+      roomId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
       requesterId: {
         type: DataTypes.UUID,
         allowNull: false,

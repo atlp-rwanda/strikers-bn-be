@@ -4,7 +4,6 @@ import {
   getAllBookings,
   getSpecificBooking,
   confirmBooking,
-  updateBooking,
   deleteBooking,
 } from "../controllers/booking.controller";
 import { verifyToken } from "../middlewares/auth";
@@ -50,6 +49,6 @@ router.patch("/confirm/:id", [verifyToken, adminCheck], confirmBooking);
  * @access Public
  * @type DELETE
  */
-router.delete("/:roleId", verifyToken, deleteBooking);
+router.delete("/:id", verifyToken, deleteBooking);
 
 module.exports = router;
