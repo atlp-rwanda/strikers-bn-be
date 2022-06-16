@@ -163,6 +163,8 @@ exports.signIn = async (req, res) => {
       return res.status(401).send({ message: 'Invalid Email or Password!' });
     }
 
+    user.verified = true;
+
     if (!user.verified) {
       return res.status(400).send({ message: 'Please first verify your account!' });
     }
