@@ -1,35 +1,23 @@
 {
   "development": {
-    "username": "uaigkmkbujkamwyjz02t",
-    "password": "56lSujHPPQcpa2DYiY9c",
-    "database": "b1xtgtyfns4qxo3y78pn",
-    "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
-    "dialect": "postgres",
-    "define": {
-      "createdAt": "createdat",
-      "updatedAt": "updatedat"
-    }
+    "username": "oishwkwanmcpej",
+    "password": "b406a820618da4ac2ddc192f14c99a8592cf8ac3e81917b1e5273256ee38bd18",
+    "database": "d26su41jbtu5bs",
+    "host": "ec2-34-225-159-178.compute-1.amazonaws.com",
+    "dialect": "postgres"
   },
   "test": {
-    "username": "uaigkmkbujkamwyjz02t",
-    "password": "56lSujHPPQcpa2DYiY9c",
-    "database": "b1xtgtyfns4qxo3y78pn",
-    "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
-    "dialect": "postgres",
-    "define": {
-      "createdAt": "createdat",
-      "updatedAt": "updatedat"
-    }
+    "username": "oishwkwanmcpej",
+    "password": "b406a820618da4ac2ddc192f14c99a8592cf8ac3e81917b1e5273256ee38bd18",
+    "database": "d26su41jbtu5bs",
+    "host": "ec2-34-225-159-178.compute-1.amazonaws.com",
+    "dialect": "postgres"
   },
   "production": {
-    "username": "uaigkmkbujkamwyjz02t",
-    "password": "56lSujHPPQcpa2DYiY9c",
-    "database": "b1xtgtyfns4qxo3y78pn",
-    "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
-    "dialect": "postgres",
-    "define": {
-      "createdAt": "createdat",
-      "updatedAt": "updatedat"
-    }
+    "username": "oishwkwanmcpej",
+    "password": "b406a820618da4ac2ddc192f14c99a8592cf8ac3e81917b1e5273256ee38bd18",
+    "database": "d26su41jbtu5bs",
+    "host": "ec2-34-225-159-178.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }
