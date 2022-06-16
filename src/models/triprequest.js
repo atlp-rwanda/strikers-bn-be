@@ -1,5 +1,5 @@
 'use strict';
-import  {
+import {
   Model
 } from 'sequelize';
 module.exports = (sequelize, DataTypes) => {

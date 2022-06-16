@@ -8,7 +8,7 @@ import {
     getAllTrips,
     getOneTrip,
     deleteOneTrip,
-    updateTrip }from '../controllers/trip.controller'; 
+    updateTrip } from '../controllers/trip.controller'; 
 
 /**
  * @description To create a new user
