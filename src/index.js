@@ -11,6 +11,7 @@ import { sequelize } from "./models";
 
 import userRouter from "./routes/user.routes";
 import rolesRouter from "./routes/role.routes";
+import companiesRouter from "./routes/company.routes";
 import bookingsRouter from "./routes/booking.routes";
 import accommodationRoutes from "./routes/accommodation.routes";
 
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1/users/", userRouter);
 
 app.use("/api/v1/roles", rolesRouter);
+app.use("/api/v1/companies", companiesRouter);
 app.use("/api/v1/bookings", bookingsRouter);
 app.use("/api/v1/accommodation", accommodationRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
