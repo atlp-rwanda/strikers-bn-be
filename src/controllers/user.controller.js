@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-import-module-exports */
 import _ from 'lodash';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
@@ -9,6 +11,7 @@ import { sendEmail } from '../emails/account';
 
 dotenv.config();
 
+// local
 exports.addUser = async (req, res) => {
   try {
     const user = req.body;
@@ -84,7 +87,7 @@ exports.editUser = async (req, res) => {
             firstName, lastName, roleId, phoneNumber, password
           },
           { where: { uuid: req.params.uuid } }
-        ).then(() => res.status(200).json({ status: 'success', message: `User with id: ${id} ` + 'UPDATED' }));
+        ).then(() => res.status(200).json({ status: 'success', message: `User with id: ${id} UPDATED` }));
       } else { res.status(404).send({ message: "User with that id doesn't exist" }); }
     });
   } catch (err) {
@@ -93,7 +96,6 @@ exports.editUser = async (req, res) => {
 };
 
 exports.getUsers = async (req, res) => {
-  console.log(req.body);
   try {
     await User.findAll().then((users) => res.status(200).json(users));
   } catch (err) {
@@ -103,7 +105,8 @@ exports.getUsers = async (req, res) => {
 exports.getUser = async (req, res) => {
   const { uuid } = req.params;
   try {
-    const user = await User.findOne({ where: { uuid } }).then((user) => { res.status(200).json(user); });
+    const user = await User.findOne({ where: { uuid } })
+      .then((user1) => { res.status(200).json(user1); });
   } catch (err) {
     return res.status(500).json({ error: 'Something went wrong' });
   }
@@ -162,9 +165,6 @@ exports.signIn = async (req, res) => {
     if (!passwordIsValid) {
       return res.status(401).send({ message: 'Invalid Email or Password!' });
     }
-
-    user.verified = true;
-
     if (!user.verified) {
       return res.status(400).send({ message: 'Please first verify your account!' });
     }
@@ -175,15 +175,33 @@ exports.signIn = async (req, res) => {
         email: user.email,
         roleId: user.roleId
       },
-      TOKEN_SECRET,
-      {
-        expiresIn: 86400, // 24 hours
-      }
+      TOKEN_SECRET
+      // ,
+      // {
+      //   expiresIn: 86400, // 24 hours
+      // }
     );
-
+    req.session.email = user.email;
+    req.session.uuid = user.uuid;
+    req.session.roleId = user.roleId;
+    req.session.pass = req.body.password;
+    console.log(`password ${req.session.email}`);
     res.status(200).send({ token, user });
   } catch (error) {
     res.status(404);
     res.send(error.toString());
+    console.log(error);
   }
+};
+exports.logout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json({
+        status: 'success', message: 'logout successfully!'
+      });
+    }
+  });
+  console.log('Token removed successfully');
 };

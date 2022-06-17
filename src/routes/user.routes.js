@@ -1,10 +1,11 @@
+/* eslint-disable import/no-import-module-exports */
 import { Router } from 'express';
 import { verifyToken } from '../middlewares/auth';
 
 const userRouter = Router();
 
 const {
-  addUser, signIn, editUser, getUsers, getUser, verifyUser
+  addUser, signIn, editUser, getUsers, getUser, verifyUser, logout
 } = require('../controllers/user.controller');
 
 /**
@@ -39,5 +40,16 @@ userRouter.post('/login', signIn);
  * @type GET
  */
 userRouter.get('/verify/:email', verifyUser);
+/**
+ * @description User Logout
+ * @api v1/api/users/:uuid/logout
+ * @access Public
+ * @type GET
+ */
+userRouter.get('/:uuid/logout', logout);
 
-module.exports = userRouter;
+userRouter.get('/:uuid/welcome', verifyToken, (req, res) => {
+  console.log(req.params.uuid);
+  res.send(`${req.params.uuid}walkverese`);
+});
+export default userRouter;
