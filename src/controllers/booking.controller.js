@@ -1,6 +1,6 @@
 // @ts-nocheck
 import _ from "lodash";
-import { User, Booking, Accommodation } from "../models";
+import { User, Company, Booking, Accommodation } from "../models";
 import { validateBookingRegistration } from "../validators/booking.validator";
 
 export async function newBooking(req, res) {
@@ -15,8 +15,8 @@ export async function newBooking(req, res) {
         .json(validateBookingInput.error.details[0].message);
     }
 
-    const checkSupplier = await User.findOne({
-      where: { uuid: newBooking.supplierId },
+    const checkSupplier = await Company.findOne({
+      where: { companyId: newBooking.supplierId },
     });
 
     if (!checkSupplier) {
@@ -80,7 +80,6 @@ export async function newBooking(req, res) {
         "roomId",
         "requesterId",
         "status",
-        "dateSubmitted",
       ])
     );
 

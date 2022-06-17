@@ -1,13 +1,13 @@
 import express from "express";
 import {
-  newBooking,
-  getAllBookings,
-  getSpecificBooking,
-  confirmBooking,
-  deleteBooking,
-} from "../controllers/booking.controller";
+  newCompany,
+  getAllCompanies,
+  getSpecificCompany,
+  updateCompanyInfo,
+  deleteCompany,
+} from "../controllers/company.controller";
 import { verifyToken } from "../middlewares/auth";
-import { travelAdmin } from "../middlewares/travel-admin";
+import { adminCheck } from "../middlewares/super-admin";
 
 const router = express.Router();
 
@@ -17,7 +17,7 @@ const router = express.Router();
  * @access Private
  * @type POST
  */
-router.post("/", verifyToken, newBooking);
+router.post("/", [verifyToken, adminCheck], newCompany);
 
 /**
  * @description To get a list of all roles
@@ -25,7 +25,7 @@ router.post("/", verifyToken, newBooking);
  * @access Public
  * @type GET
  */
-router.get("/", [verifyToken, travelAdmin], getAllBookings);
+router.get("/", getAllCompanies);
 
 /**
  * @description To get a specific booking
@@ -33,7 +33,7 @@ router.get("/", [verifyToken, travelAdmin], getAllBookings);
  * @access Public
  * @type GET
  */
-router.get("/:id", verifyToken, getSpecificBooking);
+router.get("/:id", getSpecificCompany);
 
 /**
  * @description To assign a confirm a specific accomodation booking
@@ -41,7 +41,7 @@ router.get("/:id", verifyToken, getSpecificBooking);
  * @access Public
  * @type PATCH
  */
-router.patch("/confirm/:id", [verifyToken, travelAdmin], confirmBooking);
+router.patch("/:id", [verifyToken], updateCompanyInfo);
 
 /**
  * @description To delete a specific booking
@@ -49,6 +49,6 @@ router.patch("/confirm/:id", [verifyToken, travelAdmin], confirmBooking);
  * @access Public
  * @type DELETE
  */
-router.delete("/:id", verifyToken, deleteBooking);
+router.delete("/:id", [verifyToken, adminCheck], deleteCompany);
 
 module.exports = router;

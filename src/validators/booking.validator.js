@@ -6,7 +6,6 @@ exports.validateBookingRegistration = (body) => {
     accomodationId: Joi.string().min(10).max(100).required(),
     roomId: Joi.string().min(10).max(100).required(),
     requesterId: Joi.string().min(10).max(100).required(),
-    dateSubmitted: Joi.date().required(),
   });
   return bookingSchema.validate(body);
 };
