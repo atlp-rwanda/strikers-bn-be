@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">78.57% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>20/24</span>
+                <span class='fraction'>22/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">22.22% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/7</span>
+                <span class='fraction'>2/9</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">78.57% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>20/24</span>
+                <span class='fraction'>22/28</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -87,13 +87,19 @@
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -108,16 +114,19 @@
 <span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import jwt from "jsonwebtoken"
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">28x</span></td><td class="text"><pre class="prettyprint lang-js">import jwt from "jsonwebtoken"
 import { TOKEN_SECRET } from "../config/key";
 import { Roles } from '../models';
 &nbsp;
 export async function adminCheck(req, res, next) {
   try {
     let token = req.headers.authorization.split(" ")[1];
+    if(<span class="branch-0 cbranch-no" title="branch not covered" >process.env.NODE_ENV !="test" &amp;&amp; !req.session.email)<span class="branch-0 cbranch-no" title="branch not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
     jwt.verify(token, TOKEN_SECRET, async (err, decoded) =&gt; {
       if (err) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(401).send({ message: err.message });</span>
@@ -125,6 +134,7 @@ export async function adminCheck(req, res, next) {
       if (!decoded.roleId)
 <span class="branch-0 cbranch-no" title="branch not covered" >        return r</span>es.status(404).send({ message: 'Invalid token provided' });
       const role = await Roles.findOne({ where: { roleId: decoded.roleId } });
+      console.log("decoded.roleId "+decoded.roleId);
       if (!role)
 <span class="branch-0 cbranch-no" title="branch not covered" >        return r</span>es.status(404).send({ message: 'Invalid role' });
       if (role.roleTitle != 'SUPER ADMINISTRATOR')
@@ -134,15 +144,14 @@ export async function adminCheck(req, res, next) {
   } <span class="branch-0 cbranch-no" title="branch not covered" >catch {</span>
 <span class="cstat-no" title="statement not covered" >    return res.status(403).send({ message: "No token provided!" });</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-}
-&nbsp;</pre></td></tr></table></pre>
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Tue Jun 14 2022 21:17:46 GMT+0200 (South Africa Standard Time)
+                at Sat Jun 18 2022 19:04:47 GMT+0200 (South Africa Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
