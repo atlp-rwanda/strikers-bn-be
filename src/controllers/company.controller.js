@@ -30,6 +30,7 @@ export async function getSpecificCompany(req, res) {
 }
 
 export async function newCompany(req, res) {
+  console.log("reaching here...");
   try {
     const newCompany = { ...req.body };
 
@@ -51,9 +52,13 @@ export async function newCompany(req, res) {
     //     message: "No location is registered with that locationId you provided",
     //   });
     // }
+    console.log("reaching here...");
 
     const checkManager = await User.findOne({
-      where: { uuid: newCompany.managerId },
+      where: {
+        uuid: newCompany.managerId,
+        roleId: "c648ab3d-5d6c-4106-bc4f-cb17ed2d8568",
+      },
     });
 
     if (!checkManager) {
@@ -125,7 +130,10 @@ export async function updateCompanyInfo(req, res) {
     }
 
     const checkManager = await User.findOne({
-      where: { uuid: newCompany.managerId },
+      where: {
+        uuid: newCompany.managerId,
+        roleId: "",
+      },
     });
 
     if (!checkManager) {
