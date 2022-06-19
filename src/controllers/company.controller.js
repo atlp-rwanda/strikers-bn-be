@@ -131,7 +131,7 @@ export async function updateCompanyInfo(req, res) {
     const checkManager = await User.findOne({
       where: {
         uuid: newCompany.managerId,
-        roleId: '',
+        roleId: 'c648ab3d-5d6c-4106-bc4f-cb17ed2d8568',
       },
     });
 
@@ -146,7 +146,7 @@ export async function updateCompanyInfo(req, res) {
       where: { name: newCompany.name, managerId: newCompany.managerId },
     });
 
-    if (!checkCompany) {
+    if (checkCompany) {
       return res.status(400).json({
         success: false,
         message:
