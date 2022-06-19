@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { TripRequest } from '../models'
+import { Trip } from '../models'
 import express from 'express'
 import { validateTripsNotifications } from '../validators/trip.validator'
 const app = express()
@@ -26,7 +26,7 @@ export async function addTrip(req, res) {
     return res.status(400).json(validateUserInput.error.details[0].message)
   }
   try {
-    const trip = await TripRequest.create({
+    const trip = await Trip.create({
       user,
       source,
       destination,
@@ -52,7 +52,7 @@ export async function addTrip(req, res) {
 
 export async function getAllTrips(req, res){
   try {
-    const trips = await TripRequest.findAll()
+    const trips = await Trip.findAll()
 
     return res.status(200).json({
       success: true,
@@ -68,7 +68,7 @@ export async function getAllTrips(req, res){
 export async function getOneTrip(req, res) {
   const id = req.params.id
   try {
-    const trip = await TripRequest.findOne({
+    const trip = await Trip.findOne({
       where: { id },
       // include: 'id',
     })
@@ -87,7 +87,7 @@ export async function getOneTrip(req, res) {
 export async function deleteOneTrip(req, res) {
   const id = req.params.id
   try {
-    const trip = await TripRequest.findOne({ where: { id } })
+    const trip = await Trip.findOne({ where: { id } })
 
     await trip.destroy()
 
@@ -102,7 +102,7 @@ export async function updateTrip (req, res) {
   const id = req.params.id
   const { source, destination, DateOfTravel, DateOfDestination } = req.body
   try {
-    const trip = await TripRequest.findOne({ where: { id } })
+    const trip = await Trip.findOne({ where: { id } })
 
     trip.source = source
     trip.destination = destination

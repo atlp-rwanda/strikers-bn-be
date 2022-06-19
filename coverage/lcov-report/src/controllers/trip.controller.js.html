@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.97% </span>
+                <span class="strong">48.78% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>75/123</span>
+                <span class='fraction'>60/123</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.97% </span>
+                <span class="strong">48.78% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>75/123</span>
+                <span class='fraction'>60/123</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -215,21 +215,21 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -310,7 +310,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import _ from 'lodash'
-import { TripRequest } from '../models'
+import { Trip } from '../models'
 import express from 'express'
 import { validateTripsNotifications } from '../validators/trip.validator'
 const app = express()
@@ -337,22 +337,22 @@ export async function addTrip(req, res) {
 <span class="cstat-no" title="statement not covered" >    return res.status(400).json(validateUserInput.error.details[0].message)</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
   try {
-    const trip = await TripRequest.create({
-      user,
-      source,
-      destination,
-      DateOfTravel,
-      DateOfDestination,
-      status,
-    })
-&nbsp;
-    return res.status(201).json({
-      success: true,
-      status: 201,
-      message: 'Trip request created successvely',
-      data: trip,
-    })
-  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (err) {</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >    const trip = await Trip.create({</span>
+<span class="cstat-no" title="statement not covered" >      user,</span>
+<span class="cstat-no" title="statement not covered" >      source,</span>
+<span class="cstat-no" title="statement not covered" >      destination,</span>
+<span class="cstat-no" title="statement not covered" >      DateOfTravel,</span>
+<span class="cstat-no" title="statement not covered" >      DateOfDestination,</span>
+<span class="cstat-no" title="statement not covered" >      status,</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return res.status(201).json({</span>
+<span class="cstat-no" title="statement not covered" >      success: true,</span>
+<span class="cstat-no" title="statement not covered" >      status: 201,</span>
+<span class="cstat-no" title="statement not covered" >      message: 'Trip request created successvely',</span>
+<span class="cstat-no" title="statement not covered" >      data: trip,</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >  } catch (err) {</span>
 <span class="cstat-no" title="statement not covered" >    res.status(500).json({</span>
 <span class="cstat-no" title="statement not covered" >      success: false,</span>
 <span class="cstat-no" title="statement not covered" >      status: 500,</span>
@@ -363,7 +363,7 @@ export async function addTrip(req, res) {
 &nbsp;
 export async function getAllTrips(req, res){
   try {
-    const trips = await TripRequest.findAll()
+    const trips = await Trip.findAll()
 &nbsp;
     return res.status(200).json({
       success: true,
@@ -379,7 +379,7 @@ export async function getAllTrips(req, res){
 export async function getOneTrip(req, res) {
   const id = req.params.id
   try {
-    const trip = await TripRequest.findOne({
+    const trip = await Trip.findOne({
       where: { id },
       // include: 'id',
     })
@@ -398,7 +398,7 @@ export async function getOneTrip(req, res) {
 export <span class="fstat-no" title="function not covered" >async function deleteOneTrip(req, res) {</span>
 <span class="cstat-no" title="statement not covered" >  const id = req.params.id</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    const trip = await TripRequest.findOne({ where: { id } })</span>
+<span class="cstat-no" title="statement not covered" >    const trip = await Trip.findOne({ where: { id } })</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    await trip.destroy()</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -413,7 +413,7 @@ export <span class="fstat-no" title="function not covered" >async function updat
 <span class="cstat-no" title="statement not covered" >  const id = req.params.id</span>
 <span class="cstat-no" title="statement not covered" >  const { source, destination, DateOfTravel, DateOfDestination } = req.body</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    const trip = await TripRequest.findOne({ where: { id } })</span>
+<span class="cstat-no" title="statement not covered" >    const trip = await Trip.findOne({ where: { id } })</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    trip.source = source</span>
 <span class="cstat-no" title="statement not covered" >    trip.destination = destination</span>
@@ -439,7 +439,7 @@ export <span class="fstat-no" title="function not covered" >async function updat
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Jun 16 2022 15:12:06 GMT+0200 (South Africa Standard Time)
+                at Sun Jun 19 2022 19:15:25 GMT+0200 (South Africa Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
