@@ -1,5 +1,5 @@
 import express from 'express';
-import { createAccommodation, getAccommodation,updateAccommodation } from '../controllers/accommodation.controller';
+import { createAccommodation, getAccommodation, updateAccommodation } from '../controllers/accommodation.controller';
 import upload from '../utils/multer';
 import { travelAdmin } from '../middlewares/travel-admin';
 

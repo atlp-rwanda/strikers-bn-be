@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require('joi');
 
 exports.validateCompanyRegistration = (body) => {
   const bookingSchema = Joi.object({

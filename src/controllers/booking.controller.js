@@ -1,7 +1,9 @@
 // @ts-nocheck
-import _ from "lodash";
-import { User, Company, Booking, Accommodation } from "../models";
-import { validateBookingRegistration } from "../validators/booking.validator";
+import _ from 'lodash';
+import {
+  User, Company, Booking, Accommodation
+} from '../models';
+import { validateBookingRegistration } from '../validators/booking.validator';
 
 export async function newBooking(req, res) {
   try {
@@ -22,7 +24,7 @@ export async function newBooking(req, res) {
     if (!checkSupplier) {
       return res.status(404).json({
         success: false,
-        message: "No user is registered with that supplierId you provided",
+        message: 'No user is registered with that supplierId you provided',
       });
     }
 
@@ -33,7 +35,7 @@ export async function newBooking(req, res) {
     if (!checkAccomodation) {
       return res.status(404).json({
         success: false,
-        message: "The accomodation with that UUID you provided does not exist",
+        message: 'The accomodation with that UUID you provided does not exist',
       });
     }
 
@@ -44,50 +46,62 @@ export async function newBooking(req, res) {
     if (!checkRequester) {
       return res.status(404).json({
         success: false,
-        message: "No user is registered with that requesterId you provided",
+        message: 'No user is registered with that requesterId you provided',
       });
     }
 
-    const { supplierId, accomodationId, roomId, requesterId } = newBooking;
+    const {
+      supplierId, accomodationId, roomId, requesterId
+    } = newBooking;
 
     const checkAlreadyBooked = await Booking.findOne({
-      where: { supplierId, accomodationId, roomId, requesterId },
+      where: {
+        supplierId,
+        accomodationId,
+        roomId,
+        requesterId,
+      },
     });
 
     if (checkAlreadyBooked) {
       return res.status(400).json({
         success: false,
-        message: "This booking request is already registered",
+        message: 'This booking request is already registered',
       });
     }
 
     const checkAlreadyTaken = await Booking.findOne({
-      where: { supplierId, accomodationId, roomId, status: "confirmed" },
+      where: {
+        supplierId,
+        accomodationId,
+        roomId,
+        status: 'confirmed',
+      },
     });
 
     if (checkAlreadyTaken) {
       return res.status(400).json({
         success: false,
-        message: "That room has already been booked",
+        message: 'That room has already been booked',
       });
     }
 
-    await Booking.create(
+    const createdBooking = await Booking.create(
       _.pick(newBooking, [
-        "bookingId",
-        "supplierId",
-        "accomodationId",
-        "roomId",
-        "requesterId",
-        "status",
+        'bookingId',
+        'supplierId',
+        'accomodationId',
+        'roomId',
+        'requesterId',
+        'status',
       ])
     );
 
     return res.status(201).json({
       success: true,
       status: 201,
-      message: "Booking created successfully",
-      data: newBooking,
+      message: 'Booking created successfully',
+      data: createdBooking,
     });
   } catch (e) {
     res.status(500).send(`Error: ${e}`);
@@ -107,10 +121,11 @@ export async function getSpecificBooking(req, res) {
     await Booking.findOne({ where: { bookingId: req.params.id } }).then(
       (booking) => {
         if (booking) res.status(200).json(booking);
-        else
+        else {
           res
             .status(404)
             .send({ message: "Booking with that id doesn't exist" });
+        }
         0;
       }
     );
@@ -122,7 +137,7 @@ export async function getSpecificBooking(req, res) {
 export async function confirmBooking(req, res) {
   try {
     const bookingId = req.params.id;
-    let checkBooking = await Booking.findOne({
+    const checkBooking = await Booking.findOne({
       where: { bookingId },
     });
     if (!checkBooking) {
@@ -131,11 +146,11 @@ export async function confirmBooking(req, res) {
         message: "Booking with that id doesn't exist",
       });
     }
-    await Booking.update({ status: "confirmed" }, { where: { bookingId } });
-    checkBooking.status = "confirmed";
+    await Booking.update({ status: 'confirmed' }, { where: { bookingId } });
+    checkBooking.status = 'confirmed';
     return res.status(200).json({
       success: true,
-      message: "This accomodation booking was successfully confirmed!",
+      message: 'This accomodation booking was successfully confirmed!',
       data: checkBooking,
     });
   } catch (e) {
@@ -154,7 +169,7 @@ export async function deleteBooking(req, res) {
     }
     await Booking.destroy({ where: { bookingId: id } });
     res.status(200).send({
-      message: `Successfully deleted that booking.`,
+      message: 'Successfully deleted that booking.',
       deletedBooking: bookingToDelete,
     });
   } catch (e) {
