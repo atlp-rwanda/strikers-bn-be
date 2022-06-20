@@ -7,7 +7,7 @@ import { validateUserRegisteration, validateUserAuthenatication } from "../valid
 import { TOKEN_SECRET } from "../config/key";
 import { sendEmail } from "../emails/account"
 import resetPassword from '../emails/resetPassword';
-=======
+
 /* eslint-disable linebreak-style */
 /* eslint-disable import/no-import-module-exports */
 import _ from 'lodash';
