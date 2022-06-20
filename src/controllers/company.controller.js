@@ -29,7 +29,6 @@ export async function getSpecificCompany(req, res) {
 }
 
 export async function newCompany(req, res) {
-  console.log('reaching here...');
   try {
     const newCompany = { ...req.body };
 
@@ -51,8 +50,6 @@ export async function newCompany(req, res) {
     //     message: "No location is registered with that locationId you provided",
     //   });
     // }
-    console.log('reaching here...');
-
     const checkManager = await User.findOne({
       where: {
         uuid: newCompany.managerId,

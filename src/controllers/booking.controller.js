@@ -1,9 +1,7 @@
 // @ts-nocheck
-import _ from 'lodash';
-import {
-  User, Company, Booking, Accommodation
-} from '../models';
-import { validateBookingRegistration } from '../validators/booking.validator';
+import _ from "lodash";
+import { User, Company, Booking, Accommodation } from "../models";
+import { validateBookingRegistration } from "../validators/booking.validator";
 
 export async function newBooking(req, res) {
   try {
@@ -24,20 +22,20 @@ export async function newBooking(req, res) {
     if (!checkSupplier) {
       return res.status(404).json({
         success: false,
-        message: 'No user is registered with that supplierId you provided',
+        message: "No user is registered with that supplierId you provided",
       });
     }
 
-    const checkAccomodation = await Accommodation.findOne({
-      where: { uuid: newBooking.accomodationId },
-    });
+    // const checkAccomodation = await Accommodation.findOne({
+    //   where: { uuid: newBooking.accomodationId },
+    // });
 
-    if (!checkAccomodation) {
-      return res.status(404).json({
-        success: false,
-        message: 'The accomodation with that UUID you provided does not exist',
-      });
-    }
+    // if (!checkAccomodation) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: 'The accomodation with that UUID you provided does not exist',
+    //   });
+    // }
 
     const checkRequester = await User.findOne({
       where: { uuid: newBooking.requesterId },
@@ -46,13 +44,11 @@ export async function newBooking(req, res) {
     if (!checkRequester) {
       return res.status(404).json({
         success: false,
-        message: 'No user is registered with that requesterId you provided',
+        message: "No user is registered with that requesterId you provided",
       });
     }
 
-    const {
-      supplierId, accomodationId, roomId, requesterId
-    } = newBooking;
+    const { supplierId, accomodationId, roomId, requesterId } = newBooking;
 
     const checkAlreadyBooked = await Booking.findOne({
       where: {
@@ -66,7 +62,7 @@ export async function newBooking(req, res) {
     if (checkAlreadyBooked) {
       return res.status(400).json({
         success: false,
-        message: 'This booking request is already registered',
+        message: "This booking request is already registered",
       });
     }
 
@@ -75,32 +71,32 @@ export async function newBooking(req, res) {
         supplierId,
         accomodationId,
         roomId,
-        status: 'confirmed',
+        status: "confirmed",
       },
     });
 
     if (checkAlreadyTaken) {
       return res.status(400).json({
         success: false,
-        message: 'That room has already been booked',
+        message: "That room has already been booked",
       });
     }
 
     const createdBooking = await Booking.create(
       _.pick(newBooking, [
-        'bookingId',
-        'supplierId',
-        'accomodationId',
-        'roomId',
-        'requesterId',
-        'status',
+        "bookingId",
+        "supplierId",
+        "accomodationId",
+        "roomId",
+        "requesterId",
+        "status",
       ])
     );
 
     return res.status(201).json({
       success: true,
       status: 201,
-      message: 'Booking created successfully',
+      message: "Booking created successfully",
       data: createdBooking,
     });
   } catch (e) {
@@ -146,11 +142,11 @@ export async function confirmBooking(req, res) {
         message: "Booking with that id doesn't exist",
       });
     }
-    await Booking.update({ status: 'confirmed' }, { where: { bookingId } });
-    checkBooking.status = 'confirmed';
+    await Booking.update({ status: "confirmed" }, { where: { bookingId } });
+    checkBooking.status = "confirmed";
     return res.status(200).json({
       success: true,
-      message: 'This accomodation booking was successfully confirmed!',
+      message: "This accomodation booking was successfully confirmed!",
       data: checkBooking,
     });
   } catch (e) {
@@ -169,7 +165,7 @@ export async function deleteBooking(req, res) {
     }
     await Booking.destroy({ where: { bookingId: id } });
     res.status(200).send({
-      message: 'Successfully deleted that booking.',
+      message: "Successfully deleted that booking.",
       deletedBooking: bookingToDelete,
     });
   } catch (e) {
