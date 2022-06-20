@@ -1,6 +1,5 @@
 /* eslint-disable import/no-import-module-exports */
 /* eslint-disable import/named */
-// @ts-nocheck
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
