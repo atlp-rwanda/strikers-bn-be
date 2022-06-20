@@ -8,17 +8,6 @@ import { TOKEN_SECRET } from "../config/key";
 import { sendEmail } from "../emails/account"
 import resetPassword from '../emails/resetPassword';
 
-/* eslint-disable linebreak-style */
-/* eslint-disable import/no-import-module-exports */
-import _ from 'lodash';
-import bcrypt from 'bcryptjs';
-import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
-import { User } from '../models';
-import { validateUserRegisteration, validateUserAuthenatication } from '../validators/user.validator';
-import { TOKEN_SECRET } from '../config/key';
-import { sendEmail } from '../emails/account';
-
 dotenv.config();
 
 // local
