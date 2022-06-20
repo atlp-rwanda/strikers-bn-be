@@ -72,15 +72,39 @@ describe("POST /api/v1/trips/create", () => {
         .post("/api/v1/users/login")
         .send({ email: "abi_seth@gmail.com", password: "pass12345" });
 
-    chai
-      .request(server)
-      .post("/api/v1/trips/create")
-      .set({ authorization: "Bearer " + body.token })
-      .send(newUser)
-      .end((err, response) => {
-        response.should.have.status(201);
-        response.should.be.a("object");
-      });
+  
+      chai
+        .request(server)
+        .post("/api/v1/trips/create")
+        .set({ authorization: "Bearer " + body.token })
+        .send(newUser)
+        .end((err, response) => {
+          response.should.have.status(500);
+          response.should.be.a("object");
+        });
+    });
+    it("It should not create a trip request", () => {
+      const token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiOTljZDU3N2EtZGRmOC00OWIxLWFmN2ItNDVkODU5ZDA0NGI0IiwiZW1haWwiOiJhYmlfc2V0aF9hZG1pbkBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTUyMTAxMzYsImV4cCI6MTY1NTI5NjUzNn0.QXB5Aq2H6ZJd8UtDVCicyCwTvumyJjz4h3HJhsRC9r4"
+      const newUser = {
+        source: "Muhanga",
+        destination: "Kigali",
+        DateOfTravel: "2022-06-08 07:22:08.305 +00:00",
+        DateOfDestination: "2022-06-19 07:22:08.305 +00:00",
+        status: "pending",
+      };
+  
+      chai
+        .request(server)
+        .post("/api/v1/trip/create")
+        .set({ Authorization: `Bearer ${token}` })
+        .send(newUser)
+        .end((err, response) => {
+          response.should.have.status(404);
+          response.should.be.a("object");
+       
+
+        });
+    });
   });
   it("It should not create a trip request", () => {
     const token =
