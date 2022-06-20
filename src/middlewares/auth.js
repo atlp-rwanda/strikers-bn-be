@@ -21,3 +21,4 @@ export async function verifyToken(req, res, next) {
   } catch (error) {
     return res.status(403).send({ message: 'No token provided!' });
   }
+}
