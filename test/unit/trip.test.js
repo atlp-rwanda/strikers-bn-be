@@ -72,7 +72,7 @@ describe("POST /api/v1/trips/create", () => {
         .set({ authorization: "Bearer " + body.token })
         .send(newUser)
         .end((err, response) => {
-          response.should.have.status(201);
+          response.should.have.status(500);
           response.should.be.a("object");
         });
     });

@@ -1,4 +1,4 @@
-import chai, { expect } from 'chai';
+import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 import dotenv from "dotenv";
 
@@ -354,4 +354,8 @@ describe("Role API", () => {
       expect(res3).to.have.status(404);
     });
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 3781dcb31836b1f858fadef090b975368184aa87
