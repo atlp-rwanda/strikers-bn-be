@@ -11,10 +11,11 @@ import session from 'express-session';
 import corsFunction from './utils/cors';
 import swaggerDocument from '../public/api-docs.json';
 
-import { sequelize } from './models';
+import { sequelize } from "./models/index";
+import tripRouter from "../src/routes/trip.routes";
+import userRouter from "../src/routes/user.routes";
+import rolesRouter from "../src/routes/role.routes";
 
-import userRouter from './routes/user.routes';
-import rolesRouter from './routes/role.routes';
 import accommodationRouter from './routes/accommodation.routes';
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/v1/trips/", tripRouter);
 app.use('/api/v1/users/', userRouter);
 app.use('/api/v1/roles', rolesRouter);
 app.use('/api/v1/accommodations', accommodationRouter);
