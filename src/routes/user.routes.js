@@ -48,8 +48,8 @@ userRouter.get('/verify/:email', verifyUser);
  */
 userRouter.get('/:uuid/logout', logout);
 
-userRouter.get('/:uuid/welcome',verifyToken,(req,res)=>{
+userRouter.get('/:uuid/welcome', verifyToken, (req, res) => {
   console.log(req.params.uuid);
-  res.send(req.params.uuid+'walkverese');
-})
+  res.send(`${req.params.uuid}walkverese`);
+});
 export default userRouter;

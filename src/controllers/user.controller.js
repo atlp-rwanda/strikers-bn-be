@@ -173,7 +173,7 @@ exports.signIn = async (req, res) => {
       {
         uuid: user.uuid,
         email: user.email,
-        roleId:user.roleId
+        roleId: user.roleId
       },
       TOKEN_SECRET
       // ,
@@ -185,7 +185,7 @@ exports.signIn = async (req, res) => {
     req.session.uuid = user.uuid;
     req.session.roleId = user.roleId;
     req.session.pass = req.body.password;
-    console.log("password "+req.session.email);
+    console.log(`password ${req.session.email}`);
     res.status(200).send({ token, user });
   } catch (error) {
     res.status(404);

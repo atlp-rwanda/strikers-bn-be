@@ -16,6 +16,7 @@ import tripRouter from "../src/routes/trip.routes";
 import userRouter from "../src/routes/user.routes";
 import rolesRouter from "../src/routes/role.routes";
 
+import accommodationRouter from './routes/accommodation.routes';
 
 const app = express();
 dotenv.config({ path: '../.env' });
@@ -30,9 +31,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1/trips/", tripRouter);
 app.use('/api/v1/users/', userRouter);
 app.use('/api/v1/roles', rolesRouter);
+app.use('/api/v1/accommodations', accommodationRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.get('/', (req, res) => {
-  console.log("This is email "+req.session.email);
+  console.log(`This is email ${req.session.email}`);
   res.send('Welcome to strikers-bn-be APIs');
 });
 app.get('/', (req, res) => {
