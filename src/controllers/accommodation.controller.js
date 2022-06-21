@@ -37,7 +37,7 @@ export async function createAccommodation(req, res) {
       latitude,
       longitude,
       highlights,
-      ammenities,
+      ammenities
     });
     res.status(201).send(newAccommodation);
   } catch (err) {
