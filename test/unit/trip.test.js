@@ -39,7 +39,7 @@ describe("GET /api/v1/trips", () => {
 
   describe("GET /api/v1/trips/:id", () => {
     it("It should GET a specific trip by its specific uuid", async () => {
-      const uuid = 1,
+      const uuid = 34,
         res = await chai
           .request(server)
           .get("/api/v1/trips/" + uuid)
@@ -52,7 +52,7 @@ describe("GET /api/v1/trips", () => {
   describe("POST /api/v1/trips/create", () => {
     it("It should POST a new trip", (done) => {
       const newTrip = {
-        source: "Muhanga",
+        source: "testerloc",
         destination: "Kigali",
         DateOfTravel: "2022-06-08 07:22:08.305 +00:00",
         DateOfDestination: "2022-06-19 07:22:08.305 +00:00",
@@ -67,12 +67,13 @@ describe("GET /api/v1/trips", () => {
         .end((err, response) => {
           response.should.have.status(201);
           response.should.be.a("object");
+
           done();
         });
     });
     it("It should not create a trip request", (done) => {
       const newTrip = {
-        source: 1,
+        source: "testerloc",
         destination: "Kigali",
         DateOfTravel: "2022-06-08 07:22:08.305 +00:00",
         DateOfDestination: "2022-06-19 07:22:08.305 +00:00",

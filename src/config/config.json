@@ -5,10 +5,6 @@
     "database": "b1xtgtyfns4qxo3y78pn",
     "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
     "dialect": "postgres",
-    "define": {
-      "createdAt": "createdat",
-      "updatedAt": "updatedat"
-    },
     "subQuery": false
   },
   "test": {
@@ -16,11 +12,7 @@
     "password": "56lSujHPPQcpa2DYiY9c",
     "database": "b1xtgtyfns4qxo3y78pn",
     "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
-    "dialect": "postgres",
-    "define": {
-      "createdAt": "createdat",
-      "updatedAt": "updatedat"
-    }
+    "dialect": "postgres"
   },
   "production": {
     "username": "uaigkmkbujkamwyjz02t",

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.14% </span>
+                <span class="strong">88.4% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>119/135</span>
+                <span class='fraction'>122/138</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.14% </span>
+                <span class="strong">88.4% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>119/135</span>
+                <span class='fraction'>122/138</span>
             </div>
         
             
@@ -198,7 +198,11 @@
 <a name='L133'></a><a href='#L133'>133</a>
 <a name='L134'></a><a href='#L134'>134</a>
 <a name='L135'></a><a href='#L135'>135</a>
-<a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -222,6 +226,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -334,8 +340,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import _ from "lodash";
-import { TripRequest } from "../models";
-const express = require("express");
+import { Trip } from "../models";
+import express from "express";
 import {
   validateStatus,
   validateTripsNotifications,
@@ -343,7 +349,7 @@ import {
 const app = express();
 app.use(express.json());
 &nbsp;
-exports.addTrip = async (req, res) =&gt; {
+export async function addTrip(req, res) {
   const user = req.userId;
   const { source, destination, DateOfTravel, DateOfDestination, status } =
     req.body;
@@ -354,11 +360,12 @@ exports.addTrip = async (req, res) =&gt; {
     DateOfDestination,
     status,
   });
+  console.log(user);
   if (validateUserInput.error) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >    return res.status(400).json(validateUserInput.error.details[0].message);</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
   try {
-    const trip = await TripRequest.create({
+    const trip = await Trip.create({
       user,
       source,
       destination,
@@ -368,6 +375,8 @@ exports.addTrip = async (req, res) =&gt; {
     });
 &nbsp;
     return res.status(201).json({
+      success: true,
+      status: 201,
       message: "Trip request created successvely",
       data: trip,
     });
@@ -378,11 +387,11 @@ exports.addTrip = async (req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >      message: err.message,</span>
 <span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-};
+}
 &nbsp;
-exports.getAllTrips = async (req, res) =&gt; {
+export async function getAllTrips(req, res) {
   try {
-    const trips = await TripRequest.findAll();
+    const trips = await Trip.findAll();
 &nbsp;
     return res.status(200).json({
       data: trips,
@@ -391,12 +400,12 @@ exports.getAllTrips = async (req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    console.log(err);</span>
 <span class="cstat-no" title="statement not covered" >    return res.status(500).send({ error: err.toString() });</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-};
+}
 &nbsp;
-exports.getOneTrip = async (req, res) =&gt; {
+export async function getOneTrip(req, res) {
   const id = req.params.id;
   try {
-    const trip = await TripRequest.findOne({
+    const trip = await Trip.findOne({
       where: { id },
       // include: 'id',
     });
@@ -410,12 +419,12 @@ exports.getOneTrip = async (req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    console.log(err);</span>
 <span class="cstat-no" title="statement not covered" >    return res.status(500).json({ error: error.toString() });</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-};
+}
 &nbsp;
-exports.deleteOneTrip = async (req, res) =&gt; {
+export async function deleteOneTrip(req, res) {
   const id = req.params.id;
   try {
-    const trip = await TripRequest.findOne({ where: { id } });
+    const trip = await Trip.findOne({ where: { id } });
 &nbsp;
     await trip.destroy();
 &nbsp;
@@ -424,13 +433,13 @@ exports.deleteOneTrip = async (req, res) =&gt; {
     console.log(err);
     return res.status(500).json({ error: "Something went wrong" });
   }
-};
+}
 &nbsp;
-exports.updateTrip = async (req, res) =&gt; {
+export async function updateTrip(req, res) {
   const id = req.params.id;
   const { source, destination, DateOfTravel, DateOfDestination } = req.body;
   try {
-    const trip = await TripRequest.findOne({ where: { id } });
+    const trip = await Trip.findOne({ where: { id } });
 &nbsp;
     if (source) trip.source = source;
     if (destination) trip.destination = destination;
@@ -448,14 +457,14 @@ exports.updateTrip = async (req, res) =&gt; {
     console.log(err);
     return res.status(500).json({ error: "Something went wrong" });
   }
-};
+}
 &nbsp;
-exports.changeStatus = async (req, res) =&gt; {
+export async function changeStatus(req, res) {
   try {
     if (!validateStatus(req.body.status))
       return res.status(400).send({ message: "Invalid status" });
 &nbsp;
-    const trip = await TripRequest.findOne({ where: { id: req.params.id } });
+    const trip = await Trip.findOne({ where: { id: req.params.id } });
     trip.status = req.body.status;
     await trip.save();
     return res.status(200).send({
@@ -467,7 +476,7 @@ exports.changeStatus = async (req, res) =&gt; {
   } <span class="branch-0 cbranch-no" title="branch not covered" >catch (err) {</span>
 <span class="cstat-no" title="statement not covered" >    return res.status(404).send({ error: err.toString() });</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-};
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -475,7 +484,7 @@ exports.changeStatus = async (req, res) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Jun 15 2022 00:37:19 GMT+0200 (South Africa Standard Time)
+                at Tue Jun 21 2022 20:22:52 GMT+0200 (South Africa Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

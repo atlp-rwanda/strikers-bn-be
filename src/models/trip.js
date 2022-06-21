@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+import { Model } from "sequelize";
 module.exports = (sequelize, DataTypes) => {
   class Trip extends Model {
     /**
@@ -13,31 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Trip.init(
     {
-      user: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      source: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      destination: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      DateOfTravel: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      DateOfDestination: {
-        type: DataTypes.DATE,
-
-        allowNull: false,
-      },
-      status: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      user: DataTypes.STRING,
+      source: DataTypes.STRING,
+      destination: DataTypes.STRING,
+      DateOfTravel: DataTypes.DATE,
+      DateOfDestination: DataTypes.DATE,
     },
     {
       sequelize,

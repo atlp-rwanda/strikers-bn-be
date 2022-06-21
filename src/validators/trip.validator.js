@@ -1,4 +1,4 @@
-const Joi = require("joi");
+import Joi from "joi";
 
 exports.validateTripsNotifications = (body) => {
   const validUserRegisterSchema = Joi.object({
@@ -11,5 +11,6 @@ exports.validateTripsNotifications = (body) => {
   return validUserRegisterSchema.validate(body);
 };
 
-exports.validateStatus = (status) =>
-  status === "approved" || status === "rejected" ? true : false;
+export function validateStatus(status) {
+  return status === "approved" || status === "rejected" ? true : false;
+}
