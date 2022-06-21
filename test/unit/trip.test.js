@@ -7,6 +7,7 @@ chai.should();
 chai.use(chaiHttp);
 
 const server = require("../../src/index");
+
 describe("GET /api/v1/trips", () => {
   let token = "";
   before((done) => {
