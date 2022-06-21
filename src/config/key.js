@@ -1,3 +1,6 @@
 module.exports = {
   TOKEN_SECRET: 'sdkjSI&eks8492EDJS4e94kjdsop3439kse',
+  CLOUDINARY_CLOUD_NAME: 'dweikgdwq',
+  CLOUDINARY_API_KEY: '731716491887155',
+  CLOUDINARY_API_SECRET: 'NyCYN-4hMdknt_-YVAG3Ep95zwI'
 };
