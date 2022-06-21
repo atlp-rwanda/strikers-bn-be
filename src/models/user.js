@@ -1,5 +1,5 @@
-"use strict";
-const { Model } = require("sequelize");
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     toJSON() {
-      return { ...this.get(), id: undefined, password: undefined }
+      return { ...this.get(), id: undefined, password: undefined };
     }
   }
   User.init({
@@ -81,7 +81,15 @@ module.exports = (sequelize, DataTypes) => {
     verificationToken: {
       type: DataTypes.STRING(2500),
       allowNull: true
-    }
+    },
+    createdat: {
+      allowNull: false,
+      type: DataTypes.DATE,
+    },
+    updatedat: {
+      allowNull: false,
+      type: DataTypes.DATE,
+    },
   }, {
     sequelize,
     modelName: 'User',
