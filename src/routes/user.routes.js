@@ -17,13 +17,25 @@ userRouter.post('/register', addUser);
 
 /**
  * @description To update a user
- * @api v1/api/user/uuid
+ * @api v1/api/users/updateuser/uuid
  * @access Public
  * @type PUT
  */
 
 userRouter.put('/updateuser/:uuid', verifyToken, editUser);
-userRouter.get('/getusers', getUsers);
+/**
+ * @description To retrieve users
+ * @api v1/api/users/
+ * @access Public
+ * @type GET
+ */
+userRouter.get('/', getUsers);
+/**
+ * @description To retrieve a user
+ * @api v1/api/users/uuid
+ * @access Public
+ * @type GET
+ */
 userRouter.get('/:uuid', getUser);
 
 /**
