@@ -1,10 +1,16 @@
-'use strict';
+/* eslint-disable linebreak-style */
+/* eslint-disable import/newline-after-import */
+/* eslint-disable no-unused-vars */
+/* eslint-disable lines-between-class-members */
+/* eslint-disable linebreak-style */
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Roles extends Model {
     static associate(models) {}
+
     toJSON() {
       return { ...this.get(), id: undefined };
     }
