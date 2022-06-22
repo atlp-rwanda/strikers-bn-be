@@ -95,12 +95,10 @@ exports.editUser = async (req, res) => {
             { where: { uuid: req.params.uuid } }
           )
           .then(() =>
-            res
-              .status(200)
-              .json({
-                status: "success",
-                message: `User with id: ${id} UPDATED`,
-              })
+            res.status(200).json({
+              status: "success",
+              message: `User with id: ${id} UPDATED`,
+            })
           );
       } else {
         res.status(404).send({ message: "User with that id doesn't exist" });
@@ -207,7 +205,7 @@ exports.signIn = async (req, res) => {
     req.session.uuid = user.uuid;
     req.session.roleId = user.roleId;
     req.session.pass = req.body.password;
-    console.log("password " + req.session.email);
+    console.log(`password ${req.session.email}`);
     res.status(200).send({ token, user });
   } catch (error) {
     res.status(404);

@@ -40,9 +40,9 @@ export async function addTrip(req, res) {
       data: trip,
     });
   } catch (err) {
-    res.status(400).json({
+    res.status(500).json({
       success: false,
-      status: 400,
+      status: 500,
       message: err.message,
     });
   }
@@ -53,11 +53,13 @@ export async function getAllTrips(req, res) {
     const trips = await Trip.findAll();
 
     return res.status(200).json({
+      success: true,
+      status: 200,
       data: trips,
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).send({ error: err.toString() });
+    return res.status(400).json({ error: "Something went wrong" });
   }
 }
 
@@ -76,7 +78,7 @@ export async function getOneTrip(req, res) {
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ error: error.toString() });
+    return res.status(400).json({ error: "Something went wrong" });
   }
 }
 
@@ -87,7 +89,7 @@ export async function deleteOneTrip(req, res) {
 
     await trip.destroy();
 
-    return res.json({ message: "Trip request deleted!" });
+    return res.status(200).json({ message: "Trip request deleted!" });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Something went wrong" });
@@ -100,14 +102,14 @@ export async function updateTrip(req, res) {
   try {
     const trip = await Trip.findOne({ where: { id } });
 
-    if (source) trip.source = source;
-    if (destination) trip.destination = destination;
-    if (DateOfTravel) trip.DateOfTravel = DateOfTravel;
-    if (DateOfDestination) trip.DateOfDestination = DateOfDestination;
+    trip.source = source;
+    trip.destination = destination;
+    trip.DateOfTravel = DateOfTravel;
+    trip.DateOfDestination = DateOfDestination;
 
     await trip.save();
 
-    return res.status(201).json({
+    return res.status(200).json({
       success: true,
       status: 200,
       data: trip,
@@ -117,7 +119,6 @@ export async function updateTrip(req, res) {
     return res.status(500).json({ error: "Something went wrong" });
   }
 }
-
 export async function changeStatus(req, res) {
   try {
     if (!validateStatus(req.body.status))

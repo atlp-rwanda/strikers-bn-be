@@ -80,7 +80,6 @@ describe("GET /api/v1/trips", () => {
         DateOfDestination: "2022-06-19 07:22:08.305 +00:00",
         status: "pending",
       };
-
       chai
         .request(server)
         .post("/api/v1/trip/create")
