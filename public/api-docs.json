@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "swagger": "2.0",
     "info": {
         "description": "Make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
@@ -10,8 +11,42 @@
         "license": {
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+=======
+  "swagger": "2.0",
+  "info": {
+    "description": "Make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
+    "version": "1.0.0",
+    "title": " Barefoot Nomad",
+    "contact": {
+      "email": "Andela@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "schemes": ["http"],
+  "host": "localhost:8001",
+  "basePath": "/api",
+  "paths": {
+    "v1/api/user/users": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get users",
+        "description": "Get users",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Users retrieved successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+>>>>>>> 459e075 (ft(trip): update swagger)
         }
     },
+<<<<<<< HEAD
     "schemes": [
         "http"
     ],
@@ -111,6 +146,38 @@
                   "name": "source",
                   "in": "formData",
                   "required": true,
+=======
+    "v1/api/user/users/{uuid}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user",
+        "description": "Get user",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User retrieved successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/v1/users/login": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Sign in",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User credentials",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+>>>>>>> 459e075 (ft(trip): update swagger)
                   "type": "string"
                 },
                 {
@@ -290,6 +357,100 @@
                     "required": true
                 }
             }
+<<<<<<< HEAD
+=======
+          }
+        }
+      }
+    },
+    "v1/api/user/updateuser/{uuid}": {
+      "put": {
+        "tags": ["User"],
+        "summary": "Update User",
+        "description": "Update User",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User model",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/v1/trips/all": {
+      "get": {
+        "tags": ["TripRequest"],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Query ok"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["TripRequest"],
+        "description": "",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "source",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "destination",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "DateOfTravel",
+            "in": "formData",
+            "required": true,
+            "type": "date"
+          },
+          {
+            "name": "DateOfDestination",
+            "in": "formData",
+            "required": true,
+            "type": "date"
+          },
+          {
+            "name": "status",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trip request created successivelly"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+>>>>>>> 459e075 (ft(trip): update swagger)
         },
         "TripRequest": {
             "type": "object",
