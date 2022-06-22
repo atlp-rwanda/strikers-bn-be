@@ -11,13 +11,29 @@
     "password": "56lSujHPPQcpa2DYiY9c",
     "database": "b1xtgtyfns4qxo3y78pn",
     "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
+<<<<<<< HEAD
     "dialect": "postgres"
+=======
+    "dialect": "postgres",
+    "define": {
+      "createdAt": "createdAt",
+      "updatedAt": "updatedAt"
+    }
+>>>>>>> 817aa1a864acf9ca5f68a59937b2a72de22641ec
   },
   "production": {
     "username": "uaigkmkbujkamwyjz02t",
     "password": "56lSujHPPQcpa2DYiY9c",
     "database": "b1xtgtyfns4qxo3y78pn",
     "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
+<<<<<<< HEAD
     "dialect": "postgres"
+=======
+    "dialect": "postgres",
+    "define": {
+      "createdAt": "createdAt",
+      "updatedAt": "updatedAt"
+    }
+>>>>>>> 817aa1a864acf9ca5f68a59937b2a72de22641ec
   }
 }
