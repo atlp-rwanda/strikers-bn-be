@@ -12,8 +12,8 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "schemes": ["https", "http"],
-  "host": "localhost:8001",
+  "schemes": ["http", "https"],
+  "host": "localhost:6002",
   "basePath": "/api/v1",
   "tags": [
     {
@@ -23,10 +23,6 @@
     {
       "name": "Trip",
       "description": "APIs for trips"
-    },
-    {
-      "name": "Feedback",
-      "description": "APIs for feedback"
     }
   ],
   "paths": {
@@ -311,6 +307,52 @@
           }
         }
       },
+      "/v1/trips/status/{id}": {
+        "put": {
+          "tags": ["Trip"],
+          "description": "Accept or reject trip request",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "status",
+              "in": "body",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Authentication token",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Updated"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "400": {
+              "description": "Invalid status"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
       "delete": {
         "tags": ["Trip"],
         "description": "",
@@ -336,29 +378,6 @@
         "security": [
           {
             "Authorization": []
-          }
-        ]
-      }
-    },
-    "/api/v1/feedback": {
-      "post": {
-        "tags": ["Feedback"],
-        "description": "Add feedback",
-        "consumes": ["application/json"],
-        "parameters": [
-          {
-            "name": "accomodationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "Feedback",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Feedback"
-            }
           }
         ]
       }
@@ -414,23 +433,6 @@
           "required": true
         },
         "status": {
-          "type": "string",
-          "required": true
-        }
-      }
-    },
-    "Feedback": {
-      "type": "object",
-      "properties": {
-        "feedbackId": {
-          "type": "string",
-          "required": true
-        },
-        "userId": {
-          "type": "string",
-          "required": true
-        },
-        "feedback": {
           "type": "string",
           "required": true
         }
