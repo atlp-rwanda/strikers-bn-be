@@ -217,7 +217,7 @@ describe("Booking API", () => {
         .set({ authorization: "Bearer " + res2.body.token });
     });
 
-    it("It should NOT POST (create) a new booking (Invalid data)", async () => {
+    it("It should NOT POST (create) a new booking (Invalid data sent)", async () => {
       const newCompany = {
           name: "Test1 company",
           email: "testcompany",
