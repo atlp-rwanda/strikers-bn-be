@@ -1,13 +1,12 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable import/no-import-module-exports */
-import _ from 'lodash';
-import bcrypt from 'bcryptjs';
-import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
-import { User } from '../models';
-import { validateUserRegisteration, validateUserAuthenatication } from '../validators/user.validator';
-import { TOKEN_SECRET } from '../config/key';
-import { sendEmail } from '../emails/account';
+import _ from "lodash";
+import bcrypt from "bcryptjs";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+import { User } from "../models";
+import { validateUserRegisteration, validateUserAuthenatication } from "../validators/user.validator";
+import { TOKEN_SECRET } from "../config/key";
+import { sendEmail } from "../emails/account"
+import resetPassword from '../emails/resetPassword';
 
 dotenv.config();
 
@@ -193,6 +192,77 @@ exports.signIn = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.resetPassword = async(req,res)=>{
+  try{
+    let all = await User.findAll({where: {}})
+    console.log(all)
+    let user = await User.findOne({ where: { email: req.body.email } });
+
+    if(!user)
+      return res.status(401).send({message: "User with such email does not exists"});
+
+      let token = jwt.sign(
+        {
+          id: user.id,
+          email: user.dataValues.email,
+        },
+        TOKEN_SECRET,
+        {
+          expiresIn: 1800, // 30 minutes
+        }
+      );
+
+      let emailSent = await resetPassword(user, token);
+      if(emailSent){
+          await User.update({
+            passwordResetToken: token
+          }, {where: {id: user.id}});
+
+          return res.status(200).send({messageSuccess: "Email was sent successfully, it will expires in 30 minutes"})
+      }
+    
+  }
+  catch (error) {
+    console.log(error)
+    res.status(404);
+    res.send(error.toString());
+  }
+}
+
+exports.newPassword = async(req,res)=>{
+  try{
+    let {token, newPassword} = req.body;
+
+    try{
+      jwt.verify(token,TOKEN_SECRET, async(err, decoded) => {
+        if (err) 
+        return res.status(401).send({ message: "Invalid Token"});
+console.log(decoded)
+        const salt = await bcrypt.genSalt(10);
+        newPassword = await bcrypt.hash(newPassword, salt);
+
+        let reset = await User.update({
+        password: newPassword
+        }, {where: {passwordResetToken: token,id: decoded?.id,email: decoded?.email}});
+
+        if(reset)
+        return res.send("Password has been changed successfully");
+        else
+        return res.send("User with this token does not exists");
+
+      });
+    }
+    catch {
+      return res.status(403).send({ message: "No token provided!" });
+    }
+
+  }
+  catch (error) {
+    res.status(404);
+    res.send(error.toString());
+  }
+}
 exports.logout = (req, res) => {
   req.session.destroy((err) => {
     if (err) {
