@@ -4,8 +4,10 @@ const feedbackRouter = Router();
 import { addFeedback, getFeedbacks, getFeedback, updateFeedback, deleteFeedback  } from "../controllers/feedback.controller";
 
 
-feedbackRouter.post("/feedback/:accomodationId",verifyToken, addFeedback);
-feedbackRouter.get("/feedbacks", verifyToken, getFeedbacks);
-feedbackRouter.get("/feedback/:uuid", verifyToken, getFeedback);
-feedbackRouter.put("/feedback/:uuid", verifyToken, updateFeedback);
-feedbackRouter.delete("/feedback/:uuid", verifyToken, deleteFeedback);
+feedbackRouter.post("/:accomodationId", addFeedback);
+feedbackRouter.get("/", verifyToken, getFeedbacks);
+feedbackRouter.get("/:uuid", verifyToken, getFeedback);
+feedbackRouter.put("/:uuid", verifyToken, updateFeedback);
+feedbackRouter.delete("/:uuid", verifyToken, deleteFeedback);
+
+export default feedbackRouter;

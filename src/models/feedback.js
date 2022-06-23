@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     accomodationId: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      allowNull: false
+      allowNull: false,
+      references: 'Accommodation'
     },
     feedback: {
       type: DataTypes.STRING,

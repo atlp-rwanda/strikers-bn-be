@@ -346,72 +346,32 @@
               "description": "Internal Server Error"
             }
           },
-          "security": [
-            {
-              "Authorization": []
-            }
-          ]
+        "/api/v1/feedback": {
+          "post": {
+            "tags": ["Feedback"],
+            "description": "Add feedback",
+              "consumes": [
+                "application/json"
+              ],
+              "parameters": [
+                {
+                  "name": "accomodationId",
+                  "in": "path",
+                  "required": true,
+                  "type": "string"
+                },  
+                {
+                  "name": "Feedback",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                    "$ref": "#/definitions/Feedback"
+                  }
+                }
+              ]  
+          }
         }
-      },
-      "delete": {
-        "tags": ["Trip"],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      }
-    }
-  },
-  "definitions": {
-    "User": {
-      "type": "object",
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "required": true
-        },
-        "lastName": {
-          "type": "string",
-          "required": true
-        },
-        "email": {
-          "type": "string",
-          "required": true
-        },
-        "password": {
-          "type": "string",
-          "required": true
-        },
-        "roleId": {
-          "type": "string",
-          "required": true
-        },
-        "phoneNumber": {
-          "type": "string",
-          "required": true
-        }
-      }
+         
     },
     "TripRequest": {
       "type": "object",
@@ -420,21 +380,47 @@
           "type": "string",
           "required": true
         },
-        "destination": {
-          "type": "string",
-          "required": true
+        "TripRequest": {
+            "type": "object",
+            "properties": {
+                "source": {
+                    "type": "string",
+                    "required": true
+                },
+                "destination": {
+                    "type": "string",
+                    "required": true
+                },
+                "DateOfTravel": {
+                    "type": "date",
+                    "required": true
+                },
+                "DateOfDestination": {
+                    "type": "date",
+                    "required": true
+                },
+                "status": {
+                    "type": "string",
+                    "required": true
+                }
+            }
         },
-        "DateOfTravel": {
-          "type": "date",
-          "required": true
-        },
-        "DateOfDestination": {
-          "type": "date",
-          "required": true
-        },
-        "status": {
-          "type": "string",
-          "required": true
+        "Feedback": {
+            "type": "object",
+            "properties": {
+                "feedbackId": {
+                    "type": "string",
+                    "required": true
+                },
+                "userId": {
+                    "type": "string",
+                    "required": true
+                },
+                "feedback": {
+                    "type": "string",
+                    "required": true
+                }
+            }
         }
       }
     }
