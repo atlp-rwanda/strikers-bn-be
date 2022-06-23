@@ -4,9 +4,9 @@ const { TOKEN_SECRET } = require('../config/key');
 
 export async function verifyToken(req, res, next) {
   try {
-    // if (process.env.NODE_ENV != 'test' && !req.session.email) {
-    //   return res.status(500).send({message: "Internal server error"});
-    // }
+    if (process.env.NODE_ENV != 'test' && !req.session.email) {
+      return;
+    }
     const token = req.headers.authorization.split(' ')[1];
     jwt.verify(token, TOKEN_SECRET, (err, decoded) => {
       if (err) {

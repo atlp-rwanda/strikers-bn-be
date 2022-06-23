@@ -1,5 +1,7 @@
 import express from 'express';
-import { createAccommodation, getAccommodation, updateAccommodation } from '../controllers/accommodation.controller';
+import {
+  createAccommodation, getAccommodation, updateAccommodation, deleteAccommodation
+} from '../controllers/accommodation.controller';
 import upload from '../utils/multer';
 import { travelAdmin } from '../middlewares/travel-admin';
 
@@ -27,6 +29,14 @@ router.post('/', travelAdmin, upload.single('picture'), createAccommodation);
  * @access Private
  * @type PUT
  */
-router.put('/', updateAccommodation);
+router.put('/:uuid', travelAdmin, updateAccommodation);
+
+/**
+ * @description To Create Accommodation
+ * @api api/accommodation
+ * @access Private
+ * @type DELETE
+ */
+router.delete('/:uuid', travelAdmin, deleteAccommodation);
 
 module.exports = router;

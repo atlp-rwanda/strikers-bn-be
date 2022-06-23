@@ -15,7 +15,7 @@
     "schemes": [
         "http"
     ],
-    "host": "localhost:8000",
+    "host": "localhost:8001",
     "basePath": "/api",
     "paths": {
         "v1/api/user/users": {
@@ -54,7 +54,7 @@
                 }
             }
         },
-        "v1/api/user/updateuser/{uuid}": {
+        "v1/api/user/updateuser/{uuid}":{
             "put": {
                 "summary": "Update User",
                 "description": "Update User",
@@ -81,7 +81,185 @@
                     }
                 }
             }
-        }
+        },
+        "/v1/trips/all": {
+            "get": {
+              "tags": [
+                "TripRequest"
+              ],
+              "description": "",
+              "responses": {
+                "200": {
+                  "description": "Query ok"
+                },
+                "500": {
+                  "description": "Internal Server Error"
+                }
+              }
+            },
+            "post": {
+              "tags": [
+                "TripRequest"
+              ],
+              "description": "",
+              "consumes": [
+                "application/json"
+              ],
+              "parameters": [
+            
+                {
+                  "name": "source",
+                  "in": "formData",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "destination",
+                  "in": "formData",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "DateOfTravel",
+                  "in": "formData",
+                  "required": true,
+                  "type": "date"
+                },  
+                  {
+                  "name": "DateOfDestination",
+                  "in": "formData",
+                  "required": true,
+                  "type": "date"
+                },
+                {
+                    "name": "status",
+                    "in": "formData",
+                    "required": true,
+                    "type": "string"
+                  }
+      
+              ],      
+              "responses": {
+                "200": {
+                  "description": "Trip request created successivelly"
+                },
+                "404": {
+                  "description": "Not Found"
+                },
+                "422": {
+                  "description": "Unprocessable Entity"
+                },
+                "500": {
+                  "description": "Internal Server Error"
+                }
+              },
+              "security": [
+                {
+                  "Authorization": []
+                }
+              ]
+            }
+          },
+      
+          "v1/api/trips/{id}": {
+            "put": {
+              "tags": [
+                "TripRequest"
+              ],
+              "description": "",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "obj",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                    "$ref": "#/definitions/TripRequest"
+                  }
+                }
+              ],
+              "responses": {
+                "201": {
+                  "description": "Updated"
+                },
+                "404": {
+                  "description": "Not Found"
+                },
+                "422": {
+                  "description": "Unprocessable Entity"
+                },
+                "500": {
+                  "description": "Internal Server Error"
+                }
+              },
+              "security": [
+                {
+                  "Authorization": []
+                }
+              ]
+            },
+            "get": {
+              "tags": [
+                "TripRequest"
+              ],
+              "description": "",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "type": "string"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                },
+                "404": {
+                  "description": "Not Found"
+                },
+                "500": {
+                  "description": "Internal Server Error"
+                }
+              }
+            },
+            "delete": {
+              "tags": [
+                "TripRequest"
+              ],
+              "description": "",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "type": "string"
+                }
+              ],
+              "responses": {
+                "204": {
+                  "description": "No Content"
+                },
+                "404": {
+                  "description": "Not Found"
+                },
+                "500": {
+                  "description": "Internal Server Error"
+                }
+              },
+              "security": [
+                {
+                  "Authorization": []
+                }
+              ]
+            }
+          }
+         
     },
     "definitions": {
         "User": {
@@ -112,6 +290,32 @@
                     "required": true
                 }
             }
+        },
+        "TripRequest": {
+            "type": "object",
+            "properties": {
+                "source": {
+                    "type": "string",
+                    "required": true
+                },
+                "destination": {
+                    "type": "string",
+                    "required": true
+                },
+                "DateOfTravel": {
+                    "type": "date",
+                    "required": true
+                },
+                "DateOfDestination": {
+                    "type": "date",
+                    "required": true
+                },
+                "status": {
+                    "type": "string",
+                    "required": true
+                }
+            }
         }
     }
+   
 }

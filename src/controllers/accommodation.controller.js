@@ -37,7 +37,7 @@ export async function createAccommodation(req, res) {
       latitude,
       longitude,
       highlights,
-      ammenities,
+      ammenities
     });
     res.status(201).send(newAccommodation);
   } catch (err) {
@@ -68,6 +68,18 @@ export async function updateAccommodation(req, res) {
     }, { where: { uuid: req.params.uuid } });
 
     return res.status(200).send({ message: `Accommodation with uuid ${id} updated` });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err);
+  }
+}
+
+export async function deleteAccommodation(req, res) {
+  try {
+    const id = req.params.uuid;
+    await Accommodation.destroy({ where: { uuid: id } });
+
+    return res.status(200).send({ message: `Accommodation with id ${id} deleted!!` });
   } catch (err) {
     console.log(err);
     return res.status(400).send(err);

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10.66% </span>
+                <span class="strong">11.49% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/75</span>
+                <span class='fraction'>10/87</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10.66% </span>
+                <span class="strong">11.49% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/75</span>
+                <span class='fraction'>10/87</span>
             </div>
         
             
@@ -138,7 +138,19 @@
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -203,6 +215,18 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -252,7 +276,7 @@ export <span class="fstat-no" title="function not covered" >async function creat
 <span class="cstat-no" title="statement not covered" >      latitude,</span>
 <span class="cstat-no" title="statement not covered" >      longitude,</span>
 <span class="cstat-no" title="statement not covered" >      highlights,</span>
-<span class="cstat-no" title="statement not covered" >      ammenities,</span>
+<span class="cstat-no" title="statement not covered" >      ammenities</span>
 <span class="cstat-no" title="statement not covered" >    });</span>
 <span class="cstat-no" title="statement not covered" >    res.status(201).send(newAccommodation);</span>
 <span class="cstat-no" title="statement not covered" >  } catch (err) {</span>
@@ -288,6 +312,18 @@ export <span class="fstat-no" title="function not covered" >async function updat
 <span class="cstat-no" title="statement not covered" >    return res.status(400).send(err);</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
+&nbsp;
+export <span class="fstat-no" title="function not covered" >async function deleteAccommodation(req, res) {</span>
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    const id = req.params.uuid;</span>
+<span class="cstat-no" title="statement not covered" >    await Accommodation.destroy({ where: { uuid: id } });</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return res.status(200).send({ message: `Accommodation with id ${id} deleted!!` });</span>
+<span class="cstat-no" title="statement not covered" >  } catch (err) {</span>
+<span class="cstat-no" title="statement not covered" >    console.log(err);</span>
+<span class="cstat-no" title="statement not covered" >    return res.status(400).send(err);</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -295,7 +331,7 @@ export <span class="fstat-no" title="function not covered" >async function updat
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Jun 19 2022 12:30:57 GMT+0200 (South Africa Standard Time)
+                at Thu Jun 23 2022 15:41:23 GMT+0200 (South Africa Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
