@@ -1,4 +1,4 @@
-import { Feedback } from '../models';
+import { Feedback, Accommodation } from '../models';
 
 exports.addFeedback = async (req, res) => {
     try {
@@ -9,7 +9,7 @@ exports.addFeedback = async (req, res) => {
         });
         return res.status(200).json({
             success: true,
-            status: 200,
+            status: 201,
             message: "Feedback added successfully!",
             data: feedback
         });
@@ -25,7 +25,7 @@ exports.addFeedback = async (req, res) => {
 
 exports.getFeedbacks = async (req, res) => {
     try {
-        const feedbacks = await Feedback.findAll();
+        const feedbacks = await Feedback.findAll({ include: [ { model: Accommodation, as: 'accomodation' } ] });
         return res.status(200).json({
             success: true,
             status: 200,

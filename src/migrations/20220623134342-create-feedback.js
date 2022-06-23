@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.UUID,
       },
       accomodationId: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
       },
       feedback: {
         type: Sequelize.STRING

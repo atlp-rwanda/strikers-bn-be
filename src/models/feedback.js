@@ -4,7 +4,13 @@ import {
 } from 'sequelize';
 module.exports = (sequelize, DataTypes) => {
   class Feedback extends Model {
-    static associate(models) {}
+    static associate(models) {
+      Feedback.belongsTo(models.Accommodation, {
+        foreignKey: 'accomodationId',
+        as: 'accomodation',
+        onDelete: 'CASCADE',
+      });
+    }
     toJSON() {
       return { ...this.get(), id: undefined };
     }
@@ -22,10 +28,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     accomodationId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
-      references: 'Accommodation'
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     feedback: {
       type: DataTypes.STRING,
