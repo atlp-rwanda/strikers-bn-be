@@ -1,4 +1,4 @@
-import { Accommodation } from '../models';
+import { Accommodation, User, AccommodationLikes } from '../models';
 import { cloudinary } from '../utils/cloudinary';
 
 export async function getAccommodation(req, res) {
@@ -82,6 +82,43 @@ export async function deleteAccommodation(req, res) {
     return res.status(200).send({ message: `Accommodation with id ${id} deleted!!` });
   } catch (err) {
     console.log(err);
+    return res.status(400).send(err);
+  }
+}
+
+export async function likeOrUnlikeAccommodation(req, res) {
+  try {
+    const userId = req.params.userId;
+    const accomodationId = req.params.accomodationId;
+    const accomodation = await Accommodation.findOne({ where: { uuid: accomodationId }});
+    const user = await User.findOne({ where: { uuid: userId }});
+
+    if (!accomodation)
+      return res.status(404).send({ message: 'Accomodation not found!' });
+    
+    if (!user)
+      return res.status(404).send({ message: 'User not found!' });
+    
+    const findLikeMatch = await AccommodationLikes.findOne({ where: { accommodationId: accomodationId, likedBy: userId }});
+    let returnMessage = '';
+
+    if (findLikeMatch) {
+      accomodation.likes--;
+      await findLikeMatch.destroy({ where: { uuid: findLikeMatch.uuid }});
+      returnMessage = 'Unliked accomodation successfully';
+    } else {
+      accomodation.likes++;
+      await AccommodationLikes.create({
+        accommodationId: accomodationId,
+        likedBy: userId
+      });
+      returnMessage = 'Liked accomodation successfully';
+    }
+
+    await accomodation.save();
+
+    return res.status(200).send({ message: `${returnMessage}` });
+  } catch (err) {
     return res.status(400).send(err);
   }
 }

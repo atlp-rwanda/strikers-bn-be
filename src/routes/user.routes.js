@@ -4,7 +4,7 @@ import { verifyToken } from '../middlewares/auth';
 
 const userRouter = Router();
 
-const { addUser, signIn,editUser,getUsers,getUser,verifyUser,logout,resetPassword,newPassword } = require("../controllers/user.controller");
+const { addUser, signIn, editUser, getUsers, getUser, verifyUser, logout, resetPassword, newPassword } = require("../controllers/user.controller");
 
 /**
  * @description To create a new user
@@ -16,7 +16,7 @@ userRouter.post('/register', addUser);
 
 /**
  * @description To update a user
- * @api v1/api/user/uuid
+ * @api v1/api/users/:uuid
  * @access Public
  * @type PUT
  */
