@@ -25,7 +25,7 @@ tripRouter.post("/create", verifyToken, addTrip);
  * @access Public
  * @type GET
  */
-tripRouter.get("/all", [verifyToken], getAllTrips);
+tripRouter.get('/all',getAllTrips);
 
 /**
  * @description To create a new user

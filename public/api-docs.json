@@ -94,18 +94,33 @@
             "schema": {
               "$ref": "#/definitions/User"
             }
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "New user registered!",
-            "schema": {
-              "type": "object"
-            }
+          },
+        "/api/v1/feedback": {
+          "post": {
+            "tags": ["Feedback"],
+            "description": "Add feedback",
+              "consumes": [
+                "application/json"
+              ],
+              "parameters": [
+                {
+                  "name": "accomodationId",
+                  "in": "path",
+                  "required": true,
+                  "type": "string"
+                },  
+                {
+                  "name": "Feedback",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                    "$ref": "#/definitions/Feedback"
+                  }
+                }
+              ]  
           }
         }
-      }
+         
     },
     "/users/login": {
       "post": {
@@ -137,7 +152,23 @@
             "schema": {
               "type": "object"
             }
-          }
+        },
+        "Feedback": {
+            "type": "object",
+            "properties": {
+                "feedbackId": {
+                    "type": "string",
+                    "required": true
+                },
+                "userId": {
+                    "type": "string",
+                    "required": true
+                },
+                "feedback": {
+                    "type": "string",
+                    "required": true
+                }
+            }
         }
       }
     },
