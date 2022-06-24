@@ -6,8 +6,8 @@ import { addFeedback, getFeedbacks, getFeedback, updateFeedback, deleteFeedback 
 
 feedbackRouter.post("/:accomodationId", addFeedback);
 feedbackRouter.get("/", getFeedbacks);
-feedbackRouter.get("/:uuid", verifyToken, getFeedback);
-feedbackRouter.put("/:uuid", verifyToken, updateFeedback);
-feedbackRouter.delete("/:uuid", verifyToken, deleteFeedback);
+feedbackRouter.get("/:uuid", getFeedback);
+feedbackRouter.put("/:uuid", updateFeedback);
+feedbackRouter.delete("/:uuid", deleteFeedback);
 
 export default feedbackRouter;

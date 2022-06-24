@@ -10,6 +10,7 @@ module.exports = {
       },
       feedbackId: {
         type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       userId: {
         type: Sequelize.UUID,

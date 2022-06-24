@@ -45,7 +45,7 @@ exports.getFeedbacks = async (req, res) => {
 exports.getFeedback = async (req, res) => {
     const uuid = req.params.uuid;
     try {
-        const feedback = await Feedback.findOne({ where: { uuid } });
+        const feedback = await Feedback.findOne({ where: { feedbackId: uuid }, include: [ { model: Accommodation, as: 'accomodation' } ] });
         return res.status(200).json({
             success: true,
             status: 200,
@@ -65,24 +65,24 @@ exports.getFeedback = async (req, res) => {
 exports.updateFeedback = async (req, res) => {
     const uuid = req.params.uuid;
     try {
-        const feedback = await Feedback.findOne({ where: { uuid } });
+        const feedback = await Feedback.findOne({ where: { feedbackId: uuid } });
         if (feedback) {
-            if (feedback.userId === req.userId) {
-                await Feedback.update({ feedback: req.body.feedback }, { where: { uuid } });
+            // if (feedback.userId === req.userId) {
+                await Feedback.update({ feedback: req.body.feedback }, { where: { feedbackId: uuid } });
                 return res.status(200).json({
                     success: true,
                     status: 200,
                     message: "Feedback updated successfully!",
                     data: feedback
                 });
-            }
-            else {
-                return res.status(403).json({
-                    success: false,
-                    status: 403,
-                    message: "You are not authorized to update this feedback!",
-                });
-            }
+            // }
+            // else {
+            //     return res.status(403).json({
+            //         success: false,
+            //         status: 403,
+            //         message: "You are not authorized to update this feedback!",
+            //     });
+            // }
         }
         else {
             return res.status(404).json({
@@ -104,23 +104,23 @@ exports.updateFeedback = async (req, res) => {
 exports.deleteFeedback = async (req, res) => {
     const uuid = req.params.uuid;
     try {
-        const feedback = await Feedback.findOne({ where: { uuid } });
+        const feedback = await Feedback.findOne({ where: { feedbackId: uuid } });
         if (feedback) {
-            if (feedback.userId === req.userId) {
-                await Feedback.destroy({ where: { uuid } });
+            // if (feedback.userId === req.userId) {
+                await Feedback.destroy({ where: { feedbackId: uuid } });
                 return res.status(200).json({
                     success: true,
                     status: 200,
                     message: "Feedback deleted successfully!",
                 });
-            }
-            else {
-                return res.status(403).json({
-                    success: false,
-                    status: 403,
-                    message: "You are not authorized to delete this feedback!",
-                });
-            }
+            // }
+            // else {
+            //     return res.status(403).json({
+            //         success: false,
+            //         status: 403,
+            //         message: "You are not authorized to delete this feedback!",
+            //     });
+            // }
         }
         else {
             return res.status(404).json({
