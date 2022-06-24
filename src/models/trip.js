@@ -1,7 +1,7 @@
-'use strict';
 import {
   Model
-} from'sequelize';
+} from 'sequelize';
+
 module.exports = (sequelize, DataTypes) => {
   class Trip extends Model {
     /**

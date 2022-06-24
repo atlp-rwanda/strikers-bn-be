@@ -59,18 +59,18 @@ export async function getSpecificRole(req, res) {
 
 export async function assignRole(req, res) {
   try {
-    await User.find({ where: { email: req.params.email } }).on(
-      'success',
-      (project) => {
-        if (user) {
-          user
-            .update({
-              roleId: req.params.roleId,
-            })
-            .success(() => {});
-        }
-      }
-    );
+    const user = await User.find({ where: { email: req.params.email } });
+    if (!user) {
+      return res
+        .status(404)
+        .send({
+          success: false,
+          message: "User with that email doesn't exist",
+        });
+    }
+    await User.update({
+      roleId: req.params.roleId,
+    }).success(() => {});
   } catch (err) {
     res.status(500).send({ message: `Error: ${err}` });
   }
@@ -141,7 +141,7 @@ export async function deleteRole(req, res) {
     await Roles.destroy({ where: { roleId } });
     res.status(200).send({
       message: `Successfully deleted the ${roleToDelete.roleTitle} role.`,
-      deleteRole,
+      deletedRole: roleToDelete,
     });
   } catch (e) {
     res.status(500).send(`Error: ${e}`);
