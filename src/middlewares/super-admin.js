@@ -5,9 +5,9 @@ import { Roles } from '../models';
 export async function adminCheck(req, res, next) {
   try {
     let token = req.headers.authorization.split(" ")[1];
-    if(process.env.NODE_ENV !="test" && !req.session.email){
-      return;
-    }
+    // if(process.env.NODE_ENV !="test" && !req.session.email){
+    //   return res.status(500).send({message: "Internal server error"});;
+    // }
     jwt.verify(token, TOKEN_SECRET, async (err, decoded) => {
       if (err) {
         return res.status(401).send({ message: err.message });
