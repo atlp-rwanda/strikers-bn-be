@@ -13,7 +13,7 @@
     }
   },
   "schemes": ["http", "https"],
-  "host": "localhost:6002",
+  "host": "localhost:8001",
   "basePath": "/api/v1",
   "tags": [
     {
@@ -23,6 +23,10 @@
     {
       "name": "Trip",
       "description": "APIs for trips"
+    },
+    {
+      "name": "Feedback",
+      "description": "APIs for feedback"
     }
   ],
   "paths": {
@@ -381,6 +385,29 @@
           }
         ]
       }
+    },
+    "/api/v1/feedback": {
+      "post": {
+        "tags": ["Feedback"],
+        "description": "Add feedback",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "accomodationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Feedback",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feedback"
+            }
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -433,6 +460,23 @@
           "required": true
         },
         "status": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    "Feedback": {
+      "type": "object",
+      "properties": {
+        "feedbackId": {
+          "type": "string",
+          "required": true
+        },
+        "userId": {
+          "type": "string",
+          "required": true
+        },
+        "feedback": {
           "type": "string",
           "required": true
         }
