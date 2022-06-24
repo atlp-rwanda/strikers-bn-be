@@ -1,32 +1,53 @@
 {
   "development": {
-    "username": "uaigkmkbujkamwyjz02t",
-    "password": "56lSujHPPQcpa2DYiY9c",
-    "database": "b1xtgtyfns4qxo3y78pn",
-    "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
+    "username": "ufavdgerkoqfxo",
+    "password": "78d0ec7423b0f0801139ef13c089c3412b3172a29a2f3a5aa36aac12e5d442c4",
+    "database": "de5bmlis5ma0se",
+    "host": "ec2-52-22-136-117.compute-1.amazonaws.com",
+    "port": 5432,
     "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
     "define": {
       "createdAt": "createdAt",
       "updatedAt": "updatedAt"
     }
   },
   "test": {
-    "username": "uaigkmkbujkamwyjz02t",
-    "password": "56lSujHPPQcpa2DYiY9c",
-    "database": "b1xtgtyfns4qxo3y78pn",
-    "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
+    "username": "oishwkwanmcpej",
+    "password": "b406a820618da4ac2ddc192f14c99a8592cf8ac3e81917b1e5273256ee38bd18",
+    "database": "d26su41jbtu5bs",
+    "host": "ec2-34-225-159-178.compute-1.amazonaws.com",
+    "port": 5432,
     "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
     "define": {
       "createdAt": "createdAt",
       "updatedAt": "updatedAt"
     }
   },
   "production": {
-    "username": "uaigkmkbujkamwyjz02t",
-    "password": "56lSujHPPQcpa2DYiY9c",
-    "database": "b1xtgtyfns4qxo3y78pn",
-    "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
+    "username": "njkffhlhkghnks",
+    "password": "01ae81fbbf3aa3a6ec58b0484e7696cb3e3740c0bb5b9113b9090e194f8fe047",
+    "database": "db5212t3hnui5",
+    "host": "ec2-34-200-35-222.compute-1.amazonaws.com",
+    "port": 5432,
     "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
     "define": {
       "createdAt": "createdAt",
       "updatedAt": "updatedAt"

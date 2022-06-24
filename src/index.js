@@ -39,8 +39,13 @@ app.get('/', (req, res) => {
 const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
     console.log(`Server started on port ${port}!`);
-    await sequelize.authenticate();
-    console.log('Database connected . . .');
+    await sequelize.authenticate()
+      .then(() => {
+        console.log('Connection has been established successfully.');
+      })
+      .catch(err => {
+        console.error('Unable to connect to the database:', err);
+      });
   });
 
 module.exports = server;
