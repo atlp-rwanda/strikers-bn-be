@@ -5,7 +5,7 @@ import { verifyToken } from '../middlewares/auth';
 const userRouter = Router();
 
 const {
-  addUser, signIn, editUser, getUsers, getUser, verifyUser, logout
+  addUser, signIn, editUser, getUsers, getUser, verifyUser, logout, resetPassword, newPassword
 } = require('../controllers/user.controller');
 
 /**
@@ -33,6 +33,9 @@ userRouter.get('/:uuid', getUser);
  */
 userRouter.post('/login', signIn);
 
+userRouter.post('/resetpassword', resetPassword);
+userRouter.patch('/resetpassword', newPassword);
+
 /**
  * @description To verify user account
  * @api v1/api/users/verify/{email}
@@ -48,8 +51,8 @@ userRouter.get('/verify/:email', verifyUser);
  */
 userRouter.get('/:uuid/logout', logout);
 
-userRouter.get('/:uuid/welcome',verifyToken,(req,res)=>{
+userRouter.get('/:uuid/welcome', verifyToken, (req, res) => {
   console.log(req.params.uuid);
-  res.send(req.params.uuid+'walkverese');
-})
+  res.send(`${req.params.uuid}walkverese`);
+});
 export default userRouter;
