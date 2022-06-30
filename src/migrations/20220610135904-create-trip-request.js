@@ -23,6 +23,9 @@ module.exports = {
       DateOfDestination: {
         type: Sequelize.DATE
       },
+      tripRequestId:{
+        type: Sequelize.STRING
+      },
       status: {
         type: Sequelize.STRING
       },

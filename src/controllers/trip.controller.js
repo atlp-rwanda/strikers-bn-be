@@ -1,16 +1,13 @@
 import _ from "lodash";
 import { TripRequest } from "../models";
-const express=require("express");
 import { validateTripsNotifications } from '../validators/trip.validator';
-const app = express()
-app.use(express.json())
+import { v4 as uuidv4} from "uuid";
 
 
-    exports.addTrip = async (req, res) => {
-      const user=req.userId;
+const addTrip = async (req, res) => {
+  const user=req.userId;
   const { source,destination,DateOfTravel,DateOfDestination,status} = req.body
   const validateUserInput = validateTripsNotifications({ source,destination,DateOfTravel,DateOfDestination,status});
-console.log(user);
   if (validateUserInput.error) {
     return res.status(400).json(validateUserInput.error.details[0].message);
   }
@@ -35,10 +32,9 @@ console.log(user);
 }
 
 
-    exports.getAllTrips = async (req, res) => {
+exports.getAllTrips = async (req, res) => {
   try {
     const trips = await TripRequest.findAll()
-
     return res.status(200).json({
       success: true,
       status: 200,
@@ -70,7 +66,7 @@ exports.getOneTrip = async (req, res) => {
 }
 
 
-    exports.deleteOneTrip = async (req, res) => {
+exports.deleteOneTrip = async (req, res) => {
   const id = req.params.id
   try {
     const trip = await TripRequest.findOne({ where: { id } })
@@ -85,7 +81,7 @@ exports.getOneTrip = async (req, res) => {
 }
 
 
-    exports.updateTrip = async (req, res) => {
+exports.updateTrip = async (req, res) => {
   const id = req.params.id
   const { source,destination,DateOfTravel,DateOfDestination } = req.body
   try {
@@ -109,3 +105,46 @@ exports.getOneTrip = async (req, res) => {
   }
 }
 
+exports.createMulticityRequest = async(req,res)=>{
+  const destinations = req.body.destinations;
+  if(destinations.length <= 1)
+    return addTrip(req,res);
+  
+  let counter = 0;
+  while(counter < destinations.length){
+    let destination = destinations[counter];
+    const tripRequestId = uuidv4();
+    let { source,DateOfTravel,DateOfDestination, status } = req.body;
+    const validateUserInput = validateTripsNotifications({ source,destination,DateOfTravel,
+      DateOfDestination,status});
+    if (validateUserInput.error) {
+      return res.status(400).json(validateUserInput.error.details[0].message);
+    }
+    try {
+      await TripRequest.create({source,destination, DateOfTravel,DateOfDestination,
+        status, tripRequestId });
+    } catch (err) {
+      return  res.status(500).json({
+                success: false,
+                status: 500,
+                message: err.message,
+              });
+    }
+  }
+  return res.status(201).json({
+    success: true,
+    status: 201,
+    message: "Multicity Trip request created successvely",
+    data: trip,
+  })
+}
+
+
+exports.updateMulticityRequest = async(req,res)=>{
+
+
+
+
+}
+
+exports.addTrip = addTrip;

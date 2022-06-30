@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     destination: DataTypes.STRING,
     DateOfTravel: DataTypes.DATE,
     DateOfDestination: DataTypes.DATE,
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
+    tripRequestId: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'TripRequest',

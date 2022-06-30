@@ -24,7 +24,7 @@ tripRouter.post('/create',verifyToken, addTrip);
  * @access Public
  * @type GET
  */
-tripRouter.get('/all',[verifyToken, adminCheck],getAllTrips);
+tripRouter.get('/all',getAllTrips);
 
 /**
  * @description To create a new user
@@ -49,5 +49,13 @@ tripRouter.delete('/:id',verifyToken, deleteOneTrip);
  * @type PUT
  */
 tripRouter.put('/:id',verifyToken,updateTrip);
+
+/**
+ * @description To create a new multicity trip request
+ * @api v1/api/trip/multicity-request/new
+ * @access Public
+ * @type POST
+ */
+tripRouter.post('/multicity-request/new');
 
 module.exports = tripRouter;
