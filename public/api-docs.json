@@ -338,52 +338,6 @@
           }
         }
       },
-      "/v1/trips/status/{id}": {
-        "put": {
-          "tags": ["Trip"],
-          "description": "Accept or reject trip request",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "status",
-              "in": "body",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Authentication token",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Updated"
-            },
-            "404": {
-              "description": "Not Found"
-            },
-            "400": {
-              "description": "Invalid status"
-            },
-            "500": {
-              "description": "Internal Server Error"
-            }
-          },
-          "security": [
-            {
-              "Authorization": []
-            }
-          ]
-        }
-      },
       "delete": {
         "tags": ["Trip"],
         "description": "",
