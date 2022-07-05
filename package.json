@@ -61,6 +61,8 @@
     "nodemailer": "^6.7.5",
     "nodemon": "^2.0.16",
     "nyc": "^15.1.0",
+    "passport": "^0.6.0",
+    "passport-google-oauth2": "^0.2.0",
     "path": "^0.12.7",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
@@ -75,4 +77,3 @@
     "sequelize-cli": "^6.4.1"
   }
 }
-
