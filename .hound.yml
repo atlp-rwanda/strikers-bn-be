@@ -1,7 +1,21 @@
-fail_on_violations: true
+
+Viewed
+@@ -1,17 +1,7 @@
+# fail_on_violations: true	fail_on_violations: true
+
 javascript:
-  enabled: false
-eslint:
-  enabled: true
-  config_file: .eslintrc.json
-  ignore_file: .eslintignore, ./src/database/migrations, ./src/database/seeders
+rubocop:	
+  config_file: .rubocop.yml	
+  version: 0.75.0	
+
+scss:	
+  enabled: false	  enabled: false
+
+stylelint:	
+  config_file: .stylelintrc.json	
+  enabled: true	
+
+eslint:	eslint:
+  enabled: true	  enabled: true
+  version: 5.7.0	  config_file: .eslintrc.json
+  config_file: .eslintrc 
