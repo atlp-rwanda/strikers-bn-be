@@ -1,4 +1,3 @@
-import _ from "lodash";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
@@ -104,8 +103,7 @@ exports.getUsers = async (req, res) => {
 exports.getUser = async (req, res) => {
   const { uuid } = req.params;
   try {
-    const user = await User.findOne({ where: { uuid } })
-      .then((user1) => { res.status(200).json(user1); });
+    const user = await User.findOne({ where: { uuid } }).then((user) => { res.status(200).json(user); });
   } catch (err) {
     return res.status(500).json({ error: 'Something went wrong' });
   }

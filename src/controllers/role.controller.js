@@ -1,3 +1,4 @@
+// @ts-nocheck
 import _ from 'lodash';
 import { Roles, User } from '../models';
 import { validateRoleRegistration } from '../validators/role.validator';

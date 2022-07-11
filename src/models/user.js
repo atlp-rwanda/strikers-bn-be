@@ -4,6 +4,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable valid-jsdoc */
 const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -86,7 +87,15 @@ module.exports = (sequelize, DataTypes) => {
     verificationToken: {
       type: DataTypes.STRING,
       allowNull: true
-    }
+    },
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+    },
   }, {
     sequelize,
     modelName: 'User',

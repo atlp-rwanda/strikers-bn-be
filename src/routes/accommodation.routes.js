@@ -1,9 +1,9 @@
 import express from 'express';
-import {
-  createAccommodation, getAccommodation, updateAccommodation, deleteAccommodation
-} from '../controllers/accommodation.controller';
+import { createAccommodation, getAccommodation,updateAccommodation } from '../controllers/accommodation.controller';
 import upload from '../utils/multer';
 import { travelAdmin } from '../middlewares/travel-admin';
+import { verifyToken } from '../middlewares/auth';
+import { rateAccommodation } from '../controllers/ratingAccomodation.controller';
 
 const router = express.Router();
 
@@ -29,14 +29,9 @@ router.post('/', travelAdmin, upload.single('picture'), createAccommodation);
  * @access Private
  * @type PUT
  */
-router.put('/:uuid', travelAdmin, updateAccommodation);
+router.put('/', updateAccommodation);
 
-/**
- * @description To Create Accommodation
- * @api api/accommodation
- * @access Private
- * @type DELETE
- */
-router.delete('/:uuid', travelAdmin, deleteAccommodation);
+
+router.post('/:uuid/rate',verifyToken, rateAccommodation);
 
 module.exports = router;

@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Bookings', {
+=======
+"use strict";
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable("Bookings", {
+>>>>>>> 8b843b6e9244c9d5a9340eac9688532ffbb63efb
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,7 +19,11 @@ module.exports = {
         allowNull: false,
       },
       supplierId: {
+<<<<<<< HEAD
         type: Sequelize.UUID,
+=======
+        type: Sequelize.INTEGER,
+>>>>>>> 8b843b6e9244c9d5a9340eac9688532ffbb63efb
         allowNull: false,
         // references: {
         //   model: "Users",
@@ -30,17 +41,28 @@ module.exports = {
       status: {
         type: Sequelize.STRING,
         allowNull: false,
+<<<<<<< HEAD
         defaultValue: 'pending',
       },
       dateSubmitted: {
         type: Sequelize.DATE,
         defaultValue: Date.now(),
+=======
+        defaultValue: "pending",
+      },
+      dateSubmitted: {
+        type: Sequelize.DATE,
+>>>>>>> 8b843b6e9244c9d5a9340eac9688532ffbb63efb
         allowNull: false,
       },
       createdAt: {
         allowNull: false,
+<<<<<<< HEAD
         type: Sequelize.DATEONLY,
         defaultValue: Sequelize.NOW,
+=======
+        type: Sequelize.DATE,
+>>>>>>> 8b843b6e9244c9d5a9340eac9688532ffbb63efb
       },
       updatedAt: {
         allowNull: false,
@@ -49,6 +71,10 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
+<<<<<<< HEAD
     await queryInterface.dropTable('Bookings');
+=======
+    await queryInterface.dropTable("Bookings");
+>>>>>>> 8b843b6e9244c9d5a9340eac9688532ffbb63efb
   },
 };
