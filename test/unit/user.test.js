@@ -13,7 +13,7 @@ describe("POST /api/v1/users", () => {
    * Should POST a new user
    */
 
-  const userId = Math.floor(Math.random() * 1000);
+  const userId = Math.floor(Math.random() * 10000);
 
   it("It should POST a new user", (done) => {
     const newUser = {
