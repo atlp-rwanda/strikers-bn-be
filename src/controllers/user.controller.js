@@ -184,10 +184,11 @@ exports.signIn = async (req, res) => {
         email: user.email,
         roleId: user.roleId,
       },
-      TOKEN_SECRET,
-      {
-        expiresIn: 86400, // 24 hours
-      }
+      TOKEN_SECRET
+      // ,
+      // {
+      //   expiresIn: 86400, // 24 hours
+      // }
     );
 
     res.status(200).send({ token, user });
