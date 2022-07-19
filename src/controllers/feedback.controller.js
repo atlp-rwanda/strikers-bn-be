@@ -7,7 +7,7 @@ exports.addFeedback = async (req, res) => {
             accomodationId: req.params.accomodationId,
             feedback: req.body.feedback,
         });
-        return res.status(200).json({
+        return res.status(201).json({
             success: true,
             status: 201,
             message: "Feedback added successfully!",

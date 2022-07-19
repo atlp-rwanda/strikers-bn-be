@@ -21,7 +21,7 @@ router.get('/', travelAdmin, getAccommodation);
  * @access Private
  * @type POST
  */
-router.post('/', upload.single('picture'), createAccommodation);
+router.post('/', travelAdmin, upload.single('picture'), createAccommodation);
 
 /**
  * @description To Create Accommodation
