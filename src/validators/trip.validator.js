@@ -10,3 +10,7 @@ exports.validateTripsNotifications = (body) => {
   });
   return validUserRegisterSchema.validate(body);
 };
+
+export function validateStatus(status) {
+  return status === "approved" || status === "rejected" ? true : false;
+}
