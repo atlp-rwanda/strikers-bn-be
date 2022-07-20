@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import _ from "lodash";
 import { Trip } from "../models";
 import express from "express";
@@ -5,13 +6,30 @@ import {
   validateStatus,
   validateTripsNotifications,
 } from "../validators/trip.validator";
+=======
+import _ from 'lodash';
+import express from 'express';
+import { Trip } from '../models';
+import { validateTripsNotifications } from '../validators/trip.validator';
+
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 const app = express();
 app.use(express.json());
 
 export async function addTrip(req, res) {
   const user = req.userId;
+<<<<<<< HEAD
   const { source, destination, DateOfTravel, DateOfDestination, status } =
     req.body;
+=======
+  const {
+    source,
+    destination,
+    DateOfTravel,
+    DateOfDestination,
+    status,
+  } = req.body;
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
   const validateUserInput = validateTripsNotifications({
     source,
     destination,
@@ -59,12 +77,20 @@ export async function getAllTrips(req, res) {
     });
   } catch (err) {
     console.log(err);
+<<<<<<< HEAD
     return res.status(400).json({ error: "Something went wrong" });
+=======
+    return res.status(400).json({ error: 'Something went wrong' });
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
   }
 }
 
 export async function getOneTrip(req, res) {
+<<<<<<< HEAD
   const id = req.params.id;
+=======
+  const { id } = req.params;
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
   try {
     const trip = await Trip.findOne({
       where: { id },
@@ -78,27 +104,49 @@ export async function getOneTrip(req, res) {
     });
   } catch (err) {
     console.log(err);
+<<<<<<< HEAD
     return res.status(400).json({ error: "Something went wrong" });
+=======
+    return res.status(400).json({ error: 'Something went wrong' });
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
   }
 }
 
 export async function deleteOneTrip(req, res) {
+<<<<<<< HEAD
   const id = req.params.id;
+=======
+  const { id } = req.params;
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
   try {
     const trip = await Trip.findOne({ where: { id } });
 
     await trip.destroy();
 
+<<<<<<< HEAD
     return res.status(200).json({ message: "Trip request deleted!" });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Something went wrong" });
+=======
+    return res.status(200).json({ message: 'Trip request deleted!' });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Something went wrong' });
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
   }
 }
 
 export async function updateTrip(req, res) {
+<<<<<<< HEAD
   const id = req.params.id;
   const { source, destination, DateOfTravel, DateOfDestination } = req.body;
+=======
+  const { id } = req.params;
+  const {
+    source, destination, DateOfTravel, DateOfDestination
+  } = req.body;
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
   try {
     const trip = await Trip.findOne({ where: { id } });
 
@@ -116,6 +164,7 @@ export async function updateTrip(req, res) {
     });
   } catch (err) {
     console.log(err);
+<<<<<<< HEAD
     return res.status(500).json({ error: "Something went wrong" });
   }
 }
@@ -135,5 +184,8 @@ export async function changeStatus(req, res) {
     });
   } catch (err) {
     return res.status(404).send({ error: err.toString() });
+=======
+    return res.status(500).json({ error: 'Something went wrong' });
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
   }
 }

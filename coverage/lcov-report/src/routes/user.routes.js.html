@@ -23,9 +23,15 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">95.08% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>58/61</span>
+=======
+                <span class="strong">94.82% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>55/58</span>
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
             </div>
         
             
@@ -44,9 +50,15 @@
         
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">95.08% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>58/61</span>
+=======
+                <span class="strong">94.82% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>55/58</span>
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
             </div>
         
             
@@ -121,6 +133,7 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
+<<<<<<< HEAD
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
@@ -128,6 +141,9 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+=======
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -186,12 +202,18 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable import/no-import-module-exports */
+<<<<<<< HEAD
 import { Router } from "express";
 import { verifyToken } from "../middlewares/auth";
+=======
+import { Router } from 'express';
+import { verifyToken } from '../middlewares/auth';
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 &nbsp;
 const userRouter = Router();
 &nbsp;
 const {
+<<<<<<< HEAD
   addUser,
   signIn,
   editUser,
@@ -200,6 +222,10 @@ const {
   verifyUser,
   logout,
 } = require("../controllers/user.controller");
+=======
+  addUser, signIn, editUser, getUsers, getUser, verifyUser, logout, resetPassword, newPassword
+} = require('../controllers/user.controller');
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 &nbsp;
 /**
  * @description To create a new user
@@ -207,7 +233,11 @@ const {
  * @access Public
  * @type POST
  */
+<<<<<<< HEAD
 userRouter.post("/register", addUser);
+=======
+userRouter.post('/register', addUser);
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 &nbsp;
 /**
  * @description To update a user
@@ -215,16 +245,29 @@ userRouter.post("/register", addUser);
  * @access Public
  * @type PUT
  */
+<<<<<<< HEAD
 userRouter.put("/updateuser/:uuid", verifyToken, editUser);
 userRouter.get("/getusers", getUsers);
 userRouter.get("/:uuid", getUser);
+=======
+userRouter.put('/updateuser/:uuid', verifyToken, editUser);
+userRouter.get('/getusers', getUsers);
+userRouter.get('/:uuid', getUser);
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 /**
  * @description To login using email and password
  * @api v1/api/users/login
  * @access Public
  * @type POST
  */
+<<<<<<< HEAD
 userRouter.post("/login", signIn);
+=======
+userRouter.post('/login', signIn);
+&nbsp;
+userRouter.post('/resetpassword', resetPassword);
+userRouter.patch('/resetpassword', newPassword);
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 &nbsp;
 /**
  * @description To verify user account
@@ -232,18 +275,30 @@ userRouter.post("/login", signIn);
  * @access Public
  * @type GET
  */
+<<<<<<< HEAD
 userRouter.get("/verify/:email", verifyUser);
+=======
+userRouter.get('/verify/:email', verifyUser);
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 /**
  * @description User Logout
  * @api v1/api/users/:uuid/logout
  * @access Public
  * @type GET
  */
+<<<<<<< HEAD
 userRouter.get("/:uuid/logout", logout);
 &nbsp;
 userRouter.get("/:uuid/welcome", verifyToken, (req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >  console.log(req.params.uuid);</span>
 <span class="cstat-no" title="statement not covered" >  res.send(req.params.uuid + "walkverese");</span>
+=======
+userRouter.get('/:uuid/logout', logout);
+&nbsp;
+userRouter.get('/:uuid/welcome', verifyToken, (req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >  console.log(req.params.uuid);</span>
+<span class="cstat-no" title="statement not covered" >  res.send(`${req.params.uuid}walkverese`);</span>
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 <span class="cstat-no" title="statement not covered" >});</span>
 export default userRouter;
 &nbsp;</pre></td></tr></table></pre>
@@ -253,7 +308,11 @@ export default userRouter;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+<<<<<<< HEAD
                 at Tue Jun 21 2022 20:22:52 GMT+0200 (South Africa Standard Time)
+=======
+                at Thu Jun 23 2022 15:41:23 GMT+0200 (South Africa Standard Time)
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
             </div>
         <script src="../../prettify.js"></script>
         <script>

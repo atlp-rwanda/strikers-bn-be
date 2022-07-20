@@ -7,6 +7,7 @@ exports.validateTripsNotifications = (body) => {
     DateOfTravel: Joi.date().raw().required(),
     DateOfDestination: Joi.date().raw().required(),
     status: Joi.string().max(100).min(2).required(),
+<<<<<<< HEAD
   });
   return validUserRegisterSchema.validate(body);
 };
@@ -14,3 +15,9 @@ exports.validateTripsNotifications = (body) => {
 export function validateStatus(status) {
   return status === "approved" || status === "rejected" ? true : false;
 }
+=======
+
+  });
+  return validUserRegisterSchema.validate(body);
+};
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac

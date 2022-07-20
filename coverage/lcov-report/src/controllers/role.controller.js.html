@@ -23,9 +23,15 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">84.45% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>125/148</span>
+=======
+                <span class="strong">84.56% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>126/149</span>
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
             </div>
         
             
@@ -44,9 +50,15 @@
         
             
             <div class='fl pad1y space-right2'>
+<<<<<<< HEAD
                 <span class="strong">84.45% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>125/148</span>
+=======
+                <span class="strong">84.56% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>126/149</span>
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
             </div>
         
             
@@ -210,7 +222,13 @@
 <a name='L145'></a><a href='#L145'>145</a>
 <a name='L146'></a><a href='#L146'>146</a>
 <a name='L147'></a><a href='#L147'>147</a>
+<<<<<<< HEAD
 <a name='L148'></a><a href='#L148'>148</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+=======
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -346,9 +364,16 @@
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
+<<<<<<< HEAD
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
+=======
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
@@ -357,9 +382,16 @@
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<<<<<<< HEAD
 <span class="cline-any cline-yes">12x</span></td><td class="text"><pre class="prettyprint lang-js">import _ from "lodash";
 import { Roles, User } from "../models";
 import { validateRoleRegistration } from "../validators/role.validator";
+=======
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import _ from 'lodash';
+import { Roles, User } from '../models';
+import { validateRoleRegistration } from '../validators/role.validator';
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 &nbsp;
 export async function addRole(req, res) {
   try {
@@ -380,16 +412,28 @@ export async function addRole(req, res) {
       return res.status(403).json({
         success: false,
         status: 403,
+<<<<<<< HEAD
         message: "Role already exists!",
       });
     }
 &nbsp;
     const newRole = await Roles.create(_.pick(role, ["roleTitle"]));
+=======
+        message: 'Role already exists!',
+      });
+    }
+&nbsp;
+    const newRole = await Roles.create(_.pick(role, ['roleTitle']));
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 &nbsp;
     return res.status(201).json({
       success: true,
       status: 201,
+<<<<<<< HEAD
       message: "Role created successfully",
+=======
+      message: 'Role created successfully',
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
       data: newRole,
     });
   } <span class="branch-0 cbranch-no" title="branch not covered" >catch (e) {</span>
@@ -418,6 +462,7 @@ export async function getSpecificRole(req, res) {
 &nbsp;
 export <span class="fstat-no" title="function not covered" >async function assignRole(req, res) {</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
+<<<<<<< HEAD
 <span class="cstat-no" title="statement not covered" >    await User.find({ where: { email: req.params.email } }).on(</span>
 <span class="cstat-no" title="statement not covered" >      "success",</span>
 <span class="cstat-no" title="statement not covered" >      function (project) {</span>
@@ -430,6 +475,20 @@ export <span class="fstat-no" title="function not covered" >async function assig
 <span class="cstat-no" title="statement not covered" >        }</span>
 <span class="cstat-no" title="statement not covered" >      }</span>
 <span class="cstat-no" title="statement not covered" >    );</span>
+=======
+<span class="cstat-no" title="statement not covered" >    const user = await User.find({ where: { email: req.params.email } });</span>
+<span class="cstat-no" title="statement not covered" >    if (!user) {</span>
+<span class="cstat-no" title="statement not covered" >      return res</span>
+<span class="cstat-no" title="statement not covered" >        .status(404)</span>
+<span class="cstat-no" title="statement not covered" >        .send({</span>
+<span class="cstat-no" title="statement not covered" >          success: false,</span>
+<span class="cstat-no" title="statement not covered" >          message: "User with that email doesn't exist",</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >    await User.update({</span>
+<span class="cstat-no" title="statement not covered" >      roleId: req.params.roleId,</span>
+<span class="cstat-no" title="statement not covered" >    }).success(() =&gt; {});</span>
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 <span class="cstat-no" title="statement not covered" >  } catch (err) {</span>
 <span class="cstat-no" title="statement not covered" >    res.status(500).send({ message: `Error: ${err}` });</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
@@ -459,7 +518,11 @@ export async function updateRole(req, res) {
       });
     }
 &nbsp;
+<<<<<<< HEAD
     let existing = await Roles.findOne({
+=======
+    const existing = await Roles.findOne({
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
       where: { roleId },
     });
     if (!existing) {
@@ -480,7 +543,11 @@ export async function updateRole(req, res) {
     return res.status(200).json({
       success: true,
       status: 200,
+<<<<<<< HEAD
       message: "Role title updated successfully",
+=======
+      message: 'Role title updated successfully',
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
       data: existing,
     });
   } <span class="branch-0 cbranch-no" title="branch not covered" >catch (e) {</span>
@@ -492,6 +559,7 @@ export async function deleteRole(req, res) {
   try {
     const { roleId } = req.params;
     const roleToDelete = await Roles.findOne({ where: { roleId } });
+<<<<<<< HEAD
     if (!roleToDelete)
       return res.status(404).send({
         message: "The specified roleId doesn't exist in the database",
@@ -500,18 +568,38 @@ export async function deleteRole(req, res) {
     res.status(200).send({
       message: `Successfully deleted the ${roleToDelete.roleTitle} role.`,
       deleteRole,
+=======
+    if (!roleToDelete) {
+      return res.status(404).send({
+        message: "The specified roleId doesn't exist in the database",
+      });
+    }
+    await Roles.destroy({ where: { roleId } });
+    res.status(200).send({
+      message: `Successfully deleted the ${roleToDelete.roleTitle} role.`,
+      deletedRole: roleToDelete,
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
     });
   } catch (e) {
     res.status(500).send(`Error: ${e}`);
   }
+<<<<<<< HEAD
 }</pre></td></tr></table></pre>
+=======
+}
+&nbsp;</pre></td></tr></table></pre>
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+<<<<<<< HEAD
                 at Tue Jun 21 2022 20:22:52 GMT+0200 (South Africa Standard Time)
+=======
+                at Thu Jun 23 2022 15:41:23 GMT+0200 (South Africa Standard Time)
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
             </div>
         <script src="../../prettify.js"></script>
         <script>

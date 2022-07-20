@@ -12,6 +12,8 @@ const {
   getUser,
   verifyUser,
   logout,
+  resetPassword,
+  newPassword,
 } = require("../controllers/user.controller");
 
 /**
@@ -38,6 +40,9 @@ userRouter.get("/:uuid", getUser);
  * @type POST
  */
 userRouter.post("/login", signIn);
+
+userRouter.post("/resetpassword", resetPassword);
+userRouter.patch("/resetpassword", newPassword);
 
 /**
  * @description To verify user account

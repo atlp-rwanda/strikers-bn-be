@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 "use strict";
 const { Model } = require("sequelize");
+=======
+const {
+  Model
+} = require('sequelize');
+
+>>>>>>> fc950d5a3b500a4b24feab29d5fa5118080f40ac
 module.exports = (sequelize, DataTypes) => {
   class TripRequest extends Model {
     /**
