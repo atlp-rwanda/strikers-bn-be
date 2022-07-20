@@ -2,6 +2,7 @@
 import { Router } from "express";
 import { verifyToken } from "../middlewares/auth";
 import auth from "../utils/google-auth";
+import facebookAuth from "../utils/facebook-Oauth";
 import passport from "passport";
 const userRouter = Router();
 
@@ -40,6 +41,20 @@ userRouter.get(
 userRouter.get("/auth/googleLoginFailure", (req, res) => {
   res.send("Something went wrong..");
 });
+
+userRouter.get("/auth/facebook", passport.authenticate("facebook"));
+
+userRouter.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", {
+    failureRedirect: "/api/v1/users/auth/facebook",
+  }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect("/");
+  }
+);
+
 userRouter.post("/register", addUser);
 
 /**

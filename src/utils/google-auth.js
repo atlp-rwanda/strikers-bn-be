@@ -4,7 +4,8 @@ import {
   CALLBACK_URL,
 } from "../config/key";
 import passport from "passport";
-const GoogleStrategy = require("passport-google-oauth2").Strategy;
+import googlePassport from "passport-google-oauth2";
+const GoogleStrategy = googlePassport.Strategy;
 import dotenv from "dotenv";
 dotenv.config();
 

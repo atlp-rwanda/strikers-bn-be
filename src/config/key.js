@@ -13,4 +13,6 @@ module.exports = {
   PORT: 3000,
   SESSION_SECRET: "nomad",
   CALLBACK_URL: "http://localhost:8001/api/v1/users/getusers/",
+  FACEBOOK_APP_ID: 777022773654796,
+  FACEBOOK_APP_SECRET: "51210ba6f2bd6b7fce1069bdf8ccb4d5",
 };
