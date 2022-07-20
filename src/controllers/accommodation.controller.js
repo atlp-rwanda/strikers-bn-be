@@ -88,18 +88,13 @@ export async function deleteAccommodation(req, res) {
 
 export async function likeOrUnlikeAccommodation(req, res) {
   try {
-    const userId = req.params.userId;
     const accomodationId = req.params.accomodationId;
     const accomodation = await Accommodation.findOne({ where: { uuid: accomodationId }});
-    const user = await User.findOne({ where: { uuid: userId }});
 
     if (!accomodation)
       return res.status(404).send({ message: 'Accomodation not found!' });
-    
-    if (!user)
-      return res.status(404).send({ message: 'User not found!' });
-    
-    const findLikeMatch = await AccommodationLikes.findOne({ where: { accommodationId: accomodationId, likedBy: userId }});
+
+    const findLikeMatch = await AccommodationLikes.findOne({ where: { accommodationId: accomodationId, likedBy: req.userId }});
     let returnMessage = '';
 
     if (findLikeMatch) {
@@ -110,7 +105,7 @@ export async function likeOrUnlikeAccommodation(req, res) {
       accomodation.likes++;
       await AccommodationLikes.create({
         accommodationId: accomodationId,
-        likedBy: userId
+        likedBy: req.userId
       });
       returnMessage = 'Liked accomodation successfully';
     }

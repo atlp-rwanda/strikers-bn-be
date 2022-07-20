@@ -46,6 +46,6 @@ router.delete('/:uuid', travelAdmin, deleteAccommodation);
  * @access Private
  * @type POST
  */
-router.post('/:userId/like/:accomodationId', verifyToken, likeOrUnlikeAccommodation);
+router.post('/:accomodationId/like', verifyToken, likeOrUnlikeAccommodation);
 
 module.exports = router;
