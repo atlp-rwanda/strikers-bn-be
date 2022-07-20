@@ -1,20 +1,18 @@
-import _ from 'lodash';
-import express from 'express';
-import { Trip } from '../models';
-import { validateTripsNotifications } from '../validators/trip.validator';
+import _ from "lodash";
+import express from "express";
+import { Trip } from "../models";
+import {
+  validateStatus,
+  validateTripsNotifications,
+} from "../validators/trip.validator";
 
 const app = express();
 app.use(express.json());
 
 export async function addTrip(req, res) {
   const user = req.userId;
-  const {
-    source,
-    destination,
-    DateOfTravel,
-    DateOfDestination,
-    status,
-  } = req.body;
+  const { source, destination, DateOfTravel, DateOfDestination, status } =
+    req.body;
   const validateUserInput = validateTripsNotifications({
     source,
     destination,
@@ -39,7 +37,7 @@ export async function addTrip(req, res) {
     return res.status(201).json({
       success: true,
       status: 201,
-      message: 'Trip request created successvely',
+      message: "Trip request created successvely",
       data: trip,
     });
   } catch (err) {
@@ -62,7 +60,7 @@ export async function getAllTrips(req, res) {
     });
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ error: 'Something went wrong' });
+    return res.status(400).json({ error: "Something went wrong" });
   }
 }
 
@@ -81,7 +79,7 @@ export async function getOneTrip(req, res) {
     });
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ error: 'Something went wrong' });
+    return res.status(400).json({ error: "Something went wrong" });
   }
 }
 
@@ -92,18 +90,16 @@ export async function deleteOneTrip(req, res) {
 
     await trip.destroy();
 
-    return res.status(200).json({ message: 'Trip request deleted!' });
+    return res.status(200).json({ message: "Trip request deleted!" });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ error: 'Something went wrong' });
+    return res.status(500).json({ error: "Something went wrong" });
   }
 }
 
 export async function updateTrip(req, res) {
   const { id } = req.params;
-  const {
-    source, destination, DateOfTravel, DateOfDestination
-  } = req.body;
+  const { source, destination, DateOfTravel, DateOfDestination } = req.body;
   try {
     const trip = await Trip.findOne({ where: { id } });
 
@@ -121,6 +117,25 @@ export async function updateTrip(req, res) {
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ error: 'Something went wrong' });
+    return res.status(500).json({ error: "Something went wrong" });
+  }
+}
+
+export async function changeStatus(req, res) {
+  try {
+    if (!validateStatus(req.body.status))
+      return res.status(400).send({ message: "Invalid status" });
+
+    const trip = await Trip.findOne({ where: { id: req.params.id } });
+    trip.status = req.body.status;
+    await trip.save();
+    return res.status(200).send({
+      data: trip,
+      message: `Trip request ${
+        trip.status === "approved" ? "approved" : "rejected"
+      }`,
+    });
+  } catch (err) {
+    return res.status(404).send({ error: err.toString() });
   }
 }
