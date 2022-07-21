@@ -2,20 +2,24 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('accommodation', {
+    await queryInterface.createTable('Feedbacks', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
+      feedbackId: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
-      description: {
-        type: Sequelize.STRING
+      userId: {
+        type: Sequelize.UUID,
       },
-      location: {
+      accomodationId: {
+        type: Sequelize.INTEGER,
+      },
+      feedback: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -29,7 +33,7 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('accommodation');
+    await queryInterface.dropTable('Feedbacks');
   }
 };
 =======
