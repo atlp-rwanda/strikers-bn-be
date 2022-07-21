@@ -2,6 +2,8 @@ import { Router } from "express";
 
 const tripRouter = Router();
 import { verifyManager, verifyToken } from "../middlewares/auth";
+import { addComments, getComments, deleteComments  } from "../controllers/tripComment.controller";
+
 import { adminCheck } from "../middlewares/super-admin";
 const {
   addTrip,
@@ -59,5 +61,12 @@ tripRouter.put("/:id", verifyToken, updateTrip);
  * @type PUT
  */
 tripRouter.put("/status/:id", verifyToken, verifyManager, changeStatus);
+
+//comments
+
+
+tripRouter.post("/:tripId/comments", verifyToken, addComments);
+tripRouter.get("/:tripId/comments", verifyToken, getComments);
+tripRouter.delete("/:tripId/comments/:uuid", verifyToken, deleteComments);
 
 module.exports = tripRouter;

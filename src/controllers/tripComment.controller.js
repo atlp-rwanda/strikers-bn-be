@@ -7,7 +7,8 @@ exports.addComments=async (req,res)=>{
             tripId:req.params.tripId,
             comment:req.body.comment
         });
-        return res.status(200).json({
+        console.log("Comments"+req.body.comment);
+        return res.status(201).json({
             success: true,
             status: 201,
             message: "Comment added successfully!",
@@ -63,9 +64,9 @@ exports.deleteComments = async (req,res) => {
         }
     }
     catch (err) {
-        res.status(400).json({
+        res.status(404).json({
             success: false,
-            status: 400,
+            status: 404,
             message: err.message,
         });
     }

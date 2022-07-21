@@ -7,14 +7,11 @@ import swaggerUi from "swagger-ui-express";
 import corsFunction from "./utils/cors";
 import swaggerDocument from "../public/api-docs.json";
 
-// {"email": "abiheloaf@gmail.com","password": "pass12345"}
-// bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNzIxMTdhNDYtN2JhMi00OTVkLTg4NDYtMjIxMzEzNDcwYWQ0IiwiZW1haWwiOiJhYmloZWxvYWZAZ21haWwuY29tIiwicm9sZUlkIjoiYTc3YTUwYzItODlkMy00N2ZmLThkMjgtNDljMGMxN2VjOGE2IiwiaWF0IjoxNjU4MTgxMjk2fQ.nV7T-6r9sh0UUbu-LRFmW3zF8Pr1rbgRFdOZLQ6cWHE
 
 import { sequelize } from "./models";
 import tripRouter from "../src/routes/trip.routes";
 import userRouter from "../src/routes/user.routes";
 import rolesRouter from "../src/routes/role.routes";
-import tripCommentRouter from "../src/routes/tripComment.routes"
 
 const app = express();
 dotenv.config({ path: "../.env" });
@@ -25,7 +22,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/trips/", tripRouter);
 app.use("/api/v1/users/", userRouter);
-app.use("/api/v1/tripsComments", tripCommentRouter);
 app.use("/api/v1/roles", rolesRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
