@@ -14,9 +14,9 @@
   },
   "schemes": ["http"],
   "host": "localhost:8001",
-  "basePath": "/api",
+  "basePath": "/api/v1",
   "paths": {
-    "v1/api/user/users": {
+    "/user/users": {
       "get": {
         "tags": ["User"],
         "summary": "Get users",
@@ -33,7 +33,7 @@
         }
       }
     },
-    "v1/api/user/users/{uuid}": {
+    "/user/users/{uuid}": {
       "get": {
         "tags": ["User"],
         "summary": "Get user",
@@ -50,7 +50,7 @@
         }
       }
     },
-    "/v1/users/login": {
+    "/users/login": {
       "post": {
         "tags": ["User"],
         "summary": "Sign in",
@@ -84,7 +84,7 @@
         }
       }
     },
-    "v1/api/user/updateuser/{uuid}": {
+    "/user/updateuser/{uuid}": {
       "put": {
         "tags": ["User"],
         "summary": "Update User",
@@ -109,7 +109,7 @@
         }
       }
     },
-    "/v1/trips/all": {
+    "/trips/all": {
       "get": {
         "tags": ["TripRequest"],
         "description": "",
@@ -180,7 +180,7 @@
       }
     },
 
-    "/v1/trips/{id}": {
+    "/trips/{id}": {
       "put": {
         "tags": ["TripRequest"],
         "description": "",
@@ -272,7 +272,7 @@
         ]
       }
     },
-    "/v1/trips/status/{id}": {
+    "/trips/status/{id}": {
       "put": {
         "tags": ["TripRequest"],
         "description": "Accept or reject trip request",
@@ -314,6 +314,29 @@
         "security": [
           {
             "Authorization": []
+          }
+        ]
+      }
+    },
+    "/feedback": {
+      "post": {
+        "tags": ["Feedback"],
+        "description": "Add feedback",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "accomodationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Feedback",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Feedback"
+            }
           }
         ]
       }
@@ -369,6 +392,23 @@
           "required": true
         },
         "status": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    "Feedback": {
+      "type": "object",
+      "properties": {
+        "feedbackId": {
+          "type": "string",
+          "required": true
+        },
+        "userId": {
+          "type": "string",
+          "required": true
+        },
+        "feedback": {
           "type": "string",
           "required": true
         }

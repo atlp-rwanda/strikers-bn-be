@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 import { MANAGER_ID, TOKEN_SECRET } from "../config/key";
 export async function verifyToken(req, res, next) {
   try {
-    // if (process.env.NODE_ENV != "test" && !req.session.email) {
+    // if (process.env.NODE_ENV != 'test' && !req.session.email) {
     //   return;
     // }
     const token = req.headers.authorization.split(" ")[1];
