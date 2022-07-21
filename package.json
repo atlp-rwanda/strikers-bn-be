@@ -1,7 +1,7 @@
 {
   "name": "strikers-bn-be",
   "version": "1.0.0",
-  "description": "",
+  "description": "<p>\r   <strong>Barefoot nomad</strong> is an application that will enable its “Company Nomads” book their international travel and accommodation globally; easily and conveniently across all the locations/centers where the Company has its operations.\r </p>",
   "main": "index.js",
   "engines": {
     "node": "^16.13.0"
@@ -65,14 +65,13 @@
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "redis": "^4.1.0",
-    "sequelize": "^6.20.0",
+    "sequelize": "^6.21.0",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.4.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "eslint": "^8.15.0",
+    "eslint": "^8.18.0",
     "sequelize-cli": "^6.4.1"
   }
 }
-
