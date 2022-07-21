@@ -25,6 +25,7 @@ tripRouter.post('/create', verifyToken, addTrip);
  * @access Public
  * @type GET
  */
+
 tripRouter.get('/all', [verifyToken, adminCheck], getAllTrips);
 
 /**
