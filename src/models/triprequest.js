@@ -1,6 +1,4 @@
-const {
-  Model
-} = require('sequelize');
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class TripRequest extends Model {
@@ -13,16 +11,19 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  TripRequest.init({
-    user: DataTypes.STRING,
-    source: DataTypes.STRING,
-    destination: DataTypes.STRING,
-    DateOfTravel: DataTypes.DATE,
-    DateOfDestination: DataTypes.DATE,
-    status: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'TripRequest',
-  });
+  TripRequest.init(
+    {
+      user: DataTypes.STRING,
+      source: DataTypes.STRING,
+      destination: DataTypes.STRING,
+      DateOfTravel: DataTypes.DATE,
+      DateOfDestination: DataTypes.DATE,
+      status: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "TripRequest",
+    }
+  );
   return TripRequest;
 };
