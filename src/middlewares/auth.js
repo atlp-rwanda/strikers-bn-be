@@ -3,7 +3,10 @@ import { MANAGER_ID, TOKEN_SECRET } from "../config/key";
 
 export const verifyToken = async (req, res, next) => {
   try {
-    let token = req.headers.authorization.split(" ")[1];
+    // if (process.env.NODE_ENV != 'test' && !req.session.email) {
+    //   return;
+    // }
+    const token = req.headers.authorization.split(' ')[1];
     jwt.verify(token, TOKEN_SECRET, (err, decoded) => {
       if (err) {
         return res.status(401).send({ message: err.message });
@@ -12,8 +15,8 @@ export const verifyToken = async (req, res, next) => {
       req.roleId = decoded.roleId;
       next();
     });
-  } catch {
-    return res.status(403).send({ message: "No token provided!" });
+  } catch (error) {
+    return res.status(403).send({ message: 'No token provided!' });
   }
 };
 

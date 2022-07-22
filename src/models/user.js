@@ -1,5 +1,14 @@
+<<<<<<< HEAD
 const { Model } = require('sequelize');
 
+=======
+/* eslint-disable linebreak-style */
+/* eslint-disable import/newline-after-import */
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
+/* eslint-disable valid-jsdoc */
+const { Model } = require('sequelize');
+>>>>>>> e29ef90782b2ae4c85a0f111de1e6dd181fba201
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -8,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // define association here. this is to satisfy all models are on required elements.
+      // define associtaion there or here.
     }
 
     toJSON() {
@@ -79,7 +89,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     },
     verificationToken: {
-      type: DataTypes.STRING(2500),
+      type: DataTypes.STRING,
       allowNull: true
     }
   }, {

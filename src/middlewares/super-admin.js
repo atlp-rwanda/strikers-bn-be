@@ -5,6 +5,9 @@ import { Roles } from '../models';
 export async function adminCheck(req, res, next) {
   try {
     let token = req.headers.authorization.split(" ")[1];
+    // if(process.env.NODE_ENV !="test" && !req.session.email){
+    //   return res.status(500).send({message: "Internal server error"});;
+    // }
     jwt.verify(token, TOKEN_SECRET, async (err, decoded) => {
       if (err) {
         return res.status(401).send({ message: err.message });
@@ -12,6 +15,7 @@ export async function adminCheck(req, res, next) {
       if (!decoded.roleId)
         return res.status(404).send({ message: 'Invalid token provided' });
       const role = await Roles.findOne({ where: { roleId: decoded.roleId } });
+      console.log("decoded.roleId "+decoded.roleId);
       if (!role)
         return res.status(404).send({ message: 'Invalid role' });
       if (role.roleTitle != 'SUPER ADMINISTRATOR')

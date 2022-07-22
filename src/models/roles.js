@@ -1,9 +1,11 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Roles extends Model {
     static associate(models) {}
+
     toJSON() {
       return { ...this.get(), id: undefined };
     }
