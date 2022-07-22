@@ -80,7 +80,7 @@ describe("Trip Request comment tests", () => {
     //         }
     //         );
     // }
-    )
+    // )
     it("should delete a comment", done => {
         chai
             .request(server)            
