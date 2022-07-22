@@ -7,7 +7,7 @@ import {
   deleteCompany,
 } from '../controllers/company.controller';
 import { verifyToken } from '../middlewares/auth';
-import { adminCheck } from '../middlewares/super-admin';
+// import { adminCheck } from '../middlewares/super-admin';
 
 const router = express.Router();
 
@@ -17,7 +17,7 @@ const router = express.Router();
  * @access Private
  * @type POST
  */
-router.post('/', [verifyToken, adminCheck], newCompany);
+router.post('/', verifyToken, newCompany);
 
 /**
  * @description To get a list of all roles
@@ -41,7 +41,7 @@ router.get('/:id', getSpecificCompany);
  * @access Public
  * @type PATCH
  */
-router.patch('/:id', [verifyToken], updateCompanyInfo);
+router.patch('/:id', verifyToken, updateCompanyInfo);
 
 /**
  * @description To delete a specific booking
@@ -49,6 +49,6 @@ router.patch('/:id', [verifyToken], updateCompanyInfo);
  * @access Public
  * @type DELETE
  */
-router.delete('/:id', [verifyToken, adminCheck], deleteCompany);
+router.delete('/:id', verifyToken, deleteCompany);
 
 module.exports = router;

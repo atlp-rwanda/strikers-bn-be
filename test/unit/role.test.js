@@ -55,7 +55,7 @@ describe("Role API", () => {
   describe("POST /api/v1/roles", () => {
     it("It should POST (create) a new role", async () => {
       const newRole = {
-        roleTitle: "System Tester",
+        roleTitle: "The New System Tester",
       },
         { body } = await chai
           .request(server)
@@ -77,7 +77,7 @@ describe("Role API", () => {
 
     it("It should NOT POST (create) a new role (Role already exists)", async () => {
       const newRole = {
-        roleTitle: "System Tester",
+        roleTitle: "The New System Tester",
       },
         { body } = await chai
           .request(server)
@@ -102,7 +102,7 @@ describe("Role API", () => {
 
     it("It should NOT POST (create) a new role (Not authenticated as Super Administrator)", async () => {
       const newRole = {
-        roleTitle: "System Tester",
+        roleTitle: "The New System Tester",
       },
         { body } = await chai
           .request(server)
@@ -135,7 +135,7 @@ describe("Role API", () => {
   describe("PATCH /api/v1/roles/:roleId", () => {
     it("It should PATCH (update) an existing role", async () => {
       const newRole = {
-        roleTitle: "System Tester",
+        roleTitle: "The New System Tester",
       },
         updatedRole = {
           roleTitle: "System Maintainer",
@@ -164,7 +164,7 @@ describe("Role API", () => {
 
     it("It should NOT PATCH (update) an existing role", async () => {
       const newRole = {
-        roleTitle: "System Tester",
+        roleTitle: "The New System Tester",
       },
         updatedRole = {
           roleTitle: "System Maintainer",
@@ -193,7 +193,7 @@ describe("Role API", () => {
 
     it("It should NOT PATCH (update) an existing role (Another role with the new name already exists)", async () => {
       const newRole = {
-        roleTitle: "System Tester",
+        roleTitle: "The New System Tester",
       },
         newRole2 = {
           roleTitle: "System Maintainer",
@@ -234,7 +234,7 @@ describe("Role API", () => {
 
     it("It should NOT PATCH (update) an existing role (Not authenticated as Super Administrator)", async () => {
       const newRole = {
-        roleTitle: "System Tester",
+        roleTitle: "The New System Tester",
       },
         updatedRole = {
           roleTitle: "System Maintainer",
@@ -262,7 +262,7 @@ describe("Role API", () => {
 
     it("It should NOT POST (create) a new role (Invalid Title/name)", async () => {
       const newRole = {
-        roleTitle: "System Tester",
+        roleTitle: "The New System Tester",
       },
         updatedRole = {
           roleTitle: "S",
@@ -296,7 +296,7 @@ describe("Role API", () => {
   describe("DELETE /api/v1/roles/:id", () => {
     it("It should DELETE a specific role by its UUID", async () => {
       const newRole = {
-        roleTitle: "System Tester",
+        roleTitle: "The New System Tester",
       },
         { body } = await chai
           .request(server)
@@ -330,7 +330,7 @@ describe("Role API", () => {
 
     it("It should NOT DELETE a specific role by its UUID (Non-existing UUID)", async () => {
       const newRole = {
-        roleTitle: "System Tester",
+        roleTitle: "The New System Tester",
       },
         { body } = await chai
           .request(server)

@@ -3,7 +3,10 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { User } from "../models";
-import { validateUserRegisteration, validateUserAuthenatication } from "../validators/user.validator";
+import {
+  validateUserRegisteration,
+  validateUserAuthenatication,
+} from "../validators/user.validator";
 import { TOKEN_SECRET } from "../config/key";
 import { sendEmail } from "../emails/account"
 import resetPassword from '../emails/resetPassword';
@@ -75,19 +78,23 @@ exports.addUser = async (req, res) => {
 exports.editUser = async (req, res) => {
   try {
     console.log(req.body);
-    const {
-      firstName, lastName, roleId, phoneNumber, password
-    } = req.body;
+    const { firstName, lastName, roleId, phoneNumber, password } = req.body;
     const id = req.params.uuid;
     await User.findOne({ where: { uuid: id } }).then(async (user) => {
       if (user) {
-        await user.update(
-          {
-            firstName, lastName, roleId, phoneNumber, password
-          },
-          { where: { uuid: req.params.uuid } }
-        ).then(() => res.status(200).json({ status: 'success', message: `User with id: ${id} UPDATED` }));
-      } else { res.status(404).send({ message: "User with that id doesn't exist" }); }
+        await user
+          .update(
+            { firstName, lastName, roleId, phoneNumber, password },
+            { where: { uuid: req.params.uuid } }
+          )
+          .then(() =>
+            res.status(200).json({
+              status: "success",
+              message: "User with id: " + id + " " + "UPDATED",
+            })
+          );
+      } else
+        res.status(404).send({ message: "User with that id doesn't exist" });
     });
   } catch (err) {
     res.status(500).send({ message: `Error: ${err}` });
@@ -172,7 +179,7 @@ exports.signIn = async (req, res) => {
       {
         uuid: user.uuid,
         email: user.email,
-        roleId: user.roleId
+        roleId: user.roleId,
       },
       TOKEN_SECRET
       // ,
