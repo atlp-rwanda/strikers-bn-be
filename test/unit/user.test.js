@@ -69,20 +69,20 @@ describe("POST /api/v1/users", () => {
   //     });
   // });
 
-  it("Should sign in user", (done) => {
-    chai
-      .request(server)
-      .post("/api/v1/users/login")
-      .send({
-        email: `abiheloaf@gmail.com`,
-        password: "pass12345",
-      })
-      .end((err, res) => {
-        // res.should.have.status(200);
-        res.body.should.have.property("token");
-        done();
-      });
-  });
+  // it("Should sign in user", (done) => {
+  //   chai
+  //     .request(server)
+  //     .post("/api/v1/users/login")
+  //     .send({
+  //       email: `abiheloaf@gmail.com`,
+  //       password: "pass12345",
+  //     })
+  //     .end((err, res) => {
+  //       // res.should.have.status(200);
+  //       res.body.should.have.property("token");
+  //       done();
+  //     });
+  // });
 });
 
 describe("GET /api/v1/users",()=>{
