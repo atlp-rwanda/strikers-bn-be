@@ -1,12 +1,12 @@
-// import chai, { expect } from "chai";
-// import chaiHttp from "chai-http";
-// import dotenv from "dotenv";
+import chai, { expect } from "chai";
+import chaiHttp from "chai-http";
+import dotenv from "dotenv";
 
-// dotenv.config();
-// chai.should();
-// chai.use(chaiHttp);
+dotenv.config();
+chai.should();
+chai.use(chaiHttp);
 
-// const server = require("../../src/index");
+const server = require("../../src/index");
 
 describe("GET /api/v1/trips", () => {
   let token = "";
