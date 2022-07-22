@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-const { Model } = require('sequelize');
-
-=======
 /* eslint-disable linebreak-style */
 /* eslint-disable import/newline-after-import */
 /* eslint-disable no-unused-vars */
 /* eslint-disable linebreak-style */
 /* eslint-disable valid-jsdoc */
 const { Model } = require('sequelize');
->>>>>>> e29ef90782b2ae4c85a0f111de1e6dd181fba201
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**

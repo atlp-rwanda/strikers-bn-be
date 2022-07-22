@@ -11,6 +11,9 @@ const {
   getUsers,
   getUser,
   verifyUser,
+  resetPassword,
+  newPassword,
+  logout
 } = require("../controllers/user.controller");
 
 /**
