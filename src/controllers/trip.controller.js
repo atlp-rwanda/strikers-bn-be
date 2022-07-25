@@ -121,6 +121,25 @@ export async function updateTrip(req, res) {
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ error: 'Something went wrong' });
+    return res.status(500).json({ error: "Something went wrong" });
   }
-}
+};
+
+exports.changeStatus = async (req, res) => {
+  try {
+    if (!validateStatus(req.body.status))
+      return res.status(400).send({ message: "Invalid status" });
+
+    const trip = await TripRequest.findOne({ where: { id: req.params.id } });
+    trip.status = req.body.status;
+    await trip.save();
+    return res.status(200).send({
+      data: trip,
+      message: `Trip request ${
+        trip.status === "approved" ? "approved" : "rejected"
+      }`,
+    });
+  } catch (err) {
+    return res.status(404).send({ error: err.toString() });
+  }
+};
