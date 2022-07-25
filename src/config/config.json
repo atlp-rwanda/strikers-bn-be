@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "Rich378",
-    "database": "barefoot",
-    "host": "localhost",
+    "username": "uaigkmkbujkamwyjz02t",
+    "password": "56lSujHPPQcpa2DYiY9c",
+    "database": "b1xtgtyfns4qxo3y78pn",
+    "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
     "dialect": "postgres",
     "define": {
       "createdAt": "createdAt",
