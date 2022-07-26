@@ -11,10 +11,13 @@ import session from 'express-session';
 import corsFunction from './utils/cors';
 import swaggerDocument from '../public/api-docs.json';
 
-import { sequelize } from './models';
-
-import userRouter from './routes/user.routes';
-import rolesRouter from './routes/role.routes';
+import { sequelize } from "./models/index";
+import tripRouter from "../src/routes/trip.routes";
+import userRouter from "../src/routes/user.routes";
+import rolesRouter from "../src/routes/role.routes";
+import feedbackRouter from './routes/feedback.routes';
+import companiesRouter from './routes/company.routes';
+import bookingsRouter from './routes/booking.routes';
 import accommodationRouter from './routes/accommodation.routes';
 
 const app = express();
@@ -27,7 +30,9 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/v1/trips/", tripRouter);
 app.use('/api/v1/users/', userRouter);
+
 app.use('/api/v1/roles', rolesRouter);
 app.use('/api/v1/accommodations', accommodationRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -41,7 +46,6 @@ app.get('/', (req, res) => {
 const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
     console.log(`Server started on port ${port}!`);
-    await sequelize.authenticate();
     console.log('Database connected . . .');
   });
 
