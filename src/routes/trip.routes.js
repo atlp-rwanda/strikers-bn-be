@@ -30,7 +30,7 @@ tripRouter.post('/create', verifyToken, addTrip);
  * @type GET
  */
 
-tripRouter.get('/all', [verifyToken, adminCheck], getAllTrips);
+tripRouter.get('/all', getAllTrips);
 
 /**
  * @description To create a new user
