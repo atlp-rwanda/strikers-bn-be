@@ -16,7 +16,7 @@ exports.addMessage = async (req, res) => {
             data: message
         });
     } catch (error) {
-       res.send(error);
+       res.status(500).send(error);
     }
   };
 // to add a chatting room
@@ -25,8 +25,7 @@ exports.addRoom = async (req, res) => {
     try {
         const room = await ChatRoom.create({
             userId:req.userId,
-            messageId:req.params.messageId,
-            name:req.body.name
+            name:req.body.name,
         }) 
         return res.status(201).json({
             success: true,
@@ -35,18 +34,15 @@ exports.addRoom = async (req, res) => {
             data: room
         });
     } catch (error) {
-       res.send(error);
+      res.status(500).send(error);
     }
   };
 
-// to get Rooms
+// to get Rooms user is in 
 exports.getRooms = async (req,res) =>{
   
   try {
-  const room = await ChatRoom.findAll({include: [
-    { model: User, as : 'user' },
-    { model: ChatRoom, as : 'chatRoom' },
-  ]});  
+  const room = await ChatRoom.findAll({where:{userId:req.userId}});  
 
   return res.status(200).json({
     success: true,
@@ -56,7 +52,7 @@ exports.getRooms = async (req,res) =>{
 });
 
   } catch (error) {
-    res.send(error)
+    res.status(500).send(error);
   }
 }
 
@@ -65,24 +61,24 @@ exports.getNewMessages = async (req, res) => {
    
     try {
 
-    Message.findAll({where: {
-        createdAt: {
-          $gt: req.user.lastLogout,
-        },
+const messages =    Message.findAll({where: { chatroomId: req.params.chatroomId,
+        // createdAt: {
+        //   $gt: req.user.lastLogout,
+        // },
       },
       include: [
-        { model: User, as : 'user' },
-        { model: ChatRoom, as : 'chatRoom' },
+          { model: ChatRoom, as : 'chatRoom' },
       ],
       order: [
         ['createdAt', 'ASC'],
       ],
     })
-    .then((foundMessages) => {
-      res.send(foundMessages);
-    })    
-    } catch (error) {
-        res.send(error);
+    return res.status(200).json({
+      success:"true",
+      data:messages
+      })
+} catch (error) {
+      res.status(500).send(error);
     }
 
   }
@@ -91,22 +87,22 @@ exports.getNewMessages = async (req, res) => {
 exports.getMessages =  async (req,res) => {
 
     try {
-        Message.findAll({
+        const messages = Message.findAll({
             where: {
               chatroomId: req.params.chatroomId,
             },
             include: [
-                { model: User, as : 'user' },
                 { model: ChatRoom, as : 'chatRoom' },
             ],
             order: [
               ['createdAt', 'ASC'],
             ],
           })
-          .then((foundMessages) => {
-            res.send(foundMessages);
-          })
+          return res.status(200).json({
+            success:"true",
+            data:messages
+            })
     } catch (error) {
-        res.send(error)
+      res.status(500).send(error);
     }
 }

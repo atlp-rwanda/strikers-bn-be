@@ -12,10 +12,6 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: false
       },
-      messageId:{
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
       name: {
         type: Sequelize.STRING
       },
@@ -33,3 +29,4 @@ module.exports = {
     await queryInterface.dropTable('ChatRooms');
   }
 };
+// npx sequelize-cli db:migrate:undo --to 20220727174032-create-chat-room.js

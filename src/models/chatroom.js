@@ -11,11 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      ChatRoom.hasMany(models.Message,{
-        foreignKey:'messageId',
-        as:'message',
-        onDelete:'CASCADE'
-      });
     }
   }
   ChatRoom.init({
@@ -30,13 +25,9 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.INTEGER,
       allowNull: false
     },
-    messageId:{
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.INTEGER,
-      allowNull: false
-    },
     name:  {
       type:DataTypes.STRING,
+      defaultValue:"general",
       allowNull: false
       }
   }, {

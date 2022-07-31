@@ -25,7 +25,7 @@ chatRouter.post('/',verifyToken, addRoom );
  * @access Public
  * @type GET
  */
-chatRouter.get('/messages/new',verifyToken,getNewMessages);
+chatRouter.get('/:chatRoomId/messages/new',verifyToken,getNewMessages);
 
 /**
  * @description to get all messages of a chatroom
@@ -33,7 +33,7 @@ chatRouter.get('/messages/new',verifyToken,getNewMessages);
  * @access Public
  * @type GET
  */
-chatRouter.get('/:chatroomId/messages',verifyToken,getMessages);
+chatRouter.get('/:chatRoomId/messages',verifyToken,getMessages);
 
 /**
  * @description to to add a message
@@ -41,6 +41,6 @@ chatRouter.get('/:chatroomId/messages',verifyToken,getMessages);
  * @access Public
  * @type POST
  */
-chatRouter.post('/:chatroomId/messages',verifyToken,addMessage)
+chatRouter.post('/:chatRoomId/messages',verifyToken,addMessage)
 
 export default chatRouter;
