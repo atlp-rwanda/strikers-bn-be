@@ -31,11 +31,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     notifiedAt:{
-      type: Datatypes.DATE,
+      type: DataTypes.DATE,
       defaultValue: Date.now()
     },
     isRead:{
-      type: Datatypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       default: false
     }
   }, {
