@@ -169,6 +169,7 @@ exports.signIn = async (req, res) => {
     }
 
     const user = await User.findOne({ where: { email: req.body.email } });
+    console.log("user is here");
 
     if (!user) {
       return res.status(404).send({ message: "Invalid Email or Password!" });
@@ -292,6 +293,7 @@ exports.newPassword = async (req, res) => {
   }
 };
 exports.logout = (req, res) => {
+  req.user.update({ lastLogout: Date.now() })
   req.session.destroy((err) => {
     if (err) {
       console.log(err);
