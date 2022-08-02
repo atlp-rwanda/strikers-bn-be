@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('notifications', {
+    await queryInterface.createTable('Notifications', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,7 +10,8 @@ module.exports = {
       },
       uuid:{
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV$
+        defaultValue: Sequelize.UUIDV4,
+        allowNull:false
       },
       title: {
         type: Sequelize.STRING,
@@ -21,7 +22,7 @@ module.exports = {
         allowNull:false
       },
       to:{
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
         allowNull: false
       },
       notifiedAt:{
@@ -43,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('notifications');
+    await queryInterface.dropTable('Notifications');
   }
 };

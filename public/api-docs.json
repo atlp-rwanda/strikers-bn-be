@@ -283,6 +283,19 @@
                 }
               ]  
           }
+        },
+
+        "/api/v1/notifications": {
+          "get": {
+            "tags": ["Notification"],
+            "description": "get all notifications of a user",
+              "consumes": [
+                "application/json"
+              ],
+              "parameters": [
+              
+              ]  
+          }
         }
          
     },

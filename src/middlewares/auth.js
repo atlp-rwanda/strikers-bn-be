@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { MANAGER_ID, TOKEN_SECRET } from "../config/key";
+const {verify} = jwt
 
 export const verifyToken = async (req, res, next) => {
   try {
@@ -26,3 +27,23 @@ export const verifyManager = async (req, res, next) => {
   }
   next();
 };
+
+export function authenticate(req,res,next){
+
+  
+
+  const token = req.header("Authorization").trim()
+
+  if(!token)return res.status(401).send("Access denied loggin first!")
+
+  try{
+    const TokenArray= token.split(' ')
+    console.log(TOKEN_SECRET)
+  let user = verify(TokenArray[1],(TOKEN_SECRET).trim())
+        req.user = user
+        next()
+  }catch(e){
+    res.status(400).send("Invalid token" +e)
+  }
+
+}
