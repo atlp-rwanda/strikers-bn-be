@@ -19,7 +19,7 @@ export async function createAccommodation(req, res) {
     name,
     description,
     location,
-    roomNumber,
+    roomNumber,                                                                      
     latitude,
     longitude,
     highlights,
