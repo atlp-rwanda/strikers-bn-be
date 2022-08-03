@@ -20,6 +20,8 @@ import companiesRouter from './routes/company.routes';
 import bookingsRouter from './routes/booking.routes';
 import accommodationRouter from './routes/accommodation.routes';
 
+import chatRouter from './routes/chats.routes';
+
 const app = express();
 dotenv.config({ path: '../.env' });
 app.use(cors());
@@ -30,7 +32,7 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/v1/trips/", tripRouter);
+app.use('/api/v1/trips/', tripRouter);
 app.use('/api/v1/users/', userRouter);
 
 app.use('/api/v1/roles', rolesRouter);
@@ -38,6 +40,9 @@ app.use('/api/v1/companies', companiesRouter);
 app.use('/api/v1/bookings', bookingsRouter);
 app.use('/api/v1/accommodations', accommodationRouter);
 app.use('/api/v1/feedback', feedbackRouter);
+
+app.use('/api/v1/chat',chatRouter);
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req, res) => {
