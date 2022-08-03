@@ -46,8 +46,10 @@ app.use('/api/v1/chat',chatRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req, res) => {
+  console.log(`This is email ${req.session.email}`);
   res.send('Welcome to strikers-bn-be APIs');
 });
+
 const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
     console.log(`Server started on port ${port}!`);
