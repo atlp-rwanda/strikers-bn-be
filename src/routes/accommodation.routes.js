@@ -4,6 +4,8 @@ import {
 } from '../controllers/accommodation.controller';
 import upload from '../utils/multer';
 import { travelAdmin } from '../middlewares/travel-admin';
+import { verifyToken } from '../middlewares/auth';
+import { rateAccommodation } from '../controllers/ratingAccomodation.controller';
 
 const router = express.Router();
 
@@ -38,5 +40,7 @@ router.put('/:uuid', travelAdmin, updateAccommodation);
  * @type DELETE
  */
 router.delete('/:uuid', travelAdmin, deleteAccommodation);
+
+router.post('/:uuid/rate',verifyToken, rateAccommodation);
 
 module.exports = router;
