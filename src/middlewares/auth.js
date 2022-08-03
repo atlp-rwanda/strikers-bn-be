@@ -38,7 +38,6 @@ export function authenticate(req,res,next){
 
   try{
     const TokenArray= token.split(' ')
-    console.log(TOKEN_SECRET)
   let user = verify(TokenArray[1],(TOKEN_SECRET).trim())
         req.user = user
         next()

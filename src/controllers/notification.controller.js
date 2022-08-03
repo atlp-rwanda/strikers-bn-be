@@ -6,7 +6,6 @@ export async function getNotificationsOfUser(req,res){
     try{
         let user = await User.findOne({where:{uuid:req.user.uuid}});
         if (!user) return res.status(404).send("User not found!")
-        // console.log("hereee"+req.user.uuid)
 
         let notifications= await Notifications.findAll({where:{to:req.user.uuid}})
 
