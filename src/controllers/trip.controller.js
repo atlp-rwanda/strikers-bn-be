@@ -1,7 +1,14 @@
 import _ from 'lodash';
 import express from 'express';
-import { Trip } from '../models';
+import { Trip,Notifications,User } from '../models';
 import { validateTripsNotifications } from '../validators/trip.validator';
+import {Server} from 'socket.io'
+const io =new Server(4400,{
+  cors:{
+    origin:'*',
+    methods:['GET','POST']
+  }
+})
 
 const app = express();
 app.use(express.json());
@@ -35,6 +42,20 @@ export async function addTrip(req, res) {
       DateOfDestination,
       status,
     });
+
+    //send notification to line manager
+    let requester = User.findOne({where:{uuid:user}})
+    let lineManager = requester.lineManager
+
+   let notification= await new Notifications({
+      title: `${requester.firstName} requested a trip to ${destination}`,
+      description: `${requester.firstName} requested a trip to ${destination} from ${source} the date pf travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}`,
+      to:lineManager
+    })
+
+    socket.on('sendNotification',notification=>{
+      io.emit('getNotification',notification)
+    })
 
     return res.status(201).json({
       success: true,
