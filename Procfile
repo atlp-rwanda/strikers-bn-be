@@ -1,1 +1,1 @@
-web: node -r esm src/index.js
+web: cross-env NODE_ENV=production node -r esm src/index.js
