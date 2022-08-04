@@ -49,9 +49,11 @@ app.get('/', (req, res) => {
   res.send('Welcome to strikers-bn-be APIs');
 });
 app.get('/', (req, res) => {
+  console.log(`This is email ${req.session.email}`);
   res.send('Welcome to strikers-bn-be APIs');
 });
-const port = process.env.PORT || 8002,
+
+const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
     console.log(`Server started on port ${port}!`);
     console.log('Database connected . . .');

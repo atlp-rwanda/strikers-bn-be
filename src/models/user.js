@@ -86,7 +86,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     },
     verificationToken: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(2500),
       allowNull: true
     }
   }, {
