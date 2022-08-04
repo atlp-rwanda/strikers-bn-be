@@ -276,10 +276,10 @@ exports.logout = (req, res) => {
   req.user.update({ lastLogout: Date.now() })
   req.session.destroy((err) => {
     if (err) {
-      console.log(err);
+      res.status(500).send(err);
     } else {
-      res.json({
-        status: 'success', message: 'logout successfully!'
+      res.status(200).send({
+        success: 'true', message: 'logout successfully!'
       });
     }
   });

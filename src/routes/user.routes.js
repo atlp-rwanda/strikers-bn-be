@@ -31,7 +31,7 @@ userRouter.post('/register', addUser);
  * @type PUT
  */
 userRouter.put('/updateuser/:uuid', verifyToken, editUser);
-userRouter.get('/getusers', getUsers);
+userRouter.get('/', getUsers);
 userRouter.get('/:uuid', getUser);
 /**
  * @description To login using email and password

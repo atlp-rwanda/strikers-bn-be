@@ -36,18 +36,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/v1/trips/', tripRouter);
 app.use('/api/v1/users/', userRouter);
 
+
 app.use('/api/v1/roles', rolesRouter);
 app.use('/api/v1/accommodations', accommodationRouter);
+app.use('/api/v1/companies', companiesRouter);
+app.use('/api/v1/bookings', bookingsRouter);
 app.use('/api/v1/notifications/', notificationRouter)
 app.use('/api/v1/feedback', feedbackRouter);
 
 app.use('/api/v1/chat',chatRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.get('/', (req, res) => {
-  console.log(`This is email ${req.session.email}`);
-  res.send('Welcome to strikers-bn-be APIs');
-});
+
 app.get('/', (req, res) => {
   console.log(`This is email ${req.session.email}`);
   res.send('Welcome to strikers-bn-be APIs');
