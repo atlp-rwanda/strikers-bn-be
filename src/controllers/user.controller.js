@@ -54,6 +54,7 @@ exports.addUser = async (req, res) => {
         'roleId',
         'phoneNumber',
         'password',
+        'lineManager',
         'verificationToken',
       ])
     );
@@ -78,13 +79,13 @@ exports.addUser = async (req, res) => {
 exports.editUser = async (req, res) => {
   try {
     console.log(req.body);
-    const { firstName, lastName, roleId, phoneNumber, password } = req.body;
+    const { firstName, lastName, roleId, phoneNumber, password,lineManager } = req.body;
     const id = req.params.uuid;
     await User.findOne({ where: { uuid: id } }).then(async (user) => {
       if (user) {
         await user
           .update(
-            { firstName, lastName, roleId, phoneNumber, password },
+            { firstName, lastName, roleId, phoneNumber, password,lineManager },
             { where: { uuid: req.params.uuid } }
           )
           .then(() =>
@@ -172,9 +173,9 @@ exports.signIn = async (req, res) => {
     if (!passwordIsValid) {
       return res.status(401).send({ message: 'Invalid Email or Password!' });
     }
-    if (!user.verified) {
-      return res.status(400).send({ message: 'Please first verify your account!' });
-    }
+    // if (!user.verified) {
+    //   return res.status(400).send({ message: 'Please first verify your account!' });
+    // } 
 
     const token = jwt.sign(
       {
@@ -275,10 +276,10 @@ exports.logout = (req, res) => {
   req.user.update({ lastLogout: Date.now() })
   req.session.destroy((err) => {
     if (err) {
-      console.log(err);
+      res.status(500).send(err);
     } else {
-      res.json({
-        status: 'success', message: 'logout successfully!'
+      res.status(200).send({
+        success: 'true', message: 'logout successfully!'
       });
     }
   });
