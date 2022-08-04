@@ -54,6 +54,7 @@ exports.addUser = async (req, res) => {
         'roleId',
         'phoneNumber',
         'password',
+        'lineManager',
         'verificationToken',
       ])
     );
@@ -78,13 +79,13 @@ exports.addUser = async (req, res) => {
 exports.editUser = async (req, res) => {
   try {
     console.log(req.body);
-    const { firstName, lastName, roleId, phoneNumber, password } = req.body;
+    const { firstName, lastName, roleId, phoneNumber, password,lineManager } = req.body;
     const id = req.params.uuid;
     await User.findOne({ where: { uuid: id } }).then(async (user) => {
       if (user) {
         await user
           .update(
-            { firstName, lastName, roleId, phoneNumber, password },
+            { firstName, lastName, roleId, phoneNumber, password,lineManager },
             { where: { uuid: req.params.uuid } }
           )
           .then(() =>
