@@ -31,7 +31,7 @@ describe("POST /api/v1/users", () => {
       .post("/api/v1/users/register")
       .send(newUser)
       .end((err, response) => {
-        response.should.have.status(400);
+        response.should.have.status(201);
         response.should.be.a("object");
         response.body.should.have.property("success").eq(true);
         response.body.should.have
@@ -62,7 +62,7 @@ describe("POST /api/v1/users", () => {
       .post("/api/v1/users/register")
       .send(newUser)
       .end((err, response) => {
-        response.should.have.status(400);
+        response.should.have.status(403);
         response.body.should.have.property("success").eq(false);
         response.body.should.have
           .property("message")
