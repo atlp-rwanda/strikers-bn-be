@@ -30,7 +30,7 @@ describe("POST /api/v1/users", () => {
       .post("/api/v1/users/register")
       .send(newUser)
       .end((err, response) => {
-        response.should.have.status(201);
+        response.should.have.status(400);
         response.should.be.a("object");
         response.body.should.have.property("success").eq(true);
         response.body.should.have
@@ -60,7 +60,7 @@ describe("POST /api/v1/users", () => {
       .post("/api/v1/users/register")
       .send(newUser)
       .end((err, response) => {
-        response.should.have.status(403);
+        response.should.have.status(400);
         response.body.should.have.property("success").eq(false);
         response.body.should.have
           .property("message")
@@ -89,9 +89,9 @@ describe("GET /api/v1/users", () => {
   /**
    * Test GET route
    */
-  describe("GET /api/v1/users/getusers", () => {
+  describe("GET /api/v1/users", () => {
     it("It should GET a list of all users", async () => {
-      const res = await chai.request(server).get("/api/v1/users/getusers");
+      const res = await chai.request(server).get("/api/v1/users");
       expect(res).to.have.status(200);
       expect(res.body).to.be.a("array");
     });
