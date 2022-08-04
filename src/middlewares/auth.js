@@ -30,12 +30,9 @@ export const verifyManager = async (req, res, next) => {
 
 export function authenticate(req,res,next){
 
-  
+  if(!req.header("Authorization"))return res.status(401).send("Loggin first!")
 
   const token = req.header("Authorization").trim()
-
-  if(!token)return res.status(401).send("Access denied loggin first!")
-
   try{
     const TokenArray= token.split(' ')
   let user = verify(TokenArray[1],(TOKEN_SECRET).trim())

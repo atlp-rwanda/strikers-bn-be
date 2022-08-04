@@ -1,5 +1,17 @@
+import { reset } from 'nodemon'
 import {Notifications,User} from '../models'
 // import Notification from '../models/notification'
+
+export async function createNotification(req,res){
+    try{
+        let notification= req.body
+        await Notifications.create(notification)
+
+        return res.status(201).send({message:"Created",data:notification})
+    }catch(e){
+        res.status(500).send(e)
+    }
+}
 
 export async function getNotificationsOfUser(req,res){
     

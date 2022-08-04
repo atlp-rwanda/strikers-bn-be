@@ -172,9 +172,9 @@ exports.signIn = async (req, res) => {
     if (!passwordIsValid) {
       return res.status(401).send({ message: 'Invalid Email or Password!' });
     }
-    if (!user.verified) {
-      return res.status(400).send({ message: 'Please first verify your account!' });
-    }
+    // if (!user.verified) {
+    //   return res.status(400).send({ message: 'Please first verify your account!' });
+    // } 
 
     const token = jwt.sign(
       {

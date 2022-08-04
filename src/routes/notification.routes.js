@@ -1,8 +1,16 @@
 import express from "express"
 const router= express.Router()
 
-import {getNotificationsOfUser,deleteNotification,readAllNotifications,readNotification} from "../controllers/notification.controller"
+import {getNotificationsOfUser,deleteNotification,readAllNotifications,readNotification, createNotification} from "../controllers/notification.controller"
 import {authenticate} from '../middlewares/auth'
+
+/**
+ * @description To get a list of all notifications of a user
+ * @api api/v1/notifications
+ * @access Public
+ * @type POST
+ */
+router.post('/new',createNotification)
 
 /**
  * @description To get a list of all notifications of a user
@@ -26,7 +34,7 @@ import {authenticate} from '../middlewares/auth'
   * @access Public
   * @type POST
   */
- router.post('/:notificationId', readAllNotifications);
+ router.post('/readAll', readAllNotifications);
  
  /**
   * @description To read specific notification
@@ -34,6 +42,6 @@ import {authenticate} from '../middlewares/auth'
   * @access Public
   * @type POST
   */
-  router.post('/:notificationId', readNotification);
+  router.post('read/:notificationId', readNotification);
 
  module.exports = router

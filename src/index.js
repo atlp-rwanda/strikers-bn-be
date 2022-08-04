@@ -38,7 +38,7 @@ app.use('/api/v1/users/', userRouter);
 
 app.use('/api/v1/roles', rolesRouter);
 app.use('/api/v1/accommodations', accommodationRouter);
-app.use('/api/v1/notifications', notificationRouter)
+app.use('/api/v1/notifications/', notificationRouter)
 app.use('/api/v1/feedback', feedbackRouter);
 
 app.use('/api/v1/chat',chatRouter);
