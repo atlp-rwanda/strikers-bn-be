@@ -23,11 +23,6 @@ describe("Company API", () => {
       const res = await chai.request(server).get("/api/v1/companies/all");
       expect(res).to.have.status(500);
     });
-
-    it("It should NOT GET a list of all companies", async () => {
-      const res = await chai.request(server).get("/api/v1/company/all");
-      expect(res).to.have.status(404);
-    });
   });
 
   /**
@@ -36,7 +31,7 @@ describe("Company API", () => {
   describe("GET /api/v1/companies/:id", () => {
     it("It should GET a specific company by its companyId", async () => {
       const newCompany = {
-          name: "Test1 company",
+          name: "Test12 company",
           email: "testcompany@mailbox.org",
           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
@@ -78,7 +73,7 @@ describe("Company API", () => {
   describe("POST /api/v1/companies", () => {
     it("It should POST (create) a new company", async () => {
       const newCompany = {
-          name: "Test2company",
+          name: "Test2comspany",
           email: "testcompany@mailbox.org",
           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",

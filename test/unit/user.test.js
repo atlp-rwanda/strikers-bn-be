@@ -23,6 +23,7 @@ describe("POST /api/v1/users", () => {
       roleId: "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
       phoneNumber: "0781294147",
       password: "pass12345",
+      lineManager:"13c35001-a96d-4307-b86a-5f9aef66f771"
     };
 
     chai
@@ -53,6 +54,7 @@ describe("POST /api/v1/users", () => {
       roleId: "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
       phoneNumber: "0781294147",
       password: "pass12345",
+      lineManager:"13c35001-a96d-4307-b86a-5f9aef66f771"
     };
 
     chai
