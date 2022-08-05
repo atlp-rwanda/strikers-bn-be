@@ -1,1 +1,1 @@
-web: node -r esm src/index.js
+web: npm run start
