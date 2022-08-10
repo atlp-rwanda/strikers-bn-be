@@ -8,7 +8,8 @@
     "define": {
       "createdAt": "createdAt",
       "updatedAt": "updatedAt"
-    }
+    }, 
+    "subQuery": false
   },
   "test": {
     "username": "uaigkmkbujkamwyjz02t",
