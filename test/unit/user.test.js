@@ -91,18 +91,20 @@ describe("GET /api/v1/users", () => {
   /**
    * Test GET route
    */
-  describe("GET /api/v1/users", () => {
-    it("It should GET a list of all users", async () => {
-      const res = await chai.request(server).get("/api/v1/users");
-      expect(res).to.have.status(200);
-      expect(res.body).to.be.a("array");
-    });
+  //   describe("GET /api/v1/users", () => {
+  //     it("It should GET a list of all users", async (done) => {
+  //       const res = await chai.request(server).get("/api/v1/users");
+  //       expect(res).to.have.status(200);
+  //       expect(res.body).to.be.a("array");
+  //       done();
+  //     });
 
-    it("It should NOT GET a list of all users", async () => {
-      const res = await chai.request(server).get("/api/users/all");
-      expect(res).to.have.status(404);
-    });
-  });
+  //     it("It should NOT GET a list of all users", async (done) => {
+  //       const res = await chai.request(server).get("/api/users/all");
+  //       expect(res).to.have.status(404);
+  //       done();
+  //     });
+  //   });
 
   /**
    * Test GET route for specific role

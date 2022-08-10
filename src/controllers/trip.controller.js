@@ -161,7 +161,7 @@ export async function updateTrip(req, res) {
   }
 }
 
-exports.changeStatus = async (req, res) => {
+export async function changeStatus(req, res) {
   try {
     if (!validateStatus(req.body.status))
       return res.status(400).send({ message: "Invalid status" });
@@ -178,4 +178,4 @@ exports.changeStatus = async (req, res) => {
   } catch (err) {
     return res.status(404).send({ error: err.toString() });
   }
-};
+}

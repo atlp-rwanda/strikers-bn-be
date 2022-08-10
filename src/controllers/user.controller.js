@@ -92,12 +92,11 @@ exports.editUser = async (req, res) => {
           .then(() =>
             res.status(200).json({
               status: "success",
-              message: `User with id: ${id} UPDATED`,
+              message: "User with id: " + id + " " + "UPDATED",
             })
           );
-      } else {
+      } else
         res.status(404).send({ message: "User with that id doesn't exist" });
-      }
     });
   } catch (err) {
     res.status(500).send({ message: `Error: ${err}` });
