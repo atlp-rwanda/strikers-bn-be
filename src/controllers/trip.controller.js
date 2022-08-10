@@ -1,44 +1,23 @@
-<<<<<<< HEAD
 import _ from "lodash";
-import { Trip } from "../models";
 import express from "express";
-import {
-  validateStatus,
-  validateTripsNotifications,
-} from "../validators/trip.validator";
-=======
-import _ from 'lodash';
-import express from 'express';
-import { Trip,Notifications,User } from '../models';
-import { validateTripsNotifications } from '../validators/trip.validator';
-import {sendEmail} from '../utils/emailConfig'
-import {Server} from 'socket.io'
-const io =new Server(4400,{
-  cors:{
-    origin:'*',
-    methods:['GET','POST']
-  }
-})
+import { Trip, Notifications, User } from "../models";
+import { validateTripsNotifications } from "../validators/trip.validator";
+import { sendEmail } from "../utils/emailConfig";
+import { Server } from "socket.io";
+const io = new Server(4400, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
 
->>>>>>> 5bdf4cdfc943e51ac5dae2a06b6e3152e474c81a
 const app = express();
 app.use(express.json());
 
 export async function addTrip(req, res) {
-<<<<<<< HEAD
   const user = req.userId;
   const { source, destination, DateOfTravel, DateOfDestination, status } =
     req.body;
-=======
-  const user = req.userId
-  const {
-    source,
-    destination,
-    DateOfTravel,
-    DateOfDestination,
-    status,
-  } = req.body;
->>>>>>> 5bdf4cdfc943e51ac5dae2a06b6e3152e474c81a
   const validateUserInput = validateTripsNotifications({
     source,
     destination,
@@ -60,30 +39,30 @@ export async function addTrip(req, res) {
       status,
     });
 
-    let requester = await User.findOne({where:{uuid:user}})
-    let lineManager = requester.lineManager
+    let requester = await User.findOne({ where: { uuid: user } });
+    let lineManager = requester.lineManager;
     //send notification via email
-    const emailTitle = `${requester.firstName} requested a trip to ${destination}`
-    const emailDescription=  `${requester.firstName} requested a trip to ${destination} from ${source} the date of travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}`
-    
-    let manager = await User.findOne({where:{uuid:lineManager}})
-    let emailTo = manager.email
+    const emailTitle = `${requester.firstName} requested a trip to ${destination}`;
+    const emailDescription = `${requester.firstName} requested a trip to ${destination} from ${source} the date of travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}`;
 
-    let checkSendEmail = await sendEmail(emailTo,emailTitle,emailDescription)
-  
-    console.log(checkSendEmail)
+    let manager = await User.findOne({ where: { uuid: lineManager } });
+    let emailTo = manager.email;
+
+    let checkSendEmail = await sendEmail(emailTo, emailTitle, emailDescription);
+
+    console.log(checkSendEmail);
 
     //send notification to line manager
 
-  //  let notification= await new Notifications({
-  //     title: `${requester.firstName} requested a trip to ${destination}`,
-  //     description: `${requester.firstName} requested a trip to ${destination} from ${source} the date pf travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}`,
-  //     to:lineManager
-  //   })
+    //  let notification= await new Notifications({
+    //     title: `${requester.firstName} requested a trip to ${destination}`,
+    //     description: `${requester.firstName} requested a trip to ${destination} from ${source} the date pf travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}`,
+    //     to:lineManager
+    //   })
 
-  //   socket.on('sendNotification',notification=>{
-  //     io.emit('getNotification',notification)
-  //   })
+    //   socket.on('sendNotification',notification=>{
+    //     io.emit('getNotification',notification)
+    //   })
 
     return res.status(201).json({
       success: true,
@@ -161,18 +140,18 @@ export async function updateTrip(req, res) {
 
     await trip.save();
 
-    const userId = req.userId
+    const userId = req.userId;
 
-    let requester= await User.findOne({where:{uuid:userId}})
-    const lineManager= requester.lineManager
+    let requester = await User.findOne({ where: { uuid: userId } });
+    const lineManager = requester.lineManager;
 
-    const emailTitle = `${requester.firstName} edited the request for a travel to ${trip.destination}`
-    const emailDescription=  `${requester.firstName} edited the request for a travel to ${trip.destination} from ${source} the date of travel is ${trip.DateOfTravel} and date of destination is ${trip.DateOfDestination}`
-    
-    let manager = await User.findOne({where:{uuid:lineManager}})
-    let emailTo = manager.email
+    const emailTitle = `${requester.firstName} edited the request for a travel to ${trip.destination}`;
+    const emailDescription = `${requester.firstName} edited the request for a travel to ${trip.destination} from ${source} the date of travel is ${trip.DateOfTravel} and date of destination is ${trip.DateOfDestination}`;
 
-    let checkSendEmail = await sendEmail(emailTo,emailTitle,emailDescription)
+    let manager = await User.findOne({ where: { uuid: lineManager } });
+    let emailTo = manager.email;
+
+    let checkSendEmail = await sendEmail(emailTo, emailTitle, emailDescription);
 
     return res.status(200).json({
       success: true,
@@ -182,31 +161,10 @@ export async function updateTrip(req, res) {
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Something went wrong" });
-<<<<<<< HEAD
   }
 }
+
 export async function changeStatus(req, res) {
-  try {
-    if (!validateStatus(req.body.status))
-      return res.status(400).send({ message: "Invalid status" });
-
-    const trip = await Trip.findOne({ where: { id: req.params.id } });
-    trip.status = req.body.status;
-    await trip.save();
-    return res.status(200).send({
-      data: trip,
-      message: `Trip request ${
-        trip.status === "approved" ? "approved" : "rejected"
-      }`,
-    });
-  } catch (err) {
-    return res.status(404).send({ error: err.toString() });
-=======
->>>>>>> 5bdf4cdfc943e51ac5dae2a06b6e3152e474c81a
-  }
-};
-
-exports.changeStatus = async (req, res) => {
   try {
     if (!validateStatus(req.body.status))
       return res.status(400).send({ message: "Invalid status" });
@@ -223,4 +181,4 @@ exports.changeStatus = async (req, res) => {
   } catch (err) {
     return res.status(404).send({ error: err.toString() });
   }
-};
+}

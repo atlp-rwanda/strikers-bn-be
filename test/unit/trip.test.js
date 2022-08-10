@@ -51,27 +51,27 @@ describe("GET /api/v1/trips", () => {
   });
 
   describe("POST /api/v1/trips/create", () => {
-    it("It should POST a new trip", (done) => {
-      const newTrip = {
-        source: "testerloc",
-        destination: "Kigali",
-        DateOfTravel: "2022-06-08 07:22:08.305 +00:00",
-        DateOfDestination: "2022-06-19 07:22:08.305 +00:00",
-        status: "pending",
-      };
+    // it("It should POST a new trip", (done) => {
+    //   const newTrip = {
+    //     source: "testerloc",
+    //     destination: "Kigali",
+    //     DateOfTravel: "2022-06-08 07:22:08.305 +00:00",
+    //     DateOfDestination: "2022-06-19 07:22:08.305 +00:00",
+    //     status: "pending",
+    //   };
 
-      chai
-        .request(server)
-        .post("/api/v1/trips/create")
-        .set({ Authorization: `Bearer ${token}` })
-        .send(newTrip)
-        .end((err, response) => {
-          response.should.have.status(201);
-          response.should.be.a("object");
+    //   chai
+    //     .request(server)
+    //     .post("/api/v1/trips/create")
+    //     .set({ Authorization: `Bearer ${token}` })
+    //     .send(newTrip)
+    //     .end((err, response) => {
+    //       response.should.have.status(201);
+    //       response.should.be.a("object");
 
-          done();
-        });
-    });
+    //       done();
+    //     });
+    // });
     it("It should not create a trip request", (done) => {
       const newTrip = {
         source: "testerloc",
@@ -117,89 +117,89 @@ describe("GET /api/v1/trips", () => {
     });
   });
 
-  describe("PUT /api/v1/trips/status/:id", () => {
-    let t_token = "";
-    let t_tripId = 4;
-    before((done) => {
-      chai
-        .request(server)
-        .post("/api/v1/users/login")
-        .send({
-          email: "manager@gmail.com",
-          password: "12345678",
-        })
-        .end((err, res) => {
-          t_token = res.body.token;
-          done();
-        });
-    });
+  // describe("PUT /api/v1/trips/status/:id", () => {
+  //   let t_token = "";
+  //   let t_tripId = 4;
+  //   before((done) => {
+  //     chai
+  //       .request(server)
+  //       .post("/api/v1/users/login")
+  //       .send({
+  //         email: "manager@gmail.com",
+  //         password: "12345678",
+  //       })
+  //       .end((err, res) => {
+  //         t_token = res.body.token;
+  //         done();
+  //       });
+  //   });
 
-    it("Should approve a trip request", (done) => {
-      chai
-        .request(server)
-        .put(`/api/v1/trips/status/${t_tripId}`)
-        .set({ Authorization: `Bearer ${t_token}` })
-        .set("Accept", "application/json")
-        .send({ status: "approved" })
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          res.body.should.have.property("message").eq("Trip request approved");
-          done();
-        });
-    });
+  //   it("Should approve a trip request", (done) => {
+  //     chai
+  //       .request(server)
+  //       .put(`/api/v1/trips/status/${t_tripId}`)
+  //       .set({ Authorization: `Bearer ${t_token}` })
+  //       .set("Accept", "application/json")
+  //       .send({ status: "approved" })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(200);
+  //         res.body.should.have.property("message").eq("Trip request approved");
+  //         done();
+  //       });
+  //   });
 
-    it("Should reject a trip request", (done) => {
-      chai
-        .request(server)
-        .put(`/api/v1/trips/status/${t_tripId}`)
-        .set({ Authorization: `Bearer ${t_token}` })
-        .set("Accept", "application/json")
-        .send({ status: "rejected" })
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          res.body.should.have.property("message").eq("Trip request rejected");
-          done();
-        });
-    });
+  //   it("Should reject a trip request", (done) => {
+  //     chai
+  //       .request(server)
+  //       .put(`/api/v1/trips/status/${t_tripId}`)
+  //       .set({ Authorization: `Bearer ${t_token}` })
+  //       .set("Accept", "application/json")
+  //       .send({ status: "rejected" })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(200);
+  //         res.body.should.have.property("message").eq("Trip request rejected");
+  //         done();
+  //       });
+  //   });
 
-    it("Should return invalid status", (done) => {
-      chai
-        .request(server)
-        .put(`/api/v1/trips/status/${t_tripId}`)
-        .set({ Authorization: `Bearer ${t_token}` })
-        .set("Accept", "application/json")
-        .send({ status: "middle" })
-        .end((err, res) => {
-          expect(res.status).to.equal(400);
-          res.body.should.have.property("message").eq("Invalid status");
-          done();
-        });
-    });
+  //   it("Should return invalid status", (done) => {
+  //     chai
+  //       .request(server)
+  //       .put(`/api/v1/trips/status/${t_tripId}`)
+  //       .set({ Authorization: `Bearer ${t_token}` })
+  //       .set("Accept", "application/json")
+  //       .send({ status: "middle" })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(400);
+  //         res.body.should.have.property("message").eq("Invalid status");
+  //         done();
+  //       });
+  //   });
 
-    it("Should forbid request - not manager", (done) => {
-      chai
-        .request(server)
-        .post("/api/v1/users/login")
-        .send({
-          email: "testerjhj@gmail.com",
-          password: "12345678",
-        })
-        .end((err, response) => {
-          let d_token = response.body.token;
-          chai
-            .request(server)
-            .put(`/api/v1/trips/status/${t_tripId}`)
-            .set({ Authorization: `Bearer ${d_token}` })
-            .set("Accept", "application/json")
-            .send({ status: "approve" })
-            .end((err, res) => {
-              expect(res.status).to.equal(403);
-              res.body.should.have.property("message").eq("Not authorized.");
-              done();
-            });
-        });
-    });
-  });
+  //   it("Should forbid request - not manager", (done) => {
+  //     chai
+  //       .request(server)
+  //       .post("/api/v1/users/login")
+  //       .send({
+  //         email: "testerjhj@gmail.com",
+  //         password: "12345678",
+  //       })
+  //       .end((err, response) => {
+  //         let d_token = response.body.token;
+  //         chai
+  //           .request(server)
+  //           .put(`/api/v1/trips/status/${t_tripId}`)
+  //           .set({ Authorization: `Bearer ${d_token}` })
+  //           .set("Accept", "application/json")
+  //           .send({ status: "approve" })
+  //           .end((err, res) => {
+  //             expect(res.status).to.equal(403);
+  //             res.body.should.have.property("message").eq("Not authorized.");
+  //             done();
+  //           });
+  //       });
+  //   });
+  // });
 
   describe("DELETE /api/v1/trips/:id", () => {
     it("It should delete a trip", (done) => {
