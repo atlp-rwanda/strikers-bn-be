@@ -48,6 +48,7 @@ exports.addUser = async (req, res) => {
 
     const newUser = await User.create(
       _.pick(user, [
+<<<<<<< HEAD
         "firstName",
         "lastName",
         "email",
@@ -55,6 +56,16 @@ exports.addUser = async (req, res) => {
         "phoneNumber",
         "password",
         "verificationToken",
+=======
+        'firstName',
+        'lastName',
+        'email',
+        'roleId',
+        'phoneNumber',
+        'password',
+        'lineManager',
+        'verificationToken',
+>>>>>>> 5bdf4cdfc943e51ac5dae2a06b6e3152e474c81a
       ])
     );
 
@@ -78,12 +89,17 @@ exports.addUser = async (req, res) => {
 exports.editUser = async (req, res) => {
   try {
     console.log(req.body);
+<<<<<<< HEAD
     const { firstName, lastName, roleId, phoneNumber, password } = req.body;
+=======
+    const { firstName, lastName, roleId, phoneNumber, password,lineManager } = req.body;
+>>>>>>> 5bdf4cdfc943e51ac5dae2a06b6e3152e474c81a
     const id = req.params.uuid;
     await User.findOne({ where: { uuid: id } }).then(async (user) => {
       if (user) {
         await user
           .update(
+<<<<<<< HEAD
             {
               firstName,
               lastName,
@@ -91,17 +107,28 @@ exports.editUser = async (req, res) => {
               phoneNumber,
               password,
             },
+=======
+            { firstName, lastName, roleId, phoneNumber, password,lineManager },
+>>>>>>> 5bdf4cdfc943e51ac5dae2a06b6e3152e474c81a
             { where: { uuid: req.params.uuid } }
           )
           .then(() =>
             res.status(200).json({
               status: "success",
+<<<<<<< HEAD
               message: `User with id: ${id} UPDATED`,
             })
           );
       } else {
         res.status(404).send({ message: "User with that id doesn't exist" });
       }
+=======
+              message: "User with id: " + id + " " + "UPDATED",
+            })
+          );
+      } else
+        res.status(404).send({ message: "User with that id doesn't exist" });
+>>>>>>> 5bdf4cdfc943e51ac5dae2a06b6e3152e474c81a
     });
   } catch (err) {
     res.status(500).send({ message: `Error: ${err}` });
@@ -169,6 +196,7 @@ exports.signIn = async (req, res) => {
     }
 
     const user = await User.findOne({ where: { email: req.body.email } });
+    console.log("user is here");
 
     if (!user) {
       return res.status(404).send({ message: "Invalid Email or Password!" });
@@ -182,11 +210,17 @@ exports.signIn = async (req, res) => {
     if (!passwordIsValid) {
       return res.status(401).send({ message: "Invalid Email or Password!" });
     }
+<<<<<<< HEAD
     if (!user.verified) {
       return res
         .status(400)
         .send({ message: "Please first verify your account!" });
     }
+=======
+    // if (!user.verified) {
+    //   return res.status(400).send({ message: 'Please first verify your account!' });
+    // } 
+>>>>>>> 5bdf4cdfc943e51ac5dae2a06b6e3152e474c81a
 
     const token = jwt.sign(
       {
@@ -294,13 +328,19 @@ exports.newPassword = async (req, res) => {
   }
 };
 exports.logout = (req, res) => {
+  req.user.update({ lastLogout: Date.now() })
   req.session.destroy((err) => {
     if (err) {
-      console.log(err);
+      res.status(500).send(err);
     } else {
+<<<<<<< HEAD
       res.json({
         status: "success",
         message: "logout successfully!",
+=======
+      res.status(200).send({
+        success: 'true', message: 'logout successfully!'
+>>>>>>> 5bdf4cdfc943e51ac5dae2a06b6e3152e474c81a
       });
     }
   });

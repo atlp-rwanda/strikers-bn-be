@@ -11,9 +11,9 @@ const {
   getUsers,
   getUser,
   verifyUser,
-  logout,
   resetPassword,
   newPassword,
+  logout,
 } = require("../controllers/user.controller");
 
 /**
@@ -26,12 +26,12 @@ userRouter.post("/register", addUser);
 
 /**
  * @description To update a user
- * @api v1/api/user/uuid
+ * @api v1/api/users/:uuid
  * @access Public
  * @type PUT
  */
 userRouter.put("/updateuser/:uuid", verifyToken, editUser);
-userRouter.get("/getusers", getUsers);
+userRouter.get("/", getUsers);
 userRouter.get("/:uuid", getUser);
 /**
  * @description To login using email and password

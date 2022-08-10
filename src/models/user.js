@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false
     },
     roleId: {
@@ -57,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     birthdate: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true 
     },
     location: {
       type: DataTypes.STRING,
@@ -76,15 +77,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     lineManager: {
-      type: DataTypes.STRING,
-      allowNull: true
+      type: DataTypes.UUID,
+      defaultValue: '13c35001-a96d-4307-b86a-5f9aef66f771',
+      allowNull: false
     },
     verified: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
     verificationToken: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(2500),
       allowNull: true
     }
   }, {

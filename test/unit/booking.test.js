@@ -201,7 +201,7 @@ describe("Booking API", () => {
         .post("/api/v1/users/login")
         .send({ email: "regiskayitare@gmail.com", password: "pass12345" });
 
-      expect(res1).to.have.status(400);
+      expect(res1).to.have.status(500);
       expect(res1.body).to.be.a("object");
       await chai
         .request(server)
