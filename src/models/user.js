@@ -8,25 +8,23 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here. this is to satisfy all models are on required elements.
-      // define associtaion there or here.
+      // define association here
     }
 
     toJSON() {
-      return { ...this.get(), id: undefined, password: undefined };
+      return { ...this.get(), id: undefined, password: undefined }
     }
   }
   User.init({
     uuid: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false
+      defaultValue: DataTypes.UUIDV4
     },
-    firstName: {
+    firstname: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    lastName: {
+    lastname: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -80,9 +78,9 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     },
     verificationToken: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(2500),
       allowNull: true
-    }
+    } 
   }, {
     sequelize,
     modelName: 'User',

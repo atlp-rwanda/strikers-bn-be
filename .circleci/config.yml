@@ -42,4 +42,8 @@ workflows:
               only:
                 - 'master'
     jobs:
+<<<<<<< HEAD
       - build_and_test
+=======
+      - build_and_test
+>>>>>>> 730967d ([feat]: user registration)
