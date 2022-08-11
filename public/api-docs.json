@@ -101,7 +101,7 @@
             }
         },
         "api/v1/users/resetpassword":{
-          "put": {
+          "post": {
               "summary": "Reset User Password",
               "description": "Reset User Password",
               "consumes": [
