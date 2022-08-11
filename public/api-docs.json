@@ -100,6 +100,34 @@
                 }
             }
         },
+        "api/v1/users/resetpassword":{
+          "put": {
+              "summary": "Reset User Password",
+              "description": "Reset User Password",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "application/json"
+              ],
+              "parameters": [
+                  {
+                      "in": "formData",
+                      "name": "email",
+                      "description": "User model",
+                      "required": true
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "Email with reset passowrd link sent successfuly!"
+                  },
+                  "500": {
+                      "description": "Server error"
+                  }
+              }
+          }
+      },
         "api/v1/trips/all": {
             "get": {
               "tags": [

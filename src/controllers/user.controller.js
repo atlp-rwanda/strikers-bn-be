@@ -205,7 +205,6 @@ exports.signIn = async (req, res) => {
 exports.resetPassword = async(req,res)=>{
   try{
     let all = await User.findAll({where: {}})
-    console.log(all)
     let user = await User.findOne({ where: { email: req.body.email } });
 
     if(!user)
@@ -234,8 +233,7 @@ exports.resetPassword = async(req,res)=>{
   }
   catch (error) {
     console.log(error)
-    res.status(404);
-    res.send(error.toString());
+   return res.status(404).send(error);
   }
 }
 
