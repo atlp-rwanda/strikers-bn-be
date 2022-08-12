@@ -2,11 +2,7 @@ import { Router } from "express";
 
 const tripRouter = Router();
 import { verifyManager, verifyToken } from "../middlewares/auth";
-import {
-  addComments,
-  getComments,
-  deleteComments,
-} from "../controllers/tripComment.controller";
+import { addComments, getComments, deleteComments  } from "../controllers/tripComment.controller";
 
 import { adminCheck } from "../middlewares/super-admin";
 
@@ -16,8 +12,8 @@ const {
   getOneTrip,
   deleteOneTrip,
   changeStatus,
-  updateTrip,
-} = require("../controllers/trip.controller");
+  updateTrip
+} = require('../controllers/trip.controller');
 
 /**
  * @description To create a new user
@@ -25,7 +21,7 @@ const {
  * @access Public
  * @type POST
  */
-tripRouter.post("/create", verifyToken, addTrip);
+tripRouter.post('/create', verifyToken, addTrip);
 
 /**
  * @description To login using email and password
@@ -34,7 +30,7 @@ tripRouter.post("/create", verifyToken, addTrip);
  * @type GET
  */
 
-tripRouter.get("/all", getAllTrips);
+tripRouter.get('/all', getAllTrips);
 
 /**
  * @description To create a new user
@@ -42,7 +38,7 @@ tripRouter.get("/all", getAllTrips);
  * @access Public
  * @type GET
  */
-tripRouter.get("/:id", verifyToken, getOneTrip);
+tripRouter.get('/:id', [verifyToken, adminCheck], getOneTrip);
 
 /**
  * @description To create a new user
@@ -50,7 +46,7 @@ tripRouter.get("/:id", verifyToken, getOneTrip);
  * @access Public
  * @type DELETE
  */
-tripRouter.delete("/:id", verifyToken, deleteOneTrip);
+tripRouter.delete('/:id', verifyToken, deleteOneTrip);
 
 /**
  * @description To create a new user

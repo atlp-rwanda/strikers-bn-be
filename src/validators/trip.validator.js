@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 exports.validateTripsNotifications = (body) => {
   const validUserRegisterSchema = Joi.object({
@@ -7,10 +7,7 @@ exports.validateTripsNotifications = (body) => {
     DateOfTravel: Joi.date().raw().required(),
     DateOfDestination: Joi.date().raw().required(),
     status: Joi.string().max(100).min(2).required(),
+
   });
   return validUserRegisterSchema.validate(body);
 };
-
-export function validateStatus(status) {
-  return status === "approved" || status === "rejected" ? true : false;
-}

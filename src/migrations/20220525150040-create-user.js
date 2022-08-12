@@ -2,8 +2,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Users', {
       uuid: {
-        type: Sequelize.STRING,
-        defaultValue: DataTypes.UUIDV4
+        type: Sequelize.UUID,
+        allowNull: false
       },
       id: {
         allowNull: false,
@@ -12,42 +12,73 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       firstName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       lastName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       roleId: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
         allowNull: false
       },
       phoneNumber: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
-      verified: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
-      },
-      verificationToken: {
+      passwordResetToken: {
         type: Sequelize.STRING(2500),
         allowNull: true
       },
+      birthdate: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      location: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      preferredLanguage: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      preferredCurrency: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      department: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      lineManager: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      verified: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      verificationToken: {
+        type: Sequelize.STRING(2500),
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {

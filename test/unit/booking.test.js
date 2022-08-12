@@ -17,7 +17,7 @@ describe("Booking API", () => {
       const { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+          .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
         res = await chai
           .request(server)
           .get("/api/v1/bookings")
@@ -30,7 +30,7 @@ describe("Booking API", () => {
       const { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+          .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
         res = await chai
           .request(server)
           .get("/api/v1/bookings/all")
@@ -76,7 +76,7 @@ describe("Booking API", () => {
       const { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+          .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
         res = await chai
           .request(server)
           .get("/api/v1/bookings/" + res1.body.data)
@@ -122,7 +122,7 @@ describe("Booking API", () => {
       const { body } = await chai
         .request(server)
         .post("/api/v1/users/login")
-        .send({ email: "regiskayitare@gmail.com", password: "pass12345" });
+        .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
 
       await chai
         .request(server)
@@ -145,7 +145,7 @@ describe("Booking API", () => {
         { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+          .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
         res = await chai
           .request(server)
           .get("/api/v1/bookings/" + bookingId)
@@ -199,7 +199,7 @@ describe("Booking API", () => {
       const { body } = await chai
         .request(server)
         .post("/api/v1/users/login")
-        .send({ email: "regiskayitare@gmail.com", password: "pass12345" });
+        .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
 
       expect(res1).to.have.status(500);
       expect(res1.body).to.be.a("object");
@@ -241,7 +241,7 @@ describe("Booking API", () => {
       const { body } = await chai
         .request(server)
         .post("/api/v1/users/login")
-        .send({ email: "regiskayitare@gmail.com", password: "pass12345" });
+        .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
       expect(res1).to.have.status(400);
       await chai
         .request(server)
@@ -279,7 +279,7 @@ describe("Booking API", () => {
     //   const { body } = await chai
     //     .request(server)
     //     .post("/api/v1/users/login")
-    //     .send({ email: "regiskayitare@gmail.com", password: "pass12345" });
+    //     .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
     //   expect(res1).to.have.status(404);
     //   expect(res1.body.message).to.be.equal(
     //     "No user is registered with that requesterId you provided"
@@ -324,7 +324,7 @@ describe("Booking API", () => {
     //   const { body } = await chai
     //       .request(server)
     //       .post("/api/v1/users/login")
-    //       .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+    //       .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
     //     { bookingId } = res4.body.data;
     //   expect(res1).to.have.status(400);
     //   expect(res1.body).to.be.a("object");
@@ -364,7 +364,7 @@ describe("Booking API", () => {
     //         { body } = await chai
     //           .request(server)
     //           .post("/api/v1/users/login")
-    //           .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+    //           .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
     //         res4 = await chai
     //           .request(server)
     //           .post("/api/v1/bookings")
@@ -424,7 +424,7 @@ describe("Booking API", () => {
       const { body } = await chai
         .request(server)
         .post("/api/v1/users/login")
-        .send({ email: "regiskayitare@gmail.com", password: "pass12345" });
+        .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
 
       const res = await chai
         .request(server)
@@ -467,7 +467,7 @@ describe("Booking API", () => {
       const { body } = await chai
         .request(server)
         .post("/api/v1/users/login")
-        .send({ email: "regiskayitare@gmail.com", password: "pass12345" });
+        .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
 
       await chai
         .request(server)
@@ -489,7 +489,7 @@ describe("Booking API", () => {
         { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+          .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
         res = await chai
           .request(server)
           .delete("/api/v1/bookings/" + bookingId)
