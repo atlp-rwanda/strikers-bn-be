@@ -1,7 +1,6 @@
-/* eslint-disable import/no-dynamic-require */
-import fs from "fs";
-import path from "path";
-import Sequelize from "sequelize";
+const fs = require("fs");
+const path = require("path");
+const Sequelize = require("sequelize");
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";

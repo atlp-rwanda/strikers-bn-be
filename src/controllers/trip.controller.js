@@ -25,6 +25,7 @@ export async function addTrip(req, res) {
     DateOfDestination,
     status,
   });
+
   if (validateUserInput.error) {
     return res.status(400).json(validateUserInput.error.details[0].message);
   }
@@ -64,6 +65,8 @@ export async function addTrip(req, res) {
     //   })
 
     return res.status(201).json({
+      success: true,
+      status: 201,
       message: "Trip request created successvely",
       data: trip,
     });

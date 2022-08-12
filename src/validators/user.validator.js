@@ -12,6 +12,7 @@ exports.validateUserRegisteration = (body) => {
       .pattern(/^[0-9]+$/)
       .required(),
     password: Joi.string().min(8).required(),
+    lineManager: Joi.string().max(100).min(20).required(),
   });
   return validUserRegisterSchema.validate(body);
 };
