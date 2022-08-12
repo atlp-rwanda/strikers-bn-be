@@ -23,6 +23,7 @@ describe("POST /api/v1/users", () => {
       roleId: "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
       phoneNumber: "0781294147",
       password: "pass12345",
+      lineManager:"13c35001-a96d-4307-b86a-5f9aef66f771"
     };
 
     chai
@@ -53,6 +54,7 @@ describe("POST /api/v1/users", () => {
       roleId: "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
       phoneNumber: "0781294147",
       password: "pass12345",
+      lineManager:"13c35001-a96d-4307-b86a-5f9aef66f771"
     };
 
     chai
@@ -89,9 +91,9 @@ describe("GET /api/v1/users", () => {
   /**
    * Test GET route
    */
-  describe("GET /api/v1/users/getusers", () => {
+  describe("GET /api/v1/users", () => {
     it("It should GET a list of all users", async () => {
-      const res = await chai.request(server).get("/api/v1/users/getusers");
+      const res = await chai.request(server).get("/api/v1/users");
       expect(res).to.have.status(200);
       expect(res.body).to.be.a("array");
     });

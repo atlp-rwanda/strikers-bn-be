@@ -1,8 +1,8 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
+import { MANAGER_ID, TOKEN_SECRET } from "../config/key";
+const {verify} = jwt
 
-const { TOKEN_SECRET } = require('../config/key');
-
-export async function verifyToken(req, res, next) {
+export const verifyToken = async (req, res, next) => {
   try {
     // if (process.env.NODE_ENV != 'test' && !req.session.email) {
     //   return;
@@ -13,9 +13,33 @@ export async function verifyToken(req, res, next) {
         return res.status(401).send({ message: err.message });
       }
       req.userId = decoded.uuid;
+      req.roleId = decoded.roleId;
       next();
     });
   } catch (error) {
     return res.status(403).send({ message: 'No token provided!' });
   }
+};
+
+export const verifyManager = async (req, res, next) => {
+  if (req.roleId !== MANAGER_ID) {
+    return res.status(403).send({ message: "Not authorized." });
+  }
+  next();
+};
+
+export function authenticate(req,res,next){
+
+  if(!req.header("Authorization"))return res.status(401).send("Loggin first!")
+
+  const token = req.header("Authorization").trim()
+  try{
+    const TokenArray= token.split(' ')
+  let user = verify(TokenArray[1],(TOKEN_SECRET).trim())
+        req.user = user
+        next()
+  }catch(e){
+    res.status(400).send("Invalid token" +e)
+  }
+
 }

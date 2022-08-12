@@ -3,7 +3,10 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { User } from "../models";
-import { validateUserRegisteration, validateUserAuthenatication } from "../validators/user.validator";
+import {
+  validateUserRegisteration,
+  validateUserAuthenatication,
+} from "../validators/user.validator";
 import { TOKEN_SECRET } from "../config/key";
 import { sendEmail } from "../emails/account"
 import resetPassword from '../emails/resetPassword';
@@ -51,6 +54,7 @@ exports.addUser = async (req, res) => {
         'roleId',
         'phoneNumber',
         'password',
+        'lineManager',
         'verificationToken',
       ])
     );
@@ -75,19 +79,23 @@ exports.addUser = async (req, res) => {
 exports.editUser = async (req, res) => {
   try {
     console.log(req.body);
-    const {
-      firstName, lastName, roleId, phoneNumber, password
-    } = req.body;
+    const { firstName, lastName, roleId, phoneNumber, password,lineManager } = req.body;
     const id = req.params.uuid;
     await User.findOne({ where: { uuid: id } }).then(async (user) => {
       if (user) {
-        await user.update(
-          {
-            firstName, lastName, roleId, phoneNumber, password
-          },
-          { where: { uuid: req.params.uuid } }
-        ).then(() => res.status(200).json({ status: 'success', message: `User with id: ${id} UPDATED` }));
-      } else { res.status(404).send({ message: "User with that id doesn't exist" }); }
+        await user
+          .update(
+            { firstName, lastName, roleId, phoneNumber, password,lineManager },
+            { where: { uuid: req.params.uuid } }
+          )
+          .then(() =>
+            res.status(200).json({
+              status: "success",
+              message: "User with id: " + id + " " + "UPDATED",
+            })
+          );
+      } else
+        res.status(404).send({ message: "User with that id doesn't exist" });
     });
   } catch (err) {
     res.status(500).send({ message: `Error: ${err}` });
@@ -154,6 +162,7 @@ exports.signIn = async (req, res) => {
     }
 
     const user = await User.findOne({ where: { email: req.body.email } });
+    console.log("user is here");
 
     if (!user) {
       return res.status(404).send({ message: 'Invalid Email or Password!' });
@@ -164,15 +173,15 @@ exports.signIn = async (req, res) => {
     if (!passwordIsValid) {
       return res.status(401).send({ message: 'Invalid Email or Password!' });
     }
-    if (!user.verified) {
-      return res.status(400).send({ message: 'Please first verify your account!' });
-    }
+    // if (!user.verified) {
+    //   return res.status(400).send({ message: 'Please first verify your account!' });
+    // } 
 
     const token = jwt.sign(
       {
         uuid: user.uuid,
         email: user.email,
-        roleId: user.roleId
+        roleId: user.roleId,
       },
       TOKEN_SECRET
       // ,
@@ -264,12 +273,13 @@ console.log(decoded)
   }
 }
 exports.logout = (req, res) => {
+  req.user.update({ lastLogout: Date.now() })
   req.session.destroy((err) => {
     if (err) {
-      console.log(err);
+      res.status(500).send(err);
     } else {
-      res.json({
-        status: 'success', message: 'logout successfully!'
+      res.status(200).send({
+        success: 'true', message: 'logout successfully!'
       });
     }
   });

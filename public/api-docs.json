@@ -12,39 +12,16 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "schemes": ["http", "https"],
+  "schemes": ["http"],
   "host": "localhost:8001",
-  "basePath": "/api/v1",
-  "tags": [
-    {
-      "name": "User",
-      "description": "APIs for users"
-    },
-    {
-      "name": "Trip",
-      "description": "APIs for trips"
-    },
-    {
-      "name": "Feedback",
-      "description": "APIs for feedback"
-    }
-  ],
+  "basePath": "/api",
   "paths": {
-    "/users/getusers": {
+    "api/v1/users": {
       "get": {
-        "tags": ["User"],
-        "summary": "Get all users",
+        "summary": "Get users",
         "description": "Get users",
         "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authentication token",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Users retrieved successfully"
@@ -55,27 +32,12 @@
         }
       }
     },
-    "/users/{uuid}": {
+    "api/v1/users/{uuid}": {
       "get": {
-        "tags": ["User"],
-        "summary": "Get user with given uuid",
+        "summary": "Get user",
         "description": "Get user",
         "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authentication token",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "User retrieved successfully"
@@ -86,7 +48,47 @@
         }
       }
     },
-    "/users/register": {
+    "api/v1/users/{uuid}/logout": {
+      "get": {
+        "summary": "User logout",
+        "description": "User logout",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User logged out successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "api/v1/users/updateuser/{uuid}": {
+      "put": {
+        "summary": "Update User",
+        "description": "Update User",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User model",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "api/v1/users/register": {
       "post": {
         "tags": ["User"],
         "summary": "User signup",
@@ -111,7 +113,7 @@
         }
       }
     },
-    "/users/login": {
+    "api/v1/users/login": {
       "post": {
         "tags": ["User"],
         "summary": "Sign in",
@@ -143,296 +145,661 @@
             }
           }
         }
+      },
+      "api/v1/trips/all": {
+        "get": {
+          "tags": ["TripRequest"],
+          "description": "",
+          "responses": {
+            "200": {
+              "description": "Query ok"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      },
+      "api/v1/trips/create": {
+        "post": {
+          "tags": ["TripRequest"],
+          "description": "",
+          "consumes": ["application/json"],
+          "parameters": [
+            {
+              "name": "source",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "destination",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "DateOfTravel",
+              "in": "formData",
+              "required": true,
+              "type": "date"
+            },
+            {
+              "name": "DateOfDestination",
+              "in": "formData",
+              "required": true,
+              "type": "date"
+            },
+            {
+              "name": "status",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Trip request created successivelly"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "422": {
+              "description": "Unprocessable Entity"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+
+      "api/v1/trips/{id}": {
+        "put": {
+          "tags": ["TripRequest"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "obj",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/TripRequest"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Updated"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "422": {
+              "description": "Unprocessable Entity"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        },
+        "get": {
+          "tags": ["TripRequest"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        },
+        "delete": {
+          "tags": ["TripRequest"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "api/v1/trips/{tripId}/comments": {
+        "post": {
+          "tags": ["TripRequestComponent"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "tripId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "obj",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/TripRequestComment"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Comment added"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        },
+        "get": {
+          "tags": ["TripRequestComponent"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "tripId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Comments fetched successfully"
+            }
+          }
+        }
+      },
+      "api/v1/trips/{tripId}/comments/{uuid}": {
+        "delete": {
+          "tags": ["TripRequestComponent"],
+          "description": "",
+          "parameters": [
+            {
+              "name": "tripId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Comment deleted successfully!"
+            },
+            "404": {
+              "description": "Not found"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "/api/v1/feedback": {
+        "post": {
+          "tags": ["Feedback"],
+          "description": "Add feedback",
+          "consumes": ["application/json"],
+          "parameters": [
+            {
+              "name": "accomodationId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "Feedback",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Feedback"
+              }
+            }
+          ]
+        }
+      },
+      "/api/v1/chat": {
+        "get": {
+          "tags": ["Users's chat"],
+          "description": "Get all Rooms",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "Rooms fetched successfully"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        },
+        "post": {
+          "tags": ["Users's chat"],
+          "description": "Add new Room",
+          "parameters": [
+            {
+              "name": "obj",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/NewChatRoom"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Room added successfully"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "api/v1/chat/:chatRoomId/messages": {
+        "post": {
+          "tags": ["Users's chat"],
+          "description": "Add new messages",
+          "parameters": [
+            {
+              "name": "chatRoomId",
+              "in": "path",
+              "required": "true"
+            },
+            {
+              "name": "obj",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/NewChatMessage"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Message added successfully"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        },
+        "get": {
+          "tags": ["Users's chat"],
+          "description": "Get all Messages",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "Messages fetched successfully"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "api/v1/chat/:chatRoomId/messages/new": {
+        "get": {
+          "tags": ["Users's chat"],
+          "description": "Get Latest Messages",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "Messages fetched successfully"
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "api/v1/notifications": {
+        "get": {
+          "tags": ["Notification"],
+          "description": "get all notifications of a user",
+          "consumes": ["multipart/form-data"],
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "Authorization",
+              "description": "JWT Token of the user",
+              "type": "string",
+              "required": "true"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "201": {
+              "description": "Created"
+            },
+            "400": {
+              "description": "Invalid data"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+
+      "api/v1/notifications/new": {
+        "post": {
+          "tags": ["Notification"],
+          "description": "create a notification",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "title",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "to",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "400": {
+              "description": "Invalid data"
+            },
+            "404": {
+              "description": "Not found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+
+      "api/v1/notifications/read/{notificationId}": {
+        "post": {
+          "tags": ["Notification"],
+          "description": "read a notification",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "notificationId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "400": {
+              "description": "Invalid data"
+            },
+            "404": {
+              "description": "Not found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "api/v1/notifications/readAll": {
+        "post": {
+          "tags": ["Notification"],
+          "description": "read all notifications",
+          "produces": ["application/json"],
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "400": {
+              "description": "Invalid data"
+            },
+            "404": {
+              "description": "Not found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+
+      "api/v1/notifications/{notificationId}": {
+        "delete": {
+          "tags": ["Notification"],
+          "description": "delete notification by id",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "notificationId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "400": {
+              "description": "Invalid data"
+            },
+            "404": {
+              "description": "Not found"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
       }
     },
-    "/users/updateuser/{uuid}": {
-      "put": {
-        "tags": ["User"],
-        "summary": "Update User",
-        "description": "Update User",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Authentication token",
-            "required": true,
-            "type": "string"
+    "definitions": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "required": true
           },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "User model",
+          "lastName": {
+            "type": "string",
+            "required": true
+          },
+          "email": {
+            "type": "string",
+            "required": true
+          },
+          "password": {
+            "type": "string",
+            "required": true
+          },
+          "roleId": {
+            "type": "string",
+            "required": true
+          },
+          " phoneNumber": {
+            "type": "string",
             "required": true
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "User updated successfully"
-          },
-          "500": {
-            "description": "Server error"
-          }
         }
-      }
-    },
-    "/trips/all": {
-      "get": {
-        "tags": ["Trip"],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "Query ok"
+      },
+      "TripRequest": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "required": true
           },
-          "500": {
-            "description": "Internal Server Error"
+          "destination": {
+            "type": "string",
+            "required": true
+          },
+          "DateOfTravel": {
+            "type": "date",
+            "required": true
+          },
+          "DateOfDestination": {
+            "type": "date",
+            "required": true
+          },
+          "status": {
+            "type": "string",
+            "required": true
           }
         }
       },
-      "post": {
-        "tags": ["Trip"],
-        "description": "",
-        "consumes": ["application/json"],
-        "parameters": [
-          {
-            "name": "source",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "destination",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "DateOfTravel",
-            "in": "formData",
-            "required": true,
-            "type": "date"
-          },
-          {
-            "name": "DateOfDestination",
-            "in": "formData",
-            "required": true,
-            "type": "date"
-          },
-          {
-            "name": "status",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Trip request created successivelly"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      }
-    },
-
-    "/trips/{id}": {
-      "put": {
-        "tags": ["Trip"],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "obj",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TripRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Updated"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      },
-      "get": {
-        "tags": ["Trip"],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+      "TripRequestComment": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string",
+            "required": true
           }
         }
       },
-      "delete": {
-        "tags": ["Trip"],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+      "NewChatRoom": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "required": true
           }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      }
-    },
-    "/api/v1/feedback": {
-      "post": {
-        "tags": ["Feedback"],
-        "description": "Add feedback",
-        "consumes": ["application/json"],
-        "parameters": [
-          {
-            "name": "accomodationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "Feedback",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Feedback"
-            }
-          }
-        ]
-      }
-    }
-  },
-  "definitions": {
-    "User": {
-      "type": "object",
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "required": true
-        },
-        "lastName": {
-          "type": "string",
-          "required": true
-        },
-        "email": {
-          "type": "string",
-          "required": true
-        },
-        "password": {
-          "type": "string",
-          "required": true
-        },
-        "roleId": {
-          "type": "string",
-          "required": true
-        },
-        "phoneNumber": {
-          "type": "string",
-          "required": true
         }
-      }
-    },
-    "TripRequest": {
-      "type": "object",
-      "properties": {
-        "source": {
-          "type": "string",
-          "required": true
-        },
-        "destination": {
-          "type": "string",
-          "required": true
-        },
-        "DateOfTravel": {
-          "type": "date",
-          "required": true
-        },
-        "DateOfDestination": {
-          "type": "date",
-          "required": true
-        },
-        "status": {
-          "type": "string",
-          "required": true
+      },
+      "NewChatMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "required": true
+          }
         }
-      }
-    },
-    "Feedback": {
-      "type": "object",
-      "properties": {
-        "feedbackId": {
-          "type": "string",
-          "required": true
-        },
-        "userId": {
-          "type": "string",
-          "required": true
-        },
-        "feedback": {
-          "type": "string",
-          "required": true
+      },
+      "Feedback": {
+        "type": "object",
+        "properties": {
+          "feedbackId": {
+            "type": "string",
+            "required": true
+          },
+          "userId": {
+            "type": "string",
+            "required": true
+          },
+          "feedback": {
+            "type": "string",
+            "required": true
+          }
         }
       }
     }
