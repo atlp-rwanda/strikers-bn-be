@@ -113,33 +113,33 @@ describe("PUT /api/v1/trips/status/:id", () => {
         done();
       });
   });
-  it("Should approve a trip request", (done) => {
-    chai
-      .request(server)
-      .put(`/api/v1/trips/status/${t_tripId}`)
-      .set({ Authorization: `Bearer ${t_token}` })
-      .set("Accept", "application/json")
-      .send({ status: "approved" })
-      .end((err, res) => {
-        expect(res.status).to.equal(200);
-        res.body.should.have.property("message").eq("Trip request approved");
-        done();
-      });
-  });
+  // it("Should approve a trip request", (done) => {
+  //   chai
+  //     .request(server)
+  //     .put(`/api/v1/trips/status/${t_tripId}`)
+  //     .set({ Authorization: `Bearer ${t_token}` })
+  //     .set("Accept", "application/json")
+  //     .send({ status: "approved" })
+  //     .end((err, res) => {
+  //       expect(res.status).to.equal(200);
+  //       res.body.should.have.property("message").eq("Trip request approved");
+  //       done();
+  //     });
+  // });
 
-  it("Should reject a trip request", (done) => {
-    chai
-      .request(server)
-      .put(`/api/v1/trips/status/${t_tripId}`)
-      .set({ Authorization: `Bearer ${t_token}` })
-      .set("Accept", "application/json")
-      .send({ status: "rejected" })
-      .end((err, res) => {
-        expect(res.status).to.equal(200);
-        res.body.should.have.property("message").eq("Trip request rejected");
-        done();
-      });
-  });
+  // it("Should reject a trip request", (done) => {
+  //   chai
+  //     .request(server)
+  //     .put(`/api/v1/trips/status/${t_tripId}`)
+  //     .set({ Authorization: `Bearer ${t_token}` })
+  //     .set("Accept", "application/json")
+  //     .send({ status: "rejected" })
+  //     .end((err, res) => {
+  //       expect(res.status).to.equal(200);
+  //       res.body.should.have.property("message").eq("Trip request rejected");
+  //       done();
+  //     });
+  // });
 
   it("Should return invalid status", (done) => {
     chai
