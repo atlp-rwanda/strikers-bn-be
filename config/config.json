@@ -1,36 +1,23 @@
 {
   "development": {
-    "username": "uaigkmkbujkamwyjz02t",
-    "password": "56lSujHPPQcpa2DYiY9c",
-    "database": "b1xtgtyfns4qxo3y78pn",
-    "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
-    "dialect": "postgres",
-    "define": {
-      "createdAt": "createdAt",
-      "updatedAt": "updatedAt"
-    },
-    "subQuery": false
+    "username": "root",
+    "password": null,
+    "database": "database_development",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "test": {
-    "username": "uaigkmkbujkamwyjz02t",
-    "password": "56lSujHPPQcpa2DYiY9c",
-    "database": "b1xtgtyfns4qxo3y78pn",
-    "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
-    "dialect": "postgres",
-    "define": {
-      "createdAt": "createdAt",
-      "updatedAt": "updatedAt"
-    }
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "production": {
-    "username": "uaigkmkbujkamwyjz02t",
-    "password": "56lSujHPPQcpa2DYiY9c",
-    "database": "b1xtgtyfns4qxo3y78pn",
-    "host": "b1xtgtyfns4qxo3y78pn-postgresql.services.clever-cloud.com",
-    "dialect": "postgres",
-    "define": {
-      "createdAt": "createdAt",
-      "updatedAt": "updatedAt"
-    }
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   }
 }
