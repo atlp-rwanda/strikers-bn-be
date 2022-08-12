@@ -99,7 +99,7 @@ describe("POST /api/v1/trips/create", () => {
 
 describe("PUT /api/v1/trips/status/:id", () => {
   let t_token = "";
-  let t_tripId = 4;
+  let t_tripId = 539;
   before((done) => {
     chai
       .request(server)
