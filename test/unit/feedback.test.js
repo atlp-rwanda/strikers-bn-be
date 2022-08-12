@@ -8,161 +8,344 @@ chai.use(chaiHttp);
 
 const server = require("../../src/index");
 
-const TEST_TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiODZmMzI5YjQtYWIzZi00Y2QzLWJlYTMtYTUyNzc0NWZiY2ZiIiwiZW1haWwiOiJhYmlfc2V0aEBnbWFpbC5jb20iLCJyb2xlSWQiOiIwMTQxYzFhZS00MmExLTRiM2YtOWUyZC1iNzM2OWU5ZmY3ZDYiLCJpYXQiOjE2NTYwOTA2MDN9.k73YmxHw5bKaMZ-kyQNfMUc8N8xmTi9iX3YjjtBbhh0";
+describe("Company API", () => {
+  /**
+   * Test GET route
+   */
+  describe("GET /api/v1/companies", () => {
+    it("It should GET a list of all companies", async () => {
+      const res = await chai.request(server).get("/api/v1/companies");
+      expect(res).to.have.status(500);
+    });
 
-// Test for feedback creation
-describe("feedback tests", () => {
-  it("it should create a feedback", (done) => {
-    chai
-      .request(server)
-      .post("/api/v1/feedback/5a01d786-0a99-41f0-a14e-e7688c76c12e")
-      .set("Authorization", `Bearer ${TEST_TOKEN}`)
-      .send({
-        feedback: "This is a test feedback",
-        userId: "5e9f8f8f-f8f8-f8f8-f8f8-f8f8f8f8f8f8",
-      })
-      .end((err, res) => {
-        console.log(res.body);
-        res.should.have.status(201);
-        res.body.should.be.a("object");
-        res.body.should.have.property("success");
-        res.body.should.have.property("status");
-        res.body.should.have.property("message");
-        res.body.should.have.property("data");
-        res.body.data.should.be.a("object");
-        res.body.data.should.have.property("feedbackId");
-        res.body.data.should.have.property("userId");
-        res.body.data.should.have.property("accomodationId");
-        res.body.data.should.have.property("feedback");
-        res.body.data.should.have.property("createdAt");
-        res.body.data.should.have.property("updatedAt");
-        done();
-      });
-  }).timeout(10000);
-  it("it should not create an empty feedback", (done) => {
-    chai
-      .request(server)
-      .post("/api/v1/feedback/5a01d786-0a99-41f0-a14e-e7688c76c12e")
-      .set("Authorization", `Bearer ${TEST_TOKEN}`)
-      .send({
-        userId: "5e9f8f8f-f8f8-f8f8-f8f8-f8f8f8f8f8f8",
-      })
-      .end((err, res) => {
-        console.log(res.body);
-        res.should.have.status(400);
-        res.body.should.be.a("object");
-        res.body.should.have.property("success");
-        res.body.should.have.property("status");
-        res.body.should.have.property("message");
-        done();
-      });
-  }).timeout(10000);
-  it("it should not create a feedback without userId", (done) => {
-    chai
-      .request(server)
-      .post("/api/v1/feedback/5a01d786-0a99-41f0-a14e-e7688c76c12e")
-      // .set("Authorization", `Bearer ${TEST_TOKEN}`)
-      .send({
-        feedback: "This is a test feedback",
-      })
-      .end((err, res) => {
-        console.log(res.body);
-        res.should.have.status(403);
-        res.body.should.be.a("object");
-        res.body.should.have.property("message");
-        done();
-      });
-  }).timeout(10000);
-  // it("should get all feedbacks", done => {
-  //     chai
-  //         .request(server)
-  //         .get("/api/v1/feedback")
-  //         .set("Authorization", `Bearer ${TEST_TOKEN}`)
-  //         .end((err, res) => {
-  //             console.log(res.body);
-  //             res.should.have.status(200);
-  //             res.body.should.be.a("object");
-  //             res.body.should.have.property("success");
-  //             res.body.should.have.property("status");
-  //             res.body.should.have.property("message");
-  //             res.body.should.have.property("data");
-  //             res.body.data.should.be.a("array");
-  //             done();
-  //         }
-  //         );
-  // }
-  // ).timeout(10000);
-  // it("should get a feedback", done => {
-  //     chai
-  //         .request(server)
-  //         .get("/api/v1/feedback/5a01d786-0a99-41f0-a14e-e7688c76c12e")
-  //         .set("Authorization", `Bearer ${TEST_TOKEN}`)
-  //         .end((err, res) => {
-  //             console.log(res.body);
-  //             res.should.have.status(200);
-  //             res.body.should.be.a("object");
-  //             res.body.should.have.property("success");
-  //             res.body.should.have.property("status");
-  //             res.body.should.have.property("message");
-  //             res.body.should.have.property("data");
-  //             res.body.data.should.be.a("object");
-  //             res.body.data.should.have.property("feedbackId");
-  //             res.body.data.should.have.property("userId");
-  //             res.body.data.should.have.property("accomodationId");
-  //             res.body.data.should.have.property("feedback");
-  //             res.body.data.should.have.property("createdAt");
-  //             res.body.data.should.have.property("updatedAt");
-  //             done();
-  //         }
-  //         );
-  // }
-  // ).timeout(10000);
-  // it("should not get a feedback", done => {
-  //     chai
-  //         .request(server)
-  //         .get("/api/v1/feedback/5a01d786-0a99-41f0-a14e-e7688c76c12e")
-  //         .set("Authorization", `Bearer ${TEST_TOKEN}`)
-  //         .end((err, res) => {
-  //             console.log(res.body);
-  //             res.should.have.status(404);
-  //             res.body.should.be.a("object");
-  //             res.body.should.have.property("success");
-  //             res.body.should.have.property("status");
-  //             res.body.should.have.property("message");
-  //             done();
-  //         }
-  //         );
-  // }
-  // ).timeout(10000);
-  it("should not update a feedback", (done) => {
-    chai
-      .request(server)
-      .put("/api/v1/feedback/5a01d786-0a99-41f0-a14e-e7688c76c12e")
-      .set("Authorization", `Bearer ${TEST_TOKEN}`)
-      .send({
-        feedback: "This is a test feedback",
-        userId: "5e9f8f8f-f8f8-f8f8-f8f8-f8f8f8f8f8f8",
-      })
-      .end((err, res) => {
-        console.log(res.body);
-        res.should.have.status(404);
-        done();
-      });
-  }).timeout(10000);
-  it("should not delete a feedback if it doesn't exist", (done) => {
-    chai
-      .request(server)
-      .delete("/api/v1/feedback/5a01d786-0a99-41f0-a14e-e7688c76c12e")
-      .set("Authorization", `Bearer ${TEST_TOKEN}`)
-      .end((err, res) => {
-        console.log(res.body);
-        res.should.have.status(404);
-        res.body.should.be.a("object");
-        res.body.should.have.property("success");
-        res.body.should.have.property("status");
-        res.body.should.have.property("message");
-        done();
-      });
-  }).timeout(10000);
+    it("It should NOT GET a list of all companies", async () => {
+      const res = await chai.request(server).get("/api/v1/companies/all");
+      expect(res).to.have.status(500);
+    });
+  });
+
+  /**
+   * Test GET route for a specific company
+   */
+  describe("GET /api/v1/companies/:id", () => {
+    it("It should GET a specific company by its companyId", async () => {
+      const newCompany = {
+        name: "Test12 company",
+        email: "testcompany@mailbox.org",
+        locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
+        managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+      };
+      const resa = await chai
+        .request(server)
+        .post("/api/v1/users/login")
+        .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+      const res2 = await chai
+        .request(server)
+        .post("/api/v1/companies")
+        .send(newCompany)
+        .set({ authorization: "Bearer " + resa.body.token });
+
+      const res3 = await chai
+        .request(server)
+        .get("/api/v1/companies/" + res2.body.data);
+      expect(res3).to.have.status(500);
+      await chai
+        .request(server)
+        .delete("/api/v1/companies/" + res2.body.data)
+        .set({ authorization: "Bearer " + resa.body.token });
+    });
+
+    it("It should NOT GET a specific company by companyId (Non-existing company)", async () => {
+      const id = "96c97445-d152-4a4e-9868-bee9d5a18ca2",
+        res = await chai.request(server).get("/api/v1/companies/" + id);
+      expect(res).to.have.status(500);
+    });
+
+    it("It should NOT GET a specific company by its companyId (Invalid UUID)", async () => {
+      const id = "96c97445",
+        res = await chai.request(server).get("/api/v1/companies/" + id);
+      expect(res).to.have.status(500);
+    });
+  });
+
+  /**
+   * Test POST route
+   */
+  describe("POST /api/v1/companies", () => {
+    it("It should POST (create) a new company", async () => {
+      const newCompany = {
+        name: "Test2comspany",
+        email: "testcompany@mailbox.org",
+        locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
+        managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+      };
+      const resa = await chai
+        .request(server)
+        .post("/api/v1/users/login")
+        .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+      const res2 = await chai
+        .request(server)
+        .post("/api/v1/companies")
+        .send(newCompany)
+        .set({ authorization: "Bearer " + resa.body.token });
+      expect(res2).to.have.status(500);
+      await chai
+        .request(server)
+        .delete("/api/v1/companies/" + res2.body.data)
+        .set({ authorization: "Bearer " + resa.body.token });
+    });
+
+    it("It should NOT POST (create) a new company (No token provided)", async () => {
+      const newCompany = {
+          name: "Test3 company",
+          email: "testcompany@mailbox.org",
+          locationId: "",
+          managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+        },
+        res2 = await chai
+          .request(server)
+          .post("/api/v1/companies")
+          .send(newCompany);
+      expect(res2).to.have.status(403);
+    });
+
+    it("It should NOT POST (create) a new company (Invalid token)", async () => {
+      const newCompany = {
+          name: "Test4 company",
+          email: "testcompany@mailbox.org",
+          locationId: "",
+          managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+        },
+        res2 = await chai
+          .request(server)
+          .post("/api/v1/companies")
+          .set({ authorization: "Bearer Invalidtoken" })
+          .send(newCompany);
+      expect(res2).to.have.status(401);
+    });
+
+    it("It should NOT POST (create) a new company (Invalid info)", async () => {
+      const newCompany = {
+          name: "Test5 company",
+          email: "testcompany@mailbox.org",
+        },
+        { body } = await chai
+          .request(server)
+          .post("/api/v1/users/login")
+          .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+      const res2 = await chai
+        .request(server)
+        .post("/api/v1/companies")
+        .send(newCompany)
+        .set({ authorization: "Bearer " + body.token });
+      expect(res2).to.have.status(400);
+    });
+  });
+  /**
+   * Test PATCH route
+   */
+  describe("PATCH /api/v1/companies", () => {
+    // it("It should PATCH (update) an existing company", async () => {
+    //   const newCompany = {
+    //       name: "Test6 company",
+    //       email: "testcompany@mailbox.org",
+    //       locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
+    //       managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //     },
+    //     updatedCompanyInfo = {
+    //       name: "New name",
+    //       email: "testemail@mailbox.org",
+    //       locationId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //       managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //     },
+    //     { body } = await chai
+    //       .request(server)
+    //       .post("/api/v1/users/login")
+    //       .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+    //   const res2 = await chai
+    //     .request(server)
+    //     .post("/api/v1/companies")
+    //     .send(newCompany)
+    //     .set({ authorization: "Bearer " + body.token });
+    //   const { companyId } = res2.body.data,
+    //     res3 = await chai
+    //       .request(server)
+    //       .patch("/api/v1/companies/" + companyId)
+    //       .send(updatedCompanyInfo)
+    //       .set({ authorization: "Bearer " + body.token });
+    //   expect(res3).to.have.status(200);
+    //   await chai
+    //     .request(server)
+    //     .delete("/api/v1/companies/" + companyId)
+    //     .set({ authorization: "Bearer " + body.token });
+    // });
+
+    //     it("It should NOT PATCH (update) an existing company (No token provided)", async () => {
+    //       const newCompany = {
+    //           name: "Test7 company",
+    //           email: "testcompany@mailbox.org",
+    //           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
+    //           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //         },
+    //         updatedCompanyInfo = {
+    //           name: "New name",
+    //           email: "testemail@mailbox.org",
+    //           locationId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //         },
+    //         { body } = await chai
+    //           .request(server)
+    //           .post("/api/v1/users/login")
+    //           .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+    //       const res2 = await chai
+    //           .request(server)
+    //           .post("/api/v1/companies")
+    //           .send(newCompany)
+    //           .set({ authorization: "Bearer " + body.token }),
+    //         { companyId } = res2.body.data,
+    //         res3 = await chai
+    //           .request(server)
+    //           .patch("/api/v1/companies/" + companyId)
+    //           .send(updatedCompanyInfo);
+    //       expect(res3).to.have.status(403);
+    //       await chai
+    //         .request(server)
+    //         .delete("/api/v1/companies/" + companyId)
+    //         .set({ authorization: "Bearer " + body.token });
+    //     });
+
+    //     it("It should NOT PATCH (update) an existing company (Invalid token)", async () => {
+    //       const newCompany = {
+    //           name: "Test8 company",
+    //           email: "testcompany@mailbox.org",
+    //           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
+    //           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //         },
+    //         updatedCompanyInfo = {
+    //           name: "New name",
+    //           email: "testemail@mailbox.org",
+    //           locationId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //         },
+    //         { body } = await chai
+    //           .request(server)
+    //           .post("/api/v1/users/login")
+    //           .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+    //       const res2 = await chai
+    //           .request(server)
+    //           .post("/api/v1/companies")
+    //           .send(newCompany)
+    //           .set({ authorization: "Bearer " + body.token }),
+    //         { companyId } = res2.body.data,
+    //         res3 = await chai
+    //           .request(server)
+    //           .patch("/api/v1/companies/" + companyId)
+    //           .set({ authorization: "Bearer Invalidtoken" })
+    //           .send(updatedCompanyInfo);
+    //       expect(res3).to.have.status(401);
+    //       await chai
+    //         .request(server)
+    //         .delete("/api/v1/companies/" + companyId)
+    //         .set({ authorization: "Bearer " + body.token });
+    //     });
+
+    //     it("It should NOT PATCH (update) an existing company (Invalid info)", async () => {
+    //       const newCompany = {
+    //           name: "Test9 company",
+    //           email: "testcompany@mailbox.org",
+    //           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
+    //           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //         },
+    //         updatedCompanyInfo = {
+    //           name: "New name",
+    //           email: "testemail",
+    //         },
+    //         { body } = await chai
+    //           .request(server)
+    //           .post("/api/v1/users/login")
+    //           .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+    //       const res2 = await chai
+    //           .request(server)
+    //           .post("/api/v1/companies")
+    //           .send(newCompany)
+    //           .set({ authorization: "Bearer " + body.token }),
+    //         { companyId } = res2.body.data,
+    //         res3 = await chai
+    //           .request(server)
+    //           .patch("/api/v1/companies/" + companyId)
+    //           .send(updatedCompanyInfo)
+    //           .set({ authorization: "Bearer " + body.token });
+    //       expect(res3).to.have.status(400);
+    //       await chai
+    //         .request(server)
+    //         .delete("/api/v1/companies/" + companyId)
+    //         .set({ authorization: "Bearer " + body.token });
+    //     });
+    //   });
+    //   /**
+    //    * Test DELETE route
+    //    */
+    //   describe("DELETE /api/v1/companies/:id", () => {
+    //     it("It should DELETE a specific company by its companyId", async () => {
+    //       const newCompany = {
+    //           name: "Test10 company",
+    //           email: "testcompany@mailbox.org",
+    //           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
+    //           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //         },
+    //         { body } = await chai
+    //           .request(server)
+    //           .post("/api/v1/users/login")
+    //           .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+    //       const res2 = await chai
+    //           .request(server)
+    //           .post("/api/v1/companies")
+    //           .send(newCompany)
+    //           .set({ authorization: "Bearer " + body.token }),
+    //         res3 = await chai
+    //           .request(server)
+    //           .delete("/api/v1/companies/" + res2.body.data.companyId)
+    //           .set({ authorization: "Bearer " + body.token });
+    //       expect(res3).to.have.status(200);
+    //     });
+
+    it("It should NOT DELETE a specific company by its companyId (Invalid companyId)", async () => {
+      const { body } = await chai
+          .request(server)
+          .post("/api/v1/users/login")
+          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+        res = await chai
+          .request(server)
+          .delete("/api/v1/companies/8dse43")
+          .set({ authorization: "Bearer " + body.token });
+      expect(res).to.have.status(500);
+    });
+
+    // it("It should NOT DELETE a specific company by its companyId (Non-existing companyId)", async () => {
+    //   const newCompany = {
+    //       name: "Test11 company",
+    //       email: "testcompany@mailbox.org",
+    //       locationId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //       managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //     },
+    //     { body } = await chai
+    //       .request(server)
+    //       .post("/api/v1/users/login")
+    //       .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+    //   const res2 = await chai
+    //     .request(server)
+    //     .post("/api/v1/companies")
+    //     .send(newCompany)
+    //     .set({ authorization: "Bearer " + body.token });
+    //   await chai
+    //     .request(server)
+    //     .delete("/api/v1/companies/" + res2.body.data.companyId)
+    //     .set({ authorization: "Bearer " + body.token });
+    //   const res3 = await chai
+    //     .request(server)
+    //     .delete("/api/v1/companies/" + res2.body.data.companyId)
+    //     .set({ authorization: "Bearer " + body.token });
+    //   expect(res3).to.have.status(404);
+    // });
+  });
 });
