@@ -204,7 +204,7 @@ exports.signIn = async (req, res) => {
 
 exports.resetPassword = async(req,res)=>{
   try{
-    let all = await User.findAll({where: {}})
+    // let all = await User.findAll({where: {}})
     let user = await User.findOne({ where: { email: req.body.email } });
 
     if(!user)
@@ -239,9 +239,12 @@ exports.resetPassword = async(req,res)=>{
 
 exports.newPassword = async(req,res)=>{
   try{
-    let {token, newPassword} = req.body;
+    let {token, newPassword,cpassword} = req.body;
 
     try{
+      if(newPassword != cpassword){
+        return res.send("Passwords don't match!")
+      }
       jwt.verify(token,TOKEN_SECRET, async(err, decoded) => {
         if (err) 
         return res.status(401).send({ message: "Invalid Token"});
