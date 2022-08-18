@@ -692,6 +692,17 @@
             "Booking"
           ],
           "description": "Get all bookings",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "type": "string"
+            }
+          ],
           "responses": {
             "200": {
               "description": "Query ok"
@@ -710,7 +721,7 @@
           "tags": [
             "Booking"
           ],
-          "description": "",
+          "description": "Create a new room booking request",
           "consumes": [
             "application/json"
           ],
