@@ -802,6 +802,23 @@
           }
         }
       }
+    },
+    "/v1/roles": {
+      "get": {
+        "tags": ["Roles"],
+        "summary": "Get roles",
+        "description": "Get roles",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Roles retrieved successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
     }
   }
 }
