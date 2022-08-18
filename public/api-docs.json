@@ -685,6 +685,82 @@
             }
           }
         }
+      },
+      "/api/v1/bookings": {
+        "get": {
+          "tags": [
+            "Booking"
+          ],
+          "description": "Get all bookings",
+          "responses": {
+            "200": {
+              "description": "Query ok"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        },
+        "post": {
+          "tags": [
+            "Booking"
+          ],
+          "description": "",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "supplierId",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "accomodationId",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "roomId",
+              "in": "formData",
+              "required": true,
+              "type": "date"
+            },  
+              {
+              "name": "requesterId",
+              "in": "formData",
+              "required": true,
+              "type": "date"
+            }
+  
+          ],      
+          "responses": {
+            "200": {
+              "description": "Trip request created successivelly"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "422": {
+              "description": "Unprocessable Entity"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
       }
     },
     "definitions": {
