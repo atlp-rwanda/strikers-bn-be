@@ -721,7 +721,7 @@
           "tags": [
             "Booking"
           ],
-          "description": "Create a new room booking request",
+          "description": "Create a new request to book a room in a certain accomodation",
           "consumes": [
             "application/json"
           ],
