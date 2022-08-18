@@ -1,7 +1,7 @@
 // @ts-nocheck
 import _ from 'lodash';
 import {
-  User, Company as Companies, Booking
+  User, Companies, Booking
 } from '../models';
 import { validateBookingRegistration } from '../validators/booking.validator';
 

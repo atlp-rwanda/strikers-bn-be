@@ -25,7 +25,7 @@ router.post('/', newBooking);
  * @access Public
  * @type GET
  */
-router.get('/', getAllBookings);
+router.get('/', [verifyToken, travelAdmin], getAllBookings);
 
 /**
  * @description To get a specific booking
