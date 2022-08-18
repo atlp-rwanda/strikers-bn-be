@@ -556,7 +556,6 @@ describe("Booking API", () => {
         .delete("/api/v1/companies/" + companyId)
         .set({ authorization: "Bearer " + res2.body.token });
     });
-=======
 
       const newBooking = {
         supplierId: res10.body.data,
