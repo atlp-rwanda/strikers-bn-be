@@ -738,6 +738,18 @@
               "in": "formData",
               "required": true,
               "type": "date"
+            },
+            {
+              "name": "startDate",
+              "in": "formData",
+              "required": true,
+              "type": "date"
+            },
+            {
+              "name": "endDate",
+              "in": "formData",
+              "required": true,
+              "type": "date"
             }
   
           ],      
@@ -793,6 +805,35 @@
           }
         }
       },
+      "Booking": {
+        "type": "object",
+        "properties": {
+        "supplierId": {
+          "type": "string",
+          "required": true
+        },
+        "accomodationId": {
+          "type": "string",
+          "required": true
+        },
+        "roomId": {
+          "type": "string",
+          "required": true
+        },
+        "requesterId": {
+          "type": "string",
+          "required": true
+        },
+        "startDate": {
+          "type": "date",
+          "required": true
+        },
+        "endDate": {
+          "type": "date",
+          "required": true
+        }
+      }
+    },
       "TripRequest": {
         "type": "object",
         "properties": {
