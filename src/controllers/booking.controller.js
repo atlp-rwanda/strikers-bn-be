@@ -1,7 +1,7 @@
 // @ts-nocheck
 import _ from 'lodash';
 import {
-  User, Companies, Booking
+  User, Company, Booking
 } from '../models';
 import { validateBookingRegistration } from '../validators/booking.validator';
 
@@ -43,7 +43,7 @@ export async function newBooking(req, res) {
       })
     }
 
-    const checkSupplier = await Companies.findOne({
+    const checkSupplier = await Company.findOne({
       where: { companyId: newBooking.supplierId },
     });
 
@@ -85,7 +85,7 @@ export async function newBooking(req, res) {
         supplierId,
         accomodationId,
         roomId,
-        requesterId,
+        requesterId
       },
     });
 
@@ -118,6 +118,8 @@ export async function newBooking(req, res) {
         'supplierId',
         'accomodationId',
         'roomId',
+        'startDate',
+        'endDate',
         'requesterId',
         'status',
       ])

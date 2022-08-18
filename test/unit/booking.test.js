@@ -69,6 +69,8 @@ describe("Booking API", () => {
           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
+          startDate: new Date("2023-08-11"),
+          endDate: new Date("2023-09-22")
         },
         res1 = await chai
           .request(server)
@@ -117,6 +119,8 @@ describe("Booking API", () => {
           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
+          startDate: new Date("2023-08-11"),
+          endDate: new Date("2023-09-22")
         },
         res1 = await chai
           .request(server)
@@ -195,6 +199,8 @@ describe("Booking API", () => {
           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
+          startDate: new Date("2023-08-11"),
+          endDate: new Date("2023-09-22")
         },
         res1 = await chai
           .request(server)
@@ -275,6 +281,8 @@ describe("Booking API", () => {
           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a5211abf1111",
+          startDate: new Date("2023-08-11"),
+          endDate: new Date("2023-09-22")
         },
         res1 = await chai
           .request(server)
@@ -316,6 +324,8 @@ describe("Booking API", () => {
           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
+          startDate: new Date("2023-08-11"),
+          endDate: new Date("2023-09-22")
         },
         res4 = await chai
           .request(server)
@@ -364,6 +374,8 @@ describe("Booking API", () => {
           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
+          startDate: new Date("2023-08-11"),
+          endDate: new Date("2023-09-22")
         },
         { body } = await chai
           .request(server)
@@ -421,6 +433,8 @@ describe("Booking API", () => {
           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
+          startDate: new Date("2023-08-11"),
+          endDate: new Date("2023-09-22")
         },
         res1 = await chai
           .request(server)
@@ -464,6 +478,8 @@ describe("Booking API", () => {
           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
+          startDate: new Date("2023-08-11"),
+          endDate: new Date("2023-09-22")
         },
         res1 = await chai
           .request(server)
