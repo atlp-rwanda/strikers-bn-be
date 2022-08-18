@@ -1,7 +1,7 @@
 // @ts-nocheck
 import _ from 'lodash';
 import {
-  User, Company, Booking, Accommodation
+  User, Company as Companies, Booking
 } from '../models';
 import { validateBookingRegistration } from '../validators/booking.validator';
 
@@ -22,14 +22,14 @@ export async function newBooking(req, res) {
     const startDateMonth = new Date(startDate).getMonth()
     const endDateMonth = new Date(endDate).getMonth()
 
-    if(endDateMonth == startDateMonth) {
+    if(startDate == endDate) {
       return res.status(400).json({
         success: false,
         message: "You can't have start date equal to end date"
       })
     }
 
-    if(endDateMonth < startDateMonth) {
+    if(endDate < startDate) {
       return res.status(400).json({
         success: false,
         message: "End date must be greater than start date"
@@ -43,7 +43,7 @@ export async function newBooking(req, res) {
       })
     }
 
-    const checkSupplier = await Company.findOne({
+    const checkSupplier = await Companies.findOne({
       where: { companyId: newBooking.supplierId },
     });
 
