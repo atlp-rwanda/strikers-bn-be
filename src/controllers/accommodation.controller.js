@@ -141,7 +141,14 @@ export async function getTopAccommodations(req, res) {
     const accommodations = await Accommodation.findAll({
       limit: 5,
       order: [["likes", "ASC"]],
-      attributes: ["uuid", "name", "location", "picture", "likes"],
+      attributes: [
+        "uuid",
+        "name",
+        "location",
+        "picture",
+        "likes",
+        "roomNumber",
+      ],
     });
     if (accommodations.length == 0) {
       return res.status(200).send({ message: "No accommodation found!" });
