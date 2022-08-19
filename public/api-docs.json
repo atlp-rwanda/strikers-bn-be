@@ -334,81 +334,143 @@
                 }
               ]
             }
-          }    
+          }
+         
     },
     "definitions": {
-        "User": {
-            "type": "object",
-            "properties": {
-                "firstName": {
-                    "type": "string",
-                    "required": true
-                },
-                "lastName": {
-                    "type": "string",
-                    "required": true
-                },
-                "email": {
-                    "type": "string",
-                    "required": true
-                },
-                "password": {
-                    "type": "string",
-                    "required": true
-                },
-                "roleId": {
-                    "type": "string",
-                    "required": true
-                },
-                " phoneNumber": {
-                    "type": "string",
-                    "required": true
-                }
-            }
-        },
-        "Booking": {
-            "supplierId": {
-              "type": "string",
-              "required": true
-            },
-            "accomodationId": {
-              "type": "string",
-              "required": true
-            },
-            "roomId": {
-              "type": "string",
-              "required": true
-            },
-            "requesterId": {
-              "type": "string",
-              "required": true
-            }
-        },
-        "TripRequest": {
-            "type": "object",
-            "properties": {
-                "source": {
-                    "type": "string",
-                    "required": true
-                },
-                "destination": {
-                    "type": "string",
-                    "required": true
-                },
-                "DateOfTravel": {
-                    "type": "date",
-                    "required": true
-                },
-                "DateOfDestination": {
-                    "type": "date",
-                    "required": true
-                },
-                "status": {
-                    "type": "string",
-                    "required": true
-                }
-            }
+      "User": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "required": true
+          },
+          "lastName": {
+            "type": "string",
+            "required": true
+          },
+          "email": {
+            "type": "string",
+            "required": true
+          },
+          "password": {
+            "type": "string",
+            "required": true
+          },
+          "roleId": {
+            "type": "string",
+            "required": true
+          },
+          " phoneNumber": {
+            "type": "string",
+            "required": true
+          }
         }
+      },
+      "TripRequest": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "required": true
+          },
+          "destination": {
+            "type": "string",
+            "required": true
+          },
+          "DateOfTravel": {
+            "type": "date",
+            "required": true
+          },
+          "DateOfDestination": {
+            "type": "date",
+            "required": true
+          },
+          "status": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "Booking": {
+        "supplierId": {
+          "type": "string",
+          "required": true
+        },
+        "accomodationId": {
+          "type": "string",
+          "required": true
+        },
+        "roomId": {
+          "type": "string",
+          "required": true
+        },
+        "requesterId": {
+          "type": "string",
+          "required": true
+        }
+    },
+      "TripRequestComment": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "NewChatRoom": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "NewChatMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "Feedback": {
+        "type": "object",
+        "properties": {
+          "feedbackId": {
+            "type": "string",
+            "required": true
+          },
+          "userId": {
+            "type": "string",
+            "required": true
+          },
+          "feedback": {
+            "type": "string",
+            "required": true
+          }
+        }
+      }
+    },
+    "/v1/roles": {
+      "get": {
+        "tags": ["Roles"],
+        "summary": "Get roles",
+        "description": "Get roles",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Roles retrieved successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
     }
-   
+  }
 }

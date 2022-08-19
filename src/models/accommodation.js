@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Accommodation.hasMany(models.Feedback, {
+        foreignKey: 'accomodationId',
+        as: 'feedbacks',
+        onDelete: 'CASCADE',
+      });
     }
 
     toJSON() {
@@ -56,6 +61,10 @@ module.exports = (sequelize, DataTypes) => {
       ammenities: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      likes: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       },
     },
     {
