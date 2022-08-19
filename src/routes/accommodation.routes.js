@@ -1,10 +1,15 @@
-import express from 'express';
+import express from "express";
 import {
-  createAccommodation, getAccommodation, updateAccommodation, deleteAccommodation, likeOrUnlikeAccommodation
-} from '../controllers/accommodation.controller';
-import upload from '../utils/multer';
-import { travelAdmin } from '../middlewares/travel-admin';
-import { verifyToken } from '../middlewares/auth';
+  createAccommodation,
+  getAccommodation,
+  updateAccommodation,
+  deleteAccommodation,
+  likeOrUnlikeAccommodation,
+  getTopAccommodations,
+} from "../controllers/accommodation.controller";
+import upload from "../utils/multer";
+import { travelAdmin } from "../middlewares/travel-admin";
+import { verifyToken } from "../middlewares/auth";
 
 const router = express.Router();
 
@@ -14,7 +19,7 @@ const router = express.Router();
  * @access Private
  * @type GET
  */
-router.get('/', getAccommodation);
+router.get("/", getAccommodation);
 
 /**
  * @description To Create Accommodation
@@ -22,7 +27,7 @@ router.get('/', getAccommodation);
  * @access Private
  * @type POST
  */
-router.post('/', travelAdmin, upload.single('picture'), createAccommodation);
+router.post("/", travelAdmin, upload.single("picture"), createAccommodation);
 
 /**
  * @description To Create Accommodation
@@ -30,7 +35,7 @@ router.post('/', travelAdmin, upload.single('picture'), createAccommodation);
  * @access Private
  * @type PUT
  */
-router.put('/:uuid', travelAdmin, updateAccommodation);
+router.put("/:uuid", travelAdmin, updateAccommodation);
 
 /**
  * @description To Create Accommodation
@@ -38,7 +43,7 @@ router.put('/:uuid', travelAdmin, updateAccommodation);
  * @access Private
  * @type DELETE
  */
-router.delete('/:uuid', travelAdmin, deleteAccommodation);
+router.delete("/:uuid", travelAdmin, deleteAccommodation);
 
 /**
  * @description To like & unlike an accommodation
@@ -46,6 +51,14 @@ router.delete('/:uuid', travelAdmin, deleteAccommodation);
  * @access Private
  * @type POST
  */
-router.post('/:accomodationId/like', verifyToken, likeOrUnlikeAccommodation);
+router.post("/:accomodationId/like", verifyToken, likeOrUnlikeAccommodation);
+
+/**
+ * @description Get 5 Top accomodations
+ * @api api/accommodation
+ * @access Private
+ * @type GET
+ */
+router.get("/top", verifyToken, getTopAccommodations);
 
 module.exports = router;
