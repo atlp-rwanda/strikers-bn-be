@@ -708,15 +708,6 @@
         "tags": ["Accomodation"],
         "description": "Get 5 Top Accomodations",
         "produces": ["application/json"],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "description": "JWT Token of the user",
-            "type": "string",
-            "required": "true"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Success"

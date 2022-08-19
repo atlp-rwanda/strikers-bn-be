@@ -59,6 +59,6 @@ router.post("/:accomodationId/like", verifyToken, likeOrUnlikeAccommodation);
  * @access Private
  * @type GET
  */
-router.get("/top", verifyToken, getTopAccommodations);
+router.get("/top", getTopAccommodations);
 
 module.exports = router;
