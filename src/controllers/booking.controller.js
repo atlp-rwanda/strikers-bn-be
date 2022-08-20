@@ -17,6 +17,32 @@ export async function newBooking(req, res) {
         .json(validateBookingInput.error.details[0].message);
     }
 
+    const { startDate, endDate } = newBooking
+
+    const startDateMonth = new Date(startDate).getMonth()
+    const endDateMonth = new Date(endDate).getMonth()
+
+    if(endDateMonth == startDateMonth) {
+      return res.status(400).json({
+        success: false,
+        message: "You can't have start date equal to end date"
+      })
+    }
+
+    if(endDateMonth < startDateMonth) {
+      return res.status(400).json({
+        success: false,
+        message: "End date must be greater than start date"
+      })
+    }
+
+    if((endDateMonth - startDateMonth) > 8) {
+      return res.status(400).json({
+        success: false,
+        message: "You can not exceed 8 months interval booking a room in an accomodation"
+      })
+    }
+
     const checkSupplier = await Company.findOne({
       where: { companyId: newBooking.supplierId },
     });
