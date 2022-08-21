@@ -283,7 +283,7 @@
               "tags": [
                 "Booking"
               ],
-              "description": "",
+              "description": "Should create a new booking request",
               "consumes": [
                 "application/json"
               ],
@@ -304,10 +304,22 @@
                   "name": "roomId",
                   "in": "formData",
                   "required": true,
-                  "type": "date"
+                  "type": "string"
                 },  
                   {
                   "name": "requesterId",
+                  "in": "formData",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "name": "startDate",
+                  "in": "formData",
+                  "required": true,
+                  "type": "date"
+                },
+                {
+                  "name": "endDate",
                   "in": "formData",
                   "required": true,
                   "type": "date"
