@@ -1,7 +1,7 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class Booking extends Model {
+  class Company extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,43 +11,30 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Booking.init(
+  Company.init(
     {
-      bookingId: {
+      companyId: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
       },
-      supplierId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-      },
-      accomodationId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-      },
-      roomId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-      },
-      requesterId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-      },
-      status: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "pending",
       },
-      startDate: {
-        type: DataTypes.DATE,
+      email: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
-      endDate: {
-        type: DataTypes.DATE,
+      locationId: {
+        type: DataTypes.UUID,
         allowNull: false,
       },
-      dateSubmitted: {
+      managerId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
+      dateRegistered: {
         type: DataTypes.DATE,
         defaultValue: Date.now(),
         allowNull: false,
@@ -55,8 +42,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Booking",
+      modelName: "Company",
     }
   );
-  return Booking;
+  return Company;
 };

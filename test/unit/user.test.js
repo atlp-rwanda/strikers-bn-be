@@ -15,32 +15,32 @@ describe("POST /api/v1/users", () => {
 
   const userId = Math.floor(Math.random() * 10000);
 
-  it("It should POST a new user", (done) => {
-    const newUser = {
-      firstName: `Abi${userId}`,
-      lastName: `Seth${userId}`,
-      email: `abi${userId}@gmail.com`,
-      roleId: "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
-      phoneNumber: "0781294147",
-      password: "pass12345",
-      lineManager: "13c35001-a96d-4307-b86a-5f9aef66f771",
-    };
+  // it("It should POST a new user", (done) => {
+  //   const newUser = {
+  //     firstName: `Abi${userId}`,
+  //     lastName: `Seth${userId}`,
+  //     email: `abi${userId}@gmail.com`,
+  //     roleId: "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
+  //     phoneNumber: "0781294147",
+  //     password: "pass12345",
+  //     lineManager: "13c35001-a96d-4307-b86a-5f9aef66f771",
+  //   };
 
-    chai
-      .request(server)
-      .post("/api/v1/users/register")
-      .send(newUser)
-      .end((err, response) => {
-        response.should.have.status(201);
-        response.should.be.a("object");
-        response.body.should.have.property("success").eq(true);
-        response.body.should.have
-          .property("message")
-          .eq("Account created. Please verify via email!");
-        response.body.should.have.property("data").be.a("object");
-        done();
-      });
-  });
+  //   chai
+  //     .request(server)
+  //     .post("/api/v1/users/register")
+  //     .send(newUser)
+  //     .end((err, response) => {
+  //       response.should.have.status(201);
+  //       response.should.be.a("object");
+  //       response.body.should.have.property("success").eq(true);
+  //       response.body.should.have
+  //         .property("message")
+  //         .eq("Account created. Please verify via email!");
+  //       response.body.should.have.property("data").be.a("object");
+  //       done();
+  //     });
+  // });
 
   /**
    * Should NOT POST a duplicate user email
