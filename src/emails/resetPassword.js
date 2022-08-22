@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendResetPasswordEmail = async (user, token) => {
-  const base_url = 'localhost:3000/changepassword';
+  const base_url = 'https://strikers-barefoot-fe.vercel.app/changepassword';
 
   const res = await transporter.sendMail({
     from: process.env.EMAIL,
