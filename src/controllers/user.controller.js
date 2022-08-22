@@ -230,11 +230,10 @@ exports.resetPassword = async(req,res)=>{
           return res.status(200).send({messageSuccess: "Email was sent successfully, it will expires in 30 minutes"})
       }
     
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error)
    return res.status(404).send(error);
-  }
+  }   
 }
 
 exports.newPassword = async(req,res)=>{

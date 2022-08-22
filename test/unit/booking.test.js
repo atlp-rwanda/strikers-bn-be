@@ -17,7 +17,7 @@ describe("Booking API", () => {
       const { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+          .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
         res = await chai
           .request(server)
           .get("/api/v1/bookings")
@@ -30,7 +30,7 @@ describe("Booking API", () => {
       const { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+          .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
         res = await chai
           .request(server)
           .get("/api/v1/bookings/all")
@@ -64,20 +64,19 @@ describe("Booking API", () => {
         .send(newCompany)
         .set({ authorization: "Bearer " + res2.body.token });
       const newBooking = {
-          supplierId: "129f8061-493c-439a-af1d-8bfcd54140fa",
-          accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
-          roomId: "72117a46-7ba2-495d-8846-221313470ad4",
-          requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
-        }
+        supplierId: "129f8061-493c-439a-af1d-8bfcd54140fa",
+        accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
+        roomId: "72117a46-7ba2-495d-8846-221313470ad4",
+        requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
+      };
       const res1 = await chai
-          .request(server)
-          .post("/api/v1/bookings")
-          .send(newBooking);
+        .request(server)
+        .post("/api/v1/bookings")
+        .send(newBooking);
       const { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
-        
+          .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
         res = await chai
           .request(server)
           .get("/api/v1/bookings/" + res1.body.data)
@@ -90,7 +89,7 @@ describe("Booking API", () => {
         .set({ authorization: "Bearer " + body.token });
       await chai
         .request(server)
-        .delete("/api/v1/companies/" +res10.body.data)
+        .delete("/api/v1/companies/" + res10.body.data)
         .set({ authorization: "Bearer " + res2.body.token });
     });
 
@@ -121,10 +120,10 @@ describe("Booking API", () => {
           .post("/api/v1/bookings")
           .send(newBooking);
       const { body } = await chai
-          .request(server)
-          .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" })
-        
+        .request(server)
+        .post("/api/v1/users/login")
+        .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
+
       await chai
         .request(server)
         .delete("/api/v1/bookings/" + res1.body.data)
@@ -146,7 +145,7 @@ describe("Booking API", () => {
         { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+          .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
         res = await chai
           .request(server)
           .get("/api/v1/bookings/" + bookingId)
@@ -187,21 +186,21 @@ describe("Booking API", () => {
         .post("/api/v1/companies")
         .send(newCompany)
         .set({ authorization: "Bearer " + res2.body.token });
-        const newBooking = {
-          supplierId: "129f8061-493c-439a-af1d-8bfcd54140fa",
-          accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
-          roomId: "72117a46-7ba2-495d-8846-221313470ad4",
-          requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
-        }
-      const  res1 = await chai
-          .request(server)
-          .post("/api/v1/bookings")
-          .send(newBooking);
+      const newBooking = {
+        supplierId: "129f8061-493c-439a-af1d-8bfcd54140fa",
+        accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
+        roomId: "72117a46-7ba2-495d-8846-221313470ad4",
+        requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
+      };
+      const res1 = await chai
+        .request(server)
+        .post("/api/v1/bookings")
+        .send(newBooking);
       const { body } = await chai
-          .request(server)
-          .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" })
-        
+        .request(server)
+        .post("/api/v1/users/login")
+        .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
+
       expect(res1).to.have.status(500);
       expect(res1.body).to.be.a("object");
       await chai
@@ -230,19 +229,19 @@ describe("Booking API", () => {
         .post("/api/v1/companies")
         .send(newCompany)
         .set({ authorization: "Bearer " + res2.body.token });
-      
-      const  newBooking = {
-          supplierId: res10.body.data,
-          accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
-        }
-      const  res1 = await chai
-          .request(server)
-          .post("/api/v1/bookings")
-          .send(newBooking);
+
+      const newBooking = {
+        supplierId: res10.body.data,
+        accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
+      };
+      const res1 = await chai
+        .request(server)
+        .post("/api/v1/bookings")
+        .send(newBooking);
       const { body } = await chai
         .request(server)
         .post("/api/v1/users/login")
-        .send({ email: "regiskayitare@gmail.com", password: "pass12345" });
+        .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
       expect(res1).to.have.status(400);
       await chai
         .request(server)
@@ -280,7 +279,7 @@ describe("Booking API", () => {
     //   const { body } = await chai
     //     .request(server)
     //     .post("/api/v1/users/login")
-    //     .send({ email: "regiskayitare@gmail.com", password: "pass12345" });
+    //     .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
     //   expect(res1).to.have.status(404);
     //   expect(res1.body.message).to.be.equal(
     //     "No user is registered with that requesterId you provided"
@@ -325,7 +324,7 @@ describe("Booking API", () => {
     //   const { body } = await chai
     //       .request(server)
     //       .post("/api/v1/users/login")
-    //       .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+    //       .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
     //     { bookingId } = res4.body.data;
     //   expect(res1).to.have.status(400);
     //   expect(res1.body).to.be.a("object");
@@ -339,58 +338,58 @@ describe("Booking API", () => {
     //     .set({ authorization: "Bearer " + res2.body.token });
     // });
 
-//     it("It should NOT POST (create) a new booking (room has already been booked)", async () => {
-//       const newCompany = {
-//           name: "Test1 company",
-//           email: "testcompany@mailbox.org",
-//           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
-//           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
-//         },
-//         res2 = await chai
-//           .request(server)
-//           .post("/api/v1/users/login")
-//           .send({ email: "abi_seth@gmail.com", password: "pass12345" });
-//       const res10 = await chai
-//         .request(server)
-//         .post("/api/v1/companies")
-//         .send(newCompany)
-//         .set({ authorization: "Bearer " + res2.body.token });
-//       const { companyId } = res10.body.data,
-//         newBooking = {
-//           supplierId: companyId,
-//           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
-//           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
-//           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
-//         },
-//         { body } = await chai
-//           .request(server)
-//           .post("/api/v1/users/login")
-//           .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
-//         res4 = await chai
-//           .request(server)
-//           .post("/api/v1/bookings")
-//           .send(newBooking),
-//         { bookingId } = res4.body.data;
-//       await chai
-//         .request(server)
-//         .post("/api/v1/bookings/confirm/" + bookingId)
-//         .send(newBooking);
-//       const res1 = await chai
-//         .request(server)
-//         .post("/api/v1/bookings")
-//         .send(newBooking)
-//         .set({ authorization: "Bearer " + body.token });
-//       expect(res1).to.have.status(400);
-//       expect(res1.body).to.be.a("object");
-//       await chai
-//         .request(server)
-//         .delete("/api/v1/bookings/" + bookingId)
-//         .set({ authorization: "Bearer " + body.token });
-//       await chai
-//         .request(server)
-//         .delete("/api/v1/companies/" + companyId)
-//         .set({ authorization: "Bearer " + res2.body.token });
-//     });
+    //     it("It should NOT POST (create) a new booking (room has already been booked)", async () => {
+    //       const newCompany = {
+    //           name: "Test1 company",
+    //           email: "testcompany@mailbox.org",
+    //           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
+    //           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
+    //         },
+    //         res2 = await chai
+    //           .request(server)
+    //           .post("/api/v1/users/login")
+    //           .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+    //       const res10 = await chai
+    //         .request(server)
+    //         .post("/api/v1/companies")
+    //         .send(newCompany)
+    //         .set({ authorization: "Bearer " + res2.body.token });
+    //       const { companyId } = res10.body.data,
+    //         newBooking = {
+    //           supplierId: companyId,
+    //           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
+    //           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
+    //           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
+    //         },
+    //         { body } = await chai
+    //           .request(server)
+    //           .post("/api/v1/users/login")
+    //           .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
+    //         res4 = await chai
+    //           .request(server)
+    //           .post("/api/v1/bookings")
+    //           .send(newBooking),
+    //         { bookingId } = res4.body.data;
+    //       await chai
+    //         .request(server)
+    //         .post("/api/v1/bookings/confirm/" + bookingId)
+    //         .send(newBooking);
+    //       const res1 = await chai
+    //         .request(server)
+    //         .post("/api/v1/bookings")
+    //         .send(newBooking)
+    //         .set({ authorization: "Bearer " + body.token });
+    //       expect(res1).to.have.status(400);
+    //       expect(res1.body).to.be.a("object");
+    //       await chai
+    //         .request(server)
+    //         .delete("/api/v1/bookings/" + bookingId)
+    //         .set({ authorization: "Bearer " + body.token });
+    //       await chai
+    //         .request(server)
+    //         .delete("/api/v1/companies/" + companyId)
+    //         .set({ authorization: "Bearer " + res2.body.token });
+    //     });
   });
   /**
    * Test DELETE route for a specific booking
@@ -411,8 +410,8 @@ describe("Booking API", () => {
         .request(server)
         .post("/api/v1/companies")
         .send(newCompany)
-        .set({ authorization: "Bearer " + res2.body.token });      
-        const newBooking = {
+        .set({ authorization: "Bearer " + res2.body.token });
+      const newBooking = {
           supplierId: res10.body.data,
           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
@@ -423,14 +422,14 @@ describe("Booking API", () => {
           .post("/api/v1/bookings")
           .send(newBooking);
       const { body } = await chai
-          .request(server)
-          .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" })
-        
-       const res = await chai
-          .request(server)
-          .delete("/api/v1/bookings/" + res1.body.data)
-          .set({ authorization: "Bearer " + body.token });
+        .request(server)
+        .post("/api/v1/users/login")
+        .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
+
+      const res = await chai
+        .request(server)
+        .delete("/api/v1/bookings/" + res1.body.data)
+        .set({ authorization: "Bearer " + body.token });
       expect(res).to.have.status(500);
       await chai
         .request(server)
@@ -454,8 +453,8 @@ describe("Booking API", () => {
         .post("/api/v1/companies")
         .send(newCompany)
         .set({ authorization: "Bearer " + res2.body.token });
-      
-      const  newBooking = {
+
+      const newBooking = {
           supplierId: res10.body.data,
           accomodationId: "d3a3ebae-b13b-42e9-afa8-319736274c02",
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
@@ -466,10 +465,10 @@ describe("Booking API", () => {
           .post("/api/v1/bookings")
           .send(newBooking);
       const { body } = await chai
-          .request(server)
-          .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" })
-        
+        .request(server)
+        .post("/api/v1/users/login")
+        .send({ email: "abiheloaf@gmail.com", password: "pass12345" });
+
       await chai
         .request(server)
         .delete("/api/v1/bookings/" + res1.body.data)
@@ -490,7 +489,7 @@ describe("Booking API", () => {
         { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "regiskayitare@gmail.com", password: "pass12345" }),
+          .send({ email: "abiheloaf@gmail.com", password: "pass12345" }),
         res = await chai
           .request(server)
           .delete("/api/v1/bookings/" + bookingId)
