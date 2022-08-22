@@ -40,8 +40,19 @@ userRouter.get('/:uuid', getUser);
  * @type POST
  */
 userRouter.post('/login', signIn);
-
+/**
+ * @description To send reset link to email provided
+ * @api v1/api/users/resetpassword
+ * @access Public
+ * @type POST
+ */
 userRouter.post('/resetpassword', resetPassword);
+/**
+ * @description To change password
+ * @api v1/api/users/resetpassword
+ * @access Public
+ * @type PATCH
+ */
 userRouter.patch('/resetpassword', newPassword);
 
 /**
