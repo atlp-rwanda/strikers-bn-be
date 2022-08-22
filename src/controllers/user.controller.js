@@ -241,9 +241,6 @@ exports.newPassword = async(req,res)=>{
     let {token, newPassword,cpassword} = req.body;
 
     try{
-      if(newPassword != cpassword){
-        return res.send("Passwords don't match!")
-      }
       jwt.verify(token,TOKEN_SECRET, async(err, decoded) => {
         if (err) 
         return res.status(401).send({ message: "Invalid Token"});
