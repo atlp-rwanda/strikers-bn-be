@@ -103,22 +103,6 @@ describe("GET /api/v1/users", () => {
       expect(res).to.have.status(404);
     });
   });
-
-<<<<<<< HEAD
-
-//   /**
-//    * Test GET route for specific role
-//    */
-//   describe("GET /api/v1/user/users/:uuid", () => {
-//     it("It should GET a specific user by its specific uuid", async () => {
-//       const uuid = "72117a46-7ba2-495d-8846-221313470ad4",
-//         res = await chai.request(server).get("/api/v1/users/" + uuid);
-//       expect(res).to.have.status(200);
-//       expect(res.body).to.be.a("object");
-//     });
-//   });
-// });
-=======
   /**
    * Test GET route for specific role
    */
@@ -131,4 +115,3 @@ describe("GET /api/v1/users", () => {
     });
   });
 });
->>>>>>> fc35443cab4a0375ae27045b0e6b56794bc110b1
