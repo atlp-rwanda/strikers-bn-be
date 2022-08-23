@@ -852,6 +852,105 @@
             }
           }
         }
+      },
+      "/api/v1/bookings": {
+        "get": {
+          "tags": [
+            "Booking"
+          ],
+          "description": "Get all bookings",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Query ok"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        },
+        "post": {
+          "tags": [
+            "Booking"
+          ],
+          "description": "Create a new request to book a room in a certain accomodation",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "supplierId",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "accomodationId",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "roomId",
+              "in": "formData",
+              "required": true,
+              "type": "date"
+            },  
+              {
+              "name": "requesterId",
+              "in": "formData",
+              "required": true,
+              "type": "date"
+            },
+            {
+              "name": "startDate",
+              "in": "formData",
+              "required": true,
+              "type": "date"
+            },
+            {
+              "name": "endDate",
+              "in": "formData",
+              "required": true,
+              "type": "date"
+            }
+  
+          ],      
+          "responses": {
+            "200": {
+              "description": "Trip request created successivelly"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "422": {
+              "description": "Unprocessable Entity"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
       }
     },
     "definitions": {
@@ -884,6 +983,35 @@
           }
         }
       },
+      "Booking": {
+        "type": "object",
+        "properties": {
+        "supplierId": {
+          "type": "string",
+          "required": true
+        },
+        "accomodationId": {
+          "type": "string",
+          "required": true
+        },
+        "roomId": {
+          "type": "string",
+          "required": true
+        },
+        "requesterId": {
+          "type": "string",
+          "required": true
+        },
+        "startDate": {
+          "type": "date",
+          "required": true
+        },
+        "endDate": {
+          "type": "date",
+          "required": true
+        }
+      }
+    },
       "TripRequest": {
         "type": "object",
         "properties": {
