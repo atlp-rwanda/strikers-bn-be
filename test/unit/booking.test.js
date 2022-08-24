@@ -49,8 +49,8 @@ describe("Booking API", () => {
   describe("GET /api/v1/bookings/:id", () => {
     it("It should GET a specific booking by its bookingId", async () => {
       const newCompany = {
-          name: "Test1 company",
-          email: "testcompany@mailbox.org",
+          name: `Test1 company ${Math.random() * 10}`,
+          email: `testcompany${Math.random() * 10}@mailbox.org`,
           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
         },
@@ -70,7 +70,7 @@ describe("Booking API", () => {
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
           startDate: new Date("2023-08-11"),
-          endDate: new Date("2023-09-22")
+          endDate: new Date("2023-09-22"),
         },
         res1 = await chai
           .request(server)
@@ -99,15 +99,15 @@ describe("Booking API", () => {
 
     it("It should NOT GET a specific booking by its bookingId (doesn't exist)", async () => {
       const newCompany = {
-          name: "Test2 company",
-          email: "testcompany@mailbox.org",
+          name: `Test2 company ${Math.random() * 10}`,
+          email: `testcompany${Math.random() * 10}@mailbox.org`,
           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
         },
         res2 = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+          .send({ email: "abi_seth_admin@gmail.com", password: "pass12345" });
       const res10 = await chai
         .request(server)
         .post("/api/v1/companies")
@@ -120,7 +120,7 @@ describe("Booking API", () => {
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
           startDate: new Date("2023-08-11"),
-          endDate: new Date("2023-09-22")
+          endDate: new Date("2023-09-22"),
         },
         res1 = await chai
           .request(server)
@@ -179,15 +179,15 @@ describe("Booking API", () => {
   describe("GET /api/v1/bookings/:id", () => {
     it("It should POST (create) a new booking", async () => {
       const newCompany = {
-          name: "Test2 company",
-          email: "testcompany@mailbox.org",
+          name: `Test2 company ${Math.random() * 10}`,
+          email: `testcompany${Math.random() * 10}@mailbox.org`,
           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
         },
         res2 = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+          .send({ email: "abi_seth_admin@gmail.com", password: "pass12345" });
       const res10 = await chai
         .request(server)
         .post("/api/v1/companies")
@@ -200,7 +200,7 @@ describe("Booking API", () => {
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
           startDate: new Date("2023-08-11"),
-          endDate: new Date("2023-09-22")
+          endDate: new Date("2023-09-22"),
         },
         res1 = await chai
           .request(server)
@@ -282,7 +282,7 @@ describe("Booking API", () => {
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a5211abf1111",
           startDate: new Date("2023-08-11"),
-          endDate: new Date("2023-09-22")
+          endDate: new Date("2023-09-22"),
         },
         res1 = await chai
           .request(server)
@@ -325,7 +325,7 @@ describe("Booking API", () => {
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
           startDate: new Date("2023-08-11"),
-          endDate: new Date("2023-09-22")
+          endDate: new Date("2023-09-22"),
         },
         res4 = await chai
           .request(server)
@@ -375,7 +375,7 @@ describe("Booking API", () => {
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
           startDate: new Date("2023-08-11"),
-          endDate: new Date("2023-09-22")
+          endDate: new Date("2023-09-22"),
         },
         { body } = await chai
           .request(server)
@@ -434,7 +434,7 @@ describe("Booking API", () => {
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
           startDate: new Date("2023-08-11"),
-          endDate: new Date("2023-09-22")
+          endDate: new Date("2023-09-22"),
         },
         res1 = await chai
           .request(server)
@@ -479,7 +479,7 @@ describe("Booking API", () => {
           roomId: "72117a46-7ba2-495d-8846-221313470ad4",
           requesterId: "86f329b4-ab3f-4cd3-bea3-a527745fbcfb",
           startDate: new Date("2023-08-11"),
-          endDate: new Date("2023-09-22")
+          endDate: new Date("2023-09-22"),
         },
         res1 = await chai
           .request(server)
