@@ -44,42 +44,41 @@ describe("chat tests", () => {
   describe("/api/v1/chat/roomId/messages ", () => {
     it("should add message in specific room", (done) => {
       const message1 = {
-        message: 'Hello world!'
+        message: "Hello world!",
       };
       chai
-      .request(server)
-      .post("/api/v1/chat/1/messages")
-      .set("Authorization", `Bearer ${token}`)
-      .send(message1)
-      .end((err,res) => {
+        .request(server)
+        .post("/api/v1/chat/1/messages")
+        .set("Authorization", `Bearer ${token}`)
+        .send(message1)
+        .end((err, res) => {
           res.should.have.status(201);
           res.body.should.be.a("object");
           res.body.should.have.property("message");
-          done();        
-      })
+          done();
+        });
     });
     it("should get messages from specific room", (done) => {
       chai
-      .request(server)
-      .get("/api/v1/chat/1/messages")
-      .set("Authorization", `Bearer ${token}`)
-      .end((err,res) => {
+        .request(server)
+        .get("/api/v1/chat/1/messages")
+        .set("Authorization", `Bearer ${token}`)
+        .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("object");
-          done();        
-      })
+          done();
+        });
     });
     it("should get new messages from specific room", (done) => {
       chai
-      .request(server)
-      .get("/api/v1/chat/1/messages/new")
-      .set("Authorization", `Bearer ${token}`)
-      .end((err,res) => {
+        .request(server)
+        .get("/api/v1/chat/1/messages/new")
+        .set("Authorization", `Bearer ${token}`)
+        .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("object");
-          done();        
-      })
+          done();
+        });
     });
-
   });
 });
