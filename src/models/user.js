@@ -1,5 +1,9 @@
-"use strict";
-const { Model } = require("sequelize");
+/* eslint-disable linebreak-style */
+/* eslint-disable import/newline-after-import */
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
+/* eslint-disable valid-jsdoc */
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -8,11 +12,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // define association here. this is to satisfy all models are on required elements.
+      // define associtaion there or here.
     }
 
     toJSON() {
-      return { ...this.get(), id: undefined, password: undefined }
+      return { ...this.get(), id: undefined, password: undefined };
     }
   }
   User.init({
@@ -31,11 +36,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false
     },
     roleId: {
       type: DataTypes.UUID,
-      defaultValue: 'e2a8b398-b658-4606-9b17-b9152792e875',
+      defaultValue: 'c1f1d2bf-33bd-4e11-9d7a-0331db465f95',
       allowNull: false
     },
     phoneNumber: {
@@ -52,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     birthdate: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true 
     },
     location: {
       type: DataTypes.STRING,
@@ -71,8 +77,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     lineManager: {
-      type: DataTypes.STRING,
-      allowNull: true
+      type: DataTypes.UUID,
+      defaultValue: '13c35001-a96d-4307-b86a-5f9aef66f771',
+      allowNull: false
     },
     verified: {
       type: DataTypes.BOOLEAN,
