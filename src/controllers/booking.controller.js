@@ -1,7 +1,7 @@
 // @ts-nocheck
 import _ from 'lodash';
 import {
-  User, Company, Booking, Accommodation
+  User, Company, Booking
 } from '../models';
 import { validateBookingRegistration } from '../validators/booking.validator';
 
@@ -15,6 +15,32 @@ export async function newBooking(req, res) {
       return res
         .status(400)
         .json(validateBookingInput.error.details[0].message);
+    }
+
+    const { startDate, endDate } = newBooking
+
+    const startDateMonth = new Date(startDate).getMonth()
+    const endDateMonth = new Date(endDate).getMonth()
+
+    if(startDate == endDate) {
+      return res.status(400).json({
+        success: false,
+        message: "You can't have start date equal to end date"
+      })
+    }
+
+    if(endDate < startDate) {
+      return res.status(400).json({
+        success: false,
+        message: "End date must be greater than start date"
+      })
+    }
+
+    if((endDateMonth - startDateMonth) > 8) {
+      return res.status(400).json({
+        success: false,
+        message: "You can not exceed 8 months interval booking a room in an accomodation"
+      })
     }
 
     const checkSupplier = await Company.findOne({
@@ -59,7 +85,7 @@ export async function newBooking(req, res) {
         supplierId,
         accomodationId,
         roomId,
-        requesterId,
+        requesterId
       },
     });
 
@@ -92,6 +118,8 @@ export async function newBooking(req, res) {
         'supplierId',
         'accomodationId',
         'roomId',
+        'startDate',
+        'endDate',
         'requesterId',
         'status',
       ])
