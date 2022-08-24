@@ -49,8 +49,8 @@ describe("Booking API", () => {
   describe("GET /api/v1/bookings/:id", () => {
     it("It should GET a specific booking by its bookingId", async () => {
       const newCompany = {
-          name: "Test1 company",
-          email: "testcompany@mailbox.org",
+          name: `Test1 company ${Math.random() * 10}`,
+          email: `testcompany${Math.random() * 10}@mailbox.org`,
           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
         },
