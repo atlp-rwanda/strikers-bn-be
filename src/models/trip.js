@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Trip.init(
     {
-      user: {
+      userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },

@@ -40,7 +40,7 @@ describe("GET /api/v1/trips", () => {
         .request(server)
         .post("/api/v1/users/login")
         .send({ email: "abi_seth@gmail.com", password: "pass12345" });
-      const uuid = 21,
+      const uuid = 600,
         res = await chai
           .request(server)
           .get("/api/v1/trips/" + uuid)

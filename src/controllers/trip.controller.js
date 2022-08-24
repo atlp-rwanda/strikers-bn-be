@@ -33,8 +33,10 @@ export async function addTrip(req, res) {
     return res.status(400).json(validateUserInput.error.details[0].message);
   }
   try {
+    let requester = await User.findOne({ where: { uuid: user } });
+
     const trip = await Trip.create({
-      user,
+      userId: requester.id,
       source,
       destination,
       DateOfTravel,
@@ -42,7 +44,6 @@ export async function addTrip(req, res) {
       status,
     });
 
-    let requester = await User.findOne({ where: { uuid: user } });
     let lineManager = requester.lineManager;
     //send notification via email
     const emailTitle = `${requester.firstName} requested a trip to ${destination}`;
@@ -57,22 +58,34 @@ export async function addTrip(req, res) {
 
     //send notification to line manager
 
-    //  let notification= await new Notifications({
-    //     title: `${requester.firstName} requested a trip to ${destination}`,
-    //     description: `${requester.firstName} requested a trip to ${destination} from ${source} the date pf travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}`,
-    //     to:lineManager
-    //   })
-
-    //   socket.on('sendNotification',notification=>{
-    //     io.emit('getNotification',notification)
-    //   })
-
-    return res.status(201).json({
-      success: true,
-      status: 201,
-      message: "Trip request created successvely",
-      data: trip,
-    });
+    if (lineManager) {
+      await Notifications.create({
+        title: `${requester.firstName} requested a trip to ${destination}`,
+        description: `${requester.firstName} requested a trip to ${destination} from ${source} the date pf travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}`,
+        to: lineManager,
+      })
+        .then((notification) => {
+          // io.sockets.on("sendNotification", (socket) => {
+          //   socket.emit("getNotification", notification);
+          // });
+          res.status(201).json({
+            success: true,
+            status: 201,
+            message: "Trip request created successvely",
+            data: trip,
+          });
+        })
+        .catch((err) => {
+          res.status(500).send({ message: err });
+        });
+    } else {
+      res.status(201).json({
+        success: true,
+        status: 201,
+        message: "Trip request created successvely",
+        data: trip,
+      });
+    }
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -156,13 +169,30 @@ export async function updateTrip(req, res) {
 
     let checkSendEmail = await sendEmail(emailTo, emailTitle, emailDescription);
 
-    return res.status(200).json({
-      success: true,
-      status: 200,
-      data: trip,
-    });
+    if (lineManager) {
+      await Notifications.create({
+        title: `Trip ${trip.id} updated`,
+        description: `Trip ${trip.id} made by user ${requester.firstName} has been updated`,
+        to: lineManager,
+      })
+        .then(() => {
+          res.status(200).json({
+            success: true,
+            status: 200,
+            data: trip,
+          });
+        })
+        .catch((err) => {
+          res.status(500).send({ message: err });
+        });
+    } else {
+      return res.status(200).json({
+        success: true,
+        status: 200,
+        data: trip,
+      });
+    }
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ error: "Something went wrong" });
   }
 }
@@ -172,15 +202,28 @@ exports.changeStatus = async (req, res) => {
     if (!validateStatus(req.body.status))
       return res.status(400).send({ message: "Invalid status" });
 
-    const trip = await TripRequest.findOne({ where: { id: req.params.id } });
+    const trip = await Trip.findOne({ where: { id: req.params.id } });
     trip.status = req.body.status;
     await trip.save();
-    return res.status(200).send({
-      data: trip,
-      message: `Trip request ${
-        trip.status === "approved" ? "approved" : "rejected"
-      }`,
-    });
+
+    let requester = await User.findOne({ where: { id: trip.userId } });
+
+    await Notifications.create({
+      title: `Updates on trip request to ${trip.destination}`,
+      description: `Request ${req.body.status} by your line manager`,
+      to: requester.uuid,
+    })
+      .then(() => {
+        res.status(200).send({
+          data: trip,
+          message: `Trip request ${
+            trip.status === "approved" ? "approved" : "rejected"
+          }`,
+        });
+      })
+      .catch((err) => {
+        res.status(500).send({ message: err });
+      });
   } catch (err) {
     return res.status(404).send({ error: err.toString() });
   }
