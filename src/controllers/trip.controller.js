@@ -47,7 +47,8 @@ export async function addTrip(req, res) {
     let lineManager = requester.lineManager;
     //send notification via email
     const emailTitle = `${requester.firstName} requested a trip to ${destination}`;
-    const emailDescription = `${requester.firstName} requested a trip to ${destination} from ${source} the date of travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}`;
+    const emailDescription = `<h1>Strikers-BN-BE Notifications</h1><p> ${requester.firstName} requested a trip to ${destination} from ${source} the date of travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}</p>
+    ` ;
 
     let manager = await User.findOne({ where: { uuid: lineManager } });
     let emailTo = manager.email;
@@ -162,7 +163,8 @@ export async function updateTrip(req, res) {
     const lineManager = requester.lineManager;
 
     const emailTitle = `${requester.firstName} edited the request for a travel to ${trip.destination}`;
-    const emailDescription = `${requester.firstName} edited the request for a travel to ${trip.destination} from ${source} the date of travel is ${trip.DateOfTravel} and date of destination is ${trip.DateOfDestination}`;
+    const emailDescription = `<h1>Strikers-BN-BE Notifications</h1><p> ${requester.firstName} requested a trip to ${destination} from ${source} the date of travel is ${DateOfTravel} and date of destiination is ${DateOfDestination}</p>
+    `;
 
     let manager = await User.findOne({ where: { uuid: lineManager } });
     let emailTo = manager.email;

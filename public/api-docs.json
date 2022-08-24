@@ -266,6 +266,173 @@
             }
           }
         },
+
+        "/v1/notifications": {
+          "get": {
+            "tags": ["Notification"],
+            "description": "get all notifications of a user",
+              "consumes": [
+                "multipart/form-data"
+              ],
+              "produces":[
+                "application/json"
+              ],
+              "parameters": [
+                {
+                  "in":"header",
+                  "name":"Authorization",
+                  "description":"JWT Token of the user",
+                  "type":"string",
+                  "required":"true"
+              }
+              ],
+              "responses": {
+                "200": {
+                    "description": "Success"
+                },
+                "201": {
+                    "description": "Created"
+                },
+                "400": {
+                    "description": "Invalid data"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }  
+          }
+        },
+
+        "/v1/notifications/new":{
+          "post":{
+            "tags":["Notification"],
+            "description":"create a notification",
+            "produces": [
+              "application/json"
+          ],
+            "parameters": [
+              {
+                "name": "title",
+                "in": "formData",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "description",
+                "in": "formData",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "to",
+                "in": "formData",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses": {
+              "200": {
+                  "description": "Success"
+              },
+              "400": {
+                  "description": "Invalid data"
+              },
+              "404": {
+                  "description": "Not found"
+              },
+              "500": {
+                  "description": "Internal server error"
+              }
+          } 
+          }
+        },
+
+        "/v1/notifications/read/{notificationId}":{
+          "post":{
+            "tags":["Notification"],
+            "description":"read a notification",
+            "produces": [
+              "application/json"
+          ],
+            "parameters":[
+              {
+                "name":"notificationId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+               }
+            ],
+            "responses": {
+              "200": {
+                  "description": "Success"
+              },
+              "400": {
+                  "description": "Invalid data"
+              },
+              "404": {
+                  "description": "Not found"
+              },
+              "500": {
+                  "description": "Internal server error"
+              }
+          }
+          }
+        },
+        "/v1/notifications/readAll":{
+          "post":{
+            "tags":["Notification"],
+            "description":"read all notifications",
+            "produces": [
+              "application/json"
+          ],
+            "parameters":[],
+            "responses": {
+              "200": {
+                  "description": "Success"
+              },
+              "400": {
+                  "description": "Invalid data"
+              },
+              "404": {
+                  "description": "Not found"
+              },
+              "500": {
+                  "description": "Internal server error"
+              }
+          }
+          }
+        },
+
+        "/v1/notifications/{notificationId}":{
+          "delete": {
+            "tags": ["Notification"],
+            "description": "delete notification by id",
+            "produces": [
+              "application/json"
+          ],
+              "parameters": [
+               {
+                "name":"notificationId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+               }
+              ]  ,
+              "responses": {
+                "200": {
+                    "description": "Success"
+                },
+                "400": {
+                    "description": "Invalid data"
+                },
+                "404": {
+                    "description": "Not found"
+                },
+                "500": {
+                    "description": "Internal server error"
+                }
+            }
+          },
         "delete": {
           "tags": ["TripRequest"],
           "description": "",
@@ -1462,6 +1629,36 @@
         }
       }
     },
+
+    "api/v1/notifications/{notificationId}": {
+      "delete": {
+        "tags": ["Notification"],
+        "description": "delete notification by id",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "notificationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
     "/v1/accommodations/top": {
       "get": {
         "tags": ["Accomodation"],
@@ -1584,4 +1781,5 @@
       }
     }
   }
+}
 }
