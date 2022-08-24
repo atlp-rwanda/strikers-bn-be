@@ -103,6 +103,7 @@ describe("GET /api/v1/users", () => {
       expect(res).to.have.status(404);
     });
   });
+
   /**
    * Test GET route for specific role
    */

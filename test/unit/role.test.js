@@ -1,6 +1,6 @@
-import chai, { expect } from 'chai';
+import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 
 dotenv.config();
 chai.should();
