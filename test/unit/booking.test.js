@@ -99,8 +99,8 @@ describe("Booking API", () => {
 
     it("It should NOT GET a specific booking by its bookingId (doesn't exist)", async () => {
       const newCompany = {
-          name: "Test2 company",
-          email: "testcompany@mailbox.org",
+          name: `Test2 company ${Math.random() * 10}`,
+          email: `testcompany${Math.random() * 10}@mailbox.org`,
           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
         },
@@ -179,8 +179,8 @@ describe("Booking API", () => {
   describe("GET /api/v1/bookings/:id", () => {
     it("It should POST (create) a new booking", async () => {
       const newCompany = {
-          name: "Test2 company",
-          email: "testcompany@mailbox.org",
+          name: `Test2 company ${Math.random() * 10}`,
+          email: `testcompany${Math.random() * 10}@mailbox.org`,
           locationId: "96c97445-d152-4a4e-9868-bee9d5a18ca2",
           managerId: "bd8ba2ce-9e9c-400d-aa0c-e5bbb9d1c900",
         },
