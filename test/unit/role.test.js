@@ -60,7 +60,7 @@ describe("Role API", () => {
         { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "abi_seth@gmail.com", password: "pass12345" });
+          .send({ email: "abi_seth_admin@gmail.com", password: "pass12345" });
       console.log("token here...", body.token);
       const res2 = await chai
         .request(server)
@@ -81,7 +81,7 @@ describe("Role API", () => {
         { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+          .send({ email: "abi_seth_admin@gmail.com", password: "pass12345" }),
         res2 = await chai
           .request(server)
           .post("/api/v1/roles")
@@ -118,12 +118,13 @@ describe("Role API", () => {
         { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+          .send({ email: "abi_seth_admin@gmail.com", password: "pass12345" }),
         res2 = await chai
           .request(server)
           .post("/api/v1/roles")
           .send(newRole)
           .set({ authorization: "Bearer " + body.token });
+      console.log(res2);
       expect(res2).to.have.status(400);
     });
   });
@@ -300,7 +301,7 @@ describe("Role API", () => {
         { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+          .send({ email: "abi_seth_admin@gmail.com", password: "pass12345" }),
         res2 = await chai
           .request(server)
           .post("/api/v1/roles")
@@ -310,6 +311,7 @@ describe("Role API", () => {
           .request(server)
           .delete("/api/v1/roles/" + res2.body.data.roleId)
           .set({ authorization: "Bearer " + body.token });
+      console.log("Res2::", res2);
       expect(res3).to.have.status(200);
     });
 
@@ -317,7 +319,7 @@ describe("Role API", () => {
       const { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+          .send({ email: "abi_seth_admin@gmail.com", password: "pass12345" }),
         res = await chai
           .request(server)
           .delete("/api/v1/roles/8dse43")
@@ -332,7 +334,7 @@ describe("Role API", () => {
         { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
-          .send({ email: "abi_seth@gmail.com", password: "pass12345" }),
+          .send({ email: "abi_seth_admin@gmail.com", password: "pass12345" }),
         res2 = await chai
           .request(server)
           .post("/api/v1/roles")
