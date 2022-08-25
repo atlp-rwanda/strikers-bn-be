@@ -31,7 +31,7 @@ userRouter.post('/register', addUser);
  * @type PUT
  */
 userRouter.put('/updateuser/:uuid', verifyToken, editUser);
-userRouter.get('/getusers', getUsers);
+userRouter.get('/', getUsers);
 userRouter.get('/:uuid', getUser);
 /**
  * @description To login using email and password
@@ -60,7 +60,6 @@ userRouter.get('/verify/:email', verifyUser);
 userRouter.get('/:uuid/logout', logout);
 
 userRouter.get('/:uuid/welcome', verifyToken, (req, res) => {
-  console.log(req.params.uuid);
   res.send(`${req.params.uuid}walkverese`);
 });
 export default userRouter;

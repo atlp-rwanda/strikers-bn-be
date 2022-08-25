@@ -75,6 +75,7 @@ const messages =    Message.findAll({where: { chatroomId: req.params.chatroomId,
     })
     return res.status(200).json({
       success:"true",
+      message:"Messages fetched successfully",
       data:messages
       })
 } catch (error) {
@@ -100,6 +101,7 @@ exports.getMessages =  async (req,res) => {
           })
           return res.status(200).json({
             success:"true",
+            message:"Messages fetched successfully",
             data:messages
             })
     } catch (error) {

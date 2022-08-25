@@ -21,6 +21,8 @@
       "createdAt": "createdAt",
       "updatedAt": "updatedAt"
     }
+
+   
   },
   "production": {
     "username": "uaigkmkbujkamwyjz02t",
