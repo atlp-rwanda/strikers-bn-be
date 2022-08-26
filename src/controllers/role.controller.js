@@ -59,7 +59,7 @@ export async function getSpecificRole(req, res) {
 
 export async function assignRole(req, res) {
   try {
-    const user = await User.find({ where: { email: req.params.email } });
+    const user = await User.findOne({ where: { email: req.params.email } });
     if (!user) {
       return res
         .status(404)
@@ -70,7 +70,13 @@ export async function assignRole(req, res) {
     }
     await User.update({
       roleId: req.params.roleId,
-    }).success(() => {});
+    }, { where: { email: req.params.email } });
+    return res
+      .status(200)
+      .send({
+        success: true,
+        message: "Successfully updated User role",
+      });
   } catch (err) {
     res.status(500).send({ message: `Error: ${err}` });
   }
