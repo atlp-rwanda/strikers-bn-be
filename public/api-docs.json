@@ -97,6 +97,31 @@
         }
       }
     },
+    "api/v1/users/resetpassword": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Reset password",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "Email to send reset link",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Email sent!",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
     "api/v1/users/login": {
       "post": {
         "tags": ["User"],
