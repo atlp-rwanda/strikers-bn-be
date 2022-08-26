@@ -47,7 +47,10 @@ app.use('/api/v1/feedback', feedbackRouter);
 app.use('/api/v1/chat',chatRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
+app.get('/', (req, res) => {
+  console.log(`This is email ${req.session.email}`);
+  res.send('Welcome to strikers-bn-be APIs');
+});
 app.get('/', (req, res) => {
   console.log(`This is email ${req.session.email}`);
   res.send('Welcome to strikers-bn-be APIs');
