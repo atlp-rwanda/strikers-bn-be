@@ -16,8 +16,6 @@ const {
   resetPassword,
   newPassword,
   logout,
-  resetPassword,
-  newPassword,
   googleAuth,
 } = require("../controllers/user.controller");
 

@@ -135,8 +135,8 @@ describe("Role API", () => {
   describe("PATCH /api/v1/roles/:roleId", () => {
     it("It should PATCH (update) an existing role", async () => {
       const newRole = {
-        roleTitle: "The Newas System Tester",
-      },
+          roleTitle: "The Newas System Tester",
+        },
         updatedRole = {
           roleTitle: "System Maintainer",
         },
@@ -164,8 +164,8 @@ describe("Role API", () => {
 
     it("It should NOT PATCH (update) an existing role", async () => {
       const newRole = {
-        roleTitle: "The Newas System Tester",
-      },
+          roleTitle: "The Newas System Tester",
+        },
         updatedRole = {
           roleTitle: "System Maintainer",
         },
@@ -193,8 +193,8 @@ describe("Role API", () => {
 
     it("It should NOT PATCH (update) an existing role (Another role with the new name already exists)", async () => {
       const newRole = {
-        roleTitle: "The Newas System Tester",
-      },
+          roleTitle: "The Newas System Tester",
+        },
         newRole2 = {
           roleTitle: "System Maintainer",
         },
@@ -234,8 +234,8 @@ describe("Role API", () => {
 
     it("It should NOT PATCH (update) an existing role (Not authenticated as Super Administrator)", async () => {
       const newRole = {
-        roleTitle: "The Newas System Tester",
-      },
+          roleTitle: "The Newas System Tester",
+        },
         updatedRole = {
           roleTitle: "System Maintainer",
         },
@@ -262,8 +262,8 @@ describe("Role API", () => {
 
     it("It should NOT POST (create) a new role (Invalid Title/name)", async () => {
       const newRole = {
-        roleTitle: "The Newas System Tester",
-      },
+          roleTitle: "The Newas System Tester",
+        },
         updatedRole = {
           roleTitle: "S",
         },
