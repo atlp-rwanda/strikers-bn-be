@@ -1,4 +1,6 @@
-import { rateAccommodation } from '../controllers/rating';
+import express  from 'express';
+import { rateAccommodation } from '../controllers/ratingAccomodation.controller';
+import {
   createAccommodation,
   getAccommodation,
   updateAccommodation,
