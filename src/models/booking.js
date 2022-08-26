@@ -41,11 +41,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       startDate: {
         type: DataTypes.DATE,
-        allowNull: false,
+        defaultValue: Date.now(),
       },
       endDate: {
         type: DataTypes.DATE,
-        allowNull: false,
+        defaultValue: Date.now(),
       },
       dateSubmitted: {
         type: DataTypes.DATE,
