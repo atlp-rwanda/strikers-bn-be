@@ -1,4 +1,5 @@
-import express from "express";
+import express  from 'express';
+import { rateAccommodation,getRatings } from '../controllers/ratingAccomodation.controller';
 import {
   createAccommodation,
   getAccommodation,
@@ -45,6 +46,9 @@ router.put("/:uuid", travelAdmin, updateAccommodation);
  */
 router.delete("/:uuid", travelAdmin, deleteAccommodation);
 
+router.post('/:uuid/rate',verifyToken, rateAccommodation);
+
+router.get('/:uuid/rate',verifyToken, getRatings);
 /**
  * @description To like & unlike an accommodation
  * @api api/accommodation
