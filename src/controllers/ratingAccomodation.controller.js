@@ -38,3 +38,14 @@ export async function rateAccommodation(req, res) {
         return res.status(500).send(err);
     }
 }
+export async function  getRatings(req,res){
+  const userId=req.userId;
+  console.log(userId);
+   try{
+       const ratings= await Ratings.findAll();
+       console.log(ratings);
+       res.status(200).send(ratings);
+   }catch(err){
+    res.status(500).send({ message: `Error: ${err}` });
+   }
+}

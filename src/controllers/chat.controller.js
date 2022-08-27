@@ -61,7 +61,7 @@ exports.getNewMessages = async (req, res) => {
    
     try {
 
-const messages =    Message.findAll({where: { chatroomId: req.params.chatroomId,
+      const messages =    Message.findAll({where: { chatroomId: req.params.chatroomId,
         // createdAt: {
         //   $gt: req.user.lastLogout,
         // },
