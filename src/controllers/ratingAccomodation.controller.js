@@ -15,9 +15,7 @@ export async function rateAccommodation(req, res) {
             return res.status(404).send({ message: 'User not found! First register' });
         }
         const userId = req.body.userId;
-        const rating = await Ratings.findOne({ where: { userId: userId , accomodationId: req.body.accomodationId  } });
-    
-        if (!rating) {
+        
             const newRating = await Ratings.create({
                 userId:userId,  
                 accomodationId: req.body.accomodationId,
@@ -30,11 +28,7 @@ export async function rateAccommodation(req, res) {
                 message: 'rating created successfully',
                 data: newRating,
             });
-        } return res.status(400).json({
-            success: false,
-            status: 400,
-            message: 'You have already rated this accommodation',
-        })
+        
     } catch (err) {
         console.log(err);
         return res.status(500).send(err);
