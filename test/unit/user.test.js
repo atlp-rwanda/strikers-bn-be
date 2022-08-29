@@ -109,7 +109,7 @@ describe("GET /api/v1/users", () => {
    */
   describe("GET /api/v1/users/:uuid", () => {
     it("It should GET a specific user by its specific uuid", async () => {
-      const uuid = "72117a46-7ba2-495d-8846-221313470ad4",
+      const uuid = "43acebdf-1679-4ba1-a61a-65b9ba7c296d",
         res = await chai.request(server).get("/api/v1/users/" + uuid);
       expect(res).to.have.status(200);
       expect(res.body).to.be.a("object");
