@@ -121,6 +121,38 @@
           }
         }
       }
+    },"api/v1/users/resetpassword": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Reset password",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "formData",
+            "description": "token",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "Email to send reset link",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Email sent!",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
     },
     "api/v1/users/login": {
       "post": {
