@@ -13,7 +13,7 @@ describe("Booking API", () => {
    * Test GET route
    */
   describe("GET /api/v1/bookings", () => {
-    it("It should GET a list of all bookings", async () => {
+    it("It should GET a list of all accomodation bookings", async () => {
       const { body } = await chai
           .request(server)
           .post("/api/v1/users/login")
