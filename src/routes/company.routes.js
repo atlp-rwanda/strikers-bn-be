@@ -51,4 +51,4 @@ router.patch('/:id', verifyToken, updateCompanyInfo);
  */
 router.delete('/:id', verifyToken, deleteCompany);
 
-module.exports = router;
+export default  router;

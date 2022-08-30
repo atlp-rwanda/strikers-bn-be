@@ -44,4 +44,4 @@ router.post('/new',createNotification)
   */
   router.post('read/:notificationId', readNotification);
 
- module.exports = router
+export default router

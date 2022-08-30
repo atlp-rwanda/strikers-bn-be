@@ -251,7 +251,7 @@ console.log(decoded)
 
         let reset = await User.update({
         password: newPassword
-        }, {where: {passwordResetToken: token,id: decoded?.id,email: decoded?.email}});
+        }, {where: {passwordResetToken: token,id: decoded.id,email: decoded.email}});
 
         if(reset)
         return res.send("Password has been changed successfully");

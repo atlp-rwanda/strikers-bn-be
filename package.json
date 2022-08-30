@@ -1,5 +1,6 @@
 {
   "name": "strikers-bn-be",
+  "type": "commonjs",
   "version": "1.0.0",
   "description": "<p>\r   <strong>Barefoot nomad</strong> is an application that will enable its “Company Nomads” book their international travel and accommodation globally; easily and conveniently across all the locations/centers where the Company has its operations.\r </p>",
   "main": "index.js",
@@ -7,7 +8,7 @@
     "node": "^16.13.0"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production node -r esm src/index.js",
+    "start": "node -r esm src/index.js",
     "test": "cross-env NODE_ENV=test mocha --require @babel/register \"test/**/*.test.js\" --timeout 50000 --exit",
     "coverage": "c8 --reporter=lcov --reporter=text npm test",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",

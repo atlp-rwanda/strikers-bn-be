@@ -65,4 +65,4 @@ router.post("/:accomodationId/like", verifyToken, likeOrUnlikeAccommodation);
  */
 router.get("/top", getTopAccommodations);
 
-module.exports = router;
+export default router;
