@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-exports.validateTripsNotifications = (body) => {
+export const validateTripsNotifications = (body) => {
   const validUserRegisterSchema = Joi.object({
     source: Joi.string().max(100).min(2).required(),
     destination: Joi.string().max(100).min(2).required(),

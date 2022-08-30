@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 const Joi = require('joi');
 
-exports.validateUserRegisteration = (body) => {
+export const validateUserRegisteration = (body) => {
   const validUserRegisterSchema = Joi.object({
     firstName: Joi.string().max(100).min(2).required(),
     lastName: Joi.string().max(100).min(2).required(),
@@ -14,7 +14,7 @@ exports.validateUserRegisteration = (body) => {
   return validUserRegisterSchema.validate(body);
 };
 
-exports.validateUserAuthenatication = (body) => {
+export const validateUserAuthenatication = (body) => {
   const validUserLoginSchema = Joi.object({
     email: Joi.string().email().min(5).required(),
     password: Joi.string().min(8).required()
