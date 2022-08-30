@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node -r esm src/index.js",
-    "test": "cross-env NODE_ENV=test mocha --require @babel/register \"test/**/*.test.js\" --timeout 50000 --exit",
+    "test": "cross-env NODE_ENV=test mocha --require @babel/register \"test/**/*.test.js\" --timeout 8000 --exit",
     "coverage": "c8 --reporter=lcov --reporter=text npm test",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
     "babel-version": "babel --version",
