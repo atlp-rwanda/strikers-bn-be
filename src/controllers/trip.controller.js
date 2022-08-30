@@ -21,17 +21,17 @@ export async function addTrip(req, res) {
   const user = req.userId;
   const { source, destination, DateOfTravel, DateOfDestination, status } =
     req.body;
-  const validateUserInput = validateTripsNotifications({
-    source,
-    destination,
-    DateOfTravel,
-    DateOfDestination,
-    status,
-  });
+//   const validateUserInput = validateTripsNotifications({
+//     source,
+//     destination,
+//     DateOfTravel,
+//     DateOfDestination,
+//     status,
+//   });
 
-  if (validateUserInput.error) {
-    return res.status(400).json(validateUserInput.error.details[0].message);
-  }
+//   if (validateUserInput.error) {
+//     return res.status(400).json(validateUserInput.error.details[0].message);
+//   }
   try {
     let requester = await User.findOne({ where: { uuid: user } });
 
