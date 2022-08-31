@@ -51,11 +51,8 @@ exports.addUser = async (req, res) => {
         'firstName',
         'lastName',
         'email',
-        'roleId',
         'phoneNumber',
         'password',
-        'lineManager',
-        'verificationToken',
       ])
     );
 
@@ -106,7 +103,8 @@ exports.getUsers = async (req, res) => {
   try {
     await User.findAll().then((users) => res.status(200).json(users));
   } catch (err) {
-    return res.status(500).json({ error: 'Something went wrong' });
+    // return res.status(500).json({ error: 'Something went wrong' });
+    return res.status(500).send(err)
   }
 };
 exports.getUser = async (req, res) => {
@@ -155,13 +153,8 @@ exports.verifyUser = async (req, res) => {
 
 exports.signIn = async (req, res) => {
   try {
-    const validateUserInput = validateUserAuthenatication(req.body);
-
-    if (validateUserInput.error) {
-      return res.status(400).json(validateUserInput.error.details[0].message);
-    }
-
-    const user = await User.findOne({ where: { email: req.body.email } });
+ 
+    const user = await User.findOne({ where: { email: req.body.email } }); 
     console.log("user is here");
 
     if (!user) {
@@ -238,24 +231,26 @@ exports.resetPassword = async(req,res)=>{
 }
 
 exports.newPassword = async(req,res)=>{
-  try{
+  try{ 
     let {token, newPassword} = req.body;
 
-    try{
-      jwt.verify(token,TOKEN_SECRET, async(err, decoded) => {
+    try{ 
+       jwt.verify(token,TOKEN_SECRET, async(err, decoded) => {
         if (err) 
         return res.status(401).send({ message: "Invalid Token"});
 console.log(decoded)
         const salt = await bcrypt.genSalt(10);
         newPassword = await bcrypt.hash(newPassword, salt);
 
+        if(newPassword === "")
+          return res.status(400).send("You can't have an empty password!") 
         let reset = await User.update({
         password: newPassword
-        }, {where: {passwordResetToken: token,id: decoded.id,email: decoded.email}});
-
+        }, {where: {passwordResetToken: token,id: decoded?.id,email: decoded?.email}});
+  
         if(reset)
-        return res.send("Password has been changed successfully");
-        else
+        return res.send("Password has been changed successfully"); 
+        else 
         return res.send("User with this token does not exists");
 
       });
