@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-import Joi from 'joi';
+const Joi = require('joi');
 
 export const validateUserRegisteration = (body) => {
   const validUserRegisterSchema = Joi.object({
