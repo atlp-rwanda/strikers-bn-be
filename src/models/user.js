@@ -89,9 +89,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(2500),
       allowNull: true
     }
+    ,
+    profilePic: {
+      type: DataTypes.STRING(2500),
+      allowNull: true
+    }
   }, {
     sequelize,
     modelName: 'User',
   });
+  User.sync({ alter: true })
   return User;
 };
