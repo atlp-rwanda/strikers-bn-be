@@ -77,9 +77,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     lineManager: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING,
       defaultValue: '13c35001-a96d-4307-b86a-5f9aef66f771',
-      allowNull: false
+      allowNull: true
     },
     verified: {
       type: DataTypes.BOOLEAN,
@@ -93,5 +93,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
+  User.sync({ alter: true })
   return User;
 };
