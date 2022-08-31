@@ -61,4 +61,5 @@ const port = process.env.PORT || 8001,
     console.log(`Server started on port ${port}!`);
     console.log('Database connected . . .');
   });
+
 module.exports = server;
