@@ -1,6 +1,6 @@
 import { TripRequestComments, Trip, Notifications, User } from "../models";
 
-exports.addComments = async (req, res) => {
+export const addComments = async (req, res) => {
   try {
     const comment = await TripRequestComments.create({
       userId: req.userId,
@@ -39,7 +39,7 @@ exports.addComments = async (req, res) => {
   }
 };
 
-exports.getComments = async (req, res) => {
+export const getComments = async (req, res) => {
   try {
     const comments = await TripRequestComments.findAll({
       include: [{ model: Trip, as: "trip" }],
@@ -59,7 +59,7 @@ exports.getComments = async (req, res) => {
   }
 };
 
-exports.deleteComments = async (req, res) => {
+export const deleteComments = async (req, res) => {
   const uuid = req.params.uuid;
   try {
     const comment = await TripRequestComments.findOne({ where: { id: uuid } });

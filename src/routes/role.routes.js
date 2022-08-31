@@ -59,5 +59,4 @@ router.patch('/:roleId', [verifyToken, adminCheck], updateRole);
  * @type DELETE
  */
 router.delete('/:roleId', [verifyToken, adminCheck], deleteRole);
-
-module.exports = router;
+export default  router;

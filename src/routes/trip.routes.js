@@ -90,4 +90,4 @@ tripRouter.get("/:tripId/comments", verifyToken, getComments);
  */
 tripRouter.delete("/:tripId/comments/:uuid", verifyToken, deleteComments);
 
-module.exports = tripRouter;
+export default tripRouter;

@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-exports.validateCompanyRegistration = (body) => {
+export const validateCompanyRegistration = (body) => {
   const bookingSchema = Joi.object({
     name: Joi.string().min(3).max(160).required(),
     email: Joi.string().min(3).max(320).required(),

@@ -1,6 +1,6 @@
 import { Feedback, Accommodation } from '../models';
 
-exports.addFeedback = async (req, res) => {
+export const addFeedback = async (req, res) => {
     try {
         const feedback = await Feedback.create({
             userId: req.userId,
@@ -23,7 +23,7 @@ exports.addFeedback = async (req, res) => {
     }
 }
 
-exports.getFeedbacks = async (req, res) => {
+export const getFeedbacks = async (req, res) => {
     try {
         const feedbacks = await Feedback.findAll({ include: [ { model: Accommodation, as: 'accomodation' } ] });
         return res.status(200).json({
@@ -42,7 +42,7 @@ exports.getFeedbacks = async (req, res) => {
     }
 }
 
-exports.getFeedback = async (req, res) => {
+export const getFeedback = async (req, res) => {
     const uuid = req.params.uuid;
     try {
         const feedback = await Feedback.findOne({ where: { feedbackId: uuid }, include: [ { model: Accommodation, as: 'accomodation' } ] });
@@ -62,7 +62,7 @@ exports.getFeedback = async (req, res) => {
     }
 }
 
-exports.updateFeedback = async (req, res) => {
+export const updateFeedback = async (req, res) => {
     const uuid = req.params.uuid;
     try {
         const feedback = await Feedback.findOne({ where: { feedbackId: uuid } });
@@ -101,7 +101,7 @@ exports.updateFeedback = async (req, res) => {
     }
 }
 
-exports.deleteFeedback = async (req, res) => {
+export const deleteFeedback = async (req, res) => {
     const uuid = req.params.uuid;
     try {
         const feedback = await Feedback.findOne({ where: { feedbackId: uuid } });

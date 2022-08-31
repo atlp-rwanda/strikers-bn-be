@@ -22,7 +22,8 @@ import accommodationRouter from './routes/accommodation.routes';
 import notificationRouter from './routes/notification.routes'
 
 import chatRouter from './routes/chats.routes';
-
+ 
+import { Server } from 'socket.io';
 const app = express();
 dotenv.config({ path: '../.env' });
 app.use(cors());
@@ -55,7 +56,6 @@ app.get('/', (req, res) => {
   console.log(`This is email ${req.session.email}`);
   res.send('Welcome to strikers-bn-be APIs');
 });
-
 const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
     console.log(`Server started on port ${port}!`);

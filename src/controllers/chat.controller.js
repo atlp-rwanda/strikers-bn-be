@@ -1,7 +1,7 @@
 import { Message,ChatRoom } from '../models';
 
 // to add a message
-exports.addMessage = async (req, res) => {
+export const addMessage = async (req, res) => {
     
     try {
         const message = await Message.create({
@@ -20,7 +20,7 @@ exports.addMessage = async (req, res) => {
     }
   };
 // to add a chatting room
-exports.addRoom = async (req, res) => {
+export const addRoom = async (req, res) => {
     
     try {
         const room = await ChatRoom.create({
@@ -39,7 +39,7 @@ exports.addRoom = async (req, res) => {
   };
 
 // to get Rooms user is in 
-exports.getRooms = async (req,res) =>{
+export const getRooms = async (req,res) =>{
   
   try {
   const room = await ChatRoom.findAll({where:{userId:req.userId}});  
@@ -57,7 +57,7 @@ exports.getRooms = async (req,res) =>{
 }
 
 // Get new messages from chatroom since user logged in
-exports.getNewMessages = async (req, res) => {
+export const getNewMessages = async (req, res) => {
    
     try {
 
@@ -85,7 +85,7 @@ exports.getNewMessages = async (req, res) => {
   }
 
 // to get all messages of a chatroom
-exports.getMessages =  async (req,res) => {
+export const getMessages =  async (req,res) => {
 
     try {
         const messages = Message.findAll({
