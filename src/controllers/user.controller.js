@@ -7,14 +7,13 @@ import {
   validateUserRegisteration,
   validateUserAuthenatication,
 } from "../validators/user.validator";
-import { TOKEN_SECRET } from "../config/key";
+import { keys } from '../config/key'
 import { sendEmail } from "../emails/account"
-import resetPassword from '../emails/resetPassword';
 
 dotenv.config();
 
 // local
-exports.addUser = async (req, res) => {
+export async function addUser (req, res) {
   try {
     const user = req.body;
     const validateUserInput = validateUserRegisteration(user);
@@ -41,7 +40,7 @@ exports.addUser = async (req, res) => {
         email: user.email,
         phoneNumber: user.phoneNumber,
       },
-      TOKEN_SECRET,
+      keys.TOKEN_SECRET,
       { expiresIn: '365d' }
     );
     // }, process.env.TOKEN_SECRET, { expiresIn: '365d' });
@@ -51,12 +50,15 @@ exports.addUser = async (req, res) => {
         'firstName',
         'lastName',
         'email',
+        'roleId',
         'phoneNumber',
         'password',
+        'lineManager',
+        'verificationToken',
       ])
     );
 
-    sendEmail(newUser.firstname, newUser.lastname, newUser.email);
+    // sendEmail(newUser.firstname, newUser.lastname, newUser.email);
 
     return res.status(201).json({
       success: true,
@@ -73,22 +75,24 @@ exports.addUser = async (req, res) => {
   }
 };
 
-exports.editUser = async (req, res) => {
+export async function editUser (req, res) {
   try {
     console.log(req.body);
-    const { firstName, lastName, roleId, phoneNumber, password,lineManager } = req.body;
+    const { firstName, lastName, roleId,birthdate, phoneNumber,lineManager,email,profilePic,preferredCurrency } = req.body;
+    console.log(req.body.phoneNumber);
     const id = req.params.uuid;
     await User.findOne({ where: { uuid: id } }).then(async (user) => {
       if (user) {
         await user
           .update(
-            { firstName, lastName, roleId, phoneNumber, password,lineManager },
+            { firstName, lastName, roleId,birthdate, phoneNumber,lineManager,email,profilePic,preferredCurrency },
             { where: { uuid: req.params.uuid } }
           )
-          .then(() =>
+          .then((data) =>
             res.status(200).json({
               status: "success",
               message: "User with id: " + id + " " + "UPDATED",
+              data:data
             })
           );
       } else
@@ -99,15 +103,14 @@ exports.editUser = async (req, res) => {
   }
 };
 
-exports.getUsers = async (req, res) => {
+export async function getUsers (req, res) {
   try {
     await User.findAll().then((users) => res.status(200).json(users));
   } catch (err) {
-    // return res.status(500).json({ error: 'Something went wrong' });
-    return res.status(500).send(err)
+    return res.status(500).json({ error: 'Something went wrong' });
   }
 };
-exports.getUser = async (req, res) => {
+export async function getUser (req, res) {
   const { uuid } = req.params;
   try {
     const user = await User.findOne({ where: { uuid } })
@@ -116,7 +119,7 @@ exports.getUser = async (req, res) => {
     return res.status(500).json({ error: 'Something went wrong' });
   }
 };
-exports.verifyUser = async (req, res) => {
+export async function verifyUser (req, res) {
   try {
     const userEmail = req.params.email;
     const user = await User.findOne({ where: { email: userEmail } });
@@ -151,10 +154,15 @@ exports.verifyUser = async (req, res) => {
   }
 };
 
-exports.signIn = async (req, res) => {
+export async function signIn (req, res) {
   try {
- 
-    const user = await User.findOne({ where: { email: req.body.email } }); 
+    const validateUserInput = validateUserAuthenatication(req.body);
+
+    if (validateUserInput.error) {
+      return res.status(400).json(validateUserInput.error.details[0].message);
+    }
+
+    const user = await User.findOne({ where: { email: req.body.email } });
     console.log("user is here");
 
     if (!user) {
@@ -169,14 +177,14 @@ exports.signIn = async (req, res) => {
     // if (!user.verified) {
     //   return res.status(400).send({ message: 'Please first verify your account!' });
     // } 
-
     const token = jwt.sign(
       {
+        id:user.id,
         uuid: user.uuid,
         email: user.email,
         roleId: user.roleId,
       },
-      TOKEN_SECRET
+      keys.TOKEN_SECRET
       // ,
       // {
       //   expiresIn: 86400, // 24 hours
@@ -195,8 +203,10 @@ exports.signIn = async (req, res) => {
   }
 };
 
-exports.resetPassword = async(req,res)=>{
+export async function resetPassword(req,res){
   try{
+    let all = await User.findAll({where: {}})
+    console.log(all)
     let user = await User.findOne({ where: { email: req.body.email } });
 
     if(!user)
@@ -207,7 +217,7 @@ exports.resetPassword = async(req,res)=>{
           id: user.id,
           email: user.dataValues.email,
         },
-        TOKEN_SECRET,
+        keys.TOKEN_SECRET,
         {
           expiresIn: 1800, // 30 minutes
         }
@@ -230,27 +240,25 @@ exports.resetPassword = async(req,res)=>{
   }
 }
 
-exports.newPassword = async(req,res)=>{
-  try{ 
+export async function newPassword(req,res){
+  try{
     let {token, newPassword} = req.body;
 
-    try{ 
-       jwt.verify(token,TOKEN_SECRET, async(err, decoded) => {
+    try{
+      jwt.verify(token,keys.TOKEN_SECRET, async(err, decoded) => {
         if (err) 
         return res.status(401).send({ message: "Invalid Token"});
 console.log(decoded)
         const salt = await bcrypt.genSalt(10);
         newPassword = await bcrypt.hash(newPassword, salt);
 
-        if(newPassword === "")
-          return res.status(400).send("You can't have an empty password!") 
         let reset = await User.update({
         password: newPassword
-        }, {where: {passwordResetToken: token,id: decoded?.id,email: decoded?.email}});
-  
+        }, {where: {passwordResetToken: token,id: decoded.id,email: decoded.email}});
+
         if(reset)
-        return res.send("Password has been changed successfully"); 
-        else 
+        return res.send("Password has been changed successfully");
+        else
         return res.send("User with this token does not exists");
 
       });
@@ -265,8 +273,8 @@ console.log(decoded)
     res.send(error.toString());
   }
 }
-exports.logout = (req, res) => {
-  req.user.update({ lastLogout: Date.now() })
+export async function logout (req, res) {
+  // req.user.update({ lastLogout: Date.now() })
   req.session.destroy((err) => {
     if (err) {
       res.status(500).send(err);
