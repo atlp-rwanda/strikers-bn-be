@@ -22,7 +22,8 @@ import accommodationRouter from './routes/accommodation.routes';
 import notificationRouter from './routes/notification.routes'
 
 import chatRouter from './routes/chats.routes';
-
+ 
+import { Server } from 'socket.io';
 const app = express();
 dotenv.config({ path: '../.env' });
 app.use(cors());
@@ -55,11 +56,59 @@ app.get('/', (req, res) => {
   console.log(`This is email ${req.session.email}`);
   res.send('Welcome to strikers-bn-be APIs');
 });
-
 const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
     console.log(`Server started on port ${port}!`);
     console.log('Database connected . . .');
   });
+const io = new Server(server,{
+  cors: {
+    origin: "*", 
+  },
+});
+
+let onlineUsers = [];
+
+const addNewUser = (username,pic, socketId) => {
+  !onlineUsers.some((user) => user.username === username) &&
+    onlineUsers.push({ username,pic, socketId });
+    console.log("Hello BOss",username);
+};
+
+const removeUser = (socketId) => {
+  onlineUsers = onlineUsers.filter((user) => user.socketId !== socketId);
+};
+
+const getUser = (username) => {  
+  return onlineUsers.find((user) => user.username === username);
+};
+
+io.on("connection", (socket) => {
+  socket.on("newUser", (pic,username) => {
+    console.log(pic)
+    console.log(username)
+    addNewUser(pic,username, socket.id); 
+    console.log(socket.id)
+  });
+
+  socket.on("sendNotification", ({senderName, type,receiverName }) => {
+    const receiver = getUser(receiverName);
+    const sender = getUser(senderName);
+    console.log("receiver ",receiver)
+      console.log(senderName);
+      console.log(type);
+    let p =sender?.pic;
+    io.to(receiver?.socketId).emit("getNotification", {
+      senderName,
+      p,
+      type,
+    });
+  });
+
+  socket.on("disconnect", () => {
+    removeUser(socket.id);
+  });
+});
+
 
 module.exports = server;
