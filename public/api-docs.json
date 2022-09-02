@@ -1,468 +1,705 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
-    "version": "1.0.0",
-    "title": " Barefoot Nomad",
-    "contact": {
-      "email": "Andela@gmail.com"
-    },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      "description": "Make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
+      "version": "1.1.1",
+      "title": " Barefoot Nomad",      
+      "contact": {
+          "email": "strikers@andela.com"
+      },
+      "license": {
+          "name": "Built with ❤💚🤞 by strikers",
+          "url": "https://github.com/atlp-rwanda/strikers-bn-be"
+      }
+  },
+  "host": "strikers-bnbe.herokuapp.com",
+  "basePath": "/",
+  "schemes": [
+      "https"
+  ],
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "description": "Value: Bearer ",
+      "in": "header",
+      "scheme": "bearer"
     }
   },
-  "schemes": ["http"],
-  "host": "localhost:8001",
-  "basePath": "/api",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-    "v1/api/user/users": {
-      "get": {
-        "summary": "Get users",
-        "description": "Get users",
-        "produces": ["application/json"],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Users retrieved successfully"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        }
-      }
-    },
-    "v1/api/user/users/{uuid}": {
-      "get": {
-        "summary": "Get user",
-        "description": "Get user",
-        "produces": ["application/json"],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "User retrieved successfully"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        }
-      }
-    },
-    "v1/api/user/updateuser/{uuid}": {
-      "put": {
-        "summary": "Update User",
-        "description": "Update User",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "User model",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User updated successfully"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        }
-      }
-    },
-    "api/v1/users/register": {
-      "post": {
-        "tags": ["User"],
-        "summary": "User signup",
-        "parameters": [
-          {
-            "name": "user",
-            "in": "body",
-            "description": "User to register",
-            "schema": {
-              "$ref": "#/definitions/User"
+      "/api/v1/users/register": {
+          "post": {
+            "tags": [
+              "Users"
+            ],
+            "description": "User Registration",
+            "parameters": [
+              {
+                "name": "obj",
+                "in": "body",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "User registered successfully"
+              },
+              "409": {
+                "description": "User already Exist"
+              },
+              "422": {
+                "description": "Unprocessable Entity"
+              }
             }
           }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "New user registered!",
-            "schema": {
-              "type": "object"
+        },
+        "/api/v1/users/login": {
+          "post": {
+            "tags": [
+              "Users"
+            ],
+            "description": "User Login",
+            "parameters": [
+              {
+                "name": "obj",
+                "in": "body",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/LoginModel"
+                }
+              }
+            ],
+            "responses": {
+              "200":{
+                "description":"Login successfully"
+              }
             }
           }
-        }
-      }
-    },
-    "api/v1/users/resetpassword": {
-      "post": {
-        "tags": ["User"],
-        "summary": "Reset password",
-        "parameters": [
-          {
-            "name": "email",
-            "in": "formData",
-            "description": "Email to send reset link",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
+      },
+        "/api/v1/users": {
+          "get": {
+            "tags": [
+              "Users"
+            ],
+              "summary": "Get users",
+              "description": "Get users",
+              "produces": [
+                  "application/json"
+              ],
+              "parameters": [],
+              "responses": {
+                  "200": {
+                      "description": "Users retrieved successfully"
+                  },
+                  "500": {
+                      "description": "Server error"
+                  }
+              },
+              "security": [
+                {
+                  "Authorization": []
+                }
+              ]
           }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "Email sent!",
-            "schema": {
-              "type": "object"
-            }
+      },
+      "/api/v1/users/{uuid}": {
+          "get": {
+            "tags": [
+              "Users"
+            ],
+              "summary": "Get user",
+              "description": "Get user",
+              "produces": [
+                  "application/json"
+              ],
+              "parameters": [
+                  {
+                    "name":"id",
+                    "in":"path",
+                    "schema":{
+                      "type":"string",
+                      "format":"uuid"
+                    },
+                    "required":true
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "User retrieved successfully"
+                  },
+                  "500": {
+                      "description": "Server error"
+                  }
+              },
+              "security": [
+                {
+                  "Authorization": []
+                }
+              ]
           }
-        }
-      }
-    },"api/v1/users/resetpassword": {
-      "patch": {
-        "tags": ["User"],
-        "summary": "Reset password",
-        "parameters": [
-          {
-            "name": "token",
-            "in": "formData",
-            "description": "token",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          {
-            "name": "password",
-            "in": "formData",
-            "description": "Email to send reset link",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
+      },
+      "/api/v1/users/{uuid}/logout": {
+        "get": {
+            "tags": [
+              "Users"
+            ],
+              "summary": "User logout",
+              "description": "User logout",
+              "produces": [
+                  "application/json"
+              ],
+              "parameters": [],
+              "responses": {
+                  "200": {
+                      "description": "User logged out successfully"
+                  },
+                  "500": {
+                      "description": "Server error"
+                  }
+              },
+              "security": [
+                {
+                  "Authorization": []
+                }
+              ]
           }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "Email sent!",
-            "schema": {
-              "type": "object"
-            }
-          }
-        }
-      }
-    },
-    "api/v1/users/login": {
-      "post": {
-        "tags": ["User"],
-        "summary": "Sign in",
-        "parameters": [
-          {
-            "name": "user",
-            "in": "body",
-            "description": "User credentials",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "type": "string"
+      },
+      "/api/v1/users/{uuid}/updateuser":{
+        "put": {
+            "tags": [
+              "Users"
+            ],
+              "summary": "Update User",
+              "description": "Update User",
+              "consumes": [
+                  "application/json"
+              ],
+              "produces": [
+                  "application/json"
+              ],
+              "parameters": [
+                {
+                  "name":"id",
+                  "in":"path",
+                  "schema":{
+                    "type":"string",
+                    "format":"uuid"
+                  },
+                  "required":true
                 },
-                "password": {
+                {
+                  "name": "obj",
+                  "in": "body",
+                  "required": true,
+                  "schema": {
+                    "$ref": "#/definitions/UpdateUserModel"
+                  }
+                }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "User updated successfully"
+                  },
+                  "500": {
+                      "description": "Server error"
+                  }
+              },
+              "security": [
+                {
+                  "Authorization": []
+                }
+              ]
+          }
+      },
+      "/api/v1/trips/all": {
+          "get": {
+            "tags": [
+              "TripRequest"
+            ],
+            "description": "",
+            "responses": {
+              "200": {
+                "description": "Query ok"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            },
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]
+          }
+        },
+      "/api/v1/trips/create": {    
+          "post": {
+            "tags": [
+              "TripRequest"
+            ],
+            "description": "",
+            "consumes": [
+              "application/json"
+            ],
+            "parameters": [
+          
+              {
+                "name": "source",
+                "in": "formData",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "destination",
+                "in": "formData",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "DateOfTravel",
+                "in": "formData",
+                "required": true,
+                "type":"string"
+              },  
+                {
+                "name": "DateOfDestination",
+                "in": "formData",
+                "required": true,
+                "type":"string"
+              },
+              {
+                  "name": "status",
+                  "in": "formData",
+                  "required": true,
                   "type": "string"
                 }
+    
+            ],      
+            "responses": {
+              "200": {
+                "description": "Trip request created successivelly"
               },
-              "required": ["email", "password"]
-            }
-          }
-        ],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "User authenticated.",
-            "schema": {
-              "type": "object"
-            }
-          }
-        }
-      },
-      "api/v1/trips/all": {
-        "get": {
-          "tags": ["TripRequest"],
-          "description": "",
-          "responses": {
-            "200": {
-              "description": "Query ok"
-            },
-            "500": {
-              "description": "Internal Server Error"
-            }
-          }
-        }
-      },
-      "api/v1/trips/create": {
-        "post": {
-          "tags": ["TripRequest"],
-          "description": "",
-          "consumes": ["application/json"],
-          "parameters": [
-            {
-              "name": "source",
-              "in": "formData",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "destination",
-              "in": "formData",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "DateOfTravel",
-              "in": "formData",
-              "required": true,
-              "type": "date"
-            },
-            {
-              "name": "DateOfDestination",
-              "in": "formData",
-              "required": true,
-              "type": "date"
-            },
-            {
-              "name": "status",
-              "in": "formData",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Trip request created successivelly"
-            },
-            "404": {
-              "description": "Not Found"
-            },
-            "422": {
-              "description": "Unprocessable Entity"
-            },
-            "500": {
-              "description": "Internal Server Error"
-            }
-          },
-          "security": [
-            {
-              "Authorization": []
-            }
-          ]
-        }
-      },
-
-      "api/v1/trips/{id}": {
-        "put": {
-          "tags": ["TripRequest"],
-          "description": "",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "obj",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/TripRequest"
+              "404": {
+                "description": "Not Found"
+              },
+              "422": {
+                "description": "Unprocessable Entity"
+              },
+              "500": {
+                "description": "Internal Server Error"
               }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "Updated"
             },
-            "404": {
-              "description": "Not Found"
-            },
-            "422": {
-              "description": "Unprocessable Entity"
-            },
-            "500": {
-              "description": "Internal Server Error"
-            }
-          },
-          "security": [
-            {
-              "Authorization": []
-            }
-          ]
-        },
-        "get": {
-          "tags": ["TripRequest"],
-          "description": "",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK"
-            },
-            "404": {
-              "description": "Not Found"
-            },
-            "500": {
-              "description": "Internal Server Error"
-            }
-          }
-        },
-        "delete": {
-          "tags": ["TripRequest"],
-          "description": "",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "204": {
-              "description": "No Content"
-            },
-            "404": {
-              "description": "Not Found"
-            },
-            "500": {
-              "description": "Internal Server Error"
-            }
-          },
-          "security": [
-            {
-              "Authorization": []
-            }
-          ]
-        }
-      },
-      "api/v1/trips/{tripId}/comments": {
-        "post": {
-          "tags": ["TripRequestComponent"],
-          "description": "",
-          "parameters": [
-            {
-              "name": "tripId",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "obj",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/TripRequestComment"
+            "security": [
+              {
+                "Authorization": []
               }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "Comment added"
-            },
-            "400": {
-              "description": "Bad Request"
-            },
-            "500": {
-              "description": "Internal Server Error"
-            }
-          },
-          "security": [
-            {
-              "Authorization": []
-            }
-          ]
-        },
-        "get": {
-          "tags": ["TripRequestComponent"],
-          "description": "",
-          "parameters": [
-            {
-              "name": "tripId",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "Comments fetched successfully"
-            }
+            ]
           }
-        }
-      },
-      "api/v1/trips/{tripId}/comments/{uuid}": {
-        "delete": {
-          "tags": ["TripRequestComponent"],
-          "description": "",
-          "parameters": [
-            {
-              "name": "tripId",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Comment deleted successfully!"
+        },
+        "/api/v1/trips/status/{id}": {
+          "put": {
+            "tags": [
+              "TripRequest"
+            ],
+            "description": "",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "status",
+                "in": "body",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/ChangeStatus"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "Updated"
+              },
+              "404": {
+                "description": "Not Found"
+              },
+              "400": {
+                "description": "Bad Request"
+              },
+              "422": {
+                "description": "Unprocessable Entity"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
             },
-            "404": {
-              "description": "Not found"
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]
+          }
+        },
+        "/api/v1/trips/{id}": {
+          "put": {
+            "tags": [
+              "TripRequest"
+            ],
+            "description": "",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "obj",
+                "in": "body",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/TripRequest"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "Updated"
+              },
+              "404": {
+                "description": "Not Found"
+              },
+              "422": {
+                "description": "Unprocessable Entity"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
             },
-            "500": {
-              "description": "Internal Server Error"
-            }
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]
           },
-          "security": [
-            {
-              "Authorization": []
-            }
-          ]
-        }
-      },
-      "/api/v1/feedback": {
-        "post": {
+          "get": {
+            "tags": [
+              "TripRequest"
+            ],
+            "description": "",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK"
+              },
+              "404": {
+                "description": "Not Found"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            },
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]
+          },
+          "delete": {
+            "tags": [
+              "TripRequest"
+            ],
+            "description": "",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses": {
+              "204": {
+                "description": "No Content"
+              },
+              "404": {
+                "description": "Not Found"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            },
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]
+          }
+        },
+        "/api/v1/trips/{tripId}/comments": {
+          "post": {
+            "tags": [
+              "TripRequest"
+            ],
+            "description": "",
+            "parameters": [
+              {
+                "name": "tripId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "obj",
+                "in": "body",
+                "required": true,
+                "schema": {
+                  "$ref":"#/definitions/TripRequestComment"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "Comment added"
+              },
+              "400": {
+                "description": "Bad Request"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            },
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]
+          },
+          "get":{
+            "tags": [
+              "TripRequest"
+            ],
+            "description": "",
+            "parameters": [
+              {
+                "name": "tripId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "Comments fetched successfully"
+              }
+            },
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]
+          }
+        },      
+        "/api/v1/trips/{tripId}/comments/{uuid}": {
+          "delete": {
+            "tags": [
+              "TripRequest"
+            ],
+            "description": "",
+            "parameters": [
+              {
+                "name": "tripId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Comment deleted successfully!"
+              },
+              "404": {
+                "description": "Not found"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            },
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]
+          }
+        },      
+        "/api/v1/accommodations/top": {
+          "get": {
+            "tags": ["Accomodation"],
+            "description": "Get 5 Top Accomodations",
+            "produces": ["application/json"],
+            "parameters": [],
+            "responses": {
+              "200": {
+                "description": "Success"
+              },
+              "400": {
+                "description": "Invalid data"
+              },
+              "404": {
+                "description": "Not found"
+              },
+              "500": {
+                "description": "Internal server error"
+              }
+            },
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]
+          }
+        },
+        "/api/v1/bookings": {
+          "get": {
+            "tags": [
+              "Booking"
+            ],
+            "description": "Get all bookings",
+            "responses": {
+              "200": {
+                "description": "Query ok"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            },
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]
+          },
+          "post": {
+            "tags": [
+              "Booking"
+            ],
+            "description": "Create a new room booking request",
+            "consumes": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "supplierId",
+                "in": "formData",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "accomodationId",
+                "in": "formData",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "roomId",
+                "in": "formData",
+                "required": true,
+                "type": "date"
+              },  
+                {
+                "name": "requesterId",
+                "in": "formData",
+                "required": true,
+                "type": "date"
+              },
+              {
+                "name": "startDate",
+                "in": "formData",
+                "required": true,
+                "type": "date"
+              },
+              {
+                "name": "endDate",
+                "in": "formData",
+                "required": true,
+                "type": "date"
+              }
+    
+            ],      
+            "responses": {
+              "200": {
+                "description": "Trip request created successivelly"
+              },
+              "404": {
+                "description": "Not Found"
+              },
+              "422": {
+                "description": "Unprocessable Entity"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            },
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]
+          }
+        },
+        "/api/v1/feedback": {
+          "post": {
           "tags": ["Feedback"],
           "description": "Add feedback",
-          "consumes": ["application/json"],
-          "parameters": [
-            {
-              "name": "accomodationId",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "Feedback",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/Feedback"
+            "consumes": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "accomodationId",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              },  
+              {
+                "name": "Feedback",
+                "in": "body",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/Feedback"
+                }
               }
-            }
-          ]
+            ],
+            "security": [
+              {
+                "Authorization": []
+              }
+            ]  
         }
       },
       "/api/v1/chat": {
-        "get": {
-          "tags": ["Users's chat"],
+        "get":{
+          "tags": [
+            "Users's chat"
+          ],
           "description": "Get all Rooms",
           "parameters": [],
           "responses": {
@@ -474,10 +711,12 @@
             {
               "Authorization": []
             }
-          ]
+          ]  
         },
         "post": {
-          "tags": ["Users's chat"],
+          "tags": [
+            "Users's chat"
+          ],
           "description": "Add new Room",
           "parameters": [
             {
@@ -485,7 +724,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/NewChatRoom"
+                "$ref":"#/definitions/NewChatRoom"
               }
             }
           ],
@@ -506,23 +745,25 @@
             }
           ]
         }
-      },
-      "api/v1/chat/:chatRoomId/messages": {
+      },      
+      "/api/v1/chat/{chatRoomId}/messages": {
         "post": {
-          "tags": ["Users's chat"],
+          "tags": [
+            "Users's chat"
+          ],
           "description": "Add new messages",
           "parameters": [
             {
-              "name": "chatRoomId",
-              "in": "path",
-              "required": "true"
+              "name":"chatRoomId",
+              "in":"path",
+              "required":"true"
             },
             {
               "name": "obj",
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/NewChatMessage"
+                "$ref":"#/definitions/NewChatMessage"
               }
             }
           ],
@@ -543,8 +784,10 @@
             }
           ]
         },
-        "get": {
-          "tags": ["Users's chat"],
+        "get":{
+          "tags": [
+            "Users's chat"
+          ],
           "description": "Get all Messages",
           "parameters": [],
           "responses": {
@@ -562,12 +805,14 @@
             {
               "Authorization": []
             }
-          ]
-        }
+          ]  
+        }          
       },
-      "api/v1/chat/:chatRoomId/messages/new": {
-        "get": {
-          "tags": ["Users's chat"],
+      "/api/v1/chat/{chatRoomId}/messages/new":{
+        "get":{
+          "tags": [
+            "Users's chat"
+          ],
           "description": "Get Latest Messages",
           "parameters": [],
           "responses": {
@@ -585,46 +830,52 @@
             {
               "Authorization": []
             }
-          ]
-        }
+          ]  
+        } 
       },
-      "api/v1/notifications": {
+      "/api/v1/notifications": {
         "get": {
           "tags": ["Notification"],
           "description": "get all notifications of a user",
-          "consumes": ["multipart/form-data"],
-          "produces": ["application/json"],
-          "parameters": [
-            {
-              "in": "header",
-              "name": "Authorization",
-              "description": "JWT Token of the user",
-              "type": "string",
-              "required": "true"
+            "consumes": [
+              "multipart/form-data"
+            ],
+            "produces":[
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in":"header",
+                "name":"Authorization",
+                "description":"JWT Token of the user",
+                "type":"string",
+                "required":"true"
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            },
-            "201": {
-              "description": "Created"
-            },
-            "400": {
-              "description": "Invalid data"
-            },
-            "500": {
-              "description": "Internal server error"
-            }
-          }
+            ],
+            "responses": {
+              "200": {
+                  "description": "Success"
+              },
+              "201": {
+                  "description": "Created"
+              },
+              "400": {
+                  "description": "Invalid data"
+              },
+              "500": {
+                  "description": "Internal server error"
+              }
+          }  
         }
       },
 
-      "api/v1/notifications/new": {
-        "post": {
-          "tags": ["Notification"],
-          "description": "create a notification",
-          "produces": ["application/json"],
+      "/api/v1/notifications/new":{
+        "post":{
+          "tags":["Notification"],
+          "description":"create a notification",
+          "produces": [
+            "application/json"
+        ],
           "parameters": [
             {
               "name": "title",
@@ -647,229 +898,198 @@
           ],
           "responses": {
             "200": {
-              "description": "Success"
+                "description": "Success"
             },
             "400": {
-              "description": "Invalid data"
+                "description": "Invalid data"
             },
             "404": {
-              "description": "Not found"
+                "description": "Not found"
             },
             "500": {
-              "description": "Internal server error"
+                "description": "Internal server error"
             }
-          }
+        } 
         }
       },
 
-      "api/v1/notifications/read/{notificationId}": {
-        "post": {
-          "tags": ["Notification"],
-          "description": "read a notification",
-          "produces": ["application/json"],
-          "parameters": [
+      "/api/v1/notifications/read/{notificationId}":{
+        "post":{
+          "tags":["Notification"],
+          "description":"read a notification",
+          "produces": [
+            "application/json"
+        ],
+          "parameters":[
             {
-              "name": "notificationId",
+              "name":"notificationId",
               "in": "path",
               "required": true,
               "type": "string"
-            }
+             }
           ],
           "responses": {
             "200": {
-              "description": "Success"
+                "description": "Success"
             },
             "400": {
-              "description": "Invalid data"
+                "description": "Invalid data"
             },
             "404": {
-              "description": "Not found"
+                "description": "Not found"
             },
             "500": {
-              "description": "Internal server error"
+                "description": "Internal server error"
             }
-          }
+        }
         }
       },
-      "api/v1/notifications/readAll": {
-        "post": {
-          "tags": ["Notification"],
-          "description": "read all notifications",
-          "produces": ["application/json"],
-          "parameters": [],
+      "/api/v1/notifications/readAll":{
+        "post":{
+          "tags":["Notification"],
+          "description":"read all notifications",
+          "produces": [
+            "application/json"
+        ],
+          "parameters":[],
           "responses": {
             "200": {
-              "description": "Success"
+                "description": "Success"
             },
             "400": {
-              "description": "Invalid data"
+                "description": "Invalid data"
             },
             "404": {
-              "description": "Not found"
+                "description": "Not found"
             },
             "500": {
-              "description": "Internal server error"
+                "description": "Internal server error"
             }
-          }
+        }
         }
       },
 
-      "api/v1/notifications/{notificationId}": {
+      "/api/v1/notifications/{notificationId}":{
         "delete": {
           "tags": ["Notification"],
           "description": "delete notification by id",
-          "produces": ["application/json"],
-          "parameters": [
-            {
-              "name": "notificationId",
+          "produces": [
+            "application/json"
+        ],
+            "parameters": [
+             {
+              "name":"notificationId",
               "in": "path",
               "required": true,
               "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            },
-            "400": {
-              "description": "Invalid data"
-            },
-            "404": {
-              "description": "Not found"
-            },
-            "500": {
-              "description": "Internal server error"
-            }
+             }
+            ]  ,
+            "responses": {
+              "200": {
+                  "description": "Success"
+              },
+              "400": {
+                  "description": "Invalid data"
+              },
+              "404": {
+                  "description": "Not found"
+              },
+              "500": {
+                  "description": "Internal server error"
+              }
           }
         }
-      },
-      "/api/v1/bookings": {
-        "get": {
-          "tags": [
-            "Booking"
-          ],
-          "description": "Get all bookings",
-          "consumes": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "Authorization",
-              "in": "header",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Query ok"
-            },
-            "500": {
-              "description": "Internal Server Error"
-            }
-          },
-          "security": [
-            {
-              "Authorization": []
-            }
-          ]
-        },
-        "post": {
-          "tags": [
-            "Booking"
-          ],
-          "description": "Create a new request to book a room in a certain accomodation",
-          "consumes": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "supplierId",
-              "in": "formData",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "accomodationId",
-              "in": "formData",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "roomId",
-              "in": "formData",
-              "required": true,
-              "type": "date"
-            },  
-              {
-              "name": "requesterId",
-              "in": "formData",
-              "required": true,
-              "type": "date"
-            },
-            {
-              "name": "startDate",
-              "in": "formData",
-              "required": true,
-              "type": "date"
-            },
-            {
-              "name": "endDate",
-              "in": "formData",
-              "required": true,
-              "type": "date"
-            }
-  
-          ],      
-          "responses": {
-            "200": {
-              "description": "Trip request created successivelly"
-            },
-            "404": {
-              "description": "Not Found"
-            },
-            "422": {
-              "description": "Unprocessable Entity"
-            },
-            "500": {
-              "description": "Internal Server Error"
-            }
-          },
-          "security": [
-            {
-              "Authorization": []
-            }
-          ]
-        }
-      }
+      }           
     },
-    "definitions": {
+  "definitions": {
       "User": {
+          "type": "object",
+          "properties": {
+              "firstName": {
+                  "type": "string",
+                  "example": "John",
+                  "required": true
+              },
+              "lastName": {
+                  "type": "string",
+                  "example": "Smith",
+                  "required": true
+              },
+              "email": {
+                  "type": "string",
+                  "example": "John@andela.com",
+                  "required": true
+              },
+              "password": {
+                  "type": "string",
+                  "example": "John12345",
+                  "required": true
+              },
+              "roleId": {
+                  "type": "string",
+                  "example": "c1f1d2bf-33bd-4e11-9d7a-0331db465f95",
+                  "required": true
+              },
+              "phoneNumber": {
+                  "type": "string",
+                  "example": "0790888888",
+                  "required": true
+              },
+              "lineManager":{
+                "type": "string",
+                "example":"13c35001-a96d-4307-b86a-5f9aef66f771"
+              }  
+          }
+      },
+      "LoginModel": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "abi_seth@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "pass12345"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "UpdateUserModel": {
         "type": "object",
         "properties": {
           "firstName": {
             "type": "string",
-            "required": true
+            "example": "John Snow"
           },
           "lastName": {
             "type": "string",
-            "required": true
-          },
-          "email": {
-            "type": "string",
-            "required": true
-          },
-          "password": {
-            "type": "string",
-            "required": true
-          },
+            "example": "John Snow"
+          },        
           "roleId": {
             "type": "string",
-            "required": true
+            "example": "c1f1d2bf-33bd-4e11-9d7a-0331db465f95"
           },
-          " phoneNumber": {
+          "phoneNumber": {
             "type": "string",
-            "required": true
+            "example": "0790558888"
+          },      
+          "lineManager": {
+            "type": "string",
+            "example": "13c35001-a96d-4307-b86a-5f9aef66f771"
+          }                             
+        }
+      },
+      "ChangeStatus":{
+        "type":"object",
+        "properties":{
+          "status":{
+            "type":"string",
+            "example":"approved",
+            "required":true
           }
         }
       },
@@ -903,91 +1123,77 @@
       }
     },
       "TripRequest": {
-        "type": "object",
-        "properties": {
-          "source": {
-            "type": "string",
-            "required": true
-          },
-          "destination": {
-            "type": "string",
-            "required": true
-          },
-          "DateOfTravel": {
-            "type": "date",
-            "required": true
-          },
-          "DateOfDestination": {
-            "type": "date",
-            "required": true
-          },
-          "status": {
-            "type": "string",
-            "required": true
+          "type": "object",
+          "properties": {
+              "source": {
+                  "type": "string",
+                  "required": true
+              },
+              "destination": {
+                  "type": "string",
+                  "required": true
+              },
+              "DateOfTravel": {
+                  "type": "string",
+                  "required": true
+              },
+              "DateOfDestination": {
+                  "type": "string",
+                  "required": true
+              },
+              "status": {
+                  "type": "string",
+                  "required": true
+              }
           }
-        }
       },
       "TripRequestComment": {
-        "type": "object",
-        "properties": {
-          "comment": {
-            "type": "string",
-            "required": true
+          "type": "object",
+          "properties": {                
+              "comment": {
+                  "type": "string",
+                  "example":"comment1",
+                  "required": true
+              }
           }
-        }
       },
       "NewChatRoom": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "required": true
+          "type": "object",
+          "properties": {                
+              "roomName": {
+                  "type": "string",
+                  "example":"room1",
+                  "required": true
+              }
           }
-        }
       },
       "NewChatMessage": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "required": true
+          "type": "object",
+          "properties": {                
+              "message": {
+                  "type": "string",
+                  "example":"message1",
+                  "required": true
+              }
           }
-        }
       },
       "Feedback": {
-        "type": "object",
-        "properties": {
-          "feedbackId": {
-            "type": "string",
-            "required": true
-          },
-          "userId": {
-            "type": "string",
-            "required": true
-          },
-          "feedback": {
-            "type": "string",
-            "required": true
+          "type": "object",
+          "properties": {
+              "feedbackId": {
+                  "type": "string",
+                  "required": true
+              },
+              "userId": {
+                  "type": "string",
+                  "required": true
+              },
+              "feedback": {
+                  "type": "string",
+                  "required": true
+              }
           }
-        }
       }
-    },
-    "/v1/roles": {
-      "get": {
-        "tags": ["Roles"],
-        "summary": "Get roles",
-        "description": "Get roles",
-        "produces": ["application/json"],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Roles retrieved successfully"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        }
-      }
-    }
   }
+ 
 }
