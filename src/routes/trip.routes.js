@@ -11,6 +11,7 @@ const {
   getAllTrips,
   getOneTrip,
   deleteOneTrip,
+  getTripByUser,
   changeStatus,
   updateTrip
 } = require('../controllers/trip.controller');
@@ -38,6 +39,16 @@ tripRouter.get('/all', getAllTrips);
  * @access Public
  * @type GET
  */
+
+ tripRouter.get('/all/:id', getTripByUser);
+
+ /**
+  * @description To get the trip by the user
+  * @api v1/api/trip/:id
+  * @access Public
+  * @type GET
+  */
+
 tripRouter.get('/:id', [verifyToken, adminCheck], getOneTrip);
 
 /**

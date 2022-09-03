@@ -351,6 +351,30 @@
             ]
           }
         },
+        "/api/v1/trips/all/{id}": {
+          "get": {
+            "tags": [
+              "TripRequest for getting trips by their  userid"
+            ],
+            "description": "",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "Trips fetched successfully"
+              },
+              "500": {
+                "description": "Internal Server Error"
+              }
+            }
+          }
+        },
         "/api/v1/trips/{id}": {
           "put": {
             "tags": [
