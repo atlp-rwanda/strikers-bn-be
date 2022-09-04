@@ -4,6 +4,7 @@ import { verifyToken } from "../middlewares/auth";
 import auth from "../utils/google-auth";
 import facebookAuth from "../utils/facebook-Oauth";
 import passport from "passport";
+import { CALLBACK_URL } from "../config/key";
 const userRouter = Router();
 
 const {
@@ -33,7 +34,7 @@ userRouter.get(
 userRouter.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/api/v1/users/getusers",
+    successRedirect: CALLBACK_URL,
     failureRedirect: "/auth/googleloginfailure",
   })
 );
@@ -51,7 +52,7 @@ userRouter.get(
   }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect("/");
+    res.redirect(CALLBACK_URL);
   }
 );
 
