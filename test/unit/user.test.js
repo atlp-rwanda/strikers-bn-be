@@ -115,5 +115,17 @@ describe("GET /api/v1/users", () => {
       expect(res.body).to.be.a("object");
     });
   });
+
+  describe("GET /api/v1/users/auth/google", () => {
+    it("It should GET the Google login page", async () => {
+      const res = await chai.request(server).get("/api/v1/users/auth/google");
+      expect(res).to.have.status(200);
+    });
+
+    it("It should NOT GET the Google login page", async () => {
+      const res = await chai.request(server).get("/api/users/auth/g");
+      expect(res).to.have.status(404);
+    });
+  });
 });
 //fix
