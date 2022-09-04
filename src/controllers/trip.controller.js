@@ -70,6 +70,25 @@ export async function getAllTrips(req, res) {
   }
 }
 
+export async function getTripByUser(req, res) {
+  const id = req.params.id
+  try {
+    const trips = await Trip.findAll(
+      { where: { userId: id } },
+    );
+
+    return res.status(200).json({
+      success: true,
+      status: 200,
+      data: trips,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ error: "Something went wrong" });
+  }
+}
+
+
 export async function getOneTrip(req, res) {
   const { id } = req.params;
   try {
