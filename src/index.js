@@ -15,10 +15,9 @@ import { sequelize } from "./models/index";
 import tripRouter from "../src/routes/trip.routes";
 import feedbackRouter from "./routes/feedback.routes";
 import notificationRouter from "./routes/notification.routes";
-import chatRouter from './routes/chats.routes';
- 
-import { Server } from 'socket.io';
 import chatRouter from "./routes/chats.routes";
+
+import { Server } from "socket.io";
 import userRouter from "./routes/user.routes";
 import rolesRouter from "./routes/role.routes";
 import companiesRouter from "./routes/company.routes";
@@ -68,9 +67,9 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.get("/", (req, res) => {
   res.send("Welcome to strikers-bn-be APIs");
 });
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   console.log(`This is email ${req.session.email}`);
-  res.send('Welcome to strikers-bn-be APIs');
+  res.send("Welcome to strikers-bn-be APIs");
 });
 const port = process.env.PORT || 8001,
   server = http.createServer(app).listen(port, async () => {
