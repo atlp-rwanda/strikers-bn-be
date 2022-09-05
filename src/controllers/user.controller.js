@@ -268,8 +268,8 @@ exports.newPassword = async (req, res) => {
           {
             where: {
               passwordResetToken: token,
-              id: decoded?.id,
-              email: decoded?.email,
+              id: decoded.id,
+              email: decoded.email,
             },
           }
         );
