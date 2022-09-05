@@ -1,8 +1,6 @@
 /* eslint-disable import/no-import-module-exports */
 import { Router } from "express";
 import { verifyToken } from "../middlewares/auth";
-import auth from "../utils/google-auth";
-import facebookAuth from "../utils/facebook-Oauth";
 import passport from "passport";
 import { CALLBACK_URL } from "../config/key";
 const userRouter = Router();
